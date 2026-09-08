@@ -1983,7 +1983,7 @@
    TABLET
    ========================================================= */
 
-@media (max-width: 950px) {
+@media (min-width: 701px) (max-with: 950px {
 
   #travelDashboard {
     width: 95vw;
