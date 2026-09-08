@@ -1,0 +1,2726 @@
+/* =========================================================
+   TRAVEL MAP STYLES
+   Split from the original index.html supplied by the user.
+   Keep layout, responsive design and visual rules here.
+   ========================================================= */
+
+/* =========================================================
+       GLOBAL
+       ========================================================= */
+    * {
+      box-sizing: border-box;
+    }
+    :root {
+      --panel: rgba(255,255,255,0.96);
+      --text: #172033;
+      --muted: #68758a;
+      --blue: #2878ed;
+      --orange: #f15a24;
+      --radius: 18px;
+      --shadow:
+        0 8px 30px
+        rgba(0,0,0,0.18);
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+      color:
+        var(--text);
+      background:
+        #111;
+    }
+    button,
+    input {
+      font:
+        inherit;
+    }
+    #map {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* =========================================================
+       TOP APPLICATION BAR
+       ========================================================= */
+    #topUI {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      right: 72px;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+    #topUI > * {
+      pointer-events: auto;
+    }
+
+    /* =========================================================
+       BRAND
+       ========================================================= */
+    .map-brand {
+      flex:
+        0 0 240px;
+      height:
+        62px;
+      display:
+        flex;
+      align-items:
+        center;
+      gap:
+        10px;
+      padding:
+        7px 13px
+        7px 8px;
+      background:
+        var(--panel);
+      border-radius:
+        var(--radius);
+      box-shadow:
+        var(--shadow);
+      backdrop-filter:
+        blur(12px);
+    }
+    .map-brand img {
+      width:
+        50px;
+      height:
+        50px;
+      object-fit:
+        contain;
+      flex-shrink:
+        0;
+    }
+    .brand-text {
+      min-width:
+        0;
+    }
+    .brand-name {
+      display:
+        block;
+      font-size:
+        16px;
+      font-weight:
+        800;
+      line-height:
+        1.1;
+      white-space:
+        nowrap;
+      overflow:
+        hidden;
+      text-overflow:
+        ellipsis;
+    }
+    .brand-tagline {
+      display:
+        block;
+      margin-top:
+        5px;
+      font-size:
+        10px;
+      color:
+        #697386;
+      white-space:
+        nowrap;
+    }
+
+    /* =========================================================
+       SEARCH
+       ========================================================= */
+    .search-wrap {
+      position:
+        relative;
+      flex:
+        1 1 300px;
+      min-width:
+        180px;
+      max-width:
+        390px;
+      height:
+        62px;
+    }
+    .search-box {
+      height:
+        62px;
+      display:
+        flex;
+      align-items:
+        center;
+      gap:
+        10px;
+      padding:
+        0 17px;
+
+      background:
+        var(--panel);
+
+      border-radius:
+        var(--radius);
+
+      box-shadow:
+        var(--shadow);
+
+      backdrop-filter:
+        blur(12px);
+    }
+    .search-icon {
+      flex-shrink:
+        0;
+
+      font-size:
+        20px;
+    }
+
+
+    #placeSearch {
+      width:
+        100%;
+
+      min-width:
+        0;
+
+      border:
+        none;
+
+      outline:
+        none;
+
+      background:
+        transparent;
+
+      color:
+        #26344d;
+
+      font-size:
+        14px;
+    }
+
+
+    #placeSearch::placeholder {
+      color:
+        #8a94a6;
+    }
+
+
+    #searchSuggestions {
+      position:
+        absolute;
+
+      top:
+        69px;
+
+      left:
+        0;
+
+      right:
+        0;
+
+      display:
+        none;
+
+      overflow:
+        hidden;
+
+      background:
+        white;
+
+      border-radius:
+        13px;
+
+      box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.22);
+    }
+
+
+    #searchSuggestions.active {
+      display:
+        block;
+    }
+
+
+    .search-result {
+      width:
+        100%;
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      padding:
+        12px 14px;
+
+      border:
+        none;
+
+      border-bottom:
+        1px solid #eee;
+
+      background:
+        white;
+
+      text-align:
+        left;
+
+      cursor:
+        pointer;
+    }
+
+
+    .search-result:hover {
+      background:
+        #f5f7fa;
+    }
+
+
+    .search-result-name {
+      font-size:
+        13px;
+
+      font-weight:
+        700;
+    }
+
+
+    .search-result-category {
+      font-size:
+        10px;
+
+      color:
+        #777;
+    }
+
+
+    /* =========================================================
+       CATEGORY FILTERS
+       ========================================================= */
+
+    .category-bar {
+      flex:
+        1 1 auto;
+
+      min-width:
+        0;
+
+      height:
+        62px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        2px;
+
+      padding:
+        6px;
+
+      overflow-x:
+        auto;
+
+      overflow-y:
+        hidden;
+
+      background:
+        var(--panel);
+
+      border-radius:
+        var(--radius);
+
+      box-shadow:
+        var(--shadow);
+
+      scrollbar-width:
+        none;
+
+      backdrop-filter:
+        blur(12px);
+    }
+
+
+    .category-bar::-webkit-scrollbar {
+      display:
+        none;
+    }
+
+
+    .category-button {
+      flex:
+        0 0 auto;
+
+      height:
+        42px;
+
+      padding:
+        0 10px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        5px;
+
+      border:
+        none;
+
+      border-radius:
+        11px;
+
+      background:
+        transparent;
+
+      color:
+        #26344d;
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+
+      white-space:
+        nowrap;
+
+      cursor:
+        pointer;
+    }
+
+
+    .category-button:hover {
+      background:
+        #f1f4f8;
+    }
+
+
+    .category-button.active {
+      background:
+        var(--blue);
+
+      color:
+        white;
+    }
+
+
+    /* =========================================================
+       MAP STYLE SWITCHER
+       ========================================================= */
+
+    .map-style-switcher {
+      flex:
+        0 0 auto;
+
+      height:
+        62px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        2px;
+
+      padding:
+        6px;
+
+      background:
+        var(--panel);
+
+      border-radius:
+        var(--radius);
+
+      box-shadow:
+        var(--shadow);
+
+      backdrop-filter:
+        blur(12px);
+    }
+
+
+    .style-button {
+      height:
+        42px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        5px;
+
+      padding:
+        0 10px;
+
+      border:
+        none;
+
+      border-radius:
+        11px;
+
+      background:
+        transparent;
+
+      color:
+        #5c687b;
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+
+      white-space:
+        nowrap;
+
+      cursor:
+        pointer;
+    }
+
+
+    .style-button:hover {
+      background:
+        #f1f4f8;
+    }
+
+
+    .style-button.active {
+      background:
+        #edf4ff;
+
+      color:
+        #1769e0;
+    }
+
+
+    /* =========================================================
+       LEFT MENU
+       ========================================================= */
+
+    .main-menu {
+      position:
+        fixed;
+
+      top:
+        96px;
+
+      left:
+        16px;
+
+      z-index:
+        450;
+
+      width:
+        150px;
+
+      padding:
+        8px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        4px;
+
+      background:
+        var(--panel);
+
+      border-radius:
+        20px;
+
+      box-shadow:
+        var(--shadow);
+
+      backdrop-filter:
+        blur(12px);
+    }
+
+
+    .menu-item {
+      width:
+        100%;
+
+      min-height:
+        52px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+
+      padding:
+        0 12px;
+
+      border:
+        none;
+
+      border-radius:
+        13px;
+
+      background:
+        transparent;
+
+      color:
+        #34435d;
+
+      cursor:
+        pointer;
+
+      transition:
+        0.2s ease;
+    }
+
+
+    .menu-item:hover {
+      background:
+        #f3f5f8;
+    }
+
+
+    .menu-item.active {
+      background:
+        #fff0e6;
+
+      color:
+        var(--orange);
+    }
+
+
+    .menu-icon {
+      width:
+        21px;
+
+      height:
+        21px;
+
+      flex:
+        0 0 21px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+    }
+
+
+    .menu-icon svg {
+      width:
+        100%;
+
+      height:
+        100%;
+
+      display:
+        block;
+
+      fill:
+        none;
+
+      stroke:
+        currentColor;
+
+      stroke-width:
+        1.8;
+
+      stroke-linecap:
+        round;
+
+      stroke-linejoin:
+        round;
+    }
+
+
+    .menu-label {
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+      white-space:
+        nowrap;
+    }
+
+
+    /* =========================================================
+       MAIN MENU PANEL
+       ========================================================= */
+
+    #menuPanel {
+      position:
+        fixed;
+
+      top:
+        96px;
+
+      left:
+        180px;
+
+      z-index:
+        445;
+
+      width:
+        320px;
+
+      max-height:
+        65vh;
+
+      padding:
+        20px;
+
+      overflow-y:
+        auto;
+
+      background:
+        rgba(255,255,255,0.98);
+
+      border-radius:
+        18px;
+
+      box-shadow:
+        0 10px 35px
+        rgba(0,0,0,0.20);
+
+      opacity:
+        0;
+
+      visibility:
+        hidden;
+
+      transform:
+        translateX(-8px);
+
+      transition:
+        0.2s ease;
+    }
+
+
+    #menuPanel.active {
+      opacity:
+        1;
+
+      visibility:
+        visible;
+
+      transform:
+        translateX(0);
+    }
+
+
+    #menuPanel h2 {
+      margin:
+        0 0 15px;
+
+      font-size:
+        19px;
+    }
+
+
+    #menuPanel p {
+      font-size:
+        13px;
+
+      line-height:
+        1.55;
+
+      color:
+        #555;
+    }
+
+
+    #closeMenuPanel {
+      position:
+        absolute;
+
+      top:
+        10px;
+
+      right:
+        10px;
+
+      width:
+        32px;
+
+      height:
+        32px;
+
+      border:
+        none;
+
+      border-radius:
+        50%;
+
+      background:
+        #f0f0f0;
+
+      font-size:
+        19px;
+
+      cursor:
+        pointer;
+    }
+
+
+    .utility-item {
+      padding:
+        11px 0;
+
+      border-bottom:
+        1px solid #eee;
+
+      font-size:
+        13px;
+    }
+
+
+    .timeline-buttons {
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        8px;
+    }
+
+
+    .timeline-year {
+      padding:
+        8px 12px;
+
+      border:
+        1px solid #d8dce3;
+
+      border-radius:
+        18px;
+
+      background:
+        white;
+
+      color:
+        #34435d;
+
+      font-size:
+        12px;
+
+      cursor:
+        pointer;
+    }
+
+
+    .timeline-year:hover,
+    .timeline-year.active {
+      border-color:
+        var(--blue);
+
+      background:
+        var(--blue);
+
+      color:
+        white;
+    }
+
+  /* =========================================================
+   PHOTO LIGHTBOX
+   ========================================================= */
+
+#lightbox {
+  position: fixed;                   /* Cover the whole browser window */
+  inset: 0;                          /* Top, right, bottom and left = 0 */
+  z-index: 5000;                     /* Stay above dashboard and map */
+  display: flex;                     /* Centre the photo */
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.94);  /* Dark backdrop */
+  opacity: 0;                        /* Hidden by default */
+  visibility: hidden;
+  pointer-events: none;              /* Don't block clicks while hidden */
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+#lightbox.active {
+  opacity: 1;                        /* Show when JS adds .active */
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#lightboxImage {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 92vw;                   /* Keep photo inside browser width */
+  max-height: 88vh;                  /* Keep photo inside browser height */
+  object-fit: contain;               /* Never crop or distort */
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#closeLightbox {
+  position: fixed;
+  top: 18px;
+  right: 20px;
+  z-index: 5001;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+#closeLightbox:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+
+/* =========================================================
+   MOBILE LIGHTBOX
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  #lightbox {
+    padding: 10px;
+  }
+
+  #lightboxImage {
+    max-width: 96vw;
+    max-height: 84vh;
+  }
+
+  #closeLightbox {
+    top: 12px;
+    right: 12px;
+  }
+
+}
+
+
+    /* =========================================================
+       RECENT PLACES
+       ========================================================= */
+
+    #recentPlaces {
+      position:
+        fixed;
+
+      left:
+        260px;
+
+      right:
+        220px;
+
+      bottom:
+        18px;
+
+      z-index:
+        410;
+    }
+
+
+    .recent-heading {
+      margin:
+        0 0 8px;
+
+      color:
+        white;
+
+      font-size:
+        14px;
+
+      font-weight:
+        800;
+
+      text-shadow:
+        0 2px 6px
+        rgba(0,0,0,0.8);
+    }
+
+
+    #recentList {
+      display:
+        flex;
+
+      gap:
+        8px;
+
+      overflow-x:
+        auto;
+
+      scrollbar-width:
+        none;
+    }
+
+
+    #recentList::-webkit-scrollbar {
+      display:
+        none;
+    }
+
+
+    .recent-card {
+      position:
+        relative;
+
+      flex:
+        0 0 160px;
+
+      height:
+        120px;
+
+      overflow:
+        hidden;
+
+      border:
+        2px solid
+        rgba(255,255,255,0.9);
+
+      border-radius:
+        14px;
+
+      background:
+        #222;
+
+      box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.3);
+
+      cursor:
+        pointer;
+    }
+
+
+    .recent-card img {
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        cover;
+    }
+
+
+    .recent-card-overlay {
+      position:
+        absolute;
+
+      left:
+        0;
+
+      right:
+        0;
+
+      bottom:
+        0;
+
+      padding:
+        28px 9px 8px;
+
+      color:
+        white;
+
+      background:
+        linear-gradient(
+          transparent,
+          rgba(0,0,0,0.88)
+        );
+    }
+
+
+    .recent-card-name {
+      font-size:
+        14px;
+
+      font-weight:
+        800;
+    }
+
+
+    .recent-card-category {
+      margin-top:
+        2px;
+
+      font-size:
+        9px;
+    }
+
+
+    /* =========================================================
+       MY TRAVEL MAP
+       ========================================================= */
+
+    #travelSummary {
+      position:
+        fixed;
+
+      right:
+        18px;
+
+      bottom:
+        18px;
+
+      z-index:
+        420;
+
+      width:
+        190px;
+
+      padding:
+        16px;
+
+      background:
+        var(--panel);
+
+      border-radius:
+        18px;
+
+      box-shadow:
+        var(--shadow);
+
+      backdrop-filter:
+        blur(12px);
+    }
+
+
+    .summary-title {
+      margin-bottom:
+        14px;
+
+      font-size:
+        13px;
+
+      font-weight:
+        800;
+    }
+
+
+    .summary-row {
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      margin:
+        10px 0;
+
+      font-size:
+        11px;
+
+      color:
+        #667085;
+    }
+
+
+    .summary-row strong {
+      color:
+        #1769e0;
+
+      font-size:
+        14px;
+    }
+
+
+    /* =========================================================
+       MAPLIBRE CONTROLS
+       ========================================================= */
+
+    .maplibregl-ctrl-top-right {
+      top:
+        90px;
+
+      right:
+        7px;
+    }
+
+
+    /* =========================================================
+       DASHBOARD BACKDROP
+       ========================================================= */
+
+    #overlayBackdrop {
+      position:
+        fixed;
+
+      inset:
+        0;
+
+      z-index:
+        900;
+
+      background:
+        rgba(5,10,20,0.68);
+
+      opacity:
+        0;
+
+      visibility:
+        hidden;
+
+      transition:
+        0.25s ease;
+    }
+
+
+    #overlayBackdrop.active {
+      opacity:
+        1;
+
+      visibility:
+        visible;
+    }
+
+
+    /* =========================================================
+   PLACE DASHBOARD
+   ========================================================= */
+
+#travelDashboard {
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+
+  z-index: 1000;
+
+  width: min(1240px, 92vw);
+  height: min(830px, 90vh);
+
+  overflow: hidden;
+
+  background: white;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,0.55);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translate(-50%, -47%)
+    scale(0.98);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+}
+
+
+#travelDashboard.active {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+/* =========================================================
+   DASHBOARD LAYOUT
+   ========================================================= */
+
+.dashboard-layout {
+  display: grid;
+
+  grid-template-columns:
+    180px minmax(0, 1fr);
+
+  width: 100%;
+  height: 100%;
+}
+
+
+    /* =========================================================
+   DASHBOARD SIDEBAR
+   ========================================================= */
+
+.dashboard-sidebar {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 18px 14px;
+
+  background: #ffffff;
+
+  border-right:
+    1px solid #e5e7eb;
+
+  overflow-y: auto;
+}
+
+
+.dashboard-nav {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+
+.dashboard-nav-button {
+  width: 100%;
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 12px;
+
+  border: none;
+  border-radius: 11px;
+
+  background: transparent;
+
+  color: #26344d;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+
+.dashboard-nav-button:hover {
+  background: #f5f6f8;
+}
+
+
+.dashboard-nav-button.active {
+  background: #fff1e7;
+
+  color: #ef5b18;
+}
+
+
+.dashboard-nav-icon {
+  width: 18px;
+  height: 18px;
+
+  flex: 0 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.dashboard-nav-icon svg {
+  width: 100%;
+  height: 100%;
+
+  fill: none;
+
+  stroke: currentColor;
+  stroke-width: 1.8;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+.dashboard-nav-label {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.dashboard-tab-content {
+  display: none;
+}
+
+
+.dashboard-tab-content.active {
+  display: block;
+}
+
+
+.info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+.info-card {
+  padding: 16px;
+
+  border:
+    1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  background: #fafafa;
+}
+
+
+.info-card h3 {
+  margin:
+    0 0 8px;
+
+  font-size: 14px;
+}
+
+
+.info-card p {
+  margin: 0;
+
+  color: #555;
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+
+#dashboardLinksList {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+/* Individual official-resource card */
+.dashboard-resource-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #26344d;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Small lift when mouse hovers over link */
+.dashboard-resource-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* Emoji/icon on left */
+.resource-icon {
+  flex: 0 0 auto;
+  font-size: 20px;
+}
+
+/* Resource name fills available space */
+.resource-name {
+  flex: 1;
+  min-width: 0;
+}
+
+/* External-link arrow on right */
+.resource-arrow {
+  flex: 0 0 auto;
+  font-size: 16px;
+  opacity: 0.55;
+}
+
+/* One column on smaller screens */
+@media (max-width: 700px) {
+  #dashboardLinksList {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.dashboard-resource-link {
+  display: block;
+
+  padding: 14px;
+
+  border:
+    1px solid #e5e7eb;
+
+  border-radius: 11px;
+
+  color: #26344d;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+.dashboard-resource-link:hover {
+  border-color:
+    #2878ed;
+}
+
+
+@media (max-width: 700px) {
+
+  .info-grid,
+  #dashboardLinksList {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* =========================================================
+   BEST TIME
+   ========================================================= */
+
+.best-time-card {
+  margin-top: auto;
+
+  padding: 14px;
+
+  border-radius: 13px;
+
+  background: #fff5e8;
+}
+
+
+.best-time-card strong {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 12px;
+}
+
+
+.best-time-card p {
+  margin: 0;
+
+  font-size: 11px;
+  line-height: 1.5;
+
+  color: #4f5969;
+}
+
+
+    /* =========================================================
+   DASHBOARD MAIN
+   ========================================================= */
+
+.dashboard-main {
+  position: relative;
+
+  min-width: 0;
+
+  height: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background: white;
+}
+
+
+#closeDashboard {
+  position: absolute;
+
+  top: 14px;
+  right: 14px;
+
+  z-index: 30;
+
+  width: 44px;
+  height: 44px;
+
+  border: none;
+  border-radius: 50%;
+
+  background:
+    rgba(255,255,255,0.94);
+
+  color: #111;
+
+  font-size: 25px;
+
+  box-shadow:
+    0 3px 15px rgba(0,0,0,0.18);
+
+  cursor: pointer;
+}
+
+
+    /* =========================================================
+       DASHBOARD HERO
+       ========================================================= */
+
+    .dashboard-hero {
+  position: relative;
+
+  height: 255px;
+
+  overflow: hidden;
+
+  background: #222;
+}
+
+
+#heroPhoto {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+}
+
+
+.hero-gradient {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.94) 0%,
+      rgba(255,255,255,0.73) 27%,
+      rgba(255,255,255,0.06) 60%
+    );
+}
+
+
+.hero-text {
+  position: absolute;
+
+  top: 24px;
+  left: 30px;
+
+  z-index: 5;
+
+  width: min(420px, 45%);
+}
+
+
+#dashboardPlaceName {
+  margin: 0 0 14px;
+
+  font-size: clamp(24px, 2.3vw, 32px);
+
+  line-height: 1.08;
+}
+
+
+#heroDescription {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.55;
+
+  color: #182033;
+}
+
+
+.hero-counts {
+  position: absolute;
+
+  right: 22px;
+  bottom: 17px;
+
+  z-index: 5;
+
+  display: flex;
+
+  gap: 8px;
+}
+
+
+.hero-count {
+  padding: 8px 11px;
+
+  border-radius: 18px;
+
+  background:
+    rgba(0,0,0,0.70);
+
+  color: white;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+    /* =========================================================
+   DASHBOARD CONTENT
+   ========================================================= */
+
+.dashboard-content {
+  padding: 22px 28px 32px;
+}
+
+
+/* =========================================================
+   QUICK CARDS
+   ========================================================= */
+
+.quick-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+.quick-card {
+  min-width: 0;
+
+  padding: 14px 16px;
+
+  border:
+    1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  background: white;
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,0.05);
+}
+
+
+.quick-label {
+  margin-bottom: 6px;
+
+  color: #697386;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+
+.quick-value {
+  overflow-wrap: anywhere;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+
+    /* =========================================================
+       PLACE DESCRIPTION
+       ========================================================= */
+
+    .place-description {
+      margin-top:
+        24px;
+    }
+
+
+    .place-description h3 {
+      font-size:
+        16px;
+
+      font-weight:
+        700;
+
+      margin:
+        20px 0 8px;
+
+      color:
+        #222;
+    }
+
+
+    .place-description h3:first-child {
+      margin-top:
+        0;
+    }
+
+
+    .place-description p {
+      font-size:
+        14px;
+
+      line-height:
+        1.55;
+
+      margin:
+        0 0 16px;
+
+      color:
+        #4a4a4a;
+    }
+
+
+    /* =========================================================
+   ABOUT PREVIEW
+   ========================================================= */
+
+.about-block {
+  margin-top: 24px;
+}
+
+
+.about-block h2 {
+  margin: 0 0 10px;
+
+  font-size: 19px;
+}
+
+
+#aboutPreview {
+  margin: 0;
+
+  color: #444;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+#aboutFull {
+  display: none;
+
+  margin-top: 15px;
+}
+
+
+#aboutFull.visible {
+  display: block;
+}
+
+
+#aboutFull h3 {
+  margin:
+    22px 0 8px;
+
+  font-size: 16px;
+
+  color: #222;
+}
+
+
+#aboutFull p {
+  margin:
+    0 0 15px;
+
+  color: #4a4a4a;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+#aboutFull a {
+  color: #2168ce;
+
+  word-break: break-word;
+}
+
+
+#readMoreButton {
+  margin-top: 12px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #ef5b18;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   PHOTO + VIDEO SECTIONS
+   ========================================================= */
+
+.dashboard-section {
+  padding-top: 28px;
+}
+
+
+.dashboard-section h2 {
+  margin:
+    0 0 13px;
+
+  font-size: 18px;
+}
+
+
+#photoGallery {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 9px;
+}
+
+
+.gallery-photo {
+  width: 100%;
+  height: 135px;
+
+  object-fit: cover;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+}
+
+
+#videoGallery {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(260px, 360px));
+
+  gap: 16px;
+
+  justify-content: start;
+}
+
+
+.video-card {
+  width: 100%;
+
+  max-width: 360px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background: #111;
+
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.12);
+}
+
+
+.video-card video {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  aspect-ratio: 16 / 9;
+
+  object-fit: contain;
+
+  background: #111;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+  #travelDashboard {
+    width: 95vw;
+    height: 92vh;
+  }
+
+
+  .dashboard-layout {
+    grid-template-columns:
+      66px minmax(0, 1fr);
+  }
+
+
+  .dashboard-sidebar {
+    padding:
+      14px 7px;
+  }
+
+
+  .dashboard-nav-button {
+    min-height: 48px;
+
+    padding: 0;
+
+    justify-content: center;
+  }
+
+
+  .dashboard-nav-icon {
+    width: 20px;
+    height: 20px;
+
+    flex-basis: 20px;
+  }
+
+
+  .dashboard-nav-label {
+    display: none;
+  }
+
+
+  .best-time-card {
+    padding: 9px 5px;
+
+    text-align: center;
+  }
+
+
+  .best-time-card strong {
+    font-size: 9px;
+  }
+
+
+  .best-time-card p {
+    display: none;
+  }
+
+
+  .quick-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  #photoGallery {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  #travelDashboard {
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: none;
+    max-height: none;
+
+    border-radius: 0;
+
+    transform:
+      translateY(100%);
+  }
+
+
+  #travelDashboard.active {
+    transform:
+      translateY(0);
+  }
+
+
+  .dashboard-layout {
+    display: block;
+  }
+
+
+  /* Sidebar becomes bottom navigation */
+
+  .dashboard-sidebar {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 1100;
+
+    height: 68px;
+
+    display: flex;
+
+    padding: 5px;
+
+    border-right: none;
+
+    border-top:
+      1px solid #e5e7eb;
+
+    background:
+      rgba(255,255,255,0.97);
+
+    box-shadow:
+      0 -4px 18px
+      rgba(0,0,0,0.08);
+  }
+
+
+  .dashboard-nav {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(5, 1fr);
+
+    gap: 2px;
+  }
+
+
+  .dashboard-nav-button {
+    min-width: 0;
+    min-height: 56px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 3px;
+
+    padding: 3px;
+
+    border-radius: 10px;
+
+    font-size: 9px;
+
+    text-align: center;
+  }
+
+
+  .dashboard-nav-icon {
+    width: 19px;
+    height: 19px;
+
+    flex: 0 0 19px;
+  }
+
+
+  .dashboard-nav-label {
+    display: block;
+
+    max-width: 100%;
+
+    font-size: 9px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+
+  .best-time-card {
+    display: none;
+  }
+
+
+  .dashboard-main {
+    height:
+      calc(100vh - 68px);
+
+    padding-bottom: 10px;
+  }
+
+
+  #closeDashboard {
+    position: fixed;
+
+    top: 12px;
+    right: 12px;
+
+    width: 42px;
+    height: 42px;
+  }
+
+
+  .dashboard-hero {
+    height: 235px;
+  }
+
+
+  .hero-gradient {
+    background:
+      linear-gradient(
+        0deg,
+        rgba(0,0,0,0.74),
+        rgba(0,0,0,0.04) 72%
+      );
+  }
+
+
+  .hero-text {
+    top: auto;
+
+    left: 16px;
+    right: 64px;
+    bottom: 17px;
+
+    width: auto;
+
+    color: white;
+  }
+
+
+  #dashboardPlaceName {
+    margin-bottom: 0;
+
+    color: white;
+
+    font-size: 24px;
+  }
+
+
+  #heroDescription {
+    display: none;
+  }
+
+
+  .hero-counts {
+    display: none;
+  }
+
+
+  .dashboard-content {
+    padding:
+      16px 14px 30px;
+  }
+
+
+  .quick-grid {
+    gap: 8px;
+  }
+
+
+  .quick-card {
+    padding: 12px;
+  }
+
+
+  #photoGallery {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 7px;
+  }
+
+
+  .gallery-photo {
+    height: 125px;
+  }
+
+
+  #videoGallery {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .video-card video {
+    max-height: 185px;
+  }
+
+}
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 700px) {
+
+      #topUI {
+        top:
+          8px;
+
+        left:
+          8px;
+
+        right:
+          8px;
+
+        grid-template-columns:
+          52px 1fr;
+
+        gap:
+          7px;
+      }
+
+
+      /* brand */
+
+      .map-brand {
+        width:
+          52px;
+
+        height:
+          52px;
+
+        padding:
+          5px;
+
+        justify-content:
+          center;
+
+        border-radius:
+          14px;
+      }
+
+
+      .map-brand img {
+        width:
+          42px;
+
+        height:
+          42px;
+      }
+
+
+      .brand-text {
+        display:
+          none;
+      }
+
+
+      /* search */
+
+      .search-wrap {
+        height:
+          52px;
+      }
+
+
+      .search-box {
+        height:
+          52px;
+      }
+
+
+      /* map styles */
+
+      .map-style-switcher {
+        grid-column:
+          1 / -1;
+
+        width:
+          100%;
+
+        height:
+          44px;
+
+        justify-content:
+          stretch;
+      }
+
+
+      .style-button {
+        flex:
+          1;
+
+        height:
+          32px;
+
+        justify-content:
+          center;
+
+        padding:
+          0 5px;
+
+        font-size:
+          10px;
+      }
+
+
+      /* categories */
+
+      .category-bar {
+        grid-column:
+          1 / -1;
+
+        height:
+          44px;
+      }
+
+
+      .category-button {
+        height:
+          32px;
+
+        font-size:
+          10px;
+      }
+
+
+      /* menu -> bottom navigation */
+
+      .main-menu {
+        top:
+          auto;
+
+        left:
+          8px;
+
+        right:
+          8px;
+
+        bottom:
+          8px;
+
+        width:
+          auto;
+
+        height:
+          66px;
+
+        display:
+          flex;
+
+        flex-direction:
+          row;
+
+        align-items:
+          stretch;
+
+        justify-content:
+          space-around;
+
+        gap:
+          2px;
+
+        padding:
+          5px;
+
+        border-radius:
+          18px;
+      }
+
+
+      .menu-item {
+        flex:
+          1;
+
+        width:
+          auto;
+
+        height:
+          56px;
+
+        min-height:
+          56px;
+
+        padding:
+          5px 2px;
+
+        display:
+          flex;
+
+        flex-direction:
+          column;
+
+        align-items:
+          center;
+
+        justify-content:
+          center;
+
+        gap:
+          3px;
+      }
+
+
+      .menu-icon {
+        width:
+          20px;
+
+        height:
+          20px;
+
+        flex:
+          0 0 20px;
+      }
+
+
+      .menu-label {
+        display:
+          block;
+
+        font-size:
+          9px;
+
+        text-align:
+          center;
+      }
+
+
+      .menu-item.mobile-hide {
+        display:
+          none;
+      }
+
+
+      /* menu panel */
+
+      #menuPanel {
+        top:
+          auto;
+
+        left:
+          8px;
+
+        right:
+          8px;
+
+        bottom:
+          82px;
+
+        width:
+          auto;
+
+        max-height:
+          45vh;
+      }
+
+
+      .maplibregl-ctrl-top-right {
+        top:
+          165px;
+      }
+
+
+      #recentPlaces {
+        left:
+          8px;
+
+        right:
+          8px;
+
+        bottom:
+          82px;
+      }
+
+
+      .recent-card {
+        flex:
+          0 0 120px;
+
+        height:
+          88px;
+      }
+
+
+      #travelSummary {
+        display:
+          none;
+      }
+
+
+      /* dashboard full screen */
+
+      #travelDashboard {
+        top:
+          0;
+
+        left:
+          0;
+
+        width:
+          100%;
+
+        height:
+          100%;
+
+        border-radius:
+          0;
+
+        transform:
+          translateY(100%);
+      }
+
+
+      #travelDashboard.active {
+        transform:
+          translateY(0);
+      }
+
+
+      .dashboard-layout {
+        display:
+          block;
+      }
+
+
+      .dashboard-sidebar {
+        display:
+          none;
+      }
+
+
+      .dashboard-main {
+        height:
+          100vh;
+      }
+
+
+      .dashboard-hero {
+        height:
+          220px;
+      }
+
+
+      .hero-gradient {
+        background:
+          linear-gradient(
+            0deg,
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.05)
+          );
+      }
+
+
+      .hero-text {
+        top:
+          auto;
+
+        left:
+          16px;
+
+        right:
+          70px;
+
+        bottom:
+          18px;
+
+        width:
+          auto;
+
+        color:
+          white;
+      }
+
+
+      #dashboardPlaceName {
+        font-size:
+          24px;
+
+        margin-bottom:
+          5px;
+      }
+
+
+      #heroDescription {
+        display:
+          none;
+      }
+
+
+      .hero-counts {
+        display:
+          none;
+      }
+
+
+      .dashboard-content {
+        padding:
+          16px;
+      }
+
+
+      .quick-grid {
+        grid-template-columns:
+          repeat(2,1fr);
+
+        gap:
+          8px;
+      }
+
+
+      #photoGallery {
+        grid-template-columns:
+          repeat(2,1fr);
+      }
+
+
+      .gallery-photo {
+        height:
+          125px;
+      }
+
+
+      #videoGallery {
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .video-card video {
+        max-height:
+          190px;
+      }
+
+    }

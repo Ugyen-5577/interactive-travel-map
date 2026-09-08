@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>My Interactive Travel Map</title>
+  <!-- MAPLIBRE CSS -->
+  <link
+    href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css"
+    rel="stylesheet"
+  >
+  <!-- MAPLIBRE JS -->
+  <script
+    src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js">
+  </script>
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================================
+       MAP
+       ========================================================= -->
+
+  <div id="map"></div>
+
+
+  <!-- =========================================================
+       TOP UI
+       ========================================================= -->
+
+  <div id="topUI">
+
+
+    <!-- BRAND -->
+
+    <div class="map-brand">
+
+      <img
+        src="images/logo.jpg"
+        alt="Travel Map Logo"
+        onerror="this.style.display='none'"
+      >
+
+      <div class="brand-text">
+
+        <span class="brand-name">
+          YOUR BRAND NAME
+        </span>
+
+        <span class="brand-tagline">
+          Explore • See • Experience
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-wrap">
+
+      <div class="search-box">
+
+        <span class="search-icon">
+          🔍
+        </span>
+
+        <input
+          id="placeSearch"
+          type="text"
+          placeholder="Search places, regions or experiences..."
+          autocomplete="off"
+        >
+
+      </div>
+
+      <div id="searchSuggestions"></div>
+
+    </div>
+
+
+    <!-- CATEGORY -->
+
+    <div class="category-bar">
+
+      <button
+        class="category-button active"
+        data-category="All">
+        All
+      </button>
+
+      <button
+        class="category-button"
+        data-category="Nature">
+        Nature
+      </button>
+
+      <button
+        class="category-button"
+        data-category="City">
+        Cities
+      </button>
+
+      <button
+        class="category-button"
+        data-category="Culture">
+        Culture
+      </button>
+
+      <button
+        class="category-button"
+        data-category="Beach">
+        Beaches
+      </button>
+
+      <button
+        class="category-button"
+        data-category="Scenic">
+        Scenic
+      </button>
+
+    </div>
+
+
+    <!-- MAP STYLE -->
+
+    <div class="map-style-switcher">
+
+      <button
+        class="style-button"
+        data-style="map">
+        Map
+      </button>
+
+      <button
+        class="style-button active"
+        data-style="satellite">
+        Satellite
+      </button>
+
+      <button
+        class="style-button"
+        data-style="terrain">
+        Terrain
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       RESPONSIVE MENU
+       ========================================================= -->
+
+  <nav class="main-menu">
+
+
+    <!-- EXPLORE -->
+
+    <button
+      class="menu-item active"
+      data-menu="explore"
+    >
+
+      <span class="menu-icon">
+
+        <svg viewBox="0 0 24 24">
+
+          <circle
+            cx="12"
+            cy="12"
+            r="9">
+          </circle>
+
+          <path
+            d="M15.5 8.5l-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2z">
+          </path>
+
+        </svg>
+
+      </span>
+
+      <span class="menu-label">
+        Explore
+      </span>
+
+    </button>
+
+
+    <!-- TRIPS -->
+
+    <button
+      class="menu-item"
+      data-menu="trips"
+    >
+
+      <span class="menu-icon">
+
+        <svg viewBox="0 0 24 24">
+
+          <path
+            d="M7 7V5a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v2">
+          </path>
+
+          <rect
+            x="4"
+            y="7"
+            width="16"
+            height="14"
+            rx="2">
+          </rect>
+
+        </svg>
+
+      </span>
+
+      <span class="menu-label">
+        Trips
+      </span>
+
+    </button>
+
+
+    <!-- WISHLIST -->
+
+    <button
+      class="menu-item"
+      data-menu="wishlist"
+    >
+
+      <span class="menu-icon">
+
+        <svg viewBox="0 0 24 24">
+
+          <path
+            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z">
+          </path>
+
+        </svg>
+
+      </span>
+
+      <span class="menu-label">
+        Wishlist
+      </span>
+
+    </button>
+
+
+    <!-- TIMELINE -->
+
+    <button
+      class="menu-item"
+      data-menu="timeline"
+    >
+
+      <span class="menu-icon">
+
+        <svg viewBox="0 0 24 24">
+
+          <circle
+            cx="12"
+            cy="12"
+            r="9">
+          </circle>
+
+          <path
+            d="M12 7v5h4">
+          </path>
+
+        </svg>
+
+      </span>
+
+      <span class="menu-label">
+        Timeline
+      </span>
+
+    </button>
+
+
+    <!-- STATISTICS -->
+
+    <button
+      class="menu-item mobile-hide"
+      data-menu="statistics"
+    >
+
+      <span class="menu-icon">
+
+        <svg viewBox="0 0 24 24">
+
+          <path
+            d="M4 20V10h4v10">
+          </path>
+
+          <path
+            d="M10 20V4h4v16">
+          </path>
+
+          <path
+            d="M16 20V7h4v13">
+          </path>
+
+        </svg>
+
+      </span>
+
+      <span class="menu-label">
+        Statistics
+      </span>
+
+    </button>
+
+
+    <!-- ABOUT -->
+
+    <button
+      class="menu-item mobile-hide"
+      data-menu="about"
+    >
+
+      <span class="menu-icon">
+
+        <svg viewBox="0 0 24 24">
+
+          <circle
+            cx="12"
+            cy="12"
+            r="9">
+          </circle>
+
+          <path
+            d="M12 11v6">
+          </path>
+
+          <path
+            d="M12 7h.01">
+          </path>
+
+        </svg>
+
+      </span>
+
+      <span class="menu-label">
+        About
+      </span>
+
+    </button>
+
+    <!-- DISCLAIMER -->
+
+<button
+  class="menu-item mobile-hide"
+  data-menu="disclaimer"
+>
+
+  <span class="menu-icon">
+
+    <svg viewBox="0 0 24 24">
+
+      <path
+        d="M12 3L2.5 20h19L12 3z">
+      </path>
+
+      <path
+        d="M12 9v5">
+      </path>
+
+      <path
+        d="M12 17h.01">
+      </path>
+
+    </svg>
+
+  </span>
+
+  <span class="menu-label">
+    Disclaimer
+  </span>
+
+</button>
+
+
+    <!-- SETTINGS -->
+
+    <button
+      class="menu-item mobile-hide"
+      data-menu="settings"
+    >
+
+      <span class="menu-icon">
+
+        <svg viewBox="0 0 24 24">
+
+          <circle
+            cx="12"
+            cy="12"
+            r="3">
+          </circle>
+
+          <path
+            d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.08A1.7 1.7 0 0 0 8.97 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.52-1.03H3v-4h.08A1.7 1.7 0 0 0 4.6 8.97a1.7 1.7 0 0 0-.34-1.88l-.06-.06L7.03 4.2l.06.06A1.7 1.7 0 0 0 8.97 4.6 1.7 1.7 0 0 0 10 3.08V3h4v.08a1.7 1.7 0 0 0 1.03 1.52 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06a1.7 1.7 0 0 0-.34 1.88A1.7 1.7 0 0 0 20.92 10H21v4h-.08A1.7 1.7 0 0 0 19.4 15z">
+          </path>
+
+        </svg>
+
+      </span>
+
+      <span class="menu-label">
+        Settings
+      </span>
+
+    </button>
+
+  </nav>
+
+
+  <!-- =========================================================
+       MENU PANEL
+       ========================================================= -->
+
+  <div id="menuPanel">
+
+    <button id="closeMenuPanel">
+      ×
+    </button>
+
+    <div id="menuPanelContent"></div>
+
+  </div>
+
+
+  <!-- =========================================================
+       RECENT PLACES
+       ========================================================= -->
+
+  <section id="recentPlaces">
+
+    <h3 class="recent-heading">
+      Recently Added / Top Places
+    </h3>
+
+    <div id="recentList"></div>
+
+  </section>
+
+
+  
+  <!-- =========================================================
+       DASHBOARD BACKDROP
+       ========================================================= -->
+
+  <div id="overlayBackdrop"></div>
+
+
+  <!-- =========================================================
+       PLACE DASHBOARD
+       ========================================================= -->
+
+  <div id="travelDashboard">
+
+
+    <div class="dashboard-layout">
+
+
+      <!-- DASHBOARD NAV -->
+
+      <aside class="dashboard-sidebar">
+
+  <div class="dashboard-nav">
+
+
+    <button
+      class="dashboard-nav-button active"
+      data-dashboard-tab="overview"
+    >
+
+      <span class="dashboard-nav-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 11.5L12 4l9 7.5"></path>
+          <path d="M5 10.5V20h14v-9.5"></path>
+        </svg>
+      </span>
+
+      <span class="dashboard-nav-label">
+        Overview
+      </span>
+
+    </button>
+
+
+    <button
+      class="dashboard-nav-button"
+      data-dashboard-tab="gallery"
+    >
+
+      <span class="dashboard-nav-icon">
+        <svg viewBox="0 0 24 24">
+          <rect
+            x="3"
+            y="4"
+            width="18"
+            height="16"
+            rx="2">
+          </rect>
+
+          <circle
+            cx="8"
+            cy="9"
+            r="1.5">
+          </circle>
+
+          <path d="M4 17l5-5 4 4 2-2 5 5"></path>
+        </svg>
+      </span>
+
+      <span class="dashboard-nav-label">
+        Gallery
+      </span>
+
+    </button>
+
+
+    <button
+      class="dashboard-nav-button"
+      data-dashboard-tab="videos"
+    >
+
+      <span class="dashboard-nav-icon">
+        <svg viewBox="0 0 24 24">
+          <rect
+            x="3"
+            y="5"
+            width="14"
+            height="14"
+            rx="2">
+          </rect>
+
+          <path d="M10 9l4 3-4 3z"></path>
+
+          <path d="M17 10l4-2v8l-4-2"></path>
+        </svg>
+      </span>
+
+      <span class="dashboard-nav-label">
+        Videos
+      </span>
+
+    </button>
+
+
+    <button
+      class="dashboard-nav-button"
+      data-dashboard-tab="info"
+    >
+
+      <span class="dashboard-nav-icon">
+        <svg viewBox="0 0 24 24">
+
+          <circle
+            cx="12"
+            cy="12"
+            r="9">
+          </circle>
+
+          <path d="M12 11v6"></path>
+          <path d="M12 7h.01"></path>
+
+        </svg>
+      </span>
+
+      <span class="dashboard-nav-label">
+        Info
+      </span>
+
+    </button>
+
+
+    <button
+      class="dashboard-nav-button"
+      data-dashboard-tab="links"
+    >
+
+      <span class="dashboard-nav-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"></path>
+          <path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.1-1.1"></path>
+        </svg>
+      </span>
+
+      <span class="dashboard-nav-label">
+        Links
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <div class="best-time-card">
+
+    <strong>
+      Best time to visit
+    </strong>
+
+    <p id="bestTime"></p>
+
+  </div>
+
+</aside>
+
+
+      <!-- DASHBOARD MAIN -->
+
+      <main class="dashboard-main">
+
+
+        <button id="closeDashboard">
+          ×
+        </button>
+
+
+        <!-- HERO -->
+
+        <section class="dashboard-hero">
+
+
+          <img
+            id="heroPhoto"
+            src=""
+            alt=""
+            draggable="false"
+            oncontextmenu="return false;"
+          >
+
+
+          <div class="hero-gradient"></div>
+
+
+          <div class="hero-text">
+
+            <h1 id="dashboardPlaceName">
+              Location
+            </h1>
+
+            <p id="heroDescription"></p>
+
+          </div>
+
+
+          <div class="hero-counts">
+
+            <div
+              id="heroPhotoCount"
+              class="hero-count">
+              0 Photos
+            </div>
+
+            <div
+              id="heroVideoCount"
+              class="hero-count">
+              0 Videos
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- DASHBOARD BODY -->
+
+        <div class="dashboard-content">
+
+
+  <!-- =====================================================
+     OVERVIEW
+     ===================================================== -->
+
+<section
+  id="dashboardOverview"
+  class="dashboard-tab-content active"
+>
+
+  <div class="quick-grid">
+
+    <div class="quick-card">
+      <div class="quick-label">
+        Visited
+      </div>
+
+      <div
+        id="quickVisited"
+        class="quick-value">
+      </div>
+    </div>
+
+
+    <div class="quick-card">
+      <div class="quick-label">
+        Category
+      </div>
+
+      <div
+        id="quickCategory"
+        class="quick-value">
+      </div>
+    </div>
+
+
+    <div class="quick-card">
+      <div class="quick-label">
+        Photos
+      </div>
+
+      <div
+        id="quickPhotos"
+        class="quick-value">
+      </div>
+    </div>
+
+
+    <div class="quick-card">
+      <div class="quick-label">
+        Videos
+      </div>
+
+      <div
+        id="quickVideos"
+        class="quick-value">
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="about-block">
+
+    <h2 id="aboutHeading">
+      About
+    </h2>
+
+    <p id="aboutPreview"></p>
+
+    <div
+      id="aboutFull"
+      class="place-description">
+    </div>
+
+    <button
+      id="readMoreButton"
+      type="button">
+      Read more ↓
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALLERY
+     ===================================================== -->
+
+<section
+  id="dashboardGallery"
+  class="dashboard-tab-content"
+>
+
+  <div class="dashboard-section">
+
+    <h2>
+      Photos
+    </h2>
+
+    <div id="photoGallery"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     VIDEOS
+     ===================================================== -->
+
+<section
+  id="dashboardVideos"
+  class="dashboard-tab-content"
+>
+
+  <div class="dashboard-section">
+
+    <h2>
+      Short Videos
+    </h2>
+
+    <div id="videoGallery"></div>
+
+  </div>
+
+</section>
+
+
+  <!-- =====================================================
+       INFO
+       ===================================================== -->
+
+  <section
+    id="dashboardInfo"
+    class="dashboard-tab-content"
+  >
+
+    <div class="dashboard-section">
+
+      <h2>
+        Visitor information
+      </h2>
+
+
+      <div class="info-grid">
+
+        <article class="info-card">
+
+          <h3>
+            Getting there
+          </h3>
+
+          <p id="infoGettingThere"></p>
+
+        </article>
+
+
+        <article class="info-card">
+
+          <h3>
+            Staying nearby
+          </h3>
+
+          <p id="infoStayingNearby"></p>
+
+        </article>
+
+
+        <article class="info-card">
+
+          <h3>
+            Explore nearby
+          </h3>
+
+          <p id="infoExploreNearby"></p>
+
+        </article>
+
+
+        <article class="info-card">
+
+          <h3>
+            Planning
+          </h3>
+
+          <p id="infoPlanVisit"></p>
+
+        </article>
+
+
+        <article class="info-card">
+
+          <h3>
+            Respect
+          </h3>
+
+          <p id="infoCulturalNote"></p>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+     LINKS
+     ===================================================== -->
+
+<section
+  id="dashboardLinks"
+  class="dashboard-tab-content"
+>
+
+  <div class="dashboard-section">
+
+    <h2>
+      Official resources
+    </h2>
+
+    <div id="dashboardLinksList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- CLOSE dashboard-content -->
+
+</div>
+
+
+<!-- CLOSE dashboard-main -->
+
+</main>
+
+
+<!-- CLOSE dashboard-layout -->
+
+</div>
+
+
+<!-- CLOSE travelDashboard -->
+
+</div>
+
+
+  <!-- =========================================================
+       LIGHTBOX
+       ========================================================= -->
+
+  <div id="lightbox">
+
+    <button id="closeLightbox">
+      ×
+    </button>
+
+    <img
+      id="lightboxImage"
+      src=""
+      alt=""
+      draggable="false"
+      oncontextmenu="return false;"
+    >
+
+  </div>
+
+
+    <script src="js/app.js"></script>
+
+
+</body>
+
+</html>

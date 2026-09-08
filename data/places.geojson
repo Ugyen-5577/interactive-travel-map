@@ -1,0 +1,196 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Canberra",
+        "title": "Canberra - ACT - AUSTRALIA",
+        "visited": "Home / Local",
+        "category": "City",
+
+        "heroDescription": "Australia's national capital, surrounded by nature reserves, lakes and national institutions.",
+
+        "aboutPreview": "Canberra combines national institutions, planned urban landscapes and extensive natural areas.",
+
+        "aboutFull": "<p>Canberra is Australia's national capital and is located within the Australian Capital Territory.</p><p>The city is known for Lake Burley Griffin, major national institutions, surrounding nature reserves and easy access to bushland.</p>",
+
+        "gettingThere": "Canberra is accessible by road and air, with Canberra Airport located close to the city centre.",
+
+        "stayingNearby": "Accommodation is available throughout central Canberra, Braddon, Kingston, Barton and surrounding suburbs.",
+
+        "exploreNearby": "Explore Lake Burley Griffin, Mount Ainslie, the Australian National Botanic Gardens, Tidbinbilla and Namadgi National Park.",
+
+        "planVisit": "Canberra has four distinct seasons. Spring and autumn are particularly comfortable for outdoor exploration.",
+
+        "bestTime": "Spring and autumn generally provide comfortable temperatures for exploring the city and surrounding nature.",
+
+        "culturalNote": "Respect local regulations and protected natural areas when visiting reserves and national parks.",
+
+        "photos": [
+          "images/canberra1.jpg"
+        ],
+
+        "videos": [],
+
+        "links": [
+  {
+    "name": "Visit Canberra",
+    "url": "https://visitcanberra.com.au/",
+    "icon": "🌿"
+  }
+]
+      },
+
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          149.13,
+          -35.2809
+        ]
+      }
+    },
+
+
+    {
+      "type": "Feature",
+
+      "properties": {
+
+        "name": "Uluru",
+
+        "title": "Uluru - NT - AUSTRALIA",
+
+        "visited": "August 2026",
+
+        "category": "Nature & Culture",
+
+        "heroDescription": "Uluru is one of Australia's most recognisable natural landmarks and a place of deep cultural and spiritual significance.",
+
+        "aboutPreview": "Uluru is a massive sandstone formation in the Northern Territory, rising about 348 metres above the surrounding landscape. It holds deep cultural and spiritual significance for the Aṉangu Traditional Owners.",
+
+        "aboutFull": "<p>Uluru, also known as Ayers Rock, is one of Australia's most recognisable natural landmarks. Located in the Northern Territory, the massive sandstone formation rises about 348 metres above the surrounding landscape and is estimated to have formed hundreds of millions of years ago.</p><p>Its distinctive red appearance comes from the oxidation of iron-bearing minerals in the rock.</p><p>Uluru is especially significant to the <strong>Aṉangu Traditional Owners</strong>, for whom the landscape has deep cultural and spiritual importance. Visitors are asked to respect Aṉangu culture, including restrictions on photography at certain culturally sensitive locations. Climbing Uluru permanently closed in 2019.</p><p>Sunrise and sunset are especially popular because changing light can dramatically alter the appearance and colour of the rock. Visitors can also explore the base of Uluru on foot or bicycle, visit waterholes and join guided cultural experiences.</p>",
+
+        "gettingThere": "Most visitors fly into Ayers Rock Airport (AYQ) near Yulara or travel by road through Central Australia. Alice Springs is roughly 450 km away by road.",
+
+        "stayingNearby": "Accommodation is concentrated at Yulara, just outside the national park, with options ranging from camping and apartments to hotels and luxury accommodation.",
+
+        "exploreNearby": "Visit nearby Kata Tjuṯa, approximately 50 km away by road. Longer Central Australian journeys may also include Kings Canyon and other experiences around Yulara.",
+
+        "planVisit": "Summers can be extremely hot. Cooler months generally provide more comfortable conditions for walking and outdoor activities. Check current park conditions before travelling.",
+
+        "bestTime": "April to October generally offers cooler and more comfortable conditions for walking and outdoor exploration.",
+
+        "culturalNote": "Uluru and Kata Tjuṯa are culturally significant to the Aṉangu Traditional Owners. Respect signs, culturally sensitive areas and photography restrictions throughout the national park.",
+
+        "photos": [
+          "images/uluru1.jpg"
+        ],
+
+        "videos": [
+          "videos/uluru1.mp4"
+        ],
+
+        "links": [
+
+          {
+            "name": "Parks Australia – Uluṟu-Kata Tjuṯa National Park",
+            "url": "https://parksaustralia.gov.au/uluru/",
+            "icon": "🌿"
+          },
+
+          {
+            "name": "Official Uluṟu-Kata Tjuṯa visitor information",
+            "url": "https://uluru.gov.au/",
+            "icon": "🏜"
+          },
+
+          {
+            "name": "Ayers Rock Resort – accommodation & experiences",
+            "url": "https://www.ayersrockresort.com.au/",
+            "icon": "🏨"
+          },
+
+          {
+            "name": "Northern Territory – Uluru & Surrounds",
+            "url": "https://northernterritory.com/uluru-and-surrounds",
+            "icon": "☀"
+          }
+
+        ]
+
+      },
+
+      "geometry": {
+
+        "type": "Point",
+
+        "coordinates": [
+          131.0369,
+          -25.3444
+        ]
+
+      }
+
+    },
+
+
+    {
+      "type": "Feature",
+
+      "properties": {
+
+        "name": "Sydney",
+
+        "title": "Sydney - NSW - AUSTRALIA",
+
+        "visited": "2026",
+
+        "category": "City",
+
+        "heroDescription": "Australia's largest city, combining harbour landscapes, beaches, urban attractions and coastal experiences.",
+
+        "aboutPreview": "Sydney is one of Australia's best-known cities, centred around its harbour and coastline.",
+
+        "aboutFull": "<p>Sydney is the capital of New South Wales and one of Australia's major international gateways.</p><p>The city combines harbour landscapes, beaches, coastal walks, national parks and major cultural attractions.</p>",
+
+        "gettingThere": "Sydney is served by Sydney Airport and extensive road, rail and public transport networks.",
+
+        "stayingNearby": "Accommodation is available throughout the CBD, Circular Quay, Darling Harbour, Bondi and surrounding suburbs.",
+
+        "exploreNearby": "Explore Sydney Harbour, coastal walks, beaches, the Blue Mountains and national parks surrounding the metropolitan area.",
+
+        "planVisit": "Conditions vary throughout the year. Check weather and transport information before planning outdoor activities.",
+
+        "bestTime": "Spring and autumn often provide mild conditions for sightseeing and coastal exploration.",
+
+        "culturalNote": "Respect protected environments, Aboriginal cultural places and local rules when visiting coastal and natural areas.",
+
+        "photos": [
+          "images/sydney1.jpg"
+        ],
+
+        "videos": [
+          "videos/sydney1.mp4"
+        ],
+
+        "links": []
+
+      },
+
+      "geometry": {
+
+        "type": "Point",
+
+        "coordinates": [
+          151.2093,
+          -33.8688
+        ]
+
+      }
+
+    }
+
+  ]
+
+}
