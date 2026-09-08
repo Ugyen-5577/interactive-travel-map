@@ -1983,7 +1983,7 @@
    TABLET
    ========================================================= */
 
-@media (min-width: 701px) (max-with: 950px {
+@media (min-width: 701px) (max-with: 950px) {
 
   #travelDashboard {
     width: 95vw;
@@ -2729,7 +2729,7 @@
    TABLET / PHONE LANDSCAPE
    ========================================================= */
 
-@media (max-width: 950px) {
+@media (min-width: 701px) and (max-width: 950px) {
 
   /* ==================== BRAND ==================== */
 
