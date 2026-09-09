@@ -1534,3 +1534,35 @@ document.addEventListener('keydown', event => {
   closeMenuPanel();
 
 });
+
+/* =========================================================
+   MOBILE MAP INTERACTION UI
+   Temporarily hides recent cards while moving the map.
+   ========================================================= */
+
+function isMobileMapView() {
+  return window.matchMedia('(max-width: 950px)').matches;
+}
+
+function hideMobileOverlayContent() {
+  if (!isMobileMapView()) return;
+
+  document.body.classList.add('map-interacting');
+}
+
+function showMobileOverlayContent() {
+  if (!isMobileMapView()) return;
+
+  document.body.classList.remove('map-interacting');
+}
+
+map.on('dragstart', hideMobileOverlayContent);
+map.on('zoomstart', hideMobileOverlayContent);
+
+map.on('dragend', () => {
+  setTimeout(showMobileOverlayContent, 250);
+});
+
+map.on('zoomend', () => {
+  setTimeout(showMobileOverlayContent, 250);
+});
