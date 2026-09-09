@@ -33,62 +33,173 @@
 
 
   <!-- =========================================================
-       TOP UI
-       ========================================================= -->
+     TOP UI
+     Logo + Search + Mobile Menu + Categories + Map Styles
+     ========================================================= -->
 
-  <div id="topUI">
+<div id="topUI">
 
 
-    <!-- BRAND -->
+  <!-- =======================================================
+       BRAND / LOGO
+       ======================================================= -->
 
-    <div class="map-brand">
+  <div class="map-brand">
 
-      <img
-        src="images/logo.jpg"
-        alt="Travel Map Logo"
-        onerror="this.style.display='none'"
+    <img
+      src="images/logo.jpg"
+      alt="Travel Map Logo"
+      onerror="this.style.display='none'"
+    >
+
+    <div class="brand-text">
+
+      <span class="brand-name">
+        YOUR BRAND NAME
+      </span>
+
+      <span class="brand-tagline">
+        Explore • See • Experience
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       SEARCH
+       ======================================================= -->
+
+  <div class="search-wrap">
+
+    <div class="search-box">
+
+      <span class="search-icon">
+        🔍
+      </span>
+
+      <input
+        id="placeSearch"
+        type="text"
+        placeholder="Search places..."
+        autocomplete="off"
       >
 
-      <div class="brand-text">
-
-        <span class="brand-name">
-          YOUR BRAND NAME
-        </span>
-
-        <span class="brand-tagline">
-          Explore • See • Experience
-        </span>
-
-      </div>
-
     </div>
 
+    <!-- Search results appear here -->
+    <div id="searchSuggestions"></div>
 
-    <!-- SEARCH -->
-
-    <div class="search-wrap">
-
-      <div class="search-box">
-
-        <span class="search-icon">
-          🔍
-        </span>
-
-        <input
-          id="placeSearch"
-          type="text"
-          placeholder="Search places, regions or experiences..."
-          autocomplete="off"
-        >
-
-      </div>
-
-      <div id="searchSuggestions"></div>
-
-    </div>
+  </div>
 
 
-    <!-- CATEGORY -->
+  <!-- =======================================================
+       MOBILE MENU BUTTON
+       Visible only on phone/tablet through CSS
+       ======================================================= -->
+
+  <button
+    id="mobileMenuButton"
+    class="mobile-menu-button"
+    type="button"
+    aria-label="Open map options"
+  >
+    ☰
+  </button>
+
+
+  <!-- =======================================================
+       CATEGORY FILTERS
+       Keep this section here for easy future editing.
+
+       IMPORTANT:
+       data-category must match the category used in places.geojson.
+       Example:
+       "category": "City"
+       ======================================================= -->
+
+  <div class="category-bar">
+
+    <button
+      class="category-button active"
+      data-category="All"
+      type="button"
+    >
+      All
+    </button>
+
+    <button
+      class="category-button"
+      data-category="Nature"
+      type="button"
+    >
+      Nature
+    </button>
+
+    <button
+      class="category-button"
+      data-category="City"
+      type="button"
+    >
+      Cities
+    </button>
+
+    <button
+      class="category-button"
+      data-category="Culture"
+      type="button"
+    >
+      Culture
+    </button>
+
+    <button
+      class="category-button"
+      data-category="Walk"
+      type="button"
+    >
+      Walks
+    </button>
+
+  </div>
+
+
+  <!-- =======================================================
+       MAP STYLE SWITCHER
+       Desktop/tablet can display this normally.
+       On mobile we can move these controls into the ☰ panel.
+       ======================================================= -->
+
+  <div class="map-style-switcher">
+
+    <button
+      class="style-button"
+      data-style="map"
+      type="button"
+    >
+      Map
+    </button>
+
+    <button
+      class="style-button active"
+      data-style="satellite"
+      type="button"
+    >
+      Satellite
+    </button>
+
+    <button
+      class="style-button"
+      data-style="terrain"
+      type="button"
+    >
+      Terrain
+    </button>
+
+  </div>
+
+
+</div>
 
     <div class="category-bar">
 
@@ -933,29 +1044,246 @@
 </div>
 
 
-  <!-- =========================================================
-       LIGHTBOX
-       ========================================================= -->
+ <!-- =========================================================
+     MOBILE CONTROL PANEL
+     Hidden on desktop.
+     Opened by the ☰ button on phone/tablet.
+     ========================================================= -->
 
-  <div id="lightbox">
+<div id="mobileControlPanel" class="mobile-control-panel">
 
-    <button id="closeLightbox">
+  <!-- =======================================================
+       MOBILE PANEL HEADER
+       ======================================================= -->
+
+  <div class="mobile-panel-header">
+
+    <strong>
+      Map options
+    </strong>
+
+    <button
+      id="closeMobileControlPanel"
+      type="button"
+      aria-label="Close map options"
+    >
       ×
     </button>
-
-    <img
-      id="lightboxImage"
-      src=""
-      alt=""
-      draggable="false"
-      oncontextmenu="return false;"
-    >
 
   </div>
 
 
-    <script src="js/app.js"></script>
+  <!-- =======================================================
+       MAP STYLE
+       ======================================================= -->
 
+  <div class="mobile-panel-section">
+
+    <div class="mobile-panel-label">
+      Map style
+    </div>
+
+    <div class="mobile-map-styles">
+
+      <button
+        class="style-button"
+        data-style="map"
+        type="button"
+      >
+        Map
+      </button>
+
+      <button
+        class="style-button active"
+        data-style="satellite"
+        type="button"
+      >
+        Satellite
+      </button>
+
+      <button
+        class="style-button"
+        data-style="terrain"
+        type="button"
+      >
+        Terrain
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       CATEGORIES
+       Keep this section easy to find for future updates.
+
+       data-category must match places.geojson.
+       Example:
+       "category": "City"
+       ======================================================= -->
+
+  <div class="mobile-panel-section">
+
+    <div class="mobile-panel-label">
+      Categories
+    </div>
+
+    <div class="mobile-categories">
+
+      <button
+        class="category-button active"
+        data-category="All"
+        type="button"
+      >
+        All
+      </button>
+
+      <button
+        class="category-button"
+        data-category="Nature"
+        type="button"
+      >
+        Nature
+      </button>
+
+      <button
+        class="category-button"
+        data-category="City"
+        type="button"
+      >
+        Cities
+      </button>
+
+      <button
+        class="category-button"
+        data-category="Culture"
+        type="button"
+      >
+        Culture
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       MORE FEATURES
+       These buttons connect to your existing main-menu actions.
+       ======================================================= -->
+
+  <div class="mobile-panel-section">
+
+    <div class="mobile-panel-label">
+      More
+    </div>
+
+    <div class="mobile-panel-links">
+
+      <button
+        class="mobile-panel-link"
+        data-menu="wishlist"
+        type="button"
+      >
+        Wishlist
+      </button>
+
+      <button
+        class="mobile-panel-link"
+        data-menu="timeline"
+        type="button"
+      >
+        Timeline
+      </button>
+
+      <button
+        class="mobile-panel-link"
+        data-menu="statistics"
+        type="button"
+      >
+        Statistics
+      </button>
+
+      <button
+        class="mobile-panel-link"
+        data-menu="about"
+        type="button"
+      >
+        About
+      </button>
+
+      <button
+        class="mobile-panel-link"
+        data-menu="disclaimer"
+        type="button"
+      >
+        Disclaimer
+      </button>
+
+      <button
+        class="mobile-panel-link"
+        data-menu="settings"
+        type="button"
+      >
+        Settings
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     MOBILE CONTROL BACKDROP
+     Darkens the map while the mobile panel is open.
+     ========================================================= -->
+
+<div
+  id="mobileControlBackdrop"
+  class="mobile-control-backdrop"
+></div>
+
+
+<!-- =========================================================
+     PHOTO LIGHTBOX
+     Opens gallery photos in full-screen view.
+     ========================================================= -->
+
+<div id="lightbox">
+
+  <!-- Close button -->
+
+  <button
+    id="closeLightbox"
+    type="button"
+    aria-label="Close photo"
+  >
+    ×
+  </button>
+
+
+  <!-- Full-screen image -->
+
+  <img
+    id="lightboxImage"
+    src=""
+    alt="Travel photo"
+    draggable="false"
+    oncontextmenu="return false;"
+  >
+
+</div>
+
+
+<!-- =========================================================
+     MAIN JAVASCRIPT
+     Keep this as the final script before </body>.
+     ========================================================= -->
+
+<script src="js/app.js"></script>
 
 </body>
 
