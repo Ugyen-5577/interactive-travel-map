@@ -2811,3 +2811,300 @@ button {
   }
 
 }
+
+/* =========================================================
+   FINAL MOBILE CLEANUP
+   ONLY Logo + Search + Hamburger remain visible
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+  /* =======================================================
+     CLEAN TOP UI CONTAINER
+     Remove any old white panel/background behind controls.
+     ======================================================= */
+
+  #topUI {
+    position: fixed !important;
+
+    top: max(12px, env(safe-area-inset-top)) !important;
+    left: 12px !important;
+    right: 12px !important;
+
+    width: auto !important;
+    height: 54px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: grid !important;
+
+    grid-template-columns:
+      54px minmax(0, 1fr) 54px !important;
+
+    gap: 9px !important;
+
+    align-items: center !important;
+
+    background: transparent !important;
+
+    border: none !important;
+    border-radius: 0 !important;
+
+    box-shadow: none !important;
+
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+
+    z-index: 600 !important;
+
+    pointer-events: none !important;
+  }
+
+
+  /* =======================================================
+     FIRST: HIDE EVERYTHING INSIDE TOP UI
+     ======================================================= */
+
+  #topUI > * {
+    display: none !important;
+  }
+
+
+  /* =======================================================
+     THEN SHOW ONLY THESE THREE ITEMS
+     ======================================================= */
+
+  #topUI > .map-brand {
+    display: flex !important;
+  }
+
+  #topUI > .search-wrap {
+    display: block !important;
+  }
+
+  #topUI > .mobile-menu-button {
+    display: flex !important;
+  }
+
+
+  /* =======================================================
+     ABSOLUTELY HIDE OLD CATEGORY + MAP STYLE BARS
+     Even if they are accidentally outside #topUI.
+     ======================================================= */
+
+  .category-bar {
+    display: none !important;
+  }
+
+  .map-style-switcher {
+    display: none !important;
+  }
+
+
+  /* =======================================================
+     REMOVE DESKTOP BRAND WORDING
+     ======================================================= */
+
+  .brand-text,
+  .brand-name,
+  .brand-tagline {
+    display: none !important;
+  }
+
+
+  /* =======================================================
+     LOGO
+     ======================================================= */
+
+  .map-brand {
+    position: static !important;
+
+    grid-column: 1 !important;
+
+    width: 54px !important;
+    min-width: 54px !important;
+    max-width: 54px !important;
+
+    height: 54px !important;
+
+    margin: 0 !important;
+    padding: 5px !important;
+
+    flex: none !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 0 !important;
+
+    border-radius: 17px !important;
+
+    background: rgba(255, 255, 255, 0.97) !important;
+
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.16) !important;
+
+    pointer-events: auto !important;
+  }
+
+  .map-brand img {
+    width: 44px !important;
+    height: 44px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    object-fit: contain !important;
+  }
+
+
+  /* =======================================================
+     SEARCH
+     ======================================================= */
+
+  .search-wrap {
+    position: relative !important;
+
+    grid-column: 2 !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+    height: 54px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    flex: none !important;
+
+    pointer-events: auto !important;
+  }
+
+  .search-box {
+    width: 100% !important;
+    height: 54px !important;
+
+    margin: 0 !important;
+
+    padding:
+      0
+      14px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 9px !important;
+
+    border: none !important;
+    border-radius: 17px !important;
+
+    background: rgba(255, 255, 255, 0.97) !important;
+
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.16) !important;
+  }
+
+  .search-icon {
+    flex: 0 0 auto !important;
+
+    margin: 0 !important;
+
+    font-size: 20px !important;
+  }
+
+  #placeSearch {
+    flex: 1 !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: none !important;
+    outline: none !important;
+
+    background: transparent !important;
+
+    color: #26344d !important;
+
+    font-size: 15px !important;
+  }
+
+
+  /* =======================================================
+     HAMBURGER
+     ======================================================= */
+
+  .mobile-menu-button {
+    position: static !important;
+
+    grid-column: 3 !important;
+
+    width: 54px !important;
+    min-width: 54px !important;
+    max-width: 54px !important;
+
+    height: 54px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    flex: none !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    border: none !important;
+    border-radius: 17px !important;
+
+    background: rgba(255, 255, 255, 0.97) !important;
+
+    color: #172033 !important;
+
+    font-size: 25px !important;
+    line-height: 1 !important;
+
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.16) !important;
+
+    pointer-events: auto !important;
+  }
+
+
+  /* =======================================================
+     HIDE ALL OLD PERMANENT MENU ELEMENTS
+     ======================================================= */
+
+  .main-menu,
+  #recentPlaces,
+  #travelSummary {
+    display: none !important;
+  }
+
+
+  /* =======================================================
+     IMPORTANT:
+     Controls INSIDE the hamburger panel must still display.
+     ======================================================= */
+
+  .mobile-control-panel .mobile-map-styles {
+    display: grid !important;
+  }
+
+  .mobile-control-panel .mobile-categories {
+    display: grid !important;
+  }
+
+  .mobile-control-panel .style-button {
+    display: flex !important;
+  }
+
+  .mobile-control-panel .category-button {
+    display: flex !important;
+  }
+
+}
