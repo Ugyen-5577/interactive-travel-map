@@ -1980,851 +1980,341 @@
 
 
 /* =========================================================
-   TABLET
+   MASTER MOBILE MAP EXPERIENCE
+   Phones + small tablets
    ========================================================= */
 
-@media (min-width: 701px) (max-with: 950px) {
+@media (max-width: 950px) {
 
-  #travelDashboard {
-    width: 95vw;
-    height: 92vh;
-  }
+  /* =======================================================
+     FULL-SCREEN MAP
+     ======================================================= */
 
-
-  .dashboard-layout {
-    grid-template-columns:
-      66px minmax(0, 1fr);
-  }
-
-
-  .dashboard-sidebar {
-    padding:
-      14px 7px;
-  }
-
-
-  .dashboard-nav-button {
-    min-height: 48px;
-
-    padding: 0;
-
-    justify-content: center;
-  }
-
-
-  .dashboard-nav-icon {
-    width: 20px;
-    height: 20px;
-
-    flex-basis: 20px;
-  }
-
-
-  .dashboard-nav-label {
-    display: none;
-  }
-
-
-  .best-time-card {
-    padding: 9px 5px;
-
-    text-align: center;
-  }
-
-
-  .best-time-card strong {
-    font-size: 9px;
-  }
-
-
-  .best-time-card p {
-    display: none;
-  }
-
-
-  .quick-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-
-
-  #photoGallery {
-    grid-template-columns:
-      repeat(3, minmax(0, 1fr));
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-  #travelDashboard {
-    top: 0;
-    left: 0;
-
+  html,
+  body {
     width: 100%;
     height: 100%;
-
-    max-width: none;
-    max-height: none;
-
-    border-radius: 0;
-
-    transform:
-      translateY(100%);
-  }
-
-
-  #travelDashboard.active {
-    transform:
-      translateY(0);
-  }
-
-
-  .dashboard-layout {
-    display: block;
-  }
-
-
-  /* Sidebar becomes bottom navigation */
-
-  .dashboard-sidebar {
-    position: fixed;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    z-index: 1100;
-
-    height: 68px;
-
-    display: flex;
-
-    padding: 5px;
-
-    border-right: none;
-
-    border-top:
-      1px solid #e5e7eb;
-
-    background:
-      rgba(255,255,255,0.97);
-
-    box-shadow:
-      0 -4px 18px
-      rgba(0,0,0,0.08);
-  }
-
-
-  .dashboard-nav {
-    width: 100%;
-
-    display: grid;
-
-    grid-template-columns:
-      repeat(5, 1fr);
-
-    gap: 2px;
-  }
-
-
-  .dashboard-nav-button {
-    min-width: 0;
-    min-height: 56px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 3px;
-
-    padding: 3px;
-
-    border-radius: 10px;
-
-    font-size: 9px;
-
-    text-align: center;
-  }
-
-
-  .dashboard-nav-icon {
-    width: 19px;
-    height: 19px;
-
-    flex: 0 0 19px;
-  }
-
-
-  .dashboard-nav-label {
-    display: block;
-
-    max-width: 100%;
-
-    font-size: 9px;
-
+    margin: 0;
     overflow: hidden;
-
-    text-overflow: ellipsis;
   }
 
-
-  .best-time-card {
-    display: none;
-  }
-
-
-  .dashboard-main {
-    height:
-      calc(100vh - 68px);
-
-    padding-bottom: 10px;
-  }
-
-
-  #closeDashboard {
+  #map {
     position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+  }
 
-    top: 12px;
+
+  /* =======================================================
+     TOP CONTROLS
+     ======================================================= */
+
+  .top-controls {
+    position: fixed;
+    top: max(12px, env(safe-area-inset-top));
+    left: 12px;
     right: 12px;
 
-    width: 42px;
-    height: 42px;
-  }
-
-
-  .dashboard-hero {
-    height: 235px;
-  }
-
-
-  .hero-gradient {
-    background:
-      linear-gradient(
-        0deg,
-        rgba(0,0,0,0.74),
-        rgba(0,0,0,0.04) 72%
-      );
-  }
-
-
-  .hero-text {
-    top: auto;
-
-    left: 16px;
-    right: 64px;
-    bottom: 17px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
     width: auto;
-
-    color: white;
+    z-index: 100;
   }
 
 
-  #dashboardPlaceName {
-    margin-bottom: 0;
-
-    color: white;
-
-    font-size: 24px;
-  }
-
-
-  #heroDescription {
-    display: none;
-  }
-
-
-  .hero-counts {
-    display: none;
-  }
-
-
-  .dashboard-content {
-    padding:
-      16px 14px 30px;
-  }
-
-
-  .quick-grid {
-    gap: 8px;
-  }
-
-
-  .quick-card {
-    padding: 12px;
-  }
-
-
-  #photoGallery {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-
-    gap: 7px;
-  }
-
-
-  .gallery-photo {
-    height: 125px;
-  }
-
-
-  #videoGallery {
-    grid-template-columns:
-      1fr;
-  }
-
-
-  .video-card video {
-    max-height: 185px;
-  }
-
-}
-
-    /* =========================================================
-       MOBILE
-       ========================================================= */
-
-    @media (max-width: 700px) {
-
-      #topUI {
-        top:
-          8px;
-
-        left:
-          8px;
-
-        right:
-          8px;
-
-        grid-template-columns:
-          52px 1fr;
-
-        gap:
-          7px;
-      }
-
-
-      /* brand */
-
-      .map-brand {
-        width:
-          52px;
-
-        height:
-          52px;
-
-        padding:
-          5px;
-
-        justify-content:
-          center;
-
-        border-radius:
-          14px;
-      }
-
-
-      .map-brand img {
-        width:
-          42px;
-
-        height:
-          42px;
-      }
-
-
-      .brand-text {
-        display:
-          none;
-      }
-
-
-      /* search */
-
-      .search-wrap {
-        height:
-          52px;
-      }
-
-
-      .search-box {
-        height:
-          52px;
-      }
-
-
-      /* map styles */
-
-      .map-style-switcher {
-        grid-column:
-          1 / -1;
-
-        width:
-          100%;
-
-        height:
-          44px;
-
-        justify-content:
-          stretch;
-      }
-
-
-      .style-button {
-        flex:
-          1;
-
-        height:
-          32px;
-
-        justify-content:
-          center;
-
-        padding:
-          0 5px;
-
-        font-size:
-          10px;
-      }
-
-
-      /* categories */
-
-      .category-bar {
-        grid-column:
-          1 / -1;
-
-        height:
-          44px;
-      }
-
-
-      .category-button {
-        height:
-          32px;
-
-        font-size:
-          10px;
-      }
-
-
-      /* menu -> bottom navigation */
-
-      .main-menu {
-        top:
-          auto;
-
-        left:
-          8px;
-
-        right:
-          8px;
-
-        bottom:
-          8px;
-
-        width:
-          auto;
-
-        height:
-          66px;
-
-        display:
-          flex;
-
-        flex-direction:
-          row;
-
-        align-items:
-          stretch;
-
-        justify-content:
-          space-around;
-
-        gap:
-          2px;
-
-        padding:
-          5px;
-
-        border-radius:
-          18px;
-      }
-
-
-      .menu-item {
-        flex:
-          1;
-
-        width:
-          auto;
-
-        height:
-          56px;
-
-        min-height:
-          56px;
-
-        padding:
-          5px 2px;
-
-        display:
-          flex;
-
-        flex-direction:
-          column;
-
-        align-items:
-          center;
-
-        justify-content:
-          center;
-
-        gap:
-          3px;
-      }
-
-
-      .menu-icon {
-        width:
-          20px;
-
-        height:
-          20px;
-
-        flex:
-          0 0 20px;
-      }
-
-
-      .menu-label {
-        display:
-          block;
-
-        font-size:
-          9px;
-
-        text-align:
-          center;
-      }
-
-
-      .menu-item.mobile-hide {
-        display:
-          none;
-      }
-
-
-      /* menu panel */
-
-      #menuPanel {
-        top:
-          auto;
-
-        left:
-          8px;
-
-        right:
-          8px;
-
-        bottom:
-          82px;
-
-        width:
-          auto;
-
-        max-height:
-          45vh;
-      }
-
-
-      .maplibregl-ctrl-top-right {
-        top:
-          165px;
-      }
-
-
-      #recentPlaces {
-        left:
-          8px;
-
-        right:
-          8px;
-
-        bottom:
-          82px;
-      }
-
-
-      .recent-card {
-        flex:
-          0 0 120px;
-
-        height:
-          88px;
-      }
-
-
-      #travelSummary {
-        display:
-          none;
-      }
-
-
-      /* dashboard full screen */
-
-      #travelDashboard {
-        top:
-          0;
-
-        left:
-          0;
-
-        width:
-          100%;
-
-        height:
-          100%;
-
-        border-radius:
-          0;
-
-        transform:
-          translateY(100%);
-      }
-
-
-      #travelDashboard.active {
-        transform:
-          translateY(0);
-      }
-
-
-      .dashboard-layout {
-        display:
-          block;
-      }
-
-
-      .dashboard-sidebar {
-        display:
-          none;
-      }
-
-
-      .dashboard-main {
-        height:
-          100vh;
-      }
-
-
-      .dashboard-hero {
-        height:
-          220px;
-      }
-
-
-      .hero-gradient {
-        background:
-          linear-gradient(
-            0deg,
-            rgba(0,0,0,0.65),
-            rgba(0,0,0,0.05)
-          );
-      }
-
-
-      .hero-text {
-        top:
-          auto;
-
-        left:
-          16px;
-
-        right:
-          70px;
-
-        bottom:
-          18px;
-
-        width:
-          auto;
-
-        color:
-          white;
-      }
-
-
-      #dashboardPlaceName {
-        font-size:
-          24px;
-
-        margin-bottom:
-          5px;
-      }
-
-
-      #heroDescription {
-        display:
-          none;
-      }
-
-
-      .hero-counts {
-        display:
-          none;
-      }
-
-
-      .dashboard-content {
-        padding:
-          16px;
-      }
-
-
-      .quick-grid {
-        grid-template-columns:
-          repeat(2,1fr);
-
-        gap:
-          8px;
-      }
-
-
-      #photoGallery {
-        grid-template-columns:
-          repeat(2,1fr);
-      }
-
-
-      .gallery-photo {
-        height:
-          125px;
-      }
-
-
-      #videoGallery {
-        grid-template-columns:
-          1fr;
-      }
-
-
-      .video-card video {
-        max-height:
-          190px;
-      }
-
-    }
-
-/* =========================================================
-   TABLET / PHONE LANDSCAPE
-   ========================================================= */
-
-@media (min-width: 701px) and (max-width: 950px) {
-
-  /* ==================== BRAND ==================== */
+  /* =======================================================
+     BRAND
+     Mobile = logo only
+     ======================================================= */
 
   .brand-box {
-    width: 180px;
-    min-width: 180px;
-    height: 64px;
-    padding: 8px 12px;
-    border-radius: 16px;
+    flex: 0 0 58px;
+    width: 58px;
+    min-width: 58px;
+    height: 58px;
+
+    padding: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    box-shadow:
+      0 4px 18px rgba(0, 0, 0, 0.14);
   }
 
   .brand-box img {
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
   }
 
-  .brand-title {
-    font-size: 16px;
-  }
-
+  .brand-title,
   .brand-subtitle {
     display: none;
   }
 
 
-  /* ==================== SEARCH ==================== */
+  /* =======================================================
+     SEARCH
+     ======================================================= */
 
   .search-box {
-    width: 270px;
-    height: 64px;
-    border-radius: 16px;
+    flex: 1;
+    min-width: 0;
+    width: auto;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    box-shadow:
+      0 4px 18px rgba(0, 0, 0, 0.14);
   }
 
   #placeSearch {
+    width: 100%;
+    min-width: 0;
+
+    border: 0;
+    outline: 0;
+
     font-size: 15px;
+
+    background: transparent;
   }
 
 
-  /* ==================== BASEMAP SWITCHER ==================== */
+  /* =======================================================
+     BASEMAP SWITCHER
+     Compact floating pill
+     ======================================================= */
 
   .map-style-switcher {
-    height: 64px;
-    padding: 5px;
-    border-radius: 16px;
+    position: fixed;
+    top: calc(max(12px, env(safe-area-inset-top)) + 68px);
+    right: 12px;
+
+    width: auto;
+    height: 40px;
+
+    display: flex;
+
+    padding: 4px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    box-shadow:
+      0 3px 14px rgba(0, 0, 0, 0.14);
+
+    z-index: 99;
   }
 
   .style-button {
-    padding: 0 14px;
-    font-size: 13px;
+    min-width: 0;
+    height: 32px;
+
+    padding: 0 10px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+    white-space: nowrap;
   }
 
 
-  /* ==================== CATEGORY FILTERS ==================== */
+  /* =======================================================
+     CATEGORY CHIPS
+     Horizontal scroll instead of large bar
+     ======================================================= */
 
   .category-bar {
-    position: absolute;
-    top: 82px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: fixed;
+    top: calc(max(12px, env(safe-area-inset-top)) + 68px);
+    left: 12px;
+    right: 155px;
+
     width: auto;
-    max-width: calc(100vw - 40px);
-    padding: 5px;
-    z-index: 20;
+
+    display: flex;
+    gap: 6px;
+
+    padding: 4px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    box-shadow:
+      0 3px 14px rgba(0, 0, 0, 0.14);
+
+    scrollbar-width: none;
+
+    z-index: 99;
+  }
+
+  .category-bar::-webkit-scrollbar {
+    display: none;
   }
 
   .category-button {
-    padding: 8px 12px;
-    font-size: 12px;
+    flex: 0 0 auto;
+
+    height: 32px;
+
+    padding: 0 11px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+    white-space: nowrap;
   }
 
 
-  /* ==================== REMOVE LEFT SIDEBAR ==================== */
+  /* =======================================================
+     MAPLIBRE CONTROLS
+     ======================================================= */
+
+  .maplibregl-ctrl-top-right {
+    top: 132px;
+    right: 10px;
+  }
+
+  .maplibregl-ctrl-group {
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+
+  /* =======================================================
+     RECENT PLACES
+     Horizontal carousel
+     ======================================================= */
+
+  .recent-section {
+    position: fixed;
+
+    left: 12px;
+    right: 12px;
+
+    bottom: calc(88px + env(safe-area-inset-bottom));
+
+    width: auto;
+
+    z-index: 80;
+
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease;
+  }
+
+  .recent-section h2 {
+    margin: 0 0 7px;
+
+    font-size: 17px;
+    line-height: 1.2;
+
+    color: white;
+
+    text-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.85);
+  }
+
+  #recentList {
+    display: flex;
+
+    gap: 9px;
+
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x proximity;
+
+    padding-bottom: 2px;
+
+    scrollbar-width: none;
+  }
+
+  #recentList::-webkit-scrollbar {
+    display: none;
+  }
+
+  .recent-card {
+    flex: 0 0 145px;
+
+    width: 145px;
+    height: 100px;
+
+    border-radius: 16px;
+
+    scroll-snap-align: start;
+
+    overflow: hidden;
+
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.24);
+  }
+
+  .recent-card-name {
+    font-size: 16px;
+  }
+
+  .recent-card-category {
+    font-size: 10px;
+  }
+
+
+  /* =======================================================
+     BOTTOM NAVIGATION
+     ======================================================= */
 
   .main-menu {
     position: fixed;
-    left: 16px;
-    right: 16px;
-    bottom: 12px;
+
+    left: 12px;
+    right: 12px;
+
+    bottom: calc(10px + env(safe-area-inset-bottom));
 
     width: auto;
     height: 68px;
 
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 
     padding: 5px;
 
-    border-radius: 20px;
+    border-radius: 22px;
 
-    z-index: 50;
+    background: rgba(255, 255, 255, 0.97);
+
+    box-shadow:
+      0 6px 24px rgba(0, 0, 0, 0.22);
+
+    z-index: 120;
   }
 
   .menu-item {
-    min-height: 0;
-    padding: 5px 8px;
+    min-width: 0;
+    height: 58px;
 
     display: flex;
     flex-direction: column;
@@ -2833,11 +2323,9 @@
 
     gap: 3px;
 
-    border-radius: 14px;
-  }
+    padding: 4px;
 
-  .menu-item span {
-    font-size: 11px;
+    border-radius: 17px;
   }
 
   .menu-item svg,
@@ -2846,49 +2334,357 @@
     height: 21px;
   }
 
-
-  /* ==================== RECENT PLACES ==================== */
-
-  .recent-section {
-    left: 50%;
-    right: auto;
-    bottom: 92px;
-
-    transform: translateX(-50%);
-
-    width: min(620px, calc(100vw - 40px));
+  .menu-item span {
+    font-size: 10px;
+    font-weight: 650;
   }
 
-  .recent-section h2 {
-    font-size: 17px;
-    margin-bottom: 7px;
+  .menu-item.active {
+    background: #fff0e7;
   }
 
-  #recentList {
+
+  /* =======================================================
+     HIDE DESKTOP-ONLY MENU ITEMS
+     ======================================================= */
+
+  .mobile-hide {
+    display: none !important;
+  }
+
+
+  /* =======================================================
+     MOBILE MENU PANEL
+     ======================================================= */
+
+  #menuPanel {
+    position: fixed;
+
+    left: 12px;
+    right: 12px;
+
+    bottom: calc(88px + env(safe-area-inset-bottom));
+
+    width: auto;
+    max-height: 55dvh;
+
+    border-radius: 22px;
+
+    overflow-y: auto;
+
+    z-index: 130;
+  }
+
+
+  /* =======================================================
+     DESTINATION DASHBOARD
+     ======================================================= */
+
+  #travelDashboard {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100dvh;
+
+    border-radius: 0;
+
+    z-index: 1000;
+  }
+
+  .dashboard-shell {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .dashboard-main {
+    width: 100%;
+    height: calc(100dvh - 68px);
+
+    padding-bottom: 20px;
+
+    overflow-y: auto;
+  }
+
+  .dashboard-sidebar {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: calc(68px + env(safe-area-inset-bottom));
+
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+
+    padding:
+      5px
+      6px
+      calc(5px + env(safe-area-inset-bottom));
+
+    border-right: none;
+    border-top: 1px solid #e8e8e8;
+
+    background: rgba(255, 255, 255, 0.98);
+
+    z-index: 1200;
+  }
+
+  .dashboard-nav-button {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 2px;
+
+    border-radius: 13px;
+
+    padding: 4px 2px;
+
+    font-size: 10px;
+  }
+
+  .dashboard-nav-button svg,
+  .dashboard-nav-button i {
+    width: 20px;
+    height: 20px;
+  }
+
+
+  /* =======================================================
+     DASHBOARD HERO
+     ======================================================= */
+
+  .dashboard-hero {
+    min-height: 215px;
+    height: 215px;
+  }
+
+  .dashboard-hero-content {
+    padding:
+      max(18px, env(safe-area-inset-top))
+      18px
+      18px;
+  }
+
+  #dashboardPlaceName {
+    max-width: calc(100% - 60px);
+
+    font-size: 25px;
+    line-height: 1.05;
+  }
+
+  #heroDescription {
+    max-width: 82%;
+
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+
+  /* =======================================================
+     DASHBOARD CONTENT
+     ======================================================= */
+
+  .dashboard-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
     gap: 8px;
   }
 
-  .recent-card {
-    height: 115px;
-    border-radius: 14px;
+  #photoGallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
   }
 
-  .recent-card-name {
-    font-size: 16px;
+  .gallery-photo {
+    height: 125px;
   }
 
-  .recent-card-category {
-    font-size: 11px;
+  #videoGallery {
+    grid-template-columns: 1fr;
+  }
+
+  #dashboardLinksList {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   PHONE PORTRAIT
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  /* Make search the visual priority. */
+
+  .top-controls {
+    right: 12px;
+  }
+
+  .brand-box {
+    flex-basis: 52px;
+
+    width: 52px;
+    min-width: 52px;
+    height: 52px;
+
+    border-radius: 16px;
+  }
+
+  .brand-box img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .search-box {
+    height: 52px;
   }
 
 
-  /* ==================== MAP CONTROLS ==================== */
+  /* Categories below search. */
+
+  .category-bar {
+    top: calc(max(12px, env(safe-area-inset-top)) + 62px);
+
+    right: 12px;
+  }
+
+
+  /* Basemap switch becomes a second floating row. */
+
+  .map-style-switcher {
+    top: calc(max(12px, env(safe-area-inset-top)) + 108px);
+
+    right: 12px;
+  }
 
   .maplibregl-ctrl-top-right {
-    top: 155px;
+    top: 160px;
+  }
+
+
+  /* Recent destination carousel stays compact. */
+
+  .recent-section {
+    bottom: calc(86px + env(safe-area-inset-bottom));
+  }
+
+  .recent-card {
+    flex-basis: 138px;
+
+    width: 138px;
+    height: 96px;
+  }
+
+}
+
+
+/* =========================================================
+   PHONE LANDSCAPE
+   ========================================================= */
+
+@media (max-width: 950px) and (orientation: landscape) {
+
+  /* Keep the map visible above everything else. */
+
+  .top-controls {
+    top: 8px;
+
+    left: 10px;
     right: 10px;
+  }
+
+  .brand-box {
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+
+    flex-basis: 48px;
+  }
+
+  .brand-box img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .search-box {
+    height: 48px;
+  }
+
+  .category-bar {
+    top: 64px;
+    left: 10px;
+    right: auto;
+
+    max-width: 48vw;
+  }
+
+  .map-style-switcher {
+    top: 64px;
+    right: 10px;
+
+    height: 40px;
+  }
+
+  .maplibregl-ctrl-top-right {
+    top: 112px;
+  }
+
+
+  /* Smaller horizontal recent cards. */
+
+  .recent-section {
+    left: 10px;
+    right: auto;
+
+    bottom: 82px;
+
+    width: min(540px, 65vw);
+  }
+
+  .recent-section h2 {
+    font-size: 14px;
+  }
+
+  .recent-card {
+    flex-basis: 125px;
+
+    width: 125px;
+    height: 78px;
+  }
+
+
+  /* Bottom nav narrower in landscape. */
+
+  .main-menu {
+    left: 50%;
+
+    width: min(560px, 70vw);
+
+    transform: translateX(-50%);
+
+    bottom: 8px;
+
+    height: 60px;
+  }
+
+  .menu-item {
+    height: 50px;
   }
 
 }
