@@ -1566,3 +1566,103 @@ map.on('dragend', () => {
 map.on('zoomend', () => {
   setTimeout(showMobileOverlayContent, 250);
 });
+
+/* =========================================================
+   MOBILE CONTROL PANEL
+   ========================================================= */
+
+const mobileMenuButton =
+  document.getElementById('mobileMenuButton');
+
+const mobileControlPanel =
+  document.getElementById('mobileControlPanel');
+
+const mobileControlBackdrop =
+  document.getElementById('mobileControlBackdrop');
+
+const closeMobileControlPanelButton =
+  document.getElementById('closeMobileControlPanel');
+
+
+function openMobileControlPanel() {
+
+  if (mobileControlPanel) {
+    mobileControlPanel.classList.add('active');
+  }
+
+  if (mobileControlBackdrop) {
+    mobileControlBackdrop.classList.add('active');
+  }
+
+}
+
+
+function closeMobileControlPanel() {
+
+  if (mobileControlPanel) {
+    mobileControlPanel.classList.remove('active');
+  }
+
+  if (mobileControlBackdrop) {
+    mobileControlBackdrop.classList.remove('active');
+  }
+
+}
+
+
+if (mobileMenuButton) {
+
+  mobileMenuButton.addEventListener(
+    'click',
+    openMobileControlPanel
+  );
+
+}
+
+
+if (closeMobileControlPanelButton) {
+
+  closeMobileControlPanelButton.addEventListener(
+    'click',
+    closeMobileControlPanel
+  );
+
+}
+
+
+if (mobileControlBackdrop) {
+
+  mobileControlBackdrop.addEventListener(
+    'click',
+    closeMobileControlPanel
+  );
+
+}
+
+
+/* =========================================================
+   MOBILE PANEL MENU LINKS
+   ========================================================= */
+
+document
+  .querySelectorAll('.mobile-panel-link')
+  .forEach(button => {
+
+    button.addEventListener('click', () => {
+
+      const menu = button.dataset.menu;
+
+      closeMobileControlPanel();
+
+      const originalMenuItem =
+        document.querySelector(
+          `.menu-item[data-menu="${menu}"]`
+        );
+
+      if (originalMenuItem) {
+        originalMenuItem.click();
+      }
+
+    });
+
+  });
