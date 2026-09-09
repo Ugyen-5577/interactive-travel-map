@@ -1,1220 +1,791 @@
 /* =========================================================
    TRAVEL MAP STYLES
-   Split from the original index.html supplied by the user.
-   Keep layout, responsive design and visual rules here.
+   Clean consolidated version
+   Desktop + tablet + mobile
    ========================================================= */
 
+
 /* =========================================================
-       GLOBAL
-       ========================================================= */
-    * {
-      box-sizing: border-box;
-    }
-    :root {
-      --panel: rgba(255,255,255,0.96);
-      --text: #172033;
-      --muted: #68758a;
-      --blue: #2878ed;
-      --orange: #f15a24;
-      --radius: 18px;
-      --shadow:
-        0 8px 30px
-        rgba(0,0,0,0.18);
-    }
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-      color:
-        var(--text);
-      background:
-        #111;
-    }
-    button,
-    input {
-      font:
-        inherit;
-    }
-    #map {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-    }
-
-    /* =========================================================
-       TOP APPLICATION BAR
-       ========================================================= */
-    #topUI {
-      position: fixed;
-      top: 16px;
-      left: 16px;
-      right: 72px;
-      z-index: 500;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      pointer-events: none;
-    }
-    #topUI > * {
-      pointer-events: auto;
-    }
-
-    /* =========================================================
-       BRAND
-       ========================================================= */
-    .map-brand {
-      flex:
-        0 0 240px;
-      height:
-        62px;
-      display:
-        flex;
-      align-items:
-        center;
-      gap:
-        10px;
-      padding:
-        7px 13px
-        7px 8px;
-      background:
-        var(--panel);
-      border-radius:
-        var(--radius);
-      box-shadow:
-        var(--shadow);
-      backdrop-filter:
-        blur(12px);
-    }
-    .map-brand img {
-      width:
-        50px;
-      height:
-        50px;
-      object-fit:
-        contain;
-      flex-shrink:
-        0;
-    }
-    .brand-text {
-      min-width:
-        0;
-    }
-    .brand-name {
-      display:
-        block;
-      font-size:
-        16px;
-      font-weight:
-        800;
-      line-height:
-        1.1;
-      white-space:
-        nowrap;
-      overflow:
-        hidden;
-      text-overflow:
-        ellipsis;
-    }
-    .brand-tagline {
-      display:
-        block;
-      margin-top:
-        5px;
-      font-size:
-        10px;
-      color:
-        #697386;
-      white-space:
-        nowrap;
-    }
-
-    /* =========================================================
-       SEARCH
-       ========================================================= */
-    .search-wrap {
-      position:
-        relative;
-      flex:
-        1 1 300px;
-      min-width:
-        180px;
-      max-width:
-        390px;
-      height:
-        62px;
-    }
-    .search-box {
-      height:
-        62px;
-      display:
-        flex;
-      align-items:
-        center;
-      gap:
-        10px;
-      padding:
-        0 17px;
-
-      background:
-        var(--panel);
-
-      border-radius:
-        var(--radius);
-
-      box-shadow:
-        var(--shadow);
-
-      backdrop-filter:
-        blur(12px);
-    }
-    .search-icon {
-      flex-shrink:
-        0;
-
-      font-size:
-        20px;
-    }
-
-
-    #placeSearch {
-      width:
-        100%;
-
-      min-width:
-        0;
-
-      border:
-        none;
-
-      outline:
-        none;
-
-      background:
-        transparent;
-
-      color:
-        #26344d;
-
-      font-size:
-        14px;
-    }
-
-
-    #placeSearch::placeholder {
-      color:
-        #8a94a6;
-    }
-
-
-    #searchSuggestions {
-      position:
-        absolute;
-
-      top:
-        69px;
-
-      left:
-        0;
-
-      right:
-        0;
-
-      display:
-        none;
-
-      overflow:
-        hidden;
-
-      background:
-        white;
-
-      border-radius:
-        13px;
-
-      box-shadow:
-        0 10px 30px
-        rgba(0,0,0,0.22);
-    }
+   1. GLOBAL
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --panel: rgba(255,255,255,0.96);
+  --text: #172033;
+  --muted: #68758a;
+  --blue: #2878ed;
+  --orange: #f15a24;
+  --radius: 18px;
+  --shadow: 0 8px 30px rgba(0,0,0,0.18);
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: #111;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+#map {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+}
 
+
+/* =========================================================
+   2. TOP APPLICATION BAR — DESKTOP
+   ========================================================= */
+
+#topUI {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 72px;
+  z-index: 500;
 
-    #searchSuggestions.active {
-      display:
-        block;
-    }
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
+  pointer-events: none;
+}
 
-    .search-result {
-      width:
-        100%;
+#topUI > * {
+  pointer-events: auto;
+}
 
-      display:
-        flex;
 
-      justify-content:
-        space-between;
+/* =========================================================
+   3. BRAND — DESKTOP
+   ========================================================= */
 
-      align-items:
-        center;
+.map-brand {
+  flex: 0 0 240px;
+  height: 62px;
 
-      padding:
-        12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-      border:
-        none;
+  padding: 7px 13px 7px 8px;
 
-      border-bottom:
-        1px solid #eee;
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 
-      background:
-        white;
+  backdrop-filter: blur(12px);
+}
 
-      text-align:
-        left;
+.map-brand img {
+  width: 50px;
+  height: 50px;
 
-      cursor:
-        pointer;
-    }
+  object-fit: contain;
+  flex-shrink: 0;
+}
 
+.brand-text {
+  min-width: 0;
+}
 
-    .search-result:hover {
-      background:
-        #f5f7fa;
-    }
+.brand-name {
+  display: block;
 
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.1;
 
-    .search-result-name {
-      font-size:
-        13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-      font-weight:
-        700;
-    }
+.brand-tagline {
+  display: block;
 
+  margin-top: 5px;
 
-    .search-result-category {
-      font-size:
-        10px;
+  font-size: 10px;
+  color: #697386;
 
-      color:
-        #777;
-    }
+  white-space: nowrap;
+}
 
 
-    /* =========================================================
-       CATEGORY FILTERS
-       ========================================================= */
+/* =========================================================
+   4. SEARCH — DESKTOP
+   ========================================================= */
 
-    .category-bar {
-      flex:
-        1 1 auto;
+.search-wrap {
+  position: relative;
 
-      min-width:
-        0;
+  flex: 1 1 300px;
+  min-width: 180px;
+  max-width: 390px;
 
-      height:
-        62px;
+  height: 62px;
+}
 
-      display:
-        flex;
+.search-box {
+  width: 100%;
+  height: 62px;
 
-      align-items:
-        center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-      gap:
-        2px;
+  padding: 0 17px;
 
-      padding:
-        6px;
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 
-      overflow-x:
-        auto;
+  backdrop-filter: blur(12px);
+}
 
-      overflow-y:
-        hidden;
+.search-icon {
+  flex-shrink: 0;
+  font-size: 20px;
+}
 
-      background:
-        var(--panel);
+#placeSearch {
+  width: 100%;
+  min-width: 0;
 
-      border-radius:
-        var(--radius);
+  border: none;
+  outline: none;
 
-      box-shadow:
-        var(--shadow);
+  background: transparent;
+  color: #26344d;
 
-      scrollbar-width:
-        none;
+  font-size: 14px;
+}
 
-      backdrop-filter:
-        blur(12px);
-    }
+#placeSearch::placeholder {
+  color: #8a94a6;
+}
 
+#searchSuggestions {
+  position: absolute;
 
-    .category-bar::-webkit-scrollbar {
-      display:
-        none;
-    }
+  top: 69px;
+  left: 0;
+  right: 0;
 
+  display: none;
 
-    .category-button {
-      flex:
-        0 0 auto;
+  max-height: 45vh;
+  overflow-y: auto;
 
-      height:
-        42px;
+  background: white;
+  border-radius: 13px;
 
-      padding:
-        0 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+}
 
-      display:
-        flex;
+#searchSuggestions.active {
+  display: block;
+}
 
-      align-items:
-        center;
+.search-result {
+  width: 100%;
 
-      gap:
-        5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-      border:
-        none;
+  padding: 12px 14px;
 
-      border-radius:
-        11px;
+  border: none;
+  border-bottom: 1px solid #eee;
 
-      background:
-        transparent;
+  background: white;
 
-      color:
-        #26344d;
+  text-align: left;
+  cursor: pointer;
+}
 
-      font-size:
-        11px;
+.search-result:hover {
+  background: #f5f7fa;
+}
 
-      font-weight:
-        700;
+.search-result-name {
+  font-size: 13px;
+  font-weight: 700;
+}
 
-      white-space:
-        nowrap;
+.search-result-category {
+  font-size: 10px;
+  color: #777;
+}
 
-      cursor:
-        pointer;
-    }
 
+/* =========================================================
+   5. CATEGORY FILTERS — DESKTOP
+   ========================================================= */
 
-    .category-button:hover {
-      background:
-        #f1f4f8;
-    }
+.category-bar {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 62px;
 
+  display: flex;
+  align-items: center;
+  gap: 2px;
 
-    .category-button.active {
-      background:
-        var(--blue);
+  padding: 6px;
 
-      color:
-        white;
-    }
+  overflow-x: auto;
+  overflow-y: hidden;
 
+  background: var(--panel);
 
-    /* =========================================================
-       MAP STYLE SWITCHER
-       ========================================================= */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 
-    .map-style-switcher {
-      flex:
-        0 0 auto;
+  scrollbar-width: none;
+  backdrop-filter: blur(12px);
+}
 
-      height:
-        62px;
+.category-bar::-webkit-scrollbar {
+  display: none;
+}
 
-      display:
-        flex;
+.category-button {
+  flex: 0 0 auto;
 
-      align-items:
-        center;
+  height: 42px;
 
-      gap:
-        2px;
+  padding: 0 10px;
 
-      padding:
-        6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 
-      background:
-        var(--panel);
+  border: none;
+  border-radius: 11px;
 
-      border-radius:
-        var(--radius);
+  background: transparent;
+  color: #26344d;
 
-      box-shadow:
-        var(--shadow);
+  font-size: 11px;
+  font-weight: 700;
 
-      backdrop-filter:
-        blur(12px);
-    }
+  white-space: nowrap;
+  cursor: pointer;
+}
 
+.category-button:hover {
+  background: #f1f4f8;
+}
 
-    .style-button {
-      height:
-        42px;
+.category-button.active {
+  background: var(--blue);
+  color: white;
+}
 
-      display:
-        flex;
 
-      align-items:
-        center;
+/* =========================================================
+   6. MAP STYLE SWITCHER — DESKTOP
+   ========================================================= */
 
-      gap:
-        5px;
+.map-style-switcher {
+  flex: 0 0 auto;
+  height: 62px;
 
-      padding:
-        0 10px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
 
-      border:
-        none;
+  padding: 6px;
 
-      border-radius:
-        11px;
+  background: var(--panel);
 
-      background:
-        transparent;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 
-      color:
-        #5c687b;
+  backdrop-filter: blur(12px);
+}
 
-      font-size:
-        11px;
+.style-button {
+  height: 42px;
 
-      font-weight:
-        700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 
-      white-space:
-        nowrap;
+  padding: 0 10px;
 
-      cursor:
-        pointer;
-    }
+  border: none;
+  border-radius: 11px;
 
+  background: transparent;
+  color: #5c687b;
 
-    .style-button:hover {
-      background:
-        #f1f4f8;
-    }
+  font-size: 11px;
+  font-weight: 700;
 
+  white-space: nowrap;
+  cursor: pointer;
+}
 
-    .style-button.active {
-      background:
-        #edf4ff;
+.style-button:hover {
+  background: #f1f4f8;
+}
 
-      color:
-        #1769e0;
-    }
+.style-button.active {
+  background: #edf4ff;
+  color: #1769e0;
+}
 
 
-    /* =========================================================
-       LEFT MENU
-       ========================================================= */
+/* =========================================================
+   7. MOBILE HAMBURGER
+   Hidden on desktop
+   ========================================================= */
 
-    .main-menu {
-      position:
-        fixed;
+.mobile-menu-button,
+.mobile-control-panel,
+.mobile-control-backdrop {
+  display: none;
+}
 
-      top:
-        96px;
 
-      left:
-        16px;
+/* =========================================================
+   8. LEFT MENU — DESKTOP
+   ========================================================= */
 
-      z-index:
-        450;
+.main-menu {
+  position: fixed;
 
-      width:
-        150px;
+  top: 96px;
+  left: 16px;
 
-      padding:
-        8px;
+  z-index: 450;
 
-      display:
-        flex;
+  width: 150px;
 
-      flex-direction:
-        column;
+  padding: 8px;
 
-      gap:
-        4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 
-      background:
-        var(--panel);
+  background: var(--panel);
 
-      border-radius:
-        20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
 
-      box-shadow:
-        var(--shadow);
+  backdrop-filter: blur(12px);
+}
 
-      backdrop-filter:
-        blur(12px);
-    }
+.menu-item {
+  width: 100%;
+  min-height: 52px;
 
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
-    .menu-item {
-      width:
-        100%;
+  padding: 0 12px;
 
-      min-height:
-        52px;
+  border: none;
+  border-radius: 13px;
 
-      display:
-        flex;
+  background: transparent;
+  color: #34435d;
 
-      align-items:
-        center;
+  cursor: pointer;
 
-      gap:
-        12px;
+  transition: 0.2s ease;
+}
 
-      padding:
-        0 12px;
+.menu-item:hover {
+  background: #f3f5f8;
+}
 
-      border:
-        none;
+.menu-item.active {
+  background: #fff0e6;
+  color: var(--orange);
+}
 
-      border-radius:
-        13px;
+.menu-icon {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
 
-      background:
-        transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-      color:
-        #34435d;
+.menu-icon svg {
+  width: 100%;
+  height: 100%;
 
-      cursor:
-        pointer;
+  display: block;
 
-      transition:
-        0.2s ease;
-    }
+  fill: none;
+  stroke: currentColor;
 
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-    .menu-item:hover {
-      background:
-        #f3f5f8;
-    }
+.menu-label {
+  font-size: 12px;
+  font-weight: 700;
 
+  white-space: nowrap;
+}
 
-    .menu-item.active {
-      background:
-        #fff0e6;
 
-      color:
-        var(--orange);
-    }
+/* =========================================================
+   9. MAIN MENU CONTENT PANEL
+   ========================================================= */
 
+#menuPanel {
+  position: fixed;
 
-    .menu-icon {
-      width:
-        21px;
+  top: 96px;
+  left: 180px;
 
-      height:
-        21px;
+  z-index: 445;
 
-      flex:
-        0 0 21px;
+  width: 320px;
+  max-height: 65vh;
 
-      display:
-        flex;
+  padding: 20px;
 
-      align-items:
-        center;
+  overflow-y: auto;
 
-      justify-content:
-        center;
-    }
+  background: rgba(255,255,255,0.98);
 
+  border-radius: 18px;
 
-    .menu-icon svg {
-      width:
-        100%;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.20);
 
-      height:
-        100%;
+  opacity: 0;
+  visibility: hidden;
 
-      display:
-        block;
+  transform: translateX(-8px);
 
-      fill:
-        none;
+  transition: 0.2s ease;
+}
 
-      stroke:
-        currentColor;
+#menuPanel.active {
+  opacity: 1;
+  visibility: visible;
 
-      stroke-width:
-        1.8;
+  transform: translateX(0);
+}
 
-      stroke-linecap:
-        round;
+#menuPanel h2 {
+  margin: 0 0 15px;
 
-      stroke-linejoin:
-        round;
-    }
+  font-size: 19px;
+}
 
+#menuPanel p {
+  font-size: 13px;
+  line-height: 1.55;
 
-    .menu-label {
-      font-size:
-        12px;
+  color: #555;
+}
 
-      font-weight:
-        700;
+#closeMenuPanel {
+  position: absolute;
 
-      white-space:
-        nowrap;
-    }
+  top: 10px;
+  right: 10px;
 
+  width: 32px;
+  height: 32px;
 
-    /* =========================================================
-       MAIN MENU PANEL
-       ========================================================= */
+  border: none;
+  border-radius: 50%;
 
-    #menuPanel {
-      position:
-        fixed;
+  background: #f0f0f0;
 
-      top:
-        96px;
+  font-size: 19px;
 
-      left:
-        180px;
+  cursor: pointer;
+}
 
-      z-index:
-        445;
+.utility-item {
+  padding: 11px 0;
 
-      width:
-        320px;
+  border-bottom: 1px solid #eee;
 
-      max-height:
-        65vh;
+  font-size: 13px;
+}
 
-      padding:
-        20px;
+.timeline-buttons {
+  display: flex;
+  flex-wrap: wrap;
 
-      overflow-y:
-        auto;
+  gap: 8px;
+}
 
-      background:
-        rgba(255,255,255,0.98);
+.timeline-year {
+  padding: 8px 12px;
 
-      border-radius:
-        18px;
+  border: 1px solid #d8dce3;
+  border-radius: 18px;
 
-      box-shadow:
-        0 10px 35px
-        rgba(0,0,0,0.20);
+  background: white;
+  color: #34435d;
 
-      opacity:
-        0;
+  font-size: 12px;
 
-      visibility:
-        hidden;
+  cursor: pointer;
+}
 
-      transform:
-        translateX(-8px);
+.timeline-year:hover,
+.timeline-year.active {
+  border-color: var(--blue);
 
-      transition:
-        0.2s ease;
-    }
+  background: var(--blue);
+  color: white;
+}
 
 
-    #menuPanel.active {
-      opacity:
-        1;
-
-      visibility:
-        visible;
-
-      transform:
-        translateX(0);
-    }
-
-
-    #menuPanel h2 {
-      margin:
-        0 0 15px;
-
-      font-size:
-        19px;
-    }
-
-
-    #menuPanel p {
-      font-size:
-        13px;
-
-      line-height:
-        1.55;
-
-      color:
-        #555;
-    }
-
-
-    #closeMenuPanel {
-      position:
-        absolute;
-
-      top:
-        10px;
-
-      right:
-        10px;
-
-      width:
-        32px;
-
-      height:
-        32px;
-
-      border:
-        none;
-
-      border-radius:
-        50%;
-
-      background:
-        #f0f0f0;
-
-      font-size:
-        19px;
-
-      cursor:
-        pointer;
-    }
-
-
-    .utility-item {
-      padding:
-        11px 0;
-
-      border-bottom:
-        1px solid #eee;
-
-      font-size:
-        13px;
-    }
-
-
-    .timeline-buttons {
-      display:
-        flex;
-
-      flex-wrap:
-        wrap;
-
-      gap:
-        8px;
-    }
-
-
-    .timeline-year {
-      padding:
-        8px 12px;
-
-      border:
-        1px solid #d8dce3;
-
-      border-radius:
-        18px;
-
-      background:
-        white;
-
-      color:
-        #34435d;
-
-      font-size:
-        12px;
-
-      cursor:
-        pointer;
-    }
-
-
-    .timeline-year:hover,
-    .timeline-year.active {
-      border-color:
-        var(--blue);
-
-      background:
-        var(--blue);
-
-      color:
-        white;
-    }
-
-  /* =========================================================
-   PHOTO LIGHTBOX
+/* =========================================================
+   10. PHOTO LIGHTBOX
    ========================================================= */
 
 #lightbox {
-  position: fixed;                   /* Cover the whole browser window */
-  inset: 0;                          /* Top, right, bottom and left = 0 */
-  z-index: 5000;                     /* Stay above dashboard and map */
-  display: flex;                     /* Centre the photo */
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 5000;
+
+  display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 24px;
-  background: rgba(0, 0, 0, 0.94);  /* Dark backdrop */
-  opacity: 0;                        /* Hidden by default */
+
+  background: rgba(0,0,0,0.94);
+
+  opacity: 0;
   visibility: hidden;
-  pointer-events: none;              /* Don't block clicks while hidden */
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
 }
 
 #lightbox.active {
-  opacity: 1;                        /* Show when JS adds .active */
+  opacity: 1;
   visibility: visible;
+
   pointer-events: auto;
 }
 
 #lightboxImage {
   display: block;
+
   width: auto;
   height: auto;
-  max-width: 92vw;                   /* Keep photo inside browser width */
-  max-height: 88vh;                  /* Keep photo inside browser height */
-  object-fit: contain;               /* Never crop or distort */
+
+  max-width: 92vw;
+  max-height: 88vh;
+
+  object-fit: contain;
+
   border-radius: 10px;
+
   user-select: none;
   -webkit-user-drag: none;
 }
 
 #closeLightbox {
   position: fixed;
+
   top: 18px;
   right: 20px;
+
   z-index: 5001;
+
   width: 44px;
   height: 44px;
+
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.16);
+
+  background: rgba(255,255,255,0.16);
   color: white;
+
   font-size: 28px;
+
   cursor: pointer;
 }
 
 #closeLightbox:hover {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255,255,255,0.28);
 }
 
 
 /* =========================================================
-   MOBILE LIGHTBOX
+   11. RECENT PLACES — DESKTOP
    ========================================================= */
 
-@media (max-width: 700px) {
+#recentPlaces {
+  position: fixed;
 
-  #lightbox {
-    padding: 10px;
-  }
+  left: 260px;
+  right: 220px;
+  bottom: 18px;
 
-  #lightboxImage {
-    max-width: 96vw;
-    max-height: 84vh;
-  }
+  z-index: 410;
+}
 
-  #closeLightbox {
-    top: 12px;
-    right: 12px;
-  }
+.recent-heading {
+  margin: 0 0 8px;
 
+  color: white;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+}
+
+#recentList {
+  display: flex;
+
+  gap: 8px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+#recentList::-webkit-scrollbar {
+  display: none;
+}
+
+.recent-card {
+  position: relative;
+
+  flex: 0 0 160px;
+
+  height: 120px;
+
+  overflow: hidden;
+
+  border: 2px solid rgba(255,255,255,0.9);
+  border-radius: 14px;
+
+  background: #222;
+
+  box-shadow: 0 5px 18px rgba(0,0,0,0.3);
+
+  cursor: pointer;
+}
+
+.recent-card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.recent-card-overlay {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 28px 9px 8px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      transparent,
+      rgba(0,0,0,0.88)
+    );
+}
+
+.recent-card-name {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.recent-card-category {
+  margin-top: 2px;
+
+  font-size: 9px;
 }
 
 
-    /* =========================================================
-       RECENT PLACES
-       ========================================================= */
+/* =========================================================
+   12. MAPLIBRE CONTROLS
+   ========================================================= */
 
-    #recentPlaces {
-      position:
-        fixed;
+.maplibregl-ctrl-top-right {
+  top: 90px;
+  right: 7px;
+}
 
-      left:
-        260px;
+.maplibregl-ctrl-group {
+  overflow: hidden;
 
-      right:
-        220px;
+  border-radius: 12px;
+}
 
-      bottom:
-        18px;
+/* =========================================================
+   13. DASHBOARD BACKDROP
+   ========================================================= */
 
-      z-index:
-        410;
-    }
+#overlayBackdrop {
+  position: fixed;
 
+  inset: 0;
 
-    .recent-heading {
-      margin:
-        0 0 8px;
+  z-index: 900;
 
-      color:
-        white;
+  background: rgba(5,10,20,0.68);
 
-      font-size:
-        14px;
+  opacity: 0;
+  visibility: hidden;
 
-      font-weight:
-        800;
+  transition: 0.25s ease;
+}
 
-      text-shadow:
-        0 2px 6px
-        rgba(0,0,0,0.8);
-    }
+#overlayBackdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
 
 
-    #recentList {
-      display:
-        flex;
-
-      gap:
-        8px;
-
-      overflow-x:
-        auto;
-
-      scrollbar-width:
-        none;
-    }
-
-
-    #recentList::-webkit-scrollbar {
-      display:
-        none;
-    }
-
-
-    .recent-card {
-      position:
-        relative;
-
-      flex:
-        0 0 160px;
-
-      height:
-        120px;
-
-      overflow:
-        hidden;
-
-      border:
-        2px solid
-        rgba(255,255,255,0.9);
-
-      border-radius:
-        14px;
-
-      background:
-        #222;
-
-      box-shadow:
-        0 5px 18px
-        rgba(0,0,0,0.3);
-
-      cursor:
-        pointer;
-    }
-
-
-    .recent-card img {
-      width:
-        100%;
-
-      height:
-        100%;
-
-      object-fit:
-        cover;
-    }
-
-
-    .recent-card-overlay {
-      position:
-        absolute;
-
-      left:
-        0;
-
-      right:
-        0;
-
-      bottom:
-        0;
-
-      padding:
-        28px 9px 8px;
-
-      color:
-        white;
-
-      background:
-        linear-gradient(
-          transparent,
-          rgba(0,0,0,0.88)
-        );
-    }
-
-
-    .recent-card-name {
-      font-size:
-        14px;
-
-      font-weight:
-        800;
-    }
-
-
-    .recent-card-category {
-      margin-top:
-        2px;
-
-      font-size:
-        9px;
-    }
-
-
-    /* =========================================================
-       MY TRAVEL MAP
-       ========================================================= */
-
-    #travelSummary {
-      position:
-        fixed;
-
-      right:
-        18px;
-
-      bottom:
-        18px;
-
-      z-index:
-        420;
-
-      width:
-        190px;
-
-      padding:
-        16px;
-
-      background:
-        var(--panel);
-
-      border-radius:
-        18px;
-
-      box-shadow:
-        var(--shadow);
-
-      backdrop-filter:
-        blur(12px);
-    }
-
-
-    .summary-title {
-      margin-bottom:
-        14px;
-
-      font-size:
-        13px;
-
-      font-weight:
-        800;
-    }
-
-
-    .summary-row {
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      margin:
-        10px 0;
-
-      font-size:
-        11px;
-
-      color:
-        #667085;
-    }
-
-
-    .summary-row strong {
-      color:
-        #1769e0;
-
-      font-size:
-        14px;
-    }
-
-
-    /* =========================================================
-       MAPLIBRE CONTROLS
-       ========================================================= */
-
-    .maplibregl-ctrl-top-right {
-      top:
-        90px;
-
-      right:
-        7px;
-    }
-
-
-    /* =========================================================
-       DASHBOARD BACKDROP
-       ========================================================= */
-
-    #overlayBackdrop {
-      position:
-        fixed;
-
-      inset:
-        0;
-
-      z-index:
-        900;
-
-      background:
-        rgba(5,10,20,0.68);
-
-      opacity:
-        0;
-
-      visibility:
-        hidden;
-
-      transition:
-        0.25s ease;
-    }
-
-
-    #overlayBackdrop.active {
-      opacity:
-        1;
-
-      visibility:
-        visible;
-    }
-
-
-    /* =========================================================
-   PLACE DASHBOARD
+/* =========================================================
+   14. PLACE DASHBOARD
    ========================================================= */
 
 #travelDashboard {
@@ -1234,8 +805,7 @@
 
   border-radius: 18px;
 
-  box-shadow:
-    0 30px 100px rgba(0,0,0,0.55);
+  box-shadow: 0 30px 100px rgba(0,0,0,0.55);
 
   opacity: 0;
   visibility: hidden;
@@ -1250,7 +820,6 @@
     visibility 0.25s ease;
 }
 
-
 #travelDashboard.active {
   opacity: 1;
   visibility: visible;
@@ -1260,23 +829,24 @@
     scale(1);
 }
 
+
 /* =========================================================
-   DASHBOARD LAYOUT
+   15. DASHBOARD LAYOUT
    ========================================================= */
 
 .dashboard-layout {
   display: grid;
 
   grid-template-columns:
-    180px minmax(0, 1fr);
+    180px minmax(0,1fr);
 
   width: 100%;
   height: 100%;
 }
 
 
-    /* =========================================================
-   DASHBOARD SIDEBAR
+/* =========================================================
+   16. DASHBOARD SIDEBAR
    ========================================================= */
 
 .dashboard-sidebar {
@@ -1287,14 +857,12 @@
 
   padding: 18px 14px;
 
-  background: #ffffff;
+  background: #fff;
 
-  border-right:
-    1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
 
   overflow-y: auto;
 }
-
 
 .dashboard-nav {
   display: flex;
@@ -1302,7 +870,6 @@
 
   gap: 6px;
 }
-
 
 .dashboard-nav-button {
   width: 100%;
@@ -1319,7 +886,6 @@
   border-radius: 11px;
 
   background: transparent;
-
   color: #26344d;
 
   font-size: 12px;
@@ -1332,18 +898,14 @@
   white-space: nowrap;
 }
 
-
 .dashboard-nav-button:hover {
   background: #f5f6f8;
 }
 
-
 .dashboard-nav-button.active {
   background: #fff1e7;
-
   color: #ef5b18;
 }
-
 
 .dashboard-nav-icon {
   width: 18px;
@@ -1356,20 +918,17 @@
   justify-content: center;
 }
 
-
 .dashboard-nav-icon svg {
   width: 100%;
   height: 100%;
 
   fill: none;
-
   stroke: currentColor;
-  stroke-width: 1.8;
 
+  stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-
 
 .dashboard-nav-label {
   overflow: hidden;
@@ -1381,188 +940,19 @@
   display: none;
 }
 
-
 .dashboard-tab-content.active {
   display: block;
 }
 
 
-.info-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 12px;
-}
-
-
-.info-card {
-  padding: 16px;
-
-  border:
-    1px solid #e5e7eb;
-
-  border-radius: 12px;
-
-  background: #fafafa;
-}
-
-
-.info-card h3 {
-  margin:
-    0 0 8px;
-
-  font-size: 14px;
-}
-
-
-.info-card p {
-  margin: 0;
-
-  color: #555;
-
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-
-#dashboardLinksList {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 10px;
-}
-
-/* Individual official-resource card */
-.dashboard-resource-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-  padding: 14px 16px;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  background: #ffffff;
-  color: #26344d;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 700;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Small lift when mouse hovers over link */
-.dashboard-resource-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-}
-
-/* Emoji/icon on left */
-.resource-icon {
-  flex: 0 0 auto;
-  font-size: 20px;
-}
-
-/* Resource name fills available space */
-.resource-name {
-  flex: 1;
-  min-width: 0;
-}
-
-/* External-link arrow on right */
-.resource-arrow {
-  flex: 0 0 auto;
-  font-size: 16px;
-  opacity: 0.55;
-}
-
-/* One column on smaller screens */
-@media (max-width: 700px) {
-  #dashboardLinksList {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-.dashboard-resource-link {
-  display: block;
-
-  padding: 14px;
-
-  border:
-    1px solid #e5e7eb;
-
-  border-radius: 11px;
-
-  color: #26344d;
-
-  text-decoration: none;
-
-  font-size: 13px;
-  font-weight: 700;
-}
-
-
-.dashboard-resource-link:hover {
-  border-color:
-    #2878ed;
-}
-
-
-@media (max-width: 700px) {
-
-  .info-grid,
-  #dashboardLinksList {
-    grid-template-columns: 1fr;
-  }
-
-}
-
 /* =========================================================
-   BEST TIME
-   ========================================================= */
-
-.best-time-card {
-  margin-top: auto;
-
-  padding: 14px;
-
-  border-radius: 13px;
-
-  background: #fff5e8;
-}
-
-
-.best-time-card strong {
-  display: block;
-
-  margin-bottom: 6px;
-
-  font-size: 12px;
-}
-
-
-.best-time-card p {
-  margin: 0;
-
-  font-size: 11px;
-  line-height: 1.5;
-
-  color: #4f5969;
-}
-
-
-    /* =========================================================
-   DASHBOARD MAIN
+   17. DASHBOARD MAIN AREA
    ========================================================= */
 
 .dashboard-main {
   position: relative;
 
   min-width: 0;
-
   height: 100%;
 
   overflow-y: auto;
@@ -1570,7 +960,6 @@
 
   background: white;
 }
-
 
 #closeDashboard {
   position: absolute;
@@ -1586,25 +975,22 @@
   border: none;
   border-radius: 50%;
 
-  background:
-    rgba(255,255,255,0.94);
-
+  background: rgba(255,255,255,0.94);
   color: #111;
 
   font-size: 25px;
 
-  box-shadow:
-    0 3px 15px rgba(0,0,0,0.18);
+  box-shadow: 0 3px 15px rgba(0,0,0,0.18);
 
   cursor: pointer;
 }
 
 
-    /* =========================================================
-       DASHBOARD HERO
-       ========================================================= */
+/* =========================================================
+   18. DASHBOARD HERO
+   ========================================================= */
 
-    .dashboard-hero {
+.dashboard-hero {
   position: relative;
 
   height: 255px;
@@ -1613,7 +999,6 @@
 
   background: #222;
 }
-
 
 #heroPhoto {
   width: 100%;
@@ -1624,10 +1009,8 @@
   object-fit: cover;
 
   user-select: none;
-
   -webkit-user-drag: none;
 }
-
 
 .hero-gradient {
   position: absolute;
@@ -1643,7 +1026,6 @@
     );
 }
 
-
 .hero-text {
   position: absolute;
 
@@ -1652,18 +1034,15 @@
 
   z-index: 5;
 
-  width: min(420px, 45%);
+  width: min(420px,45%);
 }
-
 
 #dashboardPlaceName {
   margin: 0 0 14px;
 
-  font-size: clamp(24px, 2.3vw, 32px);
-
+  font-size: clamp(24px,2.3vw,32px);
   line-height: 1.08;
 }
-
 
 #heroDescription {
   margin: 0;
@@ -1673,7 +1052,6 @@
 
   color: #182033;
 }
-
 
 .hero-counts {
   position: absolute;
@@ -1688,15 +1066,12 @@
   gap: 8px;
 }
 
-
 .hero-count {
   padding: 8px 11px;
 
   border-radius: 18px;
 
-  background:
-    rgba(0,0,0,0.70);
-
+  background: rgba(0,0,0,0.70);
   color: white;
 
   font-size: 11px;
@@ -1704,8 +1079,8 @@
 }
 
 
-    /* =========================================================
-   DASHBOARD CONTENT
+/* =========================================================
+   19. DASHBOARD CONTENT
    ========================================================= */
 
 .dashboard-content {
@@ -1714,35 +1089,30 @@
 
 
 /* =========================================================
-   QUICK CARDS
+   20. QUICK INFORMATION CARDS
    ========================================================= */
 
 .quick-grid {
   display: grid;
 
   grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+    repeat(4,minmax(0,1fr));
 
   gap: 12px;
 }
-
 
 .quick-card {
   min-width: 0;
 
   padding: 14px 16px;
 
-  border:
-    1px solid #e5e7eb;
-
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
 
   background: white;
 
-  box-shadow:
-    0 3px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
 }
-
 
 .quick-label {
   margin-bottom: 6px;
@@ -1755,7 +1125,6 @@
   text-transform: uppercase;
 }
 
-
 .quick-value {
   overflow-wrap: anywhere;
 
@@ -1764,67 +1133,45 @@
 }
 
 
-    /* =========================================================
-       PLACE DESCRIPTION
-       ========================================================= */
-
-    .place-description {
-      margin-top:
-        24px;
-    }
-
-
-    .place-description h3 {
-      font-size:
-        16px;
-
-      font-weight:
-        700;
-
-      margin:
-        20px 0 8px;
-
-      color:
-        #222;
-    }
-
-
-    .place-description h3:first-child {
-      margin-top:
-        0;
-    }
-
-
-    .place-description p {
-      font-size:
-        14px;
-
-      line-height:
-        1.55;
-
-      margin:
-        0 0 16px;
-
-      color:
-        #4a4a4a;
-    }
-
-
-    /* =========================================================
-   ABOUT PREVIEW
+/* =========================================================
+   21. ABOUT / DESCRIPTION
    ========================================================= */
+
+.place-description {
+  margin-top: 24px;
+}
+
+.place-description h3 {
+  margin: 20px 0 8px;
+
+  color: #222;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.place-description h3:first-child {
+  margin-top: 0;
+}
+
+.place-description p {
+  margin: 0 0 16px;
+
+  color: #4a4a4a;
+
+  font-size: 14px;
+  line-height: 1.55;
+}
 
 .about-block {
   margin-top: 24px;
 }
-
 
 .about-block h2 {
   margin: 0 0 10px;
 
   font-size: 19px;
 }
-
 
 #aboutPreview {
   margin: 0;
@@ -1835,32 +1182,26 @@
   line-height: 1.6;
 }
 
-
 #aboutFull {
   display: none;
 
   margin-top: 15px;
 }
 
-
 #aboutFull.visible {
   display: block;
 }
 
-
 #aboutFull h3 {
-  margin:
-    22px 0 8px;
-
-  font-size: 16px;
+  margin: 22px 0 8px;
 
   color: #222;
+
+  font-size: 16px;
 }
 
-
 #aboutFull p {
-  margin:
-    0 0 15px;
+  margin: 0 0 15px;
 
   color: #4a4a4a;
 
@@ -1868,13 +1209,11 @@
   line-height: 1.6;
 }
 
-
 #aboutFull a {
   color: #2168ce;
 
   word-break: break-word;
 }
-
 
 #readMoreButton {
   margin-top: 12px;
@@ -1884,7 +1223,6 @@
   border: none;
 
   background: transparent;
-
   color: #ef5b18;
 
   font-size: 13px;
@@ -1895,31 +1233,97 @@
 
 
 /* =========================================================
-   PHOTO + VIDEO SECTIONS
+   22. INFO CARDS
+   ========================================================= */
+
+.info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap: 12px;
+}
+
+.info-card {
+  padding: 16px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  background: #fafafa;
+}
+
+.info-card h3 {
+  margin: 0 0 8px;
+
+  font-size: 14px;
+}
+
+.info-card p {
+  margin: 0;
+
+  color: #555;
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   23. BEST TIME CARD
+   ========================================================= */
+
+.best-time-card {
+  margin-top: auto;
+
+  padding: 14px;
+
+  border-radius: 13px;
+
+  background: #fff5e8;
+}
+
+.best-time-card strong {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 12px;
+}
+
+.best-time-card p {
+  margin: 0;
+
+  color: #4f5969;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   24. PHOTOS
    ========================================================= */
 
 .dashboard-section {
   padding-top: 28px;
 }
 
-
 .dashboard-section h2 {
-  margin:
-    0 0 13px;
+  margin: 0 0 13px;
 
   font-size: 18px;
 }
-
 
 #photoGallery {
   display: grid;
 
   grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+    repeat(4,minmax(0,1fr));
 
   gap: 9px;
 }
-
 
 .gallery-photo {
   width: 100%;
@@ -1932,26 +1336,27 @@
   cursor: pointer;
 
   user-select: none;
-
   -webkit-user-drag: none;
 }
 
+
+/* =========================================================
+   25. VIDEOS
+   ========================================================= */
 
 #videoGallery {
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fit, minmax(260px, 360px));
+    repeat(auto-fit,minmax(260px,360px));
 
   gap: 16px;
 
   justify-content: start;
 }
 
-
 .video-card {
   width: 100%;
-
   max-width: 360px;
 
   overflow: hidden;
@@ -1960,10 +1365,8 @@
 
   background: #111;
 
-  box-shadow:
-    0 4px 14px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
 }
-
 
 .video-card video {
   display: block;
@@ -1980,7 +1383,72 @@
 
 
 /* =========================================================
-   MASTER MOBILE MAP EXPERIENCE
+   26. OFFICIAL RESOURCE LINKS
+   ========================================================= */
+
+#dashboardLinksList {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap: 10px;
+}
+
+.dashboard-resource-link {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+
+  padding: 14px 16px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  background: #fff;
+  color: #26344d;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dashboard-resource-link:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+}
+
+.resource-icon {
+  flex: 0 0 auto;
+
+  font-size: 20px;
+}
+
+.resource-name {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.resource-arrow {
+  flex: 0 0 auto;
+
+  font-size: 16px;
+
+  opacity: 0.55;
+}
+
+/* =========================================================
+   27. CLEAN MOBILE MAP EXPERIENCE
    Phones + small tablets
    ========================================================= */
 
@@ -1994,1243 +1462,46 @@
   body {
     width: 100%;
     height: 100%;
+
     margin: 0;
+
     overflow: hidden;
   }
 
   #map {
     position: fixed;
+
     inset: 0;
+
     width: 100vw;
     height: 100dvh;
   }
 
 
   /* =======================================================
-     TOP CONTROLS
+     MOBILE TOP BAR
+     ONLY: Logo | Search | Hamburger
      ======================================================= */
 
-  .top-controls {
+  #topUI {
     position: fixed;
-    top: max(12px, env(safe-area-inset-top));
+
+    top: max(12px,env(safe-area-inset-top));
     left: 12px;
     right: 12px;
 
-    display: flex;
+    width: auto;
+
+    display: grid;
+
+    grid-template-columns:
+      54px minmax(0,1fr) 54px;
+
     align-items: center;
-    gap: 8px;
-
-    width: auto;
-    z-index: 100;
-  }
-
-
-  /* =======================================================
-     BRAND
-     Mobile = logo only
-     ======================================================= */
-
-  .brand-box {
-    flex: 0 0 58px;
-    width: 58px;
-    min-width: 58px;
-    height: 58px;
-
-    padding: 6px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 18px;
-
-    background: rgba(255, 255, 255, 0.96);
-
-    box-shadow:
-      0 4px 18px rgba(0, 0, 0, 0.14);
-  }
-
-  .brand-box img {
-    width: 46px;
-    height: 46px;
-    object-fit: contain;
-  }
-
-  .brand-title,
-  .brand-subtitle {
-    display: none;
-  }
-
-
-  /* =======================================================
-     SEARCH
-     ======================================================= */
-
-  .search-box {
-    flex: 1;
-    min-width: 0;
-    width: auto;
-    height: 58px;
-
-    display: flex;
-    align-items: center;
-
-    border-radius: 18px;
-
-    background: rgba(255, 255, 255, 0.96);
-
-    box-shadow:
-      0 4px 18px rgba(0, 0, 0, 0.14);
-  }
-
-  #placeSearch {
-    width: 100%;
-    min-width: 0;
-
-    border: 0;
-    outline: 0;
-
-    font-size: 15px;
-
-    background: transparent;
-  }
-
-
-  /* =======================================================
-     BASEMAP SWITCHER
-     Compact floating pill
-     ======================================================= */
-
-  .map-style-switcher {
-    position: fixed;
-    top: calc(max(12px, env(safe-area-inset-top)) + 68px);
-    right: 12px;
-
-    width: auto;
-    height: 40px;
-
-    display: flex;
-
-    padding: 4px;
-
-    border-radius: 14px;
-
-    background: rgba(255, 255, 255, 0.94);
-
-    box-shadow:
-      0 3px 14px rgba(0, 0, 0, 0.14);
-
-    z-index: 99;
-  }
-
-  .style-button {
-    min-width: 0;
-    height: 32px;
-
-    padding: 0 10px;
-
-    border-radius: 10px;
-
-    font-size: 11px;
-    white-space: nowrap;
-  }
-
-
-  /* =======================================================
-     CATEGORY CHIPS
-     Horizontal scroll instead of large bar
-     ======================================================= */
-
-  .category-bar {
-    position: fixed;
-    top: calc(max(12px, env(safe-area-inset-top)) + 68px);
-    left: 12px;
-    right: 155px;
-
-    width: auto;
-
-    display: flex;
-    gap: 6px;
-
-    padding: 4px;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    border-radius: 14px;
-
-    background: rgba(255, 255, 255, 0.94);
-
-    box-shadow:
-      0 3px 14px rgba(0, 0, 0, 0.14);
-
-    scrollbar-width: none;
-
-    z-index: 99;
-  }
-
-  .category-bar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .category-button {
-    flex: 0 0 auto;
-
-    height: 32px;
-
-    padding: 0 11px;
-
-    border-radius: 10px;
-
-    font-size: 11px;
-    white-space: nowrap;
-  }
-
-
-  /* =======================================================
-     MAPLIBRE CONTROLS
-     ======================================================= */
-
-  .maplibregl-ctrl-top-right {
-    top: 132px;
-    right: 10px;
-  }
-
-  .maplibregl-ctrl-group {
-    border-radius: 14px;
-    overflow: hidden;
-  }
-
-
-  /* =======================================================
-     RECENT PLACES
-     Horizontal carousel
-     ======================================================= */
-
-  .recent-section {
-    position: fixed;
-
-    left: 12px;
-    right: 12px;
-
-    bottom: calc(88px + env(safe-area-inset-bottom));
-
-    width: auto;
-
-    z-index: 80;
-
-    transition:
-      transform 0.25s ease,
-      opacity 0.25s ease;
-  }
-
-  .recent-section h2 {
-    margin: 0 0 7px;
-
-    font-size: 17px;
-    line-height: 1.2;
-
-    color: white;
-
-    text-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.85);
-  }
-
-  #recentList {
-    display: flex;
 
     gap: 9px;
 
-    width: 100%;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    scroll-snap-type: x proximity;
-
-    padding-bottom: 2px;
-
-    scrollbar-width: none;
-  }
-
-  #recentList::-webkit-scrollbar {
-    display: none;
-  }
-
-  .recent-card {
-    flex: 0 0 145px;
-
-    width: 145px;
-    height: 100px;
-
-    border-radius: 16px;
-
-    scroll-snap-align: start;
-
-    overflow: hidden;
-
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.24);
-  }
-
-  .recent-card-name {
-    font-size: 16px;
-  }
-
-  .recent-card-category {
-    font-size: 10px;
-  }
-
-
-  /* =======================================================
-     BOTTOM NAVIGATION
-     ======================================================= */
-
-  .main-menu {
-    position: fixed;
-
-    left: 12px;
-    right: 12px;
-
-    bottom: calc(10px + env(safe-area-inset-bottom));
-
-    width: auto;
-    height: 68px;
-
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-
-    padding: 5px;
-
-    border-radius: 22px;
-
-    background: rgba(255, 255, 255, 0.97);
-
-    box-shadow:
-      0 6px 24px rgba(0, 0, 0, 0.22);
-
-    z-index: 120;
-  }
-
-  .menu-item {
-    min-width: 0;
-    height: 58px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 3px;
-
-    padding: 4px;
-
-    border-radius: 17px;
-  }
-
-  .menu-item svg,
-  .menu-item i {
-    width: 21px;
-    height: 21px;
-  }
-
-  .menu-item span {
-    font-size: 10px;
-    font-weight: 650;
-  }
-
-  .menu-item.active {
-    background: #fff0e7;
-  }
-
-
-  /* =======================================================
-     HIDE DESKTOP-ONLY MENU ITEMS
-     ======================================================= */
-
-  .mobile-hide {
-    display: none !important;
-  }
-
-
-  /* =======================================================
-     MOBILE MENU PANEL
-     ======================================================= */
-
-  #menuPanel {
-    position: fixed;
-
-    left: 12px;
-    right: 12px;
-
-    bottom: calc(88px + env(safe-area-inset-bottom));
-
-    width: auto;
-    max-height: 55dvh;
-
-    border-radius: 22px;
-
-    overflow-y: auto;
-
-    z-index: 130;
-  }
-
-
-  /* =======================================================
-     DESTINATION DASHBOARD
-     ======================================================= */
-
-  #travelDashboard {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100dvh;
-
-    border-radius: 0;
-
-    z-index: 1000;
-  }
-
-  .dashboard-shell {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  .dashboard-main {
-    width: 100%;
-    height: calc(100dvh - 68px);
-
-    padding-bottom: 20px;
-
-    overflow-y: auto;
-  }
-
-  .dashboard-sidebar {
-    position: fixed;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: calc(68px + env(safe-area-inset-bottom));
-
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-
-    padding:
-      5px
-      6px
-      calc(5px + env(safe-area-inset-bottom));
-
-    border-right: none;
-    border-top: 1px solid #e8e8e8;
-
-    background: rgba(255, 255, 255, 0.98);
-
-    z-index: 1200;
-  }
-
-  .dashboard-nav-button {
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 2px;
-
-    border-radius: 13px;
-
-    padding: 4px 2px;
-
-    font-size: 10px;
-  }
-
-  .dashboard-nav-button svg,
-  .dashboard-nav-button i {
-    width: 20px;
-    height: 20px;
-  }
-
-
-  /* =======================================================
-     DASHBOARD HERO
-     ======================================================= */
-
-  .dashboard-hero {
-    min-height: 215px;
-    height: 215px;
-  }
-
-  .dashboard-hero-content {
-    padding:
-      max(18px, env(safe-area-inset-top))
-      18px
-      18px;
-  }
-
-  #dashboardPlaceName {
-    max-width: calc(100% - 60px);
-
-    font-size: 25px;
-    line-height: 1.05;
-  }
-
-  #heroDescription {
-    max-width: 82%;
-
-    font-size: 12px;
-    line-height: 1.45;
-  }
-
-
-  /* =======================================================
-     DASHBOARD CONTENT
-     ======================================================= */
-
-  .dashboard-section {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .quick-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    gap: 8px;
-  }
-
-  #photoGallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    gap: 8px;
-  }
-
-  .gallery-photo {
-    height: 125px;
-  }
-
-  #videoGallery {
-    grid-template-columns: 1fr;
-  }
-
-  #dashboardLinksList {
-    grid-template-columns: 1fr;
-  }
-
-}
-
-
-/* =========================================================
-   PHONE PORTRAIT
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-  /* Make search the visual priority. */
-
-  .top-controls {
-    right: 12px;
-  }
-
-  .brand-box {
-    flex-basis: 52px;
-
-    width: 52px;
-    min-width: 52px;
-    height: 52px;
-
-    border-radius: 16px;
-  }
-
-  .brand-box img {
-    width: 40px;
-    height: 40px;
-  }
-
-  .search-box {
-    height: 52px;
-  }
-
-
-  /* Categories below search. */
-
-  .category-bar {
-    top: calc(max(12px, env(safe-area-inset-top)) + 62px);
-
-    right: 12px;
-  }
-
-
-  /* Basemap switch becomes a second floating row. */
-
-  .map-style-switcher {
-    top: calc(max(12px, env(safe-area-inset-top)) + 108px);
-
-    right: 12px;
-  }
-
-  .maplibregl-ctrl-top-right {
-    top: 160px;
-  }
-
-
-  /* Recent destination carousel stays compact. */
-
-  .recent-section {
-    bottom: calc(86px + env(safe-area-inset-bottom));
-  }
-
-  .recent-card {
-    flex-basis: 138px;
-
-    width: 138px;
-    height: 96px;
-  }
-
-}
-
-
-/* =========================================================
-   PHONE LANDSCAPE
-   ========================================================= */
-
-@media (max-width: 950px) and (orientation: landscape) {
-
-  /* Keep the map visible above everything else. */
-
-  .top-controls {
-    top: 8px;
-
-    left: 10px;
-    right: 10px;
-  }
-
-  .brand-box {
-    width: 48px;
-    min-width: 48px;
-    height: 48px;
-
-    flex-basis: 48px;
-  }
-
-  .brand-box img {
-    width: 38px;
-    height: 38px;
-  }
-
-  .search-box {
-    height: 48px;
-  }
-
-  .category-bar {
-    top: 64px;
-    left: 10px;
-    right: auto;
-
-    max-width: 48vw;
-  }
-
-  .map-style-switcher {
-    top: 64px;
-    right: 10px;
-
-    height: 40px;
-  }
-
-  .maplibregl-ctrl-top-right {
-    top: 112px;
-  }
-
-
-  /* Smaller horizontal recent cards. */
-
-  .recent-section {
-    left: 10px;
-    right: auto;
-
-    bottom: 82px;
-
-    width: min(540px, 65vw);
-  }
-
-  .recent-section h2 {
-    font-size: 14px;
-  }
-
-  .recent-card {
-    flex-basis: 125px;
-
-    width: 125px;
-    height: 78px;
-  }
-
-
-  /* Bottom nav narrower in landscape. */
-
-  .main-menu {
-    left: 50%;
-
-    width: min(560px, 70vw);
-
-    transform: translateX(-50%);
-
-    bottom: 8px;
-
-    height: 60px;
-  }
-
-  .menu-item {
-    height: 50px;
-  }
-
-}
-
-/* =========================================================
-   MAP INTERACTION MODE
-   ========================================================= */
-
-@media (max-width: 950px) {
-
-  body.map-interacting .recent-section {
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-  }
-
-}
-
-/* =========================================================
-   CLEAN MOBILE MAP UI
-   ========================================================= */
-
-.mobile-menu-button,
-.mobile-control-panel,
-.mobile-control-backdrop {
-  display: none;
-}
-
-
-@media (max-width: 950px) {
-
-  /* =======================================================
-     FULL SCREEN MAP
-     ======================================================= */
-
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-  }
-
-  #map {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100dvh;
-  }
-
-
-  /* =======================================================
-     TOP UI
-     ======================================================= */
-
-  #topUI {
-    position: fixed;
-    top: max(12px, env(safe-area-inset-top));
-    left: 12px;
-    right: 12px;
-
-    display: grid;
-    grid-template-columns: 52px minmax(0, 1fr) 52px;
-    gap: 8px;
-
-    width: auto;
-
-    z-index: 200;
-  }
-
-
-  /* =======================================================
-     BRAND
-     ======================================================= */
-
-  .map-brand {
-    width: 52px;
-    height: 52px;
-    min-width: 52px;
-
-    padding: 5px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 16px;
-
-    background: rgba(255,255,255,0.97);
-
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  }
-
-  .map-brand img {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-  }
-
-  .brand-text {
-    display: none;
-  }
-
-
-  /* =======================================================
-     SEARCH
-     ======================================================= */
-
-  .search-wrap,
-  .search-box {
-    width: 100%;
-    min-width: 0;
-    height: 52px;
-  }
-
-  .search-box {
-    border-radius: 16px;
-
-    background: rgba(255,255,255,0.97);
-
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  }
-
-  #placeSearch {
-    width: 100%;
-    min-width: 0;
-
-    font-size: 15px;
-  }
-
-
-  /* =======================================================
-     HAMBURGER BUTTON
-     ======================================================= */
-
-  .mobile-menu-button {
-    display: flex;
-
-    width: 52px;
-    height: 52px;
-
-    align-items: center;
-    justify-content: center;
-
-    border: none;
-    border-radius: 16px;
-
-    background: rgba(255,255,255,0.97);
-
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-
-    color: #1f2937;
-
-    font-size: 25px;
-    line-height: 1;
-
-    cursor: pointer;
-  }
-
-
-  /* =======================================================
-     HIDE LARGE DESKTOP CONTROLS
-     ======================================================= */
-
-  #topUI > .map-style-switcher,
-  #topUI > .category-bar {
-    display: none !important;
-  }
-
-
-  /* =======================================================
-     MAP CONTROLS
-     ======================================================= */
-
-  .maplibregl-ctrl-top-right {
-    top: 82px;
-    right: 10px;
-  }
-
-
-  /* =======================================================
-     RECENT PLACES
-     ======================================================= */
-
-  #recentPlaces {
-    position: fixed;
-
-    left: 12px;
-    right: 12px;
-
-    bottom: calc(82px + env(safe-area-inset-bottom));
-
-    width: auto;
-
-    z-index: 90;
-  }
-
-  #recentPlaces h2 {
-    margin: 0 0 7px;
-
-    font-size: 16px;
-    line-height: 1.2;
-
-    color: white;
-
-    text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-  }
-
-  #recentList {
-    display: flex;
-
-    gap: 8px;
-
-    width: 100%;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    scroll-snap-type: x proximity;
-
-    scrollbar-width: none;
-  }
-
-  #recentList::-webkit-scrollbar {
-    display: none;
-  }
-
-  .recent-card {
-    flex: 0 0 140px;
-
-    width: 140px;
-    height: 94px;
-
-    border-radius: 16px;
-
-    scroll-snap-align: start;
-
-    overflow: hidden;
-
-    box-shadow: 0 4px 16px rgba(0,0,0,0.22);
-  }
-
-  .recent-card-name {
-    font-size: 16px;
-  }
-
-  .recent-card-category {
-    font-size: 10px;
-  }
-
-
-  /* =======================================================
-     BOTTOM NAVIGATION
-     Keep only primary actions
-     ======================================================= */
-
-  .main-menu {
-    position: fixed;
-
-    left: 12px;
-    right: 12px;
-
-    bottom: calc(10px + env(safe-area-inset-bottom));
-
-    width: auto;
-    height: 64px;
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-
-    padding: 5px;
-
-    border-radius: 21px;
-
-    background: rgba(255,255,255,0.97);
-
-    box-shadow: 0 6px 22px rgba(0,0,0,0.2);
-
-    z-index: 150;
-  }
-
-  .menu-item {
-    min-height: 0;
-    height: 54px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 2px;
-
-    padding: 4px;
-
-    border-radius: 16px;
-  }
-
-  .menu-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .menu-label {
-    display: block;
-
-    font-size: 10px;
-  }
-
-  .menu-item[data-menu="wishlist"],
-  .menu-item[data-menu="timeline"],
-  .menu-item[data-menu="statistics"],
-  .menu-item[data-menu="about"],
-  .menu-item[data-menu="disclaimer"],
-  .menu-item[data-menu="settings"] {
-    display: none !important;
-  }
-
-
-  /* =======================================================
-     MOBILE CONTROL PANEL
-     ======================================================= */
-
-  .mobile-control-backdrop {
-    position: fixed;
-    inset: 0;
-
     z-index: 500;
-
-    background: rgba(0,0,0,0.32);
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-      opacity 0.2s ease,
-      visibility 0.2s ease;
-  }
-
-  .mobile-control-backdrop.active {
-    display: block;
-
-    opacity: 1;
-    visibility: visible;
-  }
-
-
-  .mobile-control-panel {
-    position: fixed;
-
-    left: 12px;
-    right: 12px;
-
-    top: calc(max(12px, env(safe-area-inset-top)) + 62px);
-
-    max-height: calc(100dvh - 100px);
-
-    padding: 16px;
-
-    border-radius: 22px;
-
-    background: rgba(255,255,255,0.98);
-
-    box-shadow: 0 12px 40px rgba(0,0,0,0.24);
-
-    overflow-y: auto;
-
-    z-index: 510;
-
-    transform: translateY(-15px);
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-      transform 0.2s ease,
-      opacity 0.2s ease,
-      visibility 0.2s ease;
-  }
-
-  .mobile-control-panel.active {
-    display: block;
-
-    transform: translateY(0);
-
-    opacity: 1;
-    visibility: visible;
-  }
-
-
-  .mobile-panel-header {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 18px;
-
-    font-size: 18px;
-  }
-
-  #closeMobileControlPanel {
-    width: 36px;
-    height: 36px;
-
-    border: none;
-    border-radius: 50%;
-
-    background: #f1f3f5;
-
-    font-size: 24px;
-
-    cursor: pointer;
-  }
-
-
-  .mobile-panel-section {
-    margin-bottom: 20px;
-  }
-
-  .mobile-panel-label {
-    margin-bottom: 8px;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    color: #6b7280;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.04em;
-  }
-
-
-  .mobile-map-styles,
-  .mobile-categories {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 6px;
-  }
-
-  .mobile-categories {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .mobile-map-styles .style-button,
-  .mobile-categories .category-button {
-    height: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0 6px;
-
-    border-radius: 12px;
-
-    font-size: 11px;
-  }
-
-
-  .mobile-panel-links {
-    display: grid;
-
-    gap: 6px;
-  }
-
-  .mobile-panel-link {
-    width: 100%;
-    height: 44px;
-
-    padding: 0 14px;
-
-    border: none;
-    border-radius: 12px;
-
-    background: #f5f6f8;
-
-    color: #26344d;
-
-    text-align: left;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    cursor: pointer;
-  }
-
-  .mobile-panel-link:hover {
-    background: #eceff3;
-  }
-
-}
-
-/* =========================================================
-   FINAL CLEAN MOBILE MAP UI
-   Phone + small tablet
-   ========================================================= */
-
-@media (max-width: 950px) {
-
-  /* =======================================================
-     FULL-SCREEN MAP
-     ======================================================= */
-
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-  }
-
-  #map {
-    position: fixed !important;
-    inset: 0 !important;
-
-    width: 100vw !important;
-    height: 100dvh !important;
-  }
-
-
-  /* =======================================================
-     TOP BAR
-     ONLY: Logo + Search + Hamburger
-     ======================================================= */
-
-  #topUI {
-    position: fixed !important;
-
-    top: max(12px, env(safe-area-inset-top)) !important;
-    left: 12px !important;
-    right: 12px !important;
-
-    width: auto !important;
-
-    display: grid !important;
-    grid-template-columns:
-      54px minmax(0, 1fr) 54px !important;
-
-    align-items: center !important;
-
-    gap: 9px !important;
-
-    z-index: 500 !important;
 
     pointer-events: none;
   }
@@ -3241,41 +1512,39 @@
      ======================================================= */
 
   .map-brand {
-    grid-column: 1 !important;
+    grid-column: 1;
 
-    width: 54px !important;
-    min-width: 54px !important;
-    max-width: 54px !important;
+    width: 54px;
+    min-width: 54px;
+    max-width: 54px;
 
-    height: 54px !important;
-    min-height: 54px !important;
+    height: 54px;
 
-    padding: 5px !important;
+    padding: 5px;
 
-    display: flex !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    align-items: center !important;
-    justify-content: center !important;
+    border-radius: 17px;
 
-    border-radius: 17px !important;
-
-    background: rgba(255, 255, 255, 0.97) !important;
+    background: rgba(255,255,255,0.97);
 
     box-shadow:
-      0 4px 18px rgba(0, 0, 0, 0.16) !important;
+      0 4px 18px rgba(0,0,0,0.16);
 
     pointer-events: auto;
   }
 
   .map-brand img {
-    width: 44px !important;
-    height: 44px !important;
+    width: 44px;
+    height: 44px;
 
-    object-fit: contain !important;
+    object-fit: contain;
   }
 
   .brand-text {
-    display: none !important;
+    display: none;
   }
 
 
@@ -3284,112 +1553,62 @@
      ======================================================= */
 
   .search-wrap {
-    grid-column: 2 !important;
+    grid-column: 2;
 
-    width: 100% !important;
-    min-width: 0 !important;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
 
-    height: 54px !important;
+    height: 54px;
 
     pointer-events: auto;
   }
 
   .search-box {
-    width: 100% !important;
-    min-width: 0 !important;
+    width: 100%;
+    height: 54px;
 
-    height: 54px !important;
+    display: flex;
+    align-items: center;
 
-    display: flex !important;
+    gap: 9px;
 
-    align-items: center !important;
+    padding: 0 15px;
 
-    padding: 0 15px !important;
+    border-radius: 17px;
 
-    border-radius: 17px !important;
-
-    background: rgba(255, 255, 255, 0.97) !important;
+    background: rgba(255,255,255,0.97);
 
     box-shadow:
-      0 4px 18px rgba(0, 0, 0, 0.16) !important;
+      0 4px 18px rgba(0,0,0,0.16);
   }
 
   .search-icon {
     flex: 0 0 auto;
 
-    margin-right: 9px;
-
-    font-size: 21px !important;
+    font-size: 21px;
   }
 
   #placeSearch {
     flex: 1;
 
-    width: 100% !important;
-    min-width: 0 !important;
+    width: 100%;
+    min-width: 0;
 
-    border: none !important;
-    outline: none !important;
+    border: none;
+    outline: none;
 
-    background: transparent !important;
+    background: transparent;
 
-    font-size: 15px !important;
+    font-size: 15px;
   }
 
   #placeSearch::placeholder {
     color: #8b94a3;
   }
 
-
-  /* =======================================================
-     HAMBURGER
-     ======================================================= */
-
-  .mobile-menu-button {
-    grid-column: 3 !important;
-
-    display: flex !important;
-
-    width: 54px !important;
-    height: 54px !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    padding: 0 !important;
-
-    border: none !important;
-
-    border-radius: 17px !important;
-
-    background: rgba(255, 255, 255, 0.97) !important;
-
-    color: #1f2937 !important;
-
-    font-size: 25px !important;
-    font-weight: 500 !important;
-
-    box-shadow:
-      0 4px 18px rgba(0, 0, 0, 0.16) !important;
-
-    cursor: pointer;
-
-    pointer-events: auto;
-  }
-
-
-  /* =======================================================
-     SEARCH SUGGESTIONS
-     ======================================================= */
-
   #searchSuggestions {
-    position: absolute;
-
     top: 61px;
-    left: 0;
-    right: 0;
-
-    width: 100%;
 
     max-height: 45vh;
 
@@ -3400,42 +1619,77 @@
     background: white;
 
     box-shadow:
-      0 8px 28px rgba(0, 0, 0, 0.18);
+      0 8px 28px rgba(0,0,0,0.18);
   }
 
 
   /* =======================================================
-     HIDE ALL OTHER PERMANENT MOBILE UI
-     Everything goes behind ☰
+     HAMBURGER
+     ======================================================= */
+
+  .mobile-menu-button {
+    grid-column: 3;
+
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 17px;
+
+    background: rgba(255,255,255,0.97);
+    color: #1f2937;
+
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 1;
+
+    box-shadow:
+      0 4px 18px rgba(0,0,0,0.16);
+
+    cursor: pointer;
+
+    pointer-events: auto;
+  }
+
+
+  /* =======================================================
+     REMOVE PERMANENT MAP CLUTTER
+     These features remain available from hamburger.
      ======================================================= */
 
   #topUI > .category-bar,
   #topUI > .map-style-switcher {
-    display: none !important;
+    display: none;
   }
 
   .main-menu {
-    display: none !important;
+    display: none;
   }
 
   #recentPlaces {
-    display: none !important;
+    display: none;
   }
 
 
   /* =======================================================
-     MAPLIBRE ZOOM CONTROLS
+     MAPLIBRE CONTROLS
      ======================================================= */
 
   .maplibregl-ctrl-top-right {
-    top: 82px !important;
-    right: 10px !important;
+    top: 82px;
+    right: 10px;
   }
 
   .maplibregl-ctrl-group {
-    border-radius: 14px !important;
-
     overflow: hidden;
+
+    border-radius: 14px;
   }
 
 
@@ -3444,16 +1698,15 @@
      ======================================================= */
 
   .mobile-control-backdrop {
-    display: block !important;
-
     position: fixed;
 
     inset: 0;
 
+    display: block;
+
     z-index: 700;
 
-    background:
-      rgba(12, 20, 32, 0.32);
+    background: rgba(12,20,32,0.32);
 
     opacity: 0;
     visibility: hidden;
@@ -3467,7 +1720,6 @@
 
   .mobile-control-backdrop.active {
     opacity: 1;
-
     visibility: visible;
 
     pointer-events: auto;
@@ -3475,22 +1727,22 @@
 
 
   /* =======================================================
-     HAMBURGER PANEL
-     Compact floating sheet
+     HAMBURGER MENU
+     Compact floating panel
      ======================================================= */
 
   .mobile-control-panel {
-    display: block !important;
-
     position: fixed;
 
     top:
       calc(
-        max(12px, env(safe-area-inset-top))
+        max(12px,env(safe-area-inset-top))
         + 64px
       );
 
     right: 12px;
+
+    display: block;
 
     width:
       min(
@@ -3511,17 +1763,14 @@
 
     border-radius: 20px;
 
-    background:
-      rgba(255, 255, 255, 0.98);
+    background: rgba(255,255,255,0.98);
 
     box-shadow:
-      0 14px 40px
-      rgba(0, 0, 0, 0.24);
+      0 14px 40px rgba(0,0,0,0.24);
 
     z-index: 720;
 
     opacity: 0;
-
     visibility: hidden;
 
     pointer-events: none;
@@ -3530,8 +1779,7 @@
       translateY(-8px)
       scale(0.98);
 
-    transform-origin:
-      top right;
+    transform-origin: top right;
 
     transition:
       opacity 0.18s ease,
@@ -3541,7 +1789,6 @@
 
   .mobile-control-panel.active {
     opacity: 1;
-
     visibility: visible;
 
     pointer-events: auto;
@@ -3553,12 +1800,11 @@
 
 
   /* =======================================================
-     MENU HEADER
+     HAMBURGER HEADER
      ======================================================= */
 
   .mobile-panel-header {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 
@@ -3566,10 +1812,10 @@
   }
 
   .mobile-panel-header strong {
+    color: #172033;
+
     font-size: 17px;
     font-weight: 700;
-
-    color: #172033;
   }
 
   #closeMobileControlPanel {
@@ -3577,18 +1823,15 @@
     height: 34px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     padding: 0;
 
     border: none;
-
     border-radius: 50%;
 
     background: #f1f3f6;
-
     color: #26344d;
 
     font-size: 22px;
@@ -3598,7 +1841,7 @@
 
 
   /* =======================================================
-     MENU SECTIONS
+     HAMBURGER SECTIONS
      ======================================================= */
 
   .mobile-panel-section {
@@ -3620,25 +1863,23 @@
 
 
   /* =======================================================
-     MAP STYLE INSIDE ☰
+     MAP STYLE OPTIONS
      ======================================================= */
 
   .mobile-map-styles {
     display: grid;
 
     grid-template-columns:
-      repeat(3, minmax(0, 1fr));
+      repeat(3,minmax(0,1fr));
 
     gap: 6px;
   }
 
   .mobile-map-styles .style-button {
     width: 100%;
-
     height: 40px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -3651,25 +1892,23 @@
 
 
   /* =======================================================
-     CATEGORIES INSIDE ☰
+     CATEGORY OPTIONS
      ======================================================= */
 
   .mobile-categories {
     display: grid;
 
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      repeat(2,minmax(0,1fr));
 
     gap: 6px;
   }
 
   .mobile-categories .category-button {
     width: 100%;
-
     height: 40px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -3682,7 +1921,7 @@
 
 
   /* =======================================================
-     MORE MENU LINKS
+     HAMBURGER LINKS
      ======================================================= */
 
   .mobile-panel-links {
@@ -3693,21 +1932,17 @@
 
   .mobile-panel-link {
     width: 100%;
-
     min-height: 43px;
 
     padding: 0 13px;
 
     display: flex;
-
     align-items: center;
 
     border: none;
-
     border-radius: 11px;
 
     background: #f5f6f8;
-
     color: #26344d;
 
     font-size: 13px;
@@ -3718,65 +1953,421 @@
     cursor: pointer;
   }
 
+  .mobile-panel-link:hover {
+    background: #eceff3;
+  }
+
+
+  /* =======================================================
+     MOBILE DESTINATION DASHBOARD
+     ======================================================= */
+
+  #travelDashboard {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100dvh;
+
+    border-radius: 0;
+
+    transform: none;
+  }
+
+  #travelDashboard.active {
+    transform: none;
+  }
+
+  .dashboard-layout {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  .dashboard-main {
+    width: 100%;
+
+    height:
+      calc(
+        100dvh
+        - 68px
+        - env(safe-area-inset-bottom)
+      );
+
+    overflow-y: auto;
+
+    padding-bottom: 20px;
+  }
+
+
+  /* =======================================================
+     DASHBOARD BOTTOM NAVIGATION
+     ======================================================= */
+
+  .dashboard-sidebar {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 1200;
+
+    width: 100%;
+
+    height:
+      calc(
+        68px
+        + env(safe-area-inset-bottom)
+      );
+
+    display: block;
+
+    padding:
+      5px
+      6px
+      calc(5px + env(safe-area-inset-bottom));
+
+    overflow: hidden;
+
+    border-right: none;
+    border-top: 1px solid #e8e8e8;
+
+    background: rgba(255,255,255,0.98);
+  }
+
+  .dashboard-nav {
+    display: grid;
+
+    grid-template-columns:
+      repeat(5,minmax(0,1fr));
+
+    gap: 3px;
+
+    width: 100%;
+    height: 58px;
+  }
+
+  .dashboard-nav-button {
+    min-width: 0;
+    min-height: 0;
+    height: 58px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 2px;
+
+    padding: 4px 2px;
+
+    border-radius: 13px;
+
+    font-size: 10px;
+
+    text-align: center;
+  }
+
+  .dashboard-nav-icon {
+    width: 20px;
+    height: 20px;
+
+    flex: 0 0 20px;
+  }
+
+  .dashboard-nav-label {
+    display: block;
+
+    max-width: 100%;
+
+    font-size: 10px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+  .best-time-card {
+    display: none;
+  }
+
+
+  /* =======================================================
+     MOBILE DASHBOARD HERO
+     ======================================================= */
+
+  .dashboard-hero {
+    height: 235px;
+  }
+
+  .hero-text {
+    top: 24px;
+    left: 18px;
+
+    width: calc(100% - 80px);
+  }
+
+  #dashboardPlaceName {
+    max-width: 100%;
+
+    font-size: 25px;
+    line-height: 1.05;
+  }
+
+  #heroDescription {
+    max-width: 88%;
+
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .hero-gradient {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(255,255,255,0.94) 0%,
+        rgba(255,255,255,0.72) 45%,
+        rgba(255,255,255,0.08) 85%
+      );
+  }
+
+  .hero-counts {
+    right: 12px;
+    bottom: 12px;
+  }
+
+
+  /* =======================================================
+     MOBILE DASHBOARD CONTENT
+     ======================================================= */
+
+  .dashboard-content {
+    padding: 18px 16px 30px;
+  }
+
+  .quick-grid {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    gap: 8px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #photoGallery {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    gap: 8px;
+  }
+
+  .gallery-photo {
+    height: 125px;
+  }
+
+  #videoGallery {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .video-card {
+    width: 100%;
+    max-width: none;
+  }
+
+  #dashboardLinksList {
+    grid-template-columns: 1fr;
+  }
+
+
+  /* =======================================================
+     MOBILE LIGHTBOX
+     ======================================================= */
+
+  #lightbox {
+    padding: 10px;
+  }
+
+  #lightboxImage {
+    max-width: 96vw;
+    max-height: 84vh;
+  }
+
+  #closeLightbox {
+    top: 12px;
+    right: 12px;
+  }
+
+}
+
+/* =========================================================
+   28. SMALL PHONE REFINEMENTS
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+  #topUI {
+    left: 10px;
+    right: 10px;
+
+    grid-template-columns:
+      50px minmax(0,1fr) 50px;
+
+    gap: 7px;
+  }
+
+  .map-brand {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+
+    height: 50px;
+
+    border-radius: 15px;
+  }
+
+  .map-brand img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .search-wrap,
+  .search-box {
+    height: 50px;
+  }
+
+  .search-box {
+    padding: 0 12px;
+
+    border-radius: 15px;
+  }
+
+  .search-icon {
+    font-size: 19px;
+  }
+
+  #placeSearch {
+    font-size: 14px;
+  }
+
+  .mobile-menu-button {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 15px;
+
+    font-size: 23px;
+  }
+
+  .maplibregl-ctrl-top-right {
+    top: 77px;
+  }
+
+  .mobile-control-panel {
+    top:
+      calc(
+        max(12px,env(safe-area-inset-top))
+        + 59px
+      );
+
+    right: 10px;
+
+    width:
+      min(
+        320px,
+        calc(100vw - 20px)
+      );
+  }
+
 }
 
 
 /* =========================================================
-   PHONE LANDSCAPE
-   Same clean top bar, smaller dimensions
+   29. PHONE LANDSCAPE
    ========================================================= */
 
 @media (max-width: 950px) and (orientation: landscape) {
 
   #topUI {
-    top: 8px !important;
+    top: 8px;
 
-    left: 10px !important;
-    right: 10px !important;
+    left: 10px;
+    right: 10px;
 
     grid-template-columns:
-      48px minmax(0, 1fr) 48px !important;
+      48px minmax(0,1fr) 48px;
 
-    gap: 7px !important;
+    gap: 7px;
   }
 
   .map-brand {
-    width: 48px !important;
-    min-width: 48px !important;
+    width: 48px;
+    min-width: 48px;
+    max-width: 48px;
 
-    height: 48px !important;
+    height: 48px;
 
-    border-radius: 15px !important;
+    border-radius: 15px;
   }
 
   .map-brand img {
-    width: 38px !important;
-    height: 38px !important;
+    width: 38px;
+    height: 38px;
   }
 
   .search-wrap,
   .search-box {
-    height: 48px !important;
+    height: 48px;
+  }
+
+  .search-box {
+    border-radius: 15px;
   }
 
   .mobile-menu-button {
-    width: 48px !important;
-    height: 48px !important;
+    width: 48px;
+    height: 48px;
 
-    border-radius: 15px !important;
+    border-radius: 15px;
   }
 
   .maplibregl-ctrl-top-right {
-    top: 67px !important;
+    top: 67px;
   }
 
   .mobile-control-panel {
     top: 63px;
 
+    right: 10px;
+
     width: 310px;
 
     max-height:
-      calc(100dvh - 72px);
+      calc(
+        100dvh
+        - 72px
+      );
+  }
+
+}
+
+
+/* =========================================================
+   30. MAP INTERACTION MODE
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+  body.map-interacting #recentPlaces {
+    opacity: 0;
+
+    pointer-events: none;
   }
 
 }
