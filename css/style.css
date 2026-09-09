@@ -1,7 +1,6 @@
 /* =========================================================
-   TRAVEL MAP STYLES
-   Clean consolidated version
-   Desktop + tablet + mobile
+   TRAVEL MAP — COMPLETE STYLESHEET
+   Desktop + clean mobile application layout
    ========================================================= */
 
 
@@ -14,24 +13,38 @@
 }
 
 :root {
-  --panel: rgba(255,255,255,0.96);
+  --panel: rgba(255, 255, 255, 0.96);
+  --panel-solid: #ffffff;
+
   --text: #172033;
   --muted: #68758a;
+
   --blue: #2878ed;
-  --orange: #f15a24;
+  --orange: #ef5b18;
+
   --radius: 18px;
-  --shadow: 0 8px 30px rgba(0,0,0,0.18);
+
+  --shadow:
+    0 8px 30px rgba(0, 0, 0, 0.18);
 }
 
 html,
 body {
   width: 100%;
   height: 100%;
+
   margin: 0;
   padding: 0;
+
   overflow: hidden;
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   color: var(--text);
+
   background: #111;
 }
 
@@ -40,27 +53,43 @@ input {
   font: inherit;
 }
 
-#map {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 
 /* =========================================================
-   2. TOP APPLICATION BAR — DESKTOP
+   2. MAP
+   ========================================================= */
+
+#map {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+}
+
+
+/* =========================================================
+   3. DESKTOP TOP UI
+   Brand | Search | Categories | Map Style
    ========================================================= */
 
 #topUI {
   position: fixed;
+
   top: 16px;
   left: 16px;
-  right: 72px;
+  right: 70px;
+
   z-index: 500;
 
   display: flex;
   align-items: center;
+
   gap: 10px;
 
   pointer-events: none;
@@ -72,32 +101,42 @@ input {
 
 
 /* =========================================================
-   3. BRAND — DESKTOP
+   4. DESKTOP BRAND
    ========================================================= */
 
 .map-brand {
   flex: 0 0 240px;
+
   height: 62px;
 
   display: flex;
   align-items: center;
+
   gap: 10px;
 
-  padding: 7px 13px 7px 8px;
+  padding:
+    6px
+    14px
+    6px
+    8px;
+
+  border-radius: var(--radius);
 
   background: var(--panel);
-  border-radius: var(--radius);
+
   box-shadow: var(--shadow);
 
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .map-brand img {
   width: 50px;
   height: 50px;
 
+  flex: 0 0 50px;
+
   object-fit: contain;
-  flex-shrink: 0;
 }
 
 .brand-text {
@@ -107,36 +146,39 @@ input {
 .brand-name {
   display: block;
 
+  overflow: hidden;
+
   font-size: 16px;
   font-weight: 800;
   line-height: 1.1;
 
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .brand-tagline {
   display: block;
 
-  margin-top: 5px;
+  margin-top: 4px;
+
+  color: var(--muted);
 
   font-size: 10px;
-  color: #697386;
 
   white-space: nowrap;
 }
 
 
 /* =========================================================
-   4. SEARCH — DESKTOP
+   5. DESKTOP SEARCH
    ========================================================= */
 
 .search-wrap {
   position: relative;
 
-  flex: 1 1 300px;
-  min-width: 180px;
+  flex: 0 1 370px;
+
+  min-width: 220px;
   max-width: 390px;
 
   height: 62px;
@@ -148,30 +190,42 @@ input {
 
   display: flex;
   align-items: center;
+
   gap: 10px;
 
-  padding: 0 17px;
+  padding:
+    0
+    17px;
+
+  border-radius: var(--radius);
 
   background: var(--panel);
-  border-radius: var(--radius);
+
   box-shadow: var(--shadow);
 
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .search-icon {
-  flex-shrink: 0;
+  flex: 0 0 auto;
+
   font-size: 20px;
 }
 
 #placeSearch {
+  flex: 1;
+
   width: 100%;
   min-width: 0;
+
+  padding: 0;
 
   border: none;
   outline: none;
 
   background: transparent;
+
   color: #26344d;
 
   font-size: 14px;
@@ -180,6 +234,11 @@ input {
 #placeSearch::placeholder {
   color: #8a94a6;
 }
+
+
+/* =========================================================
+   6. SEARCH RESULTS
+   ========================================================= */
 
 #searchSuggestions {
   position: absolute;
@@ -190,13 +249,18 @@ input {
 
   display: none;
 
-  max-height: 45vh;
+  max-height: 360px;
+
   overflow-y: auto;
 
-  background: white;
-  border-radius: 13px;
+  border-radius: 14px;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+  background: #fff;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.22);
+
+  z-index: 800;
 }
 
 #searchSuggestions.active {
@@ -207,18 +271,30 @@ input {
   width: 100%;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
-  padding: 12px 14px;
+  gap: 12px;
+
+  padding:
+    12px
+    14px;
 
   border: none;
-  border-bottom: 1px solid #eee;
+  border-bottom:
+    1px solid #edf0f4;
 
-  background: white;
+  background: #fff;
+
+  color: #26344d;
 
   text-align: left;
+
   cursor: pointer;
+}
+
+.search-result:last-child {
+  border-bottom: none;
 }
 
 .search-result:hover {
@@ -231,36 +307,43 @@ input {
 }
 
 .search-result-category {
+  color: #7b8494;
+
   font-size: 10px;
-  color: #777;
 }
 
 
 /* =========================================================
-   5. CATEGORY FILTERS — DESKTOP
+   7. DESKTOP CATEGORY BAR
    ========================================================= */
 
 .category-bar {
   flex: 1 1 auto;
-  min-width: 0;
+
+  min-width: 260px;
+
   height: 62px;
 
   display: flex;
   align-items: center;
-  gap: 2px;
+
+  gap: 3px;
 
   padding: 6px;
 
   overflow-x: auto;
   overflow-y: hidden;
 
+  border-radius: var(--radius);
+
   background: var(--panel);
 
-  border-radius: var(--radius);
   box-shadow: var(--shadow);
 
   scrollbar-width: none;
+
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .category-bar::-webkit-scrollbar {
@@ -272,23 +355,26 @@ input {
 
   height: 42px;
 
-  padding: 0 10px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+
+  padding:
+    0
+    11px;
 
   border: none;
   border-radius: 11px;
 
   background: transparent;
+
   color: #26344d;
 
   font-size: 11px;
   font-weight: 700;
 
   white-space: nowrap;
+
   cursor: pointer;
 }
 
@@ -298,30 +384,35 @@ input {
 
 .category-button.active {
   background: var(--blue);
+
   color: white;
 }
 
 
 /* =========================================================
-   6. MAP STYLE SWITCHER — DESKTOP
+   8. DESKTOP MAP STYLE SWITCHER
    ========================================================= */
 
 .map-style-switcher {
   flex: 0 0 auto;
+
   height: 62px;
 
   display: flex;
   align-items: center;
+
   gap: 2px;
 
   padding: 6px;
 
+  border-radius: var(--radius);
+
   background: var(--panel);
 
-  border-radius: var(--radius);
   box-shadow: var(--shadow);
 
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .style-button {
@@ -330,20 +421,23 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
 
-  padding: 0 10px;
+  padding:
+    0
+    11px;
 
   border: none;
   border-radius: 11px;
 
   background: transparent;
+
   color: #5c687b;
 
   font-size: 11px;
   font-weight: 700;
 
   white-space: nowrap;
+
   cursor: pointer;
 }
 
@@ -353,12 +447,13 @@ input {
 
 .style-button.active {
   background: #edf4ff;
+
   color: #1769e0;
 }
 
 
 /* =========================================================
-   7. MOBILE HAMBURGER
+   9. MOBILE-ONLY COMPONENTS
    Hidden on desktop
    ========================================================= */
 
@@ -370,7 +465,7 @@ input {
 
 
 /* =========================================================
-   8. LEFT MENU — DESKTOP
+   10. DESKTOP LEFT MENU
    ========================================================= */
 
 .main-menu {
@@ -383,18 +478,21 @@ input {
 
   width: 150px;
 
-  padding: 8px;
-
   display: flex;
   flex-direction: column;
+
   gap: 4px;
+
+  padding: 8px;
+
+  border-radius: 20px;
 
   background: var(--panel);
 
-  border-radius: 20px;
   box-shadow: var(--shadow);
 
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .menu-item {
@@ -403,19 +501,25 @@ input {
 
   display: flex;
   align-items: center;
+
   gap: 12px;
 
-  padding: 0 12px;
+  padding:
+    0
+    12px;
 
   border: none;
   border-radius: 13px;
 
   background: transparent;
+
   color: #34435d;
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
 }
 
 .menu-item:hover {
@@ -424,12 +528,14 @@ input {
 
 .menu-item.active {
   background: #fff0e6;
+
   color: var(--orange);
 }
 
 .menu-icon {
   width: 21px;
   height: 21px;
+
   flex: 0 0 21px;
 
   display: flex;
@@ -441,9 +547,8 @@ input {
   width: 100%;
   height: 100%;
 
-  display: block;
-
   fill: none;
+
   stroke: currentColor;
 
   stroke-width: 1.8;
@@ -460,7 +565,7 @@ input {
 
 
 /* =========================================================
-   9. MAIN MENU CONTENT PANEL
+   11. DESKTOP MENU PANEL
    ========================================================= */
 
 #menuPanel {
@@ -472,44 +577,57 @@ input {
   z-index: 445;
 
   width: 320px;
+
   max-height: 65vh;
 
   padding: 20px;
 
   overflow-y: auto;
 
-  background: rgba(255,255,255,0.98);
-
   border-radius: 18px;
 
-  box-shadow: 0 10px 35px rgba(0,0,0,0.20);
+  background:
+    rgba(255, 255, 255, 0.98);
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.20);
 
   opacity: 0;
   visibility: hidden;
 
-  transform: translateX(-8px);
+  transform:
+    translateX(-8px);
 
-  transition: 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
 }
 
 #menuPanel.active {
   opacity: 1;
   visibility: visible;
 
-  transform: translateX(0);
+  transform:
+    translateX(0);
 }
 
 #menuPanel h2 {
-  margin: 0 0 15px;
+  margin:
+    0
+    0
+    15px;
+
+  padding-right: 35px;
 
   font-size: 19px;
 }
 
 #menuPanel p {
+  color: #555;
+
   font-size: 13px;
   line-height: 1.55;
-
-  color: #555;
 }
 
 #closeMenuPanel {
@@ -520,6 +638,12 @@ input {
 
   width: 32px;
   height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
 
   border: none;
   border-radius: 50%;
@@ -532,9 +656,12 @@ input {
 }
 
 .utility-item {
-  padding: 11px 0;
+  padding:
+    11px
+    0;
 
-  border-bottom: 1px solid #eee;
+  border-bottom:
+    1px solid #eee;
 
   font-size: 13px;
 }
@@ -547,12 +674,17 @@ input {
 }
 
 .timeline-year {
-  padding: 8px 12px;
+  padding:
+    8px
+    12px;
 
-  border: 1px solid #d8dce3;
+  border:
+    1px solid #d8dce3;
+
   border-radius: 18px;
 
   background: white;
+
   color: #34435d;
 
   font-size: 12px;
@@ -565,12 +697,966 @@ input {
   border-color: var(--blue);
 
   background: var(--blue);
+
   color: white;
 }
 
 
 /* =========================================================
-   10. PHOTO LIGHTBOX
+   12. RECENT PLACES — DESKTOP
+   ========================================================= */
+
+#recentPlaces {
+  position: fixed;
+
+  left: 260px;
+  right: 220px;
+  bottom: 18px;
+
+  z-index: 410;
+}
+
+.recent-heading {
+  margin:
+    0
+    0
+    8px;
+
+  color: white;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+#recentList {
+  display: flex;
+
+  gap: 8px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+#recentList::-webkit-scrollbar {
+  display: none;
+}
+
+.recent-card {
+  position: relative;
+
+  flex: 0 0 160px;
+
+  height: 120px;
+
+  overflow: hidden;
+
+  border:
+    2px solid rgba(255, 255, 255, 0.9);
+
+  border-radius: 14px;
+
+  background: #222;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.3);
+
+  cursor: pointer;
+}
+
+.recent-card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.recent-card-overlay {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding:
+    28px
+    9px
+    8px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      transparent,
+      rgba(0, 0, 0, 0.88)
+    );
+}
+
+.recent-card-name {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.recent-card-category {
+  margin-top: 2px;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   13. MAPLIBRE CONTROLS
+   ========================================================= */
+
+.maplibregl-ctrl-top-right {
+  top: 90px;
+
+  right: 7px;
+}
+
+.maplibregl-ctrl-group {
+  overflow: hidden;
+
+  border-radius: 12px;
+}
+
+
+/* =========================================================
+   14. MARKER HOVER LABEL
+   ========================================================= */
+
+.place-hover-popup .maplibregl-popup-content {
+  padding:
+    7px
+    10px;
+
+  border-radius: 9px;
+
+  background:
+    rgba(20, 28, 42, 0.94);
+
+  color: white;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.25);
+}
+
+.place-hover-popup .maplibregl-popup-tip {
+  border-top-color:
+    rgba(20, 28, 42, 0.94);
+}
+
+.hover-place-name {
+  font-size: 11px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   15. DASHBOARD BACKDROP
+   ========================================================= */
+
+#overlayBackdrop {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 900;
+
+  background:
+    rgba(5, 10, 20, 0.68);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+
+#overlayBackdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* =========================================================
+   16. PLACE DASHBOARD — DESKTOP
+   ========================================================= */
+
+#travelDashboard {
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+
+  z-index: 1000;
+
+  width:
+    min(
+      1240px,
+      92vw
+    );
+
+  height:
+    min(
+      830px,
+      90vh
+    );
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  background: white;
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.55);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translate(-50%, -47%)
+    scale(0.98);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+}
+
+#travelDashboard.active {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+
+/* =========================================================
+   17. DASHBOARD LAYOUT
+   ========================================================= */
+
+.dashboard-layout {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    180px minmax(0, 1fr);
+}
+
+
+/* =========================================================
+   18. DASHBOARD SIDEBAR
+   ========================================================= */
+
+.dashboard-sidebar {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding:
+    18px
+    14px;
+
+  overflow-y: auto;
+
+  border-right:
+    1px solid #e5e7eb;
+
+  background: white;
+}
+
+.dashboard-nav {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.dashboard-nav-button {
+  width: 100%;
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding:
+    0
+    12px;
+
+  border: none;
+  border-radius: 11px;
+
+  background: transparent;
+
+  color: #26344d;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-align: left;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+.dashboard-nav-button:hover {
+  background: #f5f6f8;
+}
+
+.dashboard-nav-button.active {
+  background: #fff1e7;
+
+  color: #ef5b18;
+}
+
+.dashboard-nav-icon {
+  width: 18px;
+  height: 18px;
+
+  flex: 0 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-nav-icon svg {
+  width: 100%;
+  height: 100%;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dashboard-nav-label {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.dashboard-tab-content {
+  display: none;
+}
+
+.dashboard-tab-content.active {
+  display: block;
+}
+
+
+/* =========================================================
+   19. BEST TIME
+   ========================================================= */
+
+.best-time-card {
+  margin-top: auto;
+
+  padding: 14px;
+
+  border-radius: 13px;
+
+  background: #fff5e8;
+}
+
+.best-time-card strong {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 12px;
+}
+
+.best-time-card p {
+  margin: 0;
+
+  color: #4f5969;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   20. DASHBOARD MAIN
+   ========================================================= */
+
+.dashboard-main {
+  position: relative;
+
+  min-width: 0;
+
+  height: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background: white;
+}
+
+#closeDashboard {
+  position: absolute;
+
+  top: 14px;
+  right: 14px;
+
+  z-index: 30;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  color: #111;
+
+  font-size: 25px;
+
+  box-shadow:
+    0 3px 15px rgba(0, 0, 0, 0.18);
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   21. HERO
+   ========================================================= */
+
+.dashboard-hero {
+  position: relative;
+
+  height: 255px;
+
+  overflow: hidden;
+
+  background: #222;
+}
+
+#heroPhoto {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hero-gradient {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(255, 255, 255, 0.73) 27%,
+      rgba(255, 255, 255, 0.06) 60%
+    );
+}
+
+.hero-text {
+  position: absolute;
+
+  top: 24px;
+  left: 30px;
+
+  z-index: 5;
+
+  width:
+    min(
+      420px,
+      45%
+    );
+}
+
+#dashboardPlaceName {
+  margin:
+    0
+    0
+    14px;
+
+  font-size:
+    clamp(
+      24px,
+      2.3vw,
+      32px
+    );
+
+  line-height: 1.08;
+}
+
+#heroDescription {
+  margin: 0;
+
+  color: #182033;
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.hero-counts {
+  position: absolute;
+
+  right: 22px;
+  bottom: 17px;
+
+  z-index: 5;
+
+  display: flex;
+
+  gap: 8px;
+}
+
+.hero-count {
+  padding:
+    8px
+    11px;
+
+  border-radius: 18px;
+
+  background:
+    rgba(0, 0, 0, 0.70);
+
+  color: white;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   22. DASHBOARD CONTENT
+   ========================================================= */
+
+.dashboard-content {
+  padding:
+    22px
+    28px
+    32px;
+}
+
+
+/* =========================================================
+   23. QUICK CARDS
+   ========================================================= */
+
+.quick-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 12px;
+}
+
+.quick-card {
+  min-width: 0;
+
+  padding:
+    14px
+    16px;
+
+  border:
+    1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  background: white;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.quick-label {
+  margin-bottom: 6px;
+
+  color: #697386;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.quick-value {
+  overflow-wrap: anywhere;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   24. ABOUT / DESCRIPTION
+   ========================================================= */
+
+.place-description {
+  margin-top: 24px;
+}
+
+.place-description h3 {
+  margin:
+    20px
+    0
+    8px;
+
+  color: #222;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.place-description h3:first-child {
+  margin-top: 0;
+}
+
+.place-description p {
+  margin:
+    0
+    0
+    16px;
+
+  color: #4a4a4a;
+
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.about-block {
+  margin-top: 24px;
+}
+
+.about-block h2 {
+  margin:
+    0
+    0
+    10px;
+
+  font-size: 19px;
+}
+
+#aboutPreview {
+  margin: 0;
+
+  color: #444;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#aboutFull {
+  display: none;
+
+  margin-top: 15px;
+}
+
+#aboutFull.visible {
+  display: block;
+}
+
+#aboutFull h3 {
+  margin:
+    22px
+    0
+    8px;
+
+  color: #222;
+
+  font-size: 16px;
+}
+
+#aboutFull p {
+  margin:
+    0
+    0
+    15px;
+
+  color: #4a4a4a;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#aboutFull a {
+  color: #2168ce;
+
+  word-break: break-word;
+}
+
+#readMoreButton {
+  margin-top: 12px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--orange);
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   25. INFO TAB
+   ========================================================= */
+
+.info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 12px;
+}
+
+.info-card {
+  padding: 16px;
+
+  border:
+    1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  background: #fafafa;
+}
+
+.info-card h3 {
+  margin:
+    0
+    0
+    8px;
+
+  font-size: 14px;
+}
+
+.info-card p {
+  margin: 0;
+
+  color: #555;
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   26. DASHBOARD SECTIONS
+   ========================================================= */
+
+.dashboard-section {
+  padding-top: 28px;
+}
+
+.dashboard-section h2 {
+  margin:
+    0
+    0
+    13px;
+
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   27. PHOTO GALLERY
+   ========================================================= */
+
+#photoGallery {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 9px;
+}
+
+.gallery-photo {
+  width: 100%;
+  height: 135px;
+
+  object-fit: cover;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   28. VIDEO GALLERY
+   ========================================================= */
+
+#videoGallery {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(260px, 360px)
+    );
+
+  gap: 16px;
+
+  justify-content: start;
+}
+
+.video-card {
+  width: 100%;
+
+  max-width: 360px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background: #111;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.video-card video {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  aspect-ratio:
+    16 / 9;
+
+  object-fit: contain;
+
+  background: #111;
+}
+
+
+/* =========================================================
+   29. OFFICIAL RESOURCE LINKS
+   ========================================================= */
+
+#dashboardLinksList {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 10px;
+}
+
+.dashboard-resource-link {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+
+  padding:
+    14px
+    16px;
+
+  border:
+    1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  background: white;
+
+  color: #26344d;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dashboard-resource-link:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.resource-icon {
+  flex: 0 0 auto;
+
+  font-size: 20px;
+}
+
+.resource-name {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.resource-arrow {
+  flex: 0 0 auto;
+
+  font-size: 16px;
+
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   30. LIGHTBOX
    ========================================================= */
 
 #lightbox {
@@ -586,7 +1672,8 @@ input {
 
   padding: 24px;
 
-  background: rgba(0,0,0,0.94);
+  background:
+    rgba(0, 0, 0, 0.94);
 
   opacity: 0;
   visibility: hidden;
@@ -633,10 +1720,18 @@ input {
   width: 44px;
   height: 44px;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
   border: none;
   border-radius: 50%;
 
-  background: rgba(255,255,255,0.16);
+  background:
+    rgba(255, 255, 255, 0.16);
+
   color: white;
 
   font-size: 28px;
@@ -645,817 +1740,24 @@ input {
 }
 
 #closeLightbox:hover {
-  background: rgba(255,255,255,0.28);
-}
-
-
-/* =========================================================
-   11. RECENT PLACES — DESKTOP
-   ========================================================= */
-
-#recentPlaces {
-  position: fixed;
-
-  left: 260px;
-  right: 220px;
-  bottom: 18px;
-
-  z-index: 410;
-}
-
-.recent-heading {
-  margin: 0 0 8px;
-
-  color: white;
-
-  font-size: 14px;
-  font-weight: 800;
-
-  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
-}
-
-#recentList {
-  display: flex;
-
-  gap: 8px;
-
-  overflow-x: auto;
-
-  scrollbar-width: none;
-}
-
-#recentList::-webkit-scrollbar {
-  display: none;
-}
-
-.recent-card {
-  position: relative;
-
-  flex: 0 0 160px;
-
-  height: 120px;
-
-  overflow: hidden;
-
-  border: 2px solid rgba(255,255,255,0.9);
-  border-radius: 14px;
-
-  background: #222;
-
-  box-shadow: 0 5px 18px rgba(0,0,0,0.3);
-
-  cursor: pointer;
-}
-
-.recent-card img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-}
-
-.recent-card-overlay {
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  padding: 28px 9px 8px;
-
-  color: white;
-
   background:
-    linear-gradient(
-      transparent,
-      rgba(0,0,0,0.88)
-    );
-}
-
-.recent-card-name {
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.recent-card-category {
-  margin-top: 2px;
-
-  font-size: 9px;
-}
-
-
-/* =========================================================
-   12. MAPLIBRE CONTROLS
-   ========================================================= */
-
-.maplibregl-ctrl-top-right {
-  top: 90px;
-  right: 7px;
-}
-
-.maplibregl-ctrl-group {
-  overflow: hidden;
-
-  border-radius: 12px;
+    rgba(255, 255, 255, 0.28);
 }
 
 /* =========================================================
-   13. DASHBOARD BACKDROP
-   ========================================================= */
+   31. CLEAN MOBILE / TABLET MAP UI
+   <= 950px
 
-#overlayBackdrop {
-  position: fixed;
+   Persistent UI:
+   LOGO | SEARCH | ☰
 
-  inset: 0;
-
-  z-index: 900;
-
-  background: rgba(5,10,20,0.68);
-
-  opacity: 0;
-  visibility: hidden;
-
-  transition: 0.25s ease;
-}
-
-#overlayBackdrop.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-
-/* =========================================================
-   14. PLACE DASHBOARD
-   ========================================================= */
-
-#travelDashboard {
-  position: fixed;
-
-  top: 50%;
-  left: 50%;
-
-  z-index: 1000;
-
-  width: min(1240px, 92vw);
-  height: min(830px, 90vh);
-
-  overflow: hidden;
-
-  background: white;
-
-  border-radius: 18px;
-
-  box-shadow: 0 30px 100px rgba(0,0,0,0.55);
-
-  opacity: 0;
-  visibility: hidden;
-
-  transform:
-    translate(-50%, -47%)
-    scale(0.98);
-
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease,
-    visibility 0.25s ease;
-}
-
-#travelDashboard.active {
-  opacity: 1;
-  visibility: visible;
-
-  transform:
-    translate(-50%, -50%)
-    scale(1);
-}
-
-
-/* =========================================================
-   15. DASHBOARD LAYOUT
-   ========================================================= */
-
-.dashboard-layout {
-  display: grid;
-
-  grid-template-columns:
-    180px minmax(0,1fr);
-
-  width: 100%;
-  height: 100%;
-}
-
-
-/* =========================================================
-   16. DASHBOARD SIDEBAR
-   ========================================================= */
-
-.dashboard-sidebar {
-  display: flex;
-  flex-direction: column;
-
-  min-width: 0;
-
-  padding: 18px 14px;
-
-  background: #fff;
-
-  border-right: 1px solid #e5e7eb;
-
-  overflow-y: auto;
-}
-
-.dashboard-nav {
-  display: flex;
-  flex-direction: column;
-
-  gap: 6px;
-}
-
-.dashboard-nav-button {
-  width: 100%;
-  min-height: 42px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 10px;
-
-  padding: 0 12px;
-
-  border: none;
-  border-radius: 11px;
-
-  background: transparent;
-  color: #26344d;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  text-align: left;
-
-  cursor: pointer;
-
-  white-space: nowrap;
-}
-
-.dashboard-nav-button:hover {
-  background: #f5f6f8;
-}
-
-.dashboard-nav-button.active {
-  background: #fff1e7;
-  color: #ef5b18;
-}
-
-.dashboard-nav-icon {
-  width: 18px;
-  height: 18px;
-
-  flex: 0 0 18px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dashboard-nav-icon svg {
-  width: 100%;
-  height: 100%;
-
-  fill: none;
-  stroke: currentColor;
-
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.dashboard-nav-label {
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-}
-
-.dashboard-tab-content {
-  display: none;
-}
-
-.dashboard-tab-content.active {
-  display: block;
-}
-
-
-/* =========================================================
-   17. DASHBOARD MAIN AREA
-   ========================================================= */
-
-.dashboard-main {
-  position: relative;
-
-  min-width: 0;
-  height: 100%;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  background: white;
-}
-
-#closeDashboard {
-  position: absolute;
-
-  top: 14px;
-  right: 14px;
-
-  z-index: 30;
-
-  width: 44px;
-  height: 44px;
-
-  border: none;
-  border-radius: 50%;
-
-  background: rgba(255,255,255,0.94);
-  color: #111;
-
-  font-size: 25px;
-
-  box-shadow: 0 3px 15px rgba(0,0,0,0.18);
-
-  cursor: pointer;
-}
-
-
-/* =========================================================
-   18. DASHBOARD HERO
-   ========================================================= */
-
-.dashboard-hero {
-  position: relative;
-
-  height: 255px;
-
-  overflow: hidden;
-
-  background: #222;
-}
-
-#heroPhoto {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-.hero-gradient {
-  position: absolute;
-
-  inset: 0;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,0.94) 0%,
-      rgba(255,255,255,0.73) 27%,
-      rgba(255,255,255,0.06) 60%
-    );
-}
-
-.hero-text {
-  position: absolute;
-
-  top: 24px;
-  left: 30px;
-
-  z-index: 5;
-
-  width: min(420px,45%);
-}
-
-#dashboardPlaceName {
-  margin: 0 0 14px;
-
-  font-size: clamp(24px,2.3vw,32px);
-  line-height: 1.08;
-}
-
-#heroDescription {
-  margin: 0;
-
-  font-size: 13px;
-  line-height: 1.55;
-
-  color: #182033;
-}
-
-.hero-counts {
-  position: absolute;
-
-  right: 22px;
-  bottom: 17px;
-
-  z-index: 5;
-
-  display: flex;
-
-  gap: 8px;
-}
-
-.hero-count {
-  padding: 8px 11px;
-
-  border-radius: 18px;
-
-  background: rgba(0,0,0,0.70);
-  color: white;
-
-  font-size: 11px;
-  font-weight: 700;
-}
-
-
-/* =========================================================
-   19. DASHBOARD CONTENT
-   ========================================================= */
-
-.dashboard-content {
-  padding: 22px 28px 32px;
-}
-
-
-/* =========================================================
-   20. QUICK INFORMATION CARDS
-   ========================================================= */
-
-.quick-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
-
-  gap: 12px;
-}
-
-.quick-card {
-  min-width: 0;
-
-  padding: 14px 16px;
-
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-
-  background: white;
-
-  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
-}
-
-.quick-label {
-  margin-bottom: 6px;
-
-  color: #697386;
-
-  font-size: 9px;
-  font-weight: 700;
-
-  text-transform: uppercase;
-}
-
-.quick-value {
-  overflow-wrap: anywhere;
-
-  font-size: 14px;
-  font-weight: 800;
-}
-
-
-/* =========================================================
-   21. ABOUT / DESCRIPTION
-   ========================================================= */
-
-.place-description {
-  margin-top: 24px;
-}
-
-.place-description h3 {
-  margin: 20px 0 8px;
-
-  color: #222;
-
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.place-description h3:first-child {
-  margin-top: 0;
-}
-
-.place-description p {
-  margin: 0 0 16px;
-
-  color: #4a4a4a;
-
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-.about-block {
-  margin-top: 24px;
-}
-
-.about-block h2 {
-  margin: 0 0 10px;
-
-  font-size: 19px;
-}
-
-#aboutPreview {
-  margin: 0;
-
-  color: #444;
-
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-#aboutFull {
-  display: none;
-
-  margin-top: 15px;
-}
-
-#aboutFull.visible {
-  display: block;
-}
-
-#aboutFull h3 {
-  margin: 22px 0 8px;
-
-  color: #222;
-
-  font-size: 16px;
-}
-
-#aboutFull p {
-  margin: 0 0 15px;
-
-  color: #4a4a4a;
-
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-#aboutFull a {
-  color: #2168ce;
-
-  word-break: break-word;
-}
-
-#readMoreButton {
-  margin-top: 12px;
-
-  padding: 0;
-
-  border: none;
-
-  background: transparent;
-  color: #ef5b18;
-
-  font-size: 13px;
-  font-weight: 800;
-
-  cursor: pointer;
-}
-
-
-/* =========================================================
-   22. INFO CARDS
-   ========================================================= */
-
-.info-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
-  gap: 12px;
-}
-
-.info-card {
-  padding: 16px;
-
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-
-  background: #fafafa;
-}
-
-.info-card h3 {
-  margin: 0 0 8px;
-
-  font-size: 14px;
-}
-
-.info-card p {
-  margin: 0;
-
-  color: #555;
-
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-
-/* =========================================================
-   23. BEST TIME CARD
-   ========================================================= */
-
-.best-time-card {
-  margin-top: auto;
-
-  padding: 14px;
-
-  border-radius: 13px;
-
-  background: #fff5e8;
-}
-
-.best-time-card strong {
-  display: block;
-
-  margin-bottom: 6px;
-
-  font-size: 12px;
-}
-
-.best-time-card p {
-  margin: 0;
-
-  color: #4f5969;
-
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-
-/* =========================================================
-   24. PHOTOS
-   ========================================================= */
-
-.dashboard-section {
-  padding-top: 28px;
-}
-
-.dashboard-section h2 {
-  margin: 0 0 13px;
-
-  font-size: 18px;
-}
-
-#photoGallery {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
-
-  gap: 9px;
-}
-
-.gallery-photo {
-  width: 100%;
-  height: 135px;
-
-  object-fit: cover;
-
-  border-radius: 9px;
-
-  cursor: pointer;
-
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-
-/* =========================================================
-   25. VIDEOS
-   ========================================================= */
-
-#videoGallery {
-  display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit,minmax(260px,360px));
-
-  gap: 16px;
-
-  justify-content: start;
-}
-
-.video-card {
-  width: 100%;
-  max-width: 360px;
-
-  overflow: hidden;
-
-  border-radius: 12px;
-
-  background: #111;
-
-  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-}
-
-.video-card video {
-  display: block;
-
-  width: 100%;
-  height: auto;
-
-  aspect-ratio: 16 / 9;
-
-  object-fit: contain;
-
-  background: #111;
-}
-
-
-/* =========================================================
-   26. OFFICIAL RESOURCE LINKS
-   ========================================================= */
-
-#dashboardLinksList {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
-  gap: 10px;
-}
-
-.dashboard-resource-link {
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  min-width: 0;
-
-  padding: 14px 16px;
-
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-
-  background: #fff;
-  color: #26344d;
-
-  text-decoration: none;
-
-  font-size: 14px;
-  font-weight: 700;
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.dashboard-resource-link:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-}
-
-.resource-icon {
-  flex: 0 0 auto;
-
-  font-size: 20px;
-}
-
-.resource-name {
-  flex: 1;
-
-  min-width: 0;
-}
-
-.resource-arrow {
-  flex: 0 0 auto;
-
-  font-size: 16px;
-
-  opacity: 0.55;
-}
-
-/* =========================================================
-   27. CLEAN MOBILE MAP EXPERIENCE
-   Phones + small tablets
+   Everything else goes behind hamburger.
    ========================================================= */
 
 @media (max-width: 950px) {
 
   /* =======================================================
-     FULL-SCREEN MAP
+     MAP
      ======================================================= */
 
   html,
@@ -1464,6 +1766,7 @@ input {
     height: 100%;
 
     margin: 0;
+    padding: 0;
 
     overflow: hidden;
   }
@@ -1479,36 +1782,43 @@ input {
 
 
   /* =======================================================
-     MOBILE TOP BAR
-     ONLY: Logo | Search | Hamburger
+     TOP BAR
      ======================================================= */
 
   #topUI {
     position: fixed;
 
-    top: max(12px,env(safe-area-inset-top));
+    top:
+      max(
+        12px,
+        env(safe-area-inset-top)
+      );
+
     left: 12px;
     right: 12px;
 
     width: auto;
+    height: 54px;
 
     display: grid;
 
     grid-template-columns:
-      54px minmax(0,1fr) 54px;
+      54px
+      minmax(0, 1fr)
+      54px;
 
     align-items: center;
 
     gap: 9px;
 
-    z-index: 500;
+    z-index: 600;
 
     pointer-events: none;
   }
 
 
   /* =======================================================
-     LOGO
+     MOBILE LOGO
      ======================================================= */
 
   .map-brand {
@@ -1528,10 +1838,11 @@ input {
 
     border-radius: 17px;
 
-    background: rgba(255,255,255,0.97);
+    background:
+      rgba(255, 255, 255, 0.97);
 
     box-shadow:
-      0 4px 18px rgba(0,0,0,0.16);
+      0 5px 18px rgba(0, 0, 0, 0.18);
 
     pointer-events: auto;
   }
@@ -1549,11 +1860,13 @@ input {
 
 
   /* =======================================================
-     SEARCH
+     MOBILE SEARCH
      ======================================================= */
 
   .search-wrap {
     grid-column: 2;
+
+    position: relative;
 
     width: 100%;
     min-width: 0;
@@ -1573,14 +1886,17 @@ input {
 
     gap: 9px;
 
-    padding: 0 15px;
+    padding:
+      0
+      15px;
 
     border-radius: 17px;
 
-    background: rgba(255,255,255,0.97);
+    background:
+      rgba(255, 255, 255, 0.97);
 
     box-shadow:
-      0 4px 18px rgba(0,0,0,0.16);
+      0 5px 18px rgba(0, 0, 0, 0.18);
   }
 
   .search-icon {
@@ -1595,36 +1911,33 @@ input {
     width: 100%;
     min-width: 0;
 
+    padding: 0;
+
     border: none;
     outline: none;
 
     background: transparent;
 
+    color: #26344d;
+
     font-size: 15px;
   }
 
   #placeSearch::placeholder {
-    color: #8b94a3;
+    color: #929baa;
   }
 
   #searchSuggestions {
     top: 61px;
 
-    max-height: 45vh;
-
-    overflow-y: auto;
+    max-height: 45dvh;
 
     border-radius: 16px;
-
-    background: white;
-
-    box-shadow:
-      0 8px 28px rgba(0,0,0,0.18);
   }
 
 
   /* =======================================================
-     HAMBURGER
+     HAMBURGER BUTTON
      ======================================================= */
 
   .mobile-menu-button {
@@ -1642,15 +1955,17 @@ input {
     border: none;
     border-radius: 17px;
 
-    background: rgba(255,255,255,0.97);
-    color: #1f2937;
+    background:
+      rgba(255, 255, 255, 0.97);
+
+    color: #172033;
 
     font-size: 25px;
     font-weight: 500;
     line-height: 1;
 
     box-shadow:
-      0 4px 18px rgba(0,0,0,0.16);
+      0 5px 18px rgba(0, 0, 0, 0.18);
 
     cursor: pointer;
 
@@ -1659,8 +1974,7 @@ input {
 
 
   /* =======================================================
-     REMOVE PERMANENT MAP CLUTTER
-     These features remain available from hamburger.
+     HIDE DESKTOP MAP UI
      ======================================================= */
 
   #topUI > .category-bar,
@@ -1676,20 +1990,26 @@ input {
     display: none;
   }
 
+  #travelSummary {
+    display: none;
+  }
+
 
   /* =======================================================
      MAPLIBRE CONTROLS
      ======================================================= */
 
   .maplibregl-ctrl-top-right {
-    top: 82px;
+    top: 80px;
+
     right: 10px;
   }
 
   .maplibregl-ctrl-group {
-    overflow: hidden;
-
     border-radius: 14px;
+
+    box-shadow:
+      0 3px 12px rgba(0, 0, 0, 0.18);
   }
 
 
@@ -1706,7 +2026,8 @@ input {
 
     z-index: 700;
 
-    background: rgba(12,20,32,0.32);
+    background:
+      rgba(10, 18, 30, 0.34);
 
     opacity: 0;
     visibility: hidden;
@@ -1727,8 +2048,7 @@ input {
 
 
   /* =======================================================
-     HAMBURGER MENU
-     Compact floating panel
+     HAMBURGER PANEL
      ======================================================= */
 
   .mobile-control-panel {
@@ -1736,7 +2056,10 @@ input {
 
     top:
       calc(
-        max(12px,env(safe-area-inset-top))
+        max(
+          12px,
+          env(safe-area-inset-top)
+        )
         + 64px
       );
 
@@ -1753,7 +2076,7 @@ input {
     max-height:
       calc(
         100dvh
-        - 95px
+        - 94px
         - env(safe-area-inset-bottom)
       );
 
@@ -1763,10 +2086,11 @@ input {
 
     border-radius: 20px;
 
-    background: rgba(255,255,255,0.98);
+    background:
+      rgba(255, 255, 255, 0.985);
 
     box-shadow:
-      0 14px 40px rgba(0,0,0,0.24);
+      0 16px 45px rgba(0, 0, 0, 0.27);
 
     z-index: 720;
 
@@ -1779,7 +2103,8 @@ input {
       translateY(-8px)
       scale(0.98);
 
-    transform-origin: top right;
+    transform-origin:
+      top right;
 
     transition:
       opacity 0.18s ease,
@@ -1800,7 +2125,7 @@ input {
 
 
   /* =======================================================
-     HAMBURGER HEADER
+     MOBILE PANEL HEADER
      ======================================================= */
 
   .mobile-panel-header {
@@ -1815,7 +2140,7 @@ input {
     color: #172033;
 
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 750;
   }
 
   #closeMobileControlPanel {
@@ -1831,7 +2156,8 @@ input {
     border: none;
     border-radius: 50%;
 
-    background: #f1f3f6;
+    background: #eef1f5;
+
     color: #26344d;
 
     font-size: 22px;
@@ -1841,7 +2167,7 @@ input {
 
 
   /* =======================================================
-     HAMBURGER SECTIONS
+     MOBILE PANEL SECTIONS
      ======================================================= */
 
   .mobile-panel-section {
@@ -1851,12 +2177,12 @@ input {
   .mobile-panel-label {
     margin-bottom: 8px;
 
-    color: #7a8495;
+    color: #7b8494;
 
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 10px;
+    font-weight: 800;
 
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
 
     text-transform: uppercase;
   }
@@ -1870,7 +2196,10 @@ input {
     display: grid;
 
     grid-template-columns:
-      repeat(3,minmax(0,1fr));
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
 
     gap: 6px;
   }
@@ -1879,27 +2208,26 @@ input {
     width: 100%;
     height: 40px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0 7px;
-
-    border-radius: 11px;
+    padding:
+      0
+      5px;
 
     font-size: 11px;
   }
 
 
   /* =======================================================
-     CATEGORY OPTIONS
+     MOBILE CATEGORIES
      ======================================================= */
 
   .mobile-categories {
     display: grid;
 
     grid-template-columns:
-      repeat(2,minmax(0,1fr));
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
 
     gap: 6px;
   }
@@ -1908,20 +2236,16 @@ input {
     width: 100%;
     height: 40px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0 7px;
-
-    border-radius: 11px;
+    padding:
+      0
+      6px;
 
     font-size: 11px;
   }
 
 
   /* =======================================================
-     HAMBURGER LINKS
+     MORE FEATURES
      ======================================================= */
 
   .mobile-panel-links {
@@ -1932,51 +2256,100 @@ input {
 
   .mobile-panel-link {
     width: 100%;
-    min-height: 43px;
-
-    padding: 0 13px;
+    min-height: 44px;
 
     display: flex;
     align-items: center;
 
+    padding:
+      0
+      14px;
+
     border: none;
     border-radius: 11px;
 
-    background: #f5f6f8;
+    background: #f4f6f8;
+
     color: #26344d;
 
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 650;
 
     text-align: left;
 
     cursor: pointer;
   }
 
-  .mobile-panel-link:hover {
-    background: #eceff3;
+  .mobile-panel-link:active {
+    background: #e9edf2;
   }
 
 
   /* =======================================================
-     MOBILE DESTINATION DASHBOARD
+     EXISTING MENU CONTENT
+     Bottom sheet on mobile
+     ======================================================= */
+
+  #menuPanel {
+    top: auto;
+
+    left: 12px;
+    right: 12px;
+
+    bottom:
+      calc(
+        12px
+        + env(safe-area-inset-bottom)
+      );
+
+    width: auto;
+
+    max-height: 58dvh;
+
+    padding: 20px;
+
+    border-radius: 22px;
+
+    box-shadow:
+      0 18px 50px rgba(0, 0, 0, 0.28);
+
+    z-index: 850;
+
+    transform:
+      translateY(25px);
+  }
+
+  #menuPanel.active {
+    transform:
+      translateY(0);
+  }
+
+
+  /* =======================================================
+     MOBILE DASHBOARD
      ======================================================= */
 
   #travelDashboard {
-    position: fixed;
-
-    inset: 0;
+    top: 0;
+    left: 0;
 
     width: 100vw;
     height: 100dvh;
 
+    max-width: none;
+    max-height: none;
+
     border-radius: 0;
 
-    transform: none;
+    opacity: 1;
+
+    transform:
+      translateY(100%);
   }
 
   #travelDashboard.active {
-    transform: none;
+    transform:
+      translateY(0);
   }
 
   .dashboard-layout {
@@ -2003,7 +2376,7 @@ input {
 
 
   /* =======================================================
-     DASHBOARD BOTTOM NAVIGATION
+     MOBILE DASHBOARD BOTTOM NAV
      ======================================================= */
 
   .dashboard-sidebar {
@@ -2028,32 +2401,43 @@ input {
     padding:
       5px
       6px
-      calc(5px + env(safe-area-inset-bottom));
+      calc(
+        5px
+        + env(safe-area-inset-bottom)
+      );
 
     overflow: hidden;
 
     border-right: none;
-    border-top: 1px solid #e8e8e8;
 
-    background: rgba(255,255,255,0.98);
+    border-top:
+      1px solid #e5e7eb;
+
+    background:
+      rgba(255, 255, 255, 0.98);
   }
 
   .dashboard-nav {
+    width: 100%;
+    height: 58px;
+
     display: grid;
 
     grid-template-columns:
-      repeat(5,minmax(0,1fr));
+      repeat(
+        5,
+        minmax(0, 1fr)
+      );
 
     gap: 3px;
-
-    width: 100%;
-    height: 58px;
   }
 
   .dashboard-nav-button {
+    width: 100%;
+    height: 58px;
+
     min-width: 0;
     min-height: 0;
-    height: 58px;
 
     display: flex;
     flex-direction: column;
@@ -2062,11 +2446,13 @@ input {
 
     gap: 2px;
 
-    padding: 4px 2px;
+    padding:
+      3px
+      2px;
 
-    border-radius: 13px;
+    border-radius: 12px;
 
-    font-size: 10px;
+    font-size: 9px;
 
     text-align: center;
   }
@@ -2083,9 +2469,9 @@ input {
 
     max-width: 100%;
 
-    font-size: 10px;
-
     overflow: hidden;
+
+    font-size: 9px;
 
     text-overflow: ellipsis;
   }
@@ -2096,47 +2482,48 @@ input {
 
 
   /* =======================================================
-     MOBILE DASHBOARD HERO
+     MOBILE HERO
      ======================================================= */
 
   .dashboard-hero {
-    height: 235px;
+    height: 225px;
   }
 
   .hero-text {
-    top: 24px;
-    left: 18px;
+    top: auto;
 
-    width: calc(100% - 80px);
+    left: 16px;
+    right: 65px;
+    bottom: 18px;
+
+    width: auto;
+
+    color: white;
   }
 
   #dashboardPlaceName {
-    max-width: 100%;
+    margin-bottom: 5px;
 
-    font-size: 25px;
-    line-height: 1.05;
+    color: white;
+
+    font-size: 24px;
   }
 
   #heroDescription {
-    max-width: 88%;
+    display: none;
+  }
 
-    font-size: 12px;
-    line-height: 1.45;
+  .hero-counts {
+    display: none;
   }
 
   .hero-gradient {
     background:
       linear-gradient(
-        90deg,
-        rgba(255,255,255,0.94) 0%,
-        rgba(255,255,255,0.72) 45%,
-        rgba(255,255,255,0.08) 85%
+        0deg,
+        rgba(0, 0, 0, 0.72),
+        rgba(0, 0, 0, 0.04) 72%
       );
-  }
-
-  .hero-counts {
-    right: 12px;
-    bottom: 12px;
   }
 
 
@@ -2145,12 +2532,18 @@ input {
      ======================================================= */
 
   .dashboard-content {
-    padding: 18px 16px 30px;
+    padding:
+      18px
+      15px
+      30px;
   }
 
   .quick-grid {
     grid-template-columns:
-      repeat(2,minmax(0,1fr));
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
 
     gap: 8px;
   }
@@ -2161,7 +2554,10 @@ input {
 
   #photoGallery {
     grid-template-columns:
-      repeat(2,minmax(0,1fr));
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
 
     gap: 8px;
   }
@@ -2178,6 +2574,7 @@ input {
 
   .video-card {
     width: 100%;
+
     max-width: none;
   }
 
@@ -2196,7 +2593,7 @@ input {
 
   #lightboxImage {
     max-width: 96vw;
-    max-height: 84vh;
+    max-height: 84dvh;
   }
 
   #closeLightbox {
@@ -2207,49 +2604,53 @@ input {
 }
 
 /* =========================================================
-   28. SMALL PHONE REFINEMENTS
+   32. SMALL PHONE
    ========================================================= */
 
 @media (max-width: 430px) {
 
   #topUI {
-    left: 10px;
-    right: 10px;
+    left: 9px;
+    right: 9px;
 
     grid-template-columns:
-      50px minmax(0,1fr) 50px;
+      49px
+      minmax(0, 1fr)
+      49px;
 
     gap: 7px;
   }
 
   .map-brand {
-    width: 50px;
-    min-width: 50px;
-    max-width: 50px;
+    width: 49px;
+    min-width: 49px;
+    max-width: 49px;
 
-    height: 50px;
+    height: 49px;
 
     border-radius: 15px;
   }
 
   .map-brand img {
-    width: 40px;
-    height: 40px;
+    width: 39px;
+    height: 39px;
   }
 
   .search-wrap,
   .search-box {
-    height: 50px;
+    height: 49px;
   }
 
   .search-box {
-    padding: 0 12px;
+    padding:
+      0
+      11px;
 
     border-radius: 15px;
   }
 
   .search-icon {
-    font-size: 19px;
+    font-size: 18px;
   }
 
   #placeSearch {
@@ -2257,8 +2658,8 @@ input {
   }
 
   .mobile-menu-button {
-    width: 50px;
-    height: 50px;
+    width: 49px;
+    height: 49px;
 
     border-radius: 15px;
 
@@ -2266,22 +2667,25 @@ input {
   }
 
   .maplibregl-ctrl-top-right {
-    top: 77px;
+    top: 75px;
   }
 
   .mobile-control-panel {
     top:
       calc(
-        max(12px,env(safe-area-inset-top))
+        max(
+          12px,
+          env(safe-area-inset-top)
+        )
         + 59px
       );
 
-    right: 10px;
+    right: 9px;
 
     width:
       min(
         320px,
-        calc(100vw - 20px)
+        calc(100vw - 18px)
       );
   }
 
@@ -2289,10 +2693,12 @@ input {
 
 
 /* =========================================================
-   29. PHONE LANDSCAPE
+   33. PHONE LANDSCAPE
    ========================================================= */
 
-@media (max-width: 950px) and (orientation: landscape) {
+@media
+  (max-width: 950px)
+  and (orientation: landscape) {
 
   #topUI {
     top: 8px;
@@ -2301,7 +2707,9 @@ input {
     right: 10px;
 
     grid-template-columns:
-      48px minmax(0,1fr) 48px;
+      48px
+      minmax(0, 1fr)
+      48px;
 
     gap: 7px;
   }
@@ -2313,7 +2721,7 @@ input {
 
     height: 48px;
 
-    border-radius: 15px;
+    border-radius: 14px;
   }
 
   .map-brand img {
@@ -2327,22 +2735,22 @@ input {
   }
 
   .search-box {
-    border-radius: 15px;
+    border-radius: 14px;
   }
 
   .mobile-menu-button {
     width: 48px;
     height: 48px;
 
-    border-radius: 15px;
+    border-radius: 14px;
   }
 
   .maplibregl-ctrl-top-right {
-    top: 67px;
+    top: 65px;
   }
 
   .mobile-control-panel {
-    top: 63px;
+    top: 62px;
 
     right: 10px;
 
@@ -2351,15 +2759,47 @@ input {
     max-height:
       calc(
         100dvh
-        - 72px
+        - 70px
       );
+  }
+
+
+  /* Destination dashboard in landscape */
+
+  .dashboard-hero {
+    height: 180px;
+  }
+
+  .dashboard-main {
+    height:
+      calc(
+        100dvh
+        - 60px
+        - env(safe-area-inset-bottom)
+      );
+  }
+
+  .dashboard-sidebar {
+    height:
+      calc(
+        60px
+        + env(safe-area-inset-bottom)
+      );
+  }
+
+  .dashboard-nav {
+    height: 50px;
+  }
+
+  .dashboard-nav-button {
+    height: 50px;
   }
 
 }
 
 
 /* =========================================================
-   30. MAP INTERACTION MODE
+   34. MAP INTERACTION
    ========================================================= */
 
 @media (max-width: 950px) {
@@ -2368,1043 +2808,6 @@ input {
     opacity: 0;
 
     pointer-events: none;
-  }
-
-}
-
-/* =========================================================
-   FINAL MOBILE APP DESIGN
-   Applies ONLY to phones and small tablets.
-   Desktop remains unchanged.
-   ========================================================= */
-
-@media (max-width: 950px) {
-
-  /* =======================================================
-     1. FULL-SCREEN MAP
-     ======================================================= */
-
-  html,
-  body {
-    width: 100% !important;
-    height: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    background: #111 !important;
-  }
-
-  #map {
-    position: fixed !important;
-    inset: 0 !important;
-
-    width: 100vw !important;
-    height: 100dvh !important;
-  }
-
-
-  /* =======================================================
-     2. TOP MOBILE BAR
-
-     ONLY:
-     LOGO | SEARCH | HAMBURGER
-     ======================================================= */
-
-  #topUI {
-    position: fixed !important;
-
-    top: max(12px, env(safe-area-inset-top)) !important;
-    left: 12px !important;
-    right: 12px !important;
-
-    width: auto !important;
-    height: 54px !important;
-
-    display: grid !important;
-
-    grid-template-columns:
-      54px minmax(0, 1fr) 54px !important;
-
-    align-items: center !important;
-
-    gap: 9px !important;
-
-    z-index: 600 !important;
-
-    pointer-events: none !important;
-  }
-
-
-  /* =======================================================
-     3. LOGO
-     ======================================================= */
-
-  .map-brand {
-    grid-column: 1 !important;
-
-    width: 54px !important;
-    min-width: 54px !important;
-    max-width: 54px !important;
-
-    height: 54px !important;
-
-    margin: 0 !important;
-    padding: 5px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    border-radius: 17px !important;
-
-    background: rgba(255,255,255,0.97) !important;
-
-    box-shadow:
-      0 5px 18px rgba(0,0,0,0.18) !important;
-
-    backdrop-filter: blur(12px);
-
-    pointer-events: auto !important;
-  }
-
-  .map-brand img {
-    width: 44px !important;
-    height: 44px !important;
-
-    margin: 0 !important;
-
-    object-fit: contain !important;
-  }
-
-  .brand-text {
-    display: none !important;
-  }
-
-
-  /* =======================================================
-     4. SEARCH
-     ======================================================= */
-
-  .search-wrap {
-    grid-column: 2 !important;
-
-    position: relative !important;
-
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: none !important;
-
-    height: 54px !important;
-
-    margin: 0 !important;
-
-    pointer-events: auto !important;
-  }
-
-  .search-box {
-    width: 100% !important;
-    min-width: 0 !important;
-
-    height: 54px !important;
-
-    margin: 0 !important;
-    padding: 0 15px !important;
-
-    display: flex !important;
-    align-items: center !important;
-
-    gap: 9px !important;
-
-    border-radius: 17px !important;
-
-    background: rgba(255,255,255,0.97) !important;
-
-    box-shadow:
-      0 5px 18px rgba(0,0,0,0.18) !important;
-
-    backdrop-filter: blur(12px);
-  }
-
-  .search-icon {
-    flex: 0 0 auto !important;
-
-    margin: 0 !important;
-
-    font-size: 21px !important;
-  }
-
-  #placeSearch {
-    flex: 1 !important;
-
-    width: 100% !important;
-    min-width: 0 !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    border: none !important;
-    outline: none !important;
-
-    background: transparent !important;
-
-    color: #26344d !important;
-
-    font-size: 15px !important;
-  }
-
-  #placeSearch::placeholder {
-    color: #929baa !important;
-  }
-
-
-  /* =======================================================
-     5. SEARCH RESULTS
-     ======================================================= */
-
-  #searchSuggestions {
-    position: absolute !important;
-
-    top: 61px !important;
-    left: 0 !important;
-    right: 0 !important;
-
-    width: 100% !important;
-
-    max-height: 45dvh !important;
-
-    overflow-y: auto !important;
-
-    border-radius: 16px !important;
-
-    background: #ffffff !important;
-
-    box-shadow:
-      0 10px 30px rgba(0,0,0,0.20) !important;
-
-    z-index: 900 !important;
-  }
-
-
-  /* =======================================================
-     6. HAMBURGER
-     ======================================================= */
-
-  .mobile-menu-button {
-    grid-column: 3 !important;
-
-    width: 54px !important;
-    height: 54px !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    border: none !important;
-    border-radius: 17px !important;
-
-    background: rgba(255,255,255,0.97) !important;
-
-    color: #172033 !important;
-
-    font-size: 25px !important;
-    font-weight: 500 !important;
-    line-height: 1 !important;
-
-    box-shadow:
-      0 5px 18px rgba(0,0,0,0.18) !important;
-
-    backdrop-filter: blur(12px);
-
-    cursor: pointer !important;
-
-    pointer-events: auto !important;
-  }
-
-
-  /* =======================================================
-     7. REMOVE ALL PERMANENT MOBILE CLUTTER
-
-     Categories and basemaps remain available in hamburger.
-     ======================================================= */
-
-  #topUI > .category-bar,
-  #topUI > .map-style-switcher {
-    display: none !important;
-  }
-
-  .main-menu {
-    display: none !important;
-  }
-
-  #recentPlaces {
-    display: none !important;
-  }
-
-  #travelSummary {
-    display: none !important;
-  }
-
-
-  /* =======================================================
-     8. MAPLIBRE CONTROLS
-     ======================================================= */
-
-  .maplibregl-ctrl-top-right {
-    top: 80px !important;
-    right: 10px !important;
-  }
-
-  .maplibregl-ctrl-group {
-    overflow: hidden !important;
-
-    border-radius: 14px !important;
-
-    box-shadow:
-      0 3px 12px rgba(0,0,0,0.18) !important;
-  }
-
-
-  /* =======================================================
-     9. MOBILE MENU BACKDROP
-     ======================================================= */
-
-  .mobile-control-backdrop {
-    position: fixed !important;
-
-    inset: 0 !important;
-
-    display: block !important;
-
-    z-index: 700 !important;
-
-    background: rgba(10,18,30,0.34) !important;
-
-    opacity: 0 !important;
-    visibility: hidden !important;
-
-    pointer-events: none !important;
-
-    transition:
-      opacity 0.2s ease,
-      visibility 0.2s ease !important;
-  }
-
-  .mobile-control-backdrop.active {
-    opacity: 1 !important;
-    visibility: visible !important;
-
-    pointer-events: auto !important;
-  }
-
-
-  /* =======================================================
-     10. HAMBURGER PANEL
-     ======================================================= */
-
-  .mobile-control-panel {
-    position: fixed !important;
-
-    top:
-      calc(
-        max(12px, env(safe-area-inset-top))
-        + 64px
-      ) !important;
-
-    right: 12px !important;
-    left: auto !important;
-
-    display: block !important;
-
-    width:
-      min(
-        330px,
-        calc(100vw - 24px)
-      ) !important;
-
-    max-height:
-      calc(
-        100dvh
-        - 92px
-        - env(safe-area-inset-bottom)
-      ) !important;
-
-    margin: 0 !important;
-    padding: 16px !important;
-
-    overflow-y: auto !important;
-
-    border-radius: 20px !important;
-
-    background: rgba(255,255,255,0.98) !important;
-
-    box-shadow:
-      0 16px 45px rgba(0,0,0,0.27) !important;
-
-    z-index: 720 !important;
-
-    opacity: 0 !important;
-    visibility: hidden !important;
-
-    pointer-events: none !important;
-
-    transform:
-      translateY(-8px)
-      scale(0.98) !important;
-
-    transform-origin: top right !important;
-
-    transition:
-      opacity 0.18s ease,
-      transform 0.18s ease,
-      visibility 0.18s ease !important;
-  }
-
-  .mobile-control-panel.active {
-    opacity: 1 !important;
-    visibility: visible !important;
-
-    pointer-events: auto !important;
-
-    transform:
-      translateY(0)
-      scale(1) !important;
-  }
-
-
-  /* =======================================================
-     11. MOBILE PANEL HEADER
-     ======================================================= */
-
-  .mobile-panel-header {
-    display: flex !important;
-
-    align-items: center !important;
-    justify-content: space-between !important;
-
-    margin: 0 0 18px !important;
-  }
-
-  .mobile-panel-header strong {
-    color: #172033 !important;
-
-    font-size: 17px !important;
-    font-weight: 750 !important;
-  }
-
-  #closeMobileControlPanel {
-    width: 34px !important;
-    height: 34px !important;
-
-    padding: 0 !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    border: none !important;
-    border-radius: 50% !important;
-
-    background: #eef1f5 !important;
-    color: #26344d !important;
-
-    font-size: 22px !important;
-    line-height: 1 !important;
-
-    cursor: pointer !important;
-  }
-
-
-  /* =======================================================
-     12. PANEL SECTION HEADINGS
-     ======================================================= */
-
-  .mobile-panel-section {
-    margin: 0 0 18px !important;
-  }
-
-  .mobile-panel-label {
-    margin: 0 0 8px !important;
-
-    color: #7b8494 !important;
-
-    font-size: 10px !important;
-    font-weight: 800 !important;
-
-    letter-spacing: 0.06em !important;
-
-    text-transform: uppercase !important;
-  }
-
-
-  /* =======================================================
-     13. MAP STYLE IN HAMBURGER
-     ======================================================= */
-
-  .mobile-map-styles {
-    display: grid !important;
-
-    grid-template-columns:
-      repeat(3, minmax(0,1fr)) !important;
-
-    gap: 6px !important;
-  }
-
-  .mobile-map-styles .style-button {
-    width: 100% !important;
-    height: 40px !important;
-
-    margin: 0 !important;
-    padding: 0 5px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    border-radius: 11px !important;
-
-    font-size: 11px !important;
-  }
-
-
-  /* =======================================================
-     14. CATEGORIES IN HAMBURGER
-     ======================================================= */
-
-  .mobile-categories {
-    display: grid !important;
-
-    grid-template-columns:
-      repeat(2, minmax(0,1fr)) !important;
-
-    gap: 6px !important;
-  }
-
-  .mobile-categories .category-button {
-    width: 100% !important;
-    height: 40px !important;
-
-    margin: 0 !important;
-    padding: 0 6px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    border-radius: 11px !important;
-
-    font-size: 11px !important;
-  }
-
-
-  /* =======================================================
-     15. MORE FEATURES
-     ======================================================= */
-
-  .mobile-panel-links {
-    display: grid !important;
-
-    gap: 6px !important;
-  }
-
-  .mobile-panel-link {
-    width: 100% !important;
-    min-height: 44px !important;
-
-    margin: 0 !important;
-    padding: 0 14px !important;
-
-    display: flex !important;
-    align-items: center !important;
-
-    border: none !important;
-    border-radius: 11px !important;
-
-    background: #f4f6f8 !important;
-
-    color: #26344d !important;
-
-    font-size: 13px !important;
-    font-weight: 650 !important;
-
-    text-align: left !important;
-
-    cursor: pointer !important;
-  }
-
-  .mobile-panel-link:active {
-    background: #e9edf2 !important;
-  }
-
-
-  /* =======================================================
-     16. OLD MAIN MENU CONTENT PANEL
-     Becomes compact bottom sheet on mobile.
-     ======================================================= */
-
-  #menuPanel {
-    position: fixed !important;
-
-    top: auto !important;
-
-    left: 12px !important;
-    right: 12px !important;
-
-    bottom:
-      calc(
-        12px
-        + env(safe-area-inset-bottom)
-      ) !important;
-
-    width: auto !important;
-
-    max-height: 58dvh !important;
-
-    margin: 0 !important;
-    padding: 20px !important;
-
-    overflow-y: auto !important;
-
-    border-radius: 22px !important;
-
-    background: rgba(255,255,255,0.98) !important;
-
-    box-shadow:
-      0 18px 50px rgba(0,0,0,0.28) !important;
-
-    z-index: 850 !important;
-
-    opacity: 0 !important;
-    visibility: hidden !important;
-
-    transform:
-      translateY(25px) !important;
-
-    transition:
-      opacity 0.22s ease,
-      transform 0.22s ease,
-      visibility 0.22s ease !important;
-  }
-
-  #menuPanel.active {
-    opacity: 1 !important;
-    visibility: visible !important;
-
-    transform:
-      translateY(0) !important;
-  }
-
-  #menuPanel h2 {
-    padding-right: 35px !important;
-
-    font-size: 19px !important;
-  }
-
-  #menuPanel p {
-    font-size: 13px !important;
-    line-height: 1.55 !important;
-  }
-
-
-  /* =======================================================
-     17. DESTINATION DASHBOARD
-     ======================================================= */
-
-  #travelDashboard {
-    position: fixed !important;
-
-    inset: 0 !important;
-
-    top: 0 !important;
-    left: 0 !important;
-
-    width: 100vw !important;
-    height: 100dvh !important;
-
-    max-width: none !important;
-    max-height: none !important;
-
-    border-radius: 0 !important;
-
-    transform: translateY(100%) !important;
-
-    opacity: 1 !important;
-
-    transition:
-      transform 0.26s ease,
-      visibility 0.26s ease !important;
-  }
-
-  #travelDashboard.active {
-    transform: translateY(0) !important;
-  }
-
-  .dashboard-layout {
-    display: block !important;
-
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-
-  /* =======================================================
-     18. MOBILE DASHBOARD MAIN
-     ======================================================= */
-
-  .dashboard-main {
-    width: 100% !important;
-
-    height:
-      calc(
-        100dvh
-        - 68px
-        - env(safe-area-inset-bottom)
-      ) !important;
-
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-
-    padding-bottom: 20px !important;
-  }
-
-
-  /* =======================================================
-     19. DASHBOARD BOTTOM NAVIGATION
-     ======================================================= */
-
-  .dashboard-sidebar {
-    position: fixed !important;
-
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-
-    width: 100% !important;
-
-    height:
-      calc(
-        68px
-        + env(safe-area-inset-bottom)
-      ) !important;
-
-    padding:
-      5px
-      6px
-      calc(5px + env(safe-area-inset-bottom))
-      !important;
-
-    display: block !important;
-
-    overflow: hidden !important;
-
-    border-right: none !important;
-    border-top: 1px solid #e5e7eb !important;
-
-    background: rgba(255,255,255,0.98) !important;
-
-    z-index: 1200 !important;
-  }
-
-  .dashboard-nav {
-    width: 100% !important;
-    height: 58px !important;
-
-    display: grid !important;
-
-    grid-template-columns:
-      repeat(5, minmax(0,1fr)) !important;
-
-    gap: 3px !important;
-  }
-
-  .dashboard-nav-button {
-    width: 100% !important;
-    height: 58px !important;
-
-    min-width: 0 !important;
-    min-height: 0 !important;
-
-    padding: 3px 2px !important;
-
-    display: flex !important;
-
-    flex-direction: column !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    gap: 2px !important;
-
-    border-radius: 12px !important;
-
-    font-size: 9px !important;
-
-    text-align: center !important;
-  }
-
-  .dashboard-nav-icon {
-    width: 20px !important;
-    height: 20px !important;
-
-    flex: 0 0 20px !important;
-  }
-
-  .dashboard-nav-label {
-    display: block !important;
-
-    max-width: 100% !important;
-
-    font-size: 9px !important;
-
-    overflow: hidden !important;
-
-    text-overflow: ellipsis !important;
-  }
-
-  .best-time-card {
-    display: none !important;
-  }
-
-
-  /* =======================================================
-     20. MOBILE HERO
-     ======================================================= */
-
-  .dashboard-hero {
-    height: 225px !important;
-  }
-
-  .hero-text {
-    top: auto !important;
-
-    left: 16px !important;
-    right: 65px !important;
-    bottom: 18px !important;
-
-    width: auto !important;
-
-    color: white !important;
-  }
-
-  #dashboardPlaceName {
-    margin-bottom: 5px !important;
-
-    color: white !important;
-
-    font-size: 24px !important;
-  }
-
-  #heroDescription {
-    display: none !important;
-  }
-
-  .hero-counts {
-    display: none !important;
-  }
-
-  .hero-gradient {
-    background:
-      linear-gradient(
-        0deg,
-        rgba(0,0,0,0.72),
-        rgba(0,0,0,0.04) 72%
-      ) !important;
-  }
-
-
-  /* =======================================================
-     21. MOBILE DASHBOARD CONTENT
-     ======================================================= */
-
-  .dashboard-content {
-    padding:
-      18px 15px 30px !important;
-  }
-
-  .quick-grid {
-    grid-template-columns:
-      repeat(2, minmax(0,1fr)) !important;
-
-    gap: 8px !important;
-  }
-
-  .info-grid {
-    grid-template-columns:
-      1fr !important;
-  }
-
-  #photoGallery {
-    grid-template-columns:
-      repeat(2,minmax(0,1fr)) !important;
-
-    gap: 8px !important;
-  }
-
-  .gallery-photo {
-    height: 125px !important;
-  }
-
-  #videoGallery {
-    grid-template-columns:
-      1fr !important;
-  }
-
-  .video-card {
-    width: 100% !important;
-    max-width: none !important;
-  }
-
-  #dashboardLinksList {
-    grid-template-columns:
-      1fr !important;
-  }
-
-
-  /* =======================================================
-     22. MOBILE LIGHTBOX
-     ======================================================= */
-
-  #lightbox {
-    padding: 10px !important;
-  }
-
-  #lightboxImage {
-    max-width: 96vw !important;
-    max-height: 84dvh !important;
-  }
-
-  #closeLightbox {
-    top: 12px !important;
-    right: 12px !important;
-  }
-
-}
-
-
-/* =========================================================
-   SMALL IPHONE / SMALL PHONE
-   ========================================================= */
-
-@media (max-width: 430px) {
-
-  #topUI {
-    left: 9px !important;
-    right: 9px !important;
-
-    grid-template-columns:
-      49px minmax(0,1fr) 49px !important;
-
-    gap: 7px !important;
-  }
-
-  .map-brand {
-    width: 49px !important;
-    min-width: 49px !important;
-    max-width: 49px !important;
-
-    height: 49px !important;
-
-    border-radius: 15px !important;
-  }
-
-  .map-brand img {
-    width: 39px !important;
-    height: 39px !important;
-  }
-
-  .search-wrap,
-  .search-box {
-    height: 49px !important;
-  }
-
-  .search-box {
-    padding: 0 11px !important;
-
-    border-radius: 15px !important;
-  }
-
-  .search-icon {
-    font-size: 18px !important;
-  }
-
-  #placeSearch {
-    font-size: 14px !important;
-  }
-
-  .mobile-menu-button {
-    width: 49px !important;
-    height: 49px !important;
-
-    border-radius: 15px !important;
-
-    font-size: 23px !important;
-  }
-
-  .maplibregl-ctrl-top-right {
-    top: 75px !important;
-  }
-
-}
-
-
-/* =========================================================
-   PHONE LANDSCAPE
-   ========================================================= */
-
-@media (max-width: 950px) and (orientation: landscape) {
-
-  #topUI {
-    top: 8px !important;
-
-    left: 10px !important;
-    right: 10px !important;
-
-    grid-template-columns:
-      48px minmax(0,1fr) 48px !important;
-
-    gap: 7px !important;
-  }
-
-  .map-brand {
-    width: 48px !important;
-    min-width: 48px !important;
-    max-width: 48px !important;
-
-    height: 48px !important;
-
-    border-radius: 14px !important;
-  }
-
-  .map-brand img {
-    width: 38px !important;
-    height: 38px !important;
-  }
-
-  .search-wrap,
-  .search-box {
-    height: 48px !important;
-  }
-
-  .mobile-menu-button {
-    width: 48px !important;
-    height: 48px !important;
-
-    border-radius: 14px !important;
-  }
-
-  .maplibregl-ctrl-top-right {
-    top: 65px !important;
-  }
-
-  .mobile-control-panel {
-    top: 62px !important;
-
-    width: 310px !important;
-
-    max-height:
-      calc(100dvh - 70px) !important;
   }
 
 }
