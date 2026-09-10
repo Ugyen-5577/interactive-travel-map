@@ -546,16 +546,25 @@ function buildRecentPlaces() {
 
       const p = feature.properties;
       const photos = getMediaArray(p, 'photos', 'photo');
-      const cardImage = p.heroPhoto || photos[0] || '';
-      const card = document.createElement('div');
 
+      /* Prefer the dedicated hero image.
+         If none exists, fall back to the first gallery photo. */
+      const cardImage = p.heroPhoto ? p.heroPhoto : (photos[0] || '');
+
+      const card = document.createElement('div');
       card.className = 'recent-card';
 
       card.innerHTML = `
-        ${cardImage ? `<img src="${cardImage}" alt="${p.name}" draggable="false">` : ''}
+        ${cardImage ? `
+          <img
+            src="${cardImage}"
+            alt="${p.name || 'Travel destination'}"
+            draggable="false"
+          >
+        ` : ''}
 
         <div class="recent-card-overlay">
-          <div class="recent-card-name">${p.name}</div>
+          <div class="recent-card-name">${p.name || ''}</div>
           <div class="recent-card-category">${p.category || ''}</div>
         </div>
       `;
@@ -577,7 +586,6 @@ function buildRecentPlaces() {
     });
 
 }
-
 
 /* =========================================================
    MAIN MENU
