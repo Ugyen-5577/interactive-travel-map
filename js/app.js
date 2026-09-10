@@ -546,12 +546,13 @@ function buildRecentPlaces() {
 
       const p = feature.properties;
       const photos = getMediaArray(p, 'photos', 'photo');
+      const cardImage = p.heroPhoto || photos[0] || '';
       const card = document.createElement('div');
 
       card.className = 'recent-card';
 
       card.innerHTML = `
-        ${photos.length ? `<img src="${photos[0]}" alt="${p.name}" draggable="false">` : ''}
+        ${cardImage ? `<img src="${cardImage}" alt="${p.name}" draggable="false">` : ''}
 
         <div class="recent-card-overlay">
           <div class="recent-card-name">${p.name}</div>
