@@ -85,7 +85,7 @@
 
         "heroPhoto": "images/uluru/18.jpg",
 
-        "photos": [
+                "photos": [
           "images/uluru/1.jpg",
           "images/uluru/2.jpg",
           "images/uluru/3.jpg",
@@ -109,57 +109,46 @@
           "images/uluru/22.jpg",
           "images/uluru/23.jpg",
           "images/uluru/25.jpg"
-        ]
-
-      },
+        ],
 
         "videos": [
           "videos/uluru1.mp4"
         ],
 
         "links": [
-
           {
             "name": "Parks Australia – Uluṟu-Kata Tjuṯa National Park",
             "url": "https://parksaustralia.gov.au/uluru/",
             "icon": "🌿"
           },
-
           {
             "name": "Official Uluṟu-Kata Tjuṯa visitor information",
             "url": "https://uluru.gov.au/",
             "icon": "🏜"
           },
-
           {
             "name": "Ayers Rock Resort – accommodation & experiences",
             "url": "https://www.ayersrockresort.com.au/",
             "icon": "🏨"
           },
-
           {
             "name": "Northern Territory – Uluru & Surrounds",
             "url": "https://northernterritory.com/uluru-and-surrounds",
             "icon": "☀"
           }
-
         ]
 
       },
 
       "geometry": {
-
         "type": "Point",
-
         "coordinates": [
           131.0369,
           -25.3444
         ]
-
       }
 
     },
-
 
     {
       "type": "Feature",
