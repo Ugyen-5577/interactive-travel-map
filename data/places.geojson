@@ -87,16 +87,31 @@
 
         "photos": [
           "images/uluru/1.jpg",
-            "images/uluru/2.jpg",
-            "images/uluru/3.jpg",
-            "images/uluru/4.jpg",
-            "images/uluru/5.jpg",
-            "images/uluru/6.jpg",
-            "images/uluru/7.jpg",
-            "images/uluru/8.jpg",
-            "images/uluru/9.jpg",
-            "images/uluru/18.jpg"
-        ],
+          "images/uluru/2.jpg",
+          "images/uluru/3.jpg",
+          "images/uluru/4.jpg",
+          "images/uluru/5.jpg",
+          "images/uluru/6.jpg",
+          "images/uluru/7.jpg",
+          "images/uluru/8.jpg",
+          "images/uluru/9.jpg",
+          "images/uluru/10.jpg",
+          "images/uluru/11.jpg",
+          "images/uluru/12.jpg",
+          "images/uluru/13.jpg",
+          "images/uluru/14.jpg",
+          "images/uluru/15.jpg",
+          "images/uluru/16.jpg",
+          "images/uluru/17.jpg",
+          "images/uluru/18.jpg",
+          "images/uluru/19.jpg",
+          "images/uluru/20.jpg",
+          "images/uluru/21.jpg",
+          "images/uluru/22.jpg",
+          "images/uluru/23.jpg",
+          "images/uluru/24.jpg",
+          "images/uluru/25.jpg"
+        ]
 
         "videos": [
           "videos/uluru1.mp4"
