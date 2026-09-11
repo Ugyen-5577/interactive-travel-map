@@ -107,270 +107,58 @@ map.on('load', async () => {
     layout: { visibility: 'none' }
   });
 
-   /* =========================================================
-   ULURU BASE WALK ROUTE
-   Keep route layers above basemap and below travel markers.
-   ========================================================= */
 
-map.addSource('uluru-walk-route', {
-  type: 'geojson',
-  data: {
-    type: 'Feature',
-    geometry: {
-      type: 'LineString',
-      coordinates: []
+  /* =========================================================
+     ULURU BASE WALK ROUTE SOURCES + LAYERS
+     Sources start empty and are populated only when animation runs.
+     ========================================================= */
+
+  const emptyGeoJSON = {
+    type: 'FeatureCollection',
+    features: []
+  };
+
+  map.addSource('uluru-walk-route', {
+    type: 'geojson',
+    data: emptyGeoJSON
+  });
+
+  map.addSource('uluru-walk-progress', {
+    type: 'geojson',
+    data: emptyGeoJSON
+  });
+
+  /* Full route underneath. */
+  map.addLayer({
+    id: 'uluru-walk-route-line',
+    type: 'line',
+    source: 'uluru-walk-route',
+    layout: {
+      'line-cap': 'round',
+      'line-join': 'round'
+    },
+    paint: {
+      'line-color': '#ffffff',
+      'line-width': 5,
+      'line-opacity': 0.45
     }
-  }
-});
+  });
 
-map.addSource('uluru-walk-progress', {
-  type: 'geojson',
-  data: {
-    type: 'Feature',
-    geometry: {
-      type: 'LineString',
-      coordinates: []
+  /* Progressively drawn route. */
+  map.addLayer({
+    id: 'uluru-walk-progress-line',
+    type: 'line',
+    source: 'uluru-walk-progress',
+    layout: {
+      'line-cap': 'round',
+      'line-join': 'round'
+    },
+    paint: {
+      'line-color': '#f88b00',
+      'line-width': 6,
+      'line-opacity': 0.95
     }
-  }
-});
-
-/* Full route underneath */
-map.addLayer({
-  id: 'uluru-walk-route-line',
-  type: 'line',
-  source: 'uluru-walk-route',
-  layout: {
-    'line-cap': 'round',
-    'line-join': 'round'
-  },
-  paint: {
-    'line-color': '#ffffff',
-    'line-width': 5,
-    'line-opacity': 0.45
-  }
-});
-
-/* Progressively drawn route */
-map.addLayer({
-  id: 'uluru-walk-progress-line',
-  type: 'line',
-  source: 'uluru-walk-progress',
-  layout: {
-    'line-cap': 'round',
-    'line-join': 'round'
-  },
-  paint: {
-    'line-color': '#f88b00',
-    'line-width': 6,
-    'line-opacity': 0.95
-  }
-});
-
-   /* =========================================================
-   ULURU BASE WALK ANIMATION
-   Uses every coordinate from uluru-base-walk.geojson.
-   ========================================================= */
-
-let uluruWalkAnimation = null;
-let uluruWalkerMarker = null;
-
-async function startUluruWalk() {
-
-  try {
-
-    /* Stop previous animation if visitor starts it again */
-    if (uluruWalkAnimation) {
-      cancelAnimationFrame(uluruWalkAnimation);
-      uluruWalkAnimation = null;
-    }
-
-    const response = await fetch(
-      'data/routes/uluru-base-walk.geojson',
-      { cache: 'no-store' }
-    );
-
-    if (!response.ok) {
-      throw new Error('Could not load Uluru Base Walk route');
-    }
-
-    const route = await response.json();
-
-    /* Support either a GeoJSON Feature or FeatureCollection */
-    const feature =
-      route.type === 'FeatureCollection'
-        ? route.features[0]
-        : route;
-
-    const coordinates = feature.geometry.coordinates;
-
-    if (!coordinates || coordinates.length < 2) {
-      throw new Error('Uluru Base Walk route has no usable coordinates');
-    }
-
-    console.log(
-      `Uluru Base Walk loaded: ${coordinates.length} points`
-    );
-
-    /* ---------------------------------------------------------
-       SHOW COMPLETE ROUTE FAINTLY
-       --------------------------------------------------------- */
-
-    map.getSource('uluru-walk-route').setData({
-      type: 'Feature',
-      properties: {},
-      geometry: {
-        type: 'LineString',
-        coordinates: coordinates
-      }
-    });
-
-    /* ---------------------------------------------------------
-       RESET ANIMATED PROGRESS
-       --------------------------------------------------------- */
-
-    const progressCoordinates = [
-      coordinates[0]
-    ];
-
-    map.getSource('uluru-walk-progress').setData({
-      type: 'Feature',
-      properties: {},
-      geometry: {
-        type: 'LineString',
-        coordinates: progressCoordinates
-      }
-    });
-
-    /* ---------------------------------------------------------
-       CREATE WALKER
-       --------------------------------------------------------- */
-
-    if (uluruWalkerMarker) {
-      uluruWalkerMarker.remove();
-    }
-
-    const walker = document.createElement('div');
-
-    walker.innerHTML = '🥾';
-    walker.style.fontSize = '28px';
-    walker.style.width = '34px';
-    walker.style.height = '34px';
-    walker.style.display = 'flex';
-    walker.style.alignItems = 'center';
-    walker.style.justifyContent = 'center';
-    walker.style.background = 'white';
-    walker.style.borderRadius = '50%';
-    walker.style.boxShadow = '0 2px 8px rgba(0,0,0,0.35)';
-
-    uluruWalkerMarker = new maplibregl.Marker({
-      element: walker,
-      anchor: 'center'
-    })
-      .setLngLat(coordinates[0])
-      .addTo(map);
-
-    /* ---------------------------------------------------------
-       ZOOM TO THE ROUTE
-       --------------------------------------------------------- */
-
-    const bounds =
-      coordinates.reduce(
-        (bounds, coordinate) =>
-          bounds.extend(coordinate),
-        new maplibregl.LngLatBounds(
-          coordinates[0],
-          coordinates[0]
-        )
-      );
-
-    map.fitBounds(bounds, {
-      padding: 80,
-      duration: 1800
-    });
-
-    /* Give map time to finish zooming before walking starts */
-    await new Promise(resolve =>
-      setTimeout(resolve, 1900)
-    );
-
-    /* ---------------------------------------------------------
-       ANIMATE ALL ORIGINAL POINTS
-       --------------------------------------------------------- */
-
-    let index = 1;
-
-    const totalDuration = 35000; // About 35 seconds.
-    const interval =
-      totalDuration / coordinates.length;
-
-    let previousTime = 0;
-
-    function animate(timestamp) {
-
-      if (!previousTime) {
-        previousTime = timestamp;
-      }
-
-      if (
-        timestamp - previousTime >= interval
-      ) {
-
-        previousTime = timestamp;
-
-        if (index >= coordinates.length) {
-          uluruWalkAnimation = null;
-          return;
-        }
-
-        const coordinate =
-          coordinates[index];
-
-        /* Add the next ORIGINAL KML point */
-        progressCoordinates.push(
-          coordinate
-        );
-
-        map.getSource(
-          'uluru-walk-progress'
-        ).setData({
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'LineString',
-            coordinates:
-              progressCoordinates
-          }
-        });
-
-        uluruWalkerMarker.setLngLat(
-          coordinate
-        );
-
-        index++;
-
-      }
-
-      uluruWalkAnimation =
-        requestAnimationFrame(
-          animate
-        );
-    }
-
-    uluruWalkAnimation =
-      requestAnimationFrame(
-        animate
-      );
-
-  } catch (error) {
-
-    console.error(
-      'Uluru walk animation error:',
-      error
-    );
-
-  }
-
-}
+  });
 
 
   /* ==================== LOAD PLACES.GEOJSON ==================== */
@@ -400,6 +188,171 @@ async function startUluruWalk() {
 
 
 /* =========================================================
+   ULURU BASE WALK ANIMATION
+   Uses every coordinate from uluru-base-walk.geojson.
+   ========================================================= */
+
+let uluruWalkAnimation = null;
+let uluruWalkerMarker = null;
+
+async function startUluruWalk() {
+
+  try {
+
+    /* Route layers are created only after the map has loaded. */
+    const routeSource = map.getSource('uluru-walk-route');
+    const progressSource = map.getSource('uluru-walk-progress');
+
+    if (!routeSource || !progressSource) {
+      throw new Error('Uluru walk layers are not ready yet. Wait for the map to finish loading.');
+    }
+
+    /* Stop a previous run before starting again. */
+    if (uluruWalkAnimation) {
+      cancelAnimationFrame(uluruWalkAnimation);
+      uluruWalkAnimation = null;
+    }
+
+    if (uluruWalkerMarker) {
+      uluruWalkerMarker.remove();
+      uluruWalkerMarker = null;
+    }
+
+    const response = await fetch(
+      'data/routes/uluru-base-walk.geojson',
+      { cache: 'no-store' }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Could not load Uluru Base Walk route (${response.status})`);
+    }
+
+    const route = await response.json();
+
+    /* Support either a Feature or FeatureCollection. */
+    const feature = route.type === 'FeatureCollection'
+      ? route.features?.[0]
+      : route;
+
+    if (!feature || feature.geometry?.type !== 'LineString') {
+      throw new Error('Uluru Base Walk GeoJSON must contain a LineString feature.');
+    }
+
+    const coordinates = feature.geometry.coordinates;
+
+    if (!Array.isArray(coordinates) || coordinates.length < 2) {
+      throw new Error('Uluru Base Walk route has fewer than two coordinates.');
+    }
+
+    console.log(`Uluru Base Walk loaded: ${coordinates.length} points`);
+
+    /* Show complete route faintly. */
+    routeSource.setData({
+      type: 'Feature',
+      properties: {
+        name: feature.properties?.name || 'Uluru Base Walk'
+      },
+      geometry: {
+        type: 'LineString',
+        coordinates: coordinates
+      }
+    });
+
+    /* Clear the previous progress line. */
+    progressSource.setData({
+      type: 'FeatureCollection',
+      features: []
+    });
+
+    /* Create walker marker. */
+    const walker = document.createElement('div');
+    walker.innerHTML = '🥾';
+    walker.style.fontSize = '28px';
+    walker.style.width = '34px';
+    walker.style.height = '34px';
+    walker.style.display = 'flex';
+    walker.style.alignItems = 'center';
+    walker.style.justifyContent = 'center';
+    walker.style.background = 'white';
+    walker.style.borderRadius = '50%';
+    walker.style.boxShadow = '0 2px 8px rgba(0,0,0,0.35)';
+
+    uluruWalkerMarker = new maplibregl.Marker({
+      element: walker,
+      anchor: 'center'
+    })
+      .setLngLat(coordinates[0])
+      .addTo(map);
+
+    /* Zoom to the full route. */
+    const bounds = coordinates.reduce(
+      (routeBounds, coordinate) => routeBounds.extend(coordinate),
+      new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
+    );
+
+    map.fitBounds(bounds, {
+      padding: 80,
+      duration: 1800
+    });
+
+    await new Promise(resolve => setTimeout(resolve, 1900));
+
+    /* Animate every original route point in order. */
+    const progressCoordinates = [coordinates[0]];
+    const totalDuration = 35000; // About 35 seconds.
+    const interval = totalDuration / (coordinates.length - 1);
+
+    let index = 1;
+    let previousTime = 0;
+
+    function animate(timestamp) {
+
+      if (!previousTime) previousTime = timestamp;
+
+      if (timestamp - previousTime >= interval) {
+
+        previousTime = timestamp;
+
+        if (index >= coordinates.length) {
+          uluruWalkAnimation = null;
+          return;
+        }
+
+        const coordinate = coordinates[index];
+        progressCoordinates.push(coordinate);
+
+        /* A valid LineString starts once two route points exist. */
+        progressSource.setData({
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: progressCoordinates
+          }
+        });
+
+        uluruWalkerMarker.setLngLat(coordinate);
+        index++;
+      }
+
+      uluruWalkAnimation = requestAnimationFrame(animate);
+    }
+
+    uluruWalkAnimation = requestAnimationFrame(animate);
+
+  } catch (error) {
+
+    console.error('Uluru walk animation error:', error);
+
+  }
+
+}
+
+/* Make testing from the browser Console reliable. */
+window.startUluruWalk = startUluruWalk;
+
+
+/* =========================================================
    ADD PERMANENT TRAVEL SOURCE + LAYERS
    ========================================================= */
 
@@ -425,6 +378,7 @@ function addTravelLayers() {
     map.getSource('travel-places').setData(currentFilteredData);
 
   }
+
 
 
   /* ==================== CLUSTER CIRCLES ==================== */
@@ -805,6 +759,7 @@ function buildRecentPlaces() {
 
   travelData.features
     .slice()
+
     .reverse()
     .slice(0, 6)
     .forEach(feature => {
