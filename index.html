@@ -232,8 +232,7 @@
 
 
   </div>
-
-    <!-- =====================================================
+      <!-- =====================================================
        MAIN DESKTOP NAVIGATION
        Hidden on mobile through CSS.
        ===================================================== -->
@@ -555,63 +554,99 @@
 
   <div id="overlayBackdrop"></div>
 
-
-  <!-- =====================================================
+    <!-- =====================================================
        PLACE DASHBOARD
        ===================================================== -->
 
-  <!-- EXPERIENCE -->
-  <button class="dashboard-nav-button active" data-dashboard-section="experience" type="button">
-    <span class="dashboard-nav-icon">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 3a9 9 0 1 0 9 9"></path>
-        <path d="M12 7v5l3 2"></path>
-      </svg>
-    </span>
+  <div id="travelDashboard">
 
-    <span class="dashboard-nav-label">
-      Experience
-    </span>
-  </button>
+    <div class="dashboard-layout">
 
 
-  <!-- PLAN -->
-  <button class="dashboard-nav-button" data-dashboard-section="plan" type="button">
-    <span class="dashboard-nav-icon">
-      <svg viewBox="0 0 24 24">
-        <path d="M4 5h16v14H4z"></path>
-        <path d="M8 3v4"></path>
-        <path d="M16 3v4"></path>
-        <path d="M4 9h16"></path>
-      </svg>
-    </span>
+      <!-- =================================================
+           DASHBOARD NAVIGATION
+           EXPERIENCE / PLAN / EXPLORE
+           ================================================= -->
 
-    <span class="dashboard-nav-label">
-      Plan
-    </span>
-  </button>
+      <aside class="dashboard-sidebar">
+
+        <div class="dashboard-nav">
 
 
-  <!-- EXPLORE -->
-  <button class="dashboard-nav-button" data-dashboard-section="explore" type="button">
-    <span class="dashboard-nav-icon">
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="9"></circle>
-        <path d="M15.5 8.5l-2 5-5 2 2-5z"></path>
-      </svg>
-    </span>
+          <!-- ==================== EXPERIENCE ==================== -->
 
-    <span class="dashboard-nav-label">
-      Explore
-    </span>
-  </button>
+          <button class="dashboard-nav-button active" data-dashboard-section="experience" type="button">
 
-</div>
+            <span class="dashboard-nav-icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 7v5l3 2"></path>
+              </svg>
+            </span>
 
+            <span class="dashboard-nav-label">
+              Experience
+            </span>
+
+          </button>
+
+
+          <!-- ==================== PLAN ==================== -->
+
+          <button class="dashboard-nav-button" data-dashboard-section="plan" type="button">
+
+            <span class="dashboard-nav-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+                <path d="M8 3v4"></path>
+                <path d="M16 3v4"></path>
+                <path d="M4 9h16"></path>
+              </svg>
+            </span>
+
+            <span class="dashboard-nav-label">
+              Plan
+            </span>
+
+          </button>
+
+
+          <!-- ==================== EXPLORE ==================== -->
+
+          <button class="dashboard-nav-button" data-dashboard-section="explore" type="button">
+
+            <span class="dashboard-nav-icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M15.5 8.5l-2 5-5 2 2-5z"></path>
+              </svg>
+            </span>
+
+            <span class="dashboard-nav-label">
+              Explore
+            </span>
+
+          </button>
+
+        </div>
+
+
+        <!-- ==================== BEST TIME ==================== -->
+
+        <div class="best-time-card">
+
+          <strong>
+            Best time to visit
+          </strong>
+
+          <p id="bestTime"></p>
+
+        </div>
 
       </aside>
 
-            <!-- =================================================
+
+      <!-- =================================================
            DASHBOARD MAIN
            ================================================= -->
 
@@ -961,7 +996,7 @@
             class="dashboard-tab-content"
           >
 
-            <div class="dashboard-section">
+                        <div class="dashboard-section">
 
               <h2>
                 Official resources
@@ -1278,3 +1313,10 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
