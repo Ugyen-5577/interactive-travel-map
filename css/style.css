@@ -3805,24 +3805,25 @@ button {
 }
 
 /* =========================================================
-   FINAL DASHBOARD SIDEBAR COLOUR OVERRIDE
-   Keep this as the LAST block in style.css
+   DASHBOARD SIDEBAR — DISTINCT BACKGROUND
    ========================================================= */
 
-/* Desktop / tablet */
 #travelDashboard .dashboard-sidebar {
   background: #eef2f6 !important;
   border-right: 1px solid #d7dde5 !important;
 }
 
 
-/* Navigation buttons */
+/* Normal navigation buttons */
+
 #travelDashboard .dashboard-nav-button {
   background: transparent !important;
+  border: 1px solid transparent;
 }
 
 
 /* Active navigation button */
+
 #travelDashboard .dashboard-nav-button.active {
   background: #fff0e6 !important;
   color: #f4511e !important;
@@ -3831,19 +3832,22 @@ button {
 
 
 /* Best time card */
+
 #travelDashboard .best-time-card {
   background: #fff7e8 !important;
+  border: 1px solid #f2e1ca;
 }
 
 
 /* =========================================================
-   PHONE
+   PHONE / TABLET
    ========================================================= */
 
 @media (max-width: 950px) {
 
   #travelDashboard .dashboard-sidebar {
     background: #e9eef4 !important;
+    border-right: 1px solid #d7dde5 !important;
   }
 
 }
