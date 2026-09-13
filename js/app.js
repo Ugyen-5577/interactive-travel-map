@@ -1937,11 +1937,11 @@ function populateExperiencePlanExplore(properties) {
      EXPLORE — CATEGORIES
      ======================================================= */
 
-  renderSimpleList(
-    'exploreSimilar',
-    explore.similar || explore.similarExperiences,
-    'Similar experiences will be added soon.'
-  );
+ renderSimpleList(
+  'exploreEvents',
+  explore.events,
+  'Events will be added soon.'
+);
 
   renderSimpleList(
     'exploreWalks',
