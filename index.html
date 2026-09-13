@@ -269,7 +269,6 @@
 
       </span>
 
-      
       <span class="menu-label">
         Explore
       </span>
@@ -539,7 +538,7 @@
        Desktop only in current mobile design.
        ===================================================== -->
 
-    <section id="recentPlaces">
+  <section id="recentPlaces">
 
     <h3 class="recent-heading">
       Recently Added / Top Places
@@ -574,77 +573,25 @@
 
         <div class="dashboard-nav">
 
-          <!-- ==================== OVERVIEW ==================== -->
-
-          <button class="dashboard-nav-button active" data-dashboard-tab="overview" type="button">
-            <span class="dashboard-nav-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M3 11.5L12 4l9 7.5"></path>
-                <path d="M5 10.5V20h14v-9.5"></path>
-              </svg>
-            </span>
-            <span class="dashboard-nav-label">Overview</span>
+          <!-- ==================== EXPERIENCE ==================== -->
+          <button class="dashboard-nav-button active" data-dashboard-tab="experience" type="button">
+            <span class="dashboard-nav-icon">✦</span>
+            <span class="dashboard-nav-label">Experience</span>
           </button>
 
-
-          <!-- ==================== GALLERY ==================== -->
-
-          <button class="dashboard-nav-button" data-dashboard-tab="gallery" type="button">
-            <span class="dashboard-nav-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
-                <circle cx="8" cy="9" r="1.5"></circle>
-                <path d="M4 17l5-5 4 4 2-2 5 5"></path>
-              </svg>
-            </span>
-            <span class="dashboard-nav-label">Gallery</span>
+          <!-- ==================== PLAN ==================== -->
+          <button class="dashboard-nav-button" data-dashboard-tab="plan" type="button">
+            <span class="dashboard-nav-icon">☰</span>
+            <span class="dashboard-nav-label">Plan</span>
           </button>
 
-
-          <!-- ==================== VIDEOS ==================== -->
-
-          <button class="dashboard-nav-button" data-dashboard-tab="videos" type="button">
-            <span class="dashboard-nav-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="3" y="5" width="14" height="14" rx="2"></rect>
-                <path d="M10 9l4 3-4 3z"></path>
-                <path d="M17 10l4-2v8l-4-2"></path>
-              </svg>
-            </span>
-            <span class="dashboard-nav-label">Videos</span>
-          </button>
-
-
-          <!-- ==================== INFO ==================== -->
-
-          <button class="dashboard-nav-button" data-dashboard-tab="info" type="button">
-            <span class="dashboard-nav-icon">
-              <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9"></circle>
-                <path d="M12 11v6"></path>
-                <path d="M12 7h.01"></path>
-              </svg>
-            </span>
-            <span class="dashboard-nav-label">Info</span>
-          </button>
-
-
-          <!-- ==================== LINKS ==================== -->
-
-          <button class="dashboard-nav-button" data-dashboard-tab="links" type="button">
-            <span class="dashboard-nav-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"></path>
-                <path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.1-1.1"></path>
-              </svg>
-            </span>
-            <span class="dashboard-nav-label">Links</span>
+          <!-- ==================== EXPLORE ==================== -->
+          <button class="dashboard-nav-button" data-dashboard-tab="explore" type="button">
+            <span class="dashboard-nav-icon">⌖</span>
+            <span class="dashboard-nav-label">Explore</span>
           </button>
 
         </div>
-
-
-        <!-- ==================== BEST TIME ==================== -->
 
         <div class="best-time-card">
           <strong>Best time to visit</strong>
@@ -730,293 +677,126 @@
 
         <div class="dashboard-content">
 
+          <!-- =====================================================
+               EXPERIENCE
+               Personal story, media, observations and routes.
+               ===================================================== -->
+          <section id="dashboardExperience" class="dashboard-tab-content active">
 
-          <!-- ===============================================
-               OVERVIEW
-               =============================================== -->
-
-          <section
-            id="dashboardOverview"
-            class="dashboard-tab-content active"
-          >
-
+            <div class="section-intro">
+              <span class="section-kicker">EXPERIENCE</span>
+              <h2>What it was like</h2>
+              <p id="experienceSummary" class="section-summary"></p>
+            </div>
 
             <div class="quick-grid">
-
-
-              <div class="quick-card">
-
-                <div class="quick-label">
-                  Visited
-                </div>
-
-                <div
-                  id="quickVisited"
-                  class="quick-value"
-                ></div>
-
-              </div>
-
-
-              <div class="quick-card">
-
-                <div class="quick-label">
-                  Category
-                </div>
-
-                <div
-                  id="quickCategory"
-                  class="quick-value"
-                ></div>
-
-              </div>
-
-
-              <div class="quick-card">
-
-                <div class="quick-label">
-                  Photos
-                </div>
-
-                <div
-                  id="quickPhotos"
-                  class="quick-value"
-                ></div>
-
-              </div>
-
-
-              <div class="quick-card">
-
-                <div class="quick-label">
-                  Videos
-                </div>
-
-                <div
-                  id="quickVideos"
-                  class="quick-value"
-                ></div>
-
-              </div>
-
-
+              <div class="quick-card"><div class="quick-label">Visited</div><div id="quickVisited" class="quick-value"></div></div>
+              <div class="quick-card"><div class="quick-label">Category</div><div id="quickCategory" class="quick-value"></div></div>
+              <div class="quick-card"><div class="quick-label">Photos</div><div id="quickPhotos" class="quick-value"></div></div>
+              <div class="quick-card"><div class="quick-label">Videos</div><div id="quickVideos" class="quick-value"></div></div>
             </div>
 
-
-            <!-- ABOUT -->
-
-           <!-- =====================================================
-     ULURU ACTIVITY ROUTE
-     Hidden for destinations other than Uluru.
-     ===================================================== -->
-
-            
-<div
-  id="uluruActivityPanel"
-  class="activity-panel"
-  style="display: none;"
->
-
-  <div class="activity-panel-text">
-
-    <div class="activity-panel-title">
-      Explore my route
-    </div>
-
-    <div class="activity-panel-description">
-      Watch my walk around the base of Uluru.
-    </div>
-
-  </div>
-
-  <button
-    id="startUluruWalkButton"
-    class="activity-route-button"
-    type="button"
-  >
-    <span class="activity-route-icon">🥾</span>
-    <span>Animate Base Walk</span>
-  </button>
-
-</div>
-
-
-<!-- ABOUT -->
-
-<div class="about-block">
-
-              <h2 id="aboutHeading">
-                About
-              </h2>
-
-              <p id="aboutPreview"></p>
-
-              <div
-                id="aboutFull"
-                class="place-description"
-              ></div>
-
-              <button
-                id="readMoreButton"
-                type="button"
-              >
-                Read more ↓
+            <!-- ULURU ROUTE / ACTIVITY -->
+            <div id="uluruActivityPanel" class="activity-panel" style="display: none;">
+              <div class="activity-panel-text">
+                <div class="activity-panel-title">Explore my route</div>
+                <div class="activity-panel-description">Watch my walk around the base of Uluru.</div>
+              </div>
+              <button id="startUluruWalkButton" class="activity-route-button" type="button">
+                <span class="activity-route-icon">🥾</span>
+                <span>Animate Base Walk</span>
               </button>
-
             </div>
 
+            <div class="about-block">
+              <h2 id="aboutHeading">About</h2>
+              <p id="aboutPreview"></p>
+              <div id="aboutFull" class="place-description"></div>
+              <button id="readMoreButton" type="button">Read more ↓</button>
+            </div>
 
-          </section>
-
-
-          <!-- ===============================================
-               GALLERY
-               =============================================== -->
-
-          <section
-            id="dashboardGallery"
-            class="dashboard-tab-content"
-          >
+            <div class="experience-insight-grid">
+              <article class="insight-card"><span>👀</span><h3>What surprised me</h3><div id="experienceSurprised"></div></article>
+              <article class="insight-card"><span>💡</span><h3>What I learned</h3><div id="experienceLearned"></div></article>
+              <article class="insight-card"><span>↻</span><h3>What I’d do differently</h3><div id="experienceDifferent"></div></article>
+              <article class="insight-card"><span>🌿</span><h3>Environmental observations</h3><div id="experienceEnvironment"></div></article>
+            </div>
 
             <div class="dashboard-section">
-
-              <h2>
-                Photos
-              </h2>
-
+              <div class="section-heading-row"><h2>Photos</h2><span id="experiencePhotoLabel" class="section-count-label"></span></div>
               <div id="photoGallery"></div>
-
             </div>
 
-          </section>
-
-
-          <!-- ===============================================
-               VIDEOS
-               =============================================== -->
-
-          <section
-            id="dashboardVideos"
-            class="dashboard-tab-content"
-          >
-
             <div class="dashboard-section">
-
-              <h2>
-                Short Videos
-              </h2>
-
+              <div class="section-heading-row"><h2>Short videos</h2><span id="experienceVideoLabel" class="section-count-label"></span></div>
               <div id="videoGallery"></div>
-
             </div>
 
           </section>
 
 
-          <!-- ===============================================
-               INFO
-               =============================================== -->
+          <!-- =====================================================
+               PLAN
+               Practical information for preparing a visit.
+               ===================================================== -->
+          <section id="dashboardPlan" class="dashboard-tab-content">
 
-          <section
-            id="dashboardInfo"
-            class="dashboard-tab-content"
-          >
-
-            <div class="dashboard-section">
-
-
-              <h2>
-                Visitor information
-              </h2>
-
-
-              <div class="info-grid">
-
-
-                <article class="info-card">
-
-                  <h3>
-                    Getting there
-                  </h3>
-
-                  <p id="infoGettingThere"></p>
-
-                </article>
-
-
-                <article class="info-card">
-
-                  <h3>
-                    Staying nearby
-                  </h3>
-
-                  <p id="infoStayingNearby"></p>
-
-                </article>
-
-
-                <article class="info-card">
-
-                  <h3>
-                    Explore nearby
-                  </h3>
-
-                  <p id="infoExploreNearby"></p>
-
-                </article>
-
-
-                <article class="info-card">
-
-                  <h3>
-                    Planning
-                  </h3>
-
-                  <p id="infoPlanVisit"></p>
-
-                </article>
-
-
-                <article class="info-card">
-
-                  <h3>
-                    Respect
-                  </h3>
-
-                  <p id="infoCulturalNote"></p>
-
-                </article>
-
-
-              </div>
-
-
+            <div class="section-intro">
+              <span class="section-kicker">PLAN</span>
+              <h2>Prepare your visit</h2>
+              <p class="section-summary">Practical information gathered from the trip and official sources.</p>
             </div>
 
-          </section>
-
-
-          <!-- ===============================================
-               LINKS
-               =============================================== -->
-
-          <section
-            id="dashboardLinks"
-            class="dashboard-tab-content"
-          >
+            <div class="plan-quick-grid">
+              <article class="plan-card"><span class="plan-icon">☀</span><h3>Best time</h3><p id="planBestTime"></p></article>
+              <article class="plan-card"><span class="plan-icon">🚗</span><h3>Getting there</h3><p id="infoGettingThere"></p></article>
+              <article class="plan-card"><span class="plan-icon">🛏</span><h3>Staying nearby</h3><p id="infoStayingNearby"></p></article>
+              <article class="plan-card"><span class="plan-icon">📅</span><h3>Planning</h3><p id="infoPlanVisit"></p></article>
+              <article class="plan-card"><span class="plan-icon">🤝</span><h3>Respect</h3><p id="infoCulturalNote"></p></article>
+              <article class="plan-card"><span class="plan-icon">📍</span><h3>Access</h3><p id="planAccess"></p></article>
+              <article class="plan-card"><span class="plan-icon">🚻</span><h3>Facilities</h3><p id="planFacilities"></p></article>
+              <article class="plan-card"><span class="plan-icon">⚠</span><h3>Safety</h3><p id="planSafety"></p></article>
+              <article class="plan-card"><span class="plan-icon">📶</span><h3>Mobile coverage</h3><p id="planMobile"></p></article>
+              <article class="plan-card"><span class="plan-icon">🎒</span><h3>What to pack</h3><p id="planPacking"></p></article>
+              <article class="plan-card"><span class="plan-icon">🎫</span><h3>Permits / passes</h3><p id="planPermits"></p></article>
+              <article class="plan-card"><span class="plan-icon">💰</span><h3>Cost</h3><p id="planCost"></p></article>
+            </div>
 
             <div class="dashboard-section">
-
-              <h2>
-                Official resources
-              </h2>
-
+              <h2>Official resources</h2>
               <div id="dashboardLinksList"></div>
-
             </div>
 
           </section>
 
+
+          <!-- =====================================================
+               EXPLORE
+               Geographic discovery and related experiences.
+               ===================================================== -->
+          <section id="dashboardExplore" class="dashboard-tab-content">
+
+            <div class="section-intro">
+              <span class="section-kicker">EXPLORE</span>
+              <h2>Discover around this place</h2>
+              <p class="section-summary">Use the map to branch into nearby and similar experiences.</p>
+            </div>
+
+            <div class="explore-grid">
+              <article class="explore-card"><span class="explore-icon">⌖</span><h3>Nearby experiences</h3><p id="infoExploreNearby"></p></article>
+              <article class="explore-card"><span class="explore-icon">✦</span><h3>Similar experiences</h3><div id="exploreSimilar"></div></article>
+              <article class="explore-card"><span class="explore-icon">🥾</span><h3>Walks</h3><div id="exploreWalks"></div></article>
+              <article class="explore-card"><span class="explore-icon">🚙</span><h3>Road trips</h3><div id="exploreRoadTrips"></div></article>
+              <article class="explore-card"><span class="explore-icon">🌿</span><h3>Nature</h3><div id="exploreNature"></div></article>
+              <article class="explore-card"><span class="explore-icon">🏛</span><h3>Culture & cities</h3><div id="exploreCulture"></div></article>
+            </div>
+
+            <div class="dashboard-section">
+              <h2>Explore on the map</h2>
+              <p class="explore-map-note">Close this dashboard and use the map filters to discover more places by category.</p>
+            </div>
+
+          </section>
 
         </div>
         <!-- END dashboard-content -->
@@ -1081,7 +861,6 @@
 
       <div class="mobile-map-styles">
 
-        
 
         <button
           class="style-button"
@@ -1323,5 +1102,3 @@
 </body>
 
 </html>
-
-      
