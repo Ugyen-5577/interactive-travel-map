@@ -3805,57 +3805,45 @@ button {
 }
 
 /* =========================================================
-   DASHBOARD SIDEBAR — DISTINCT BACKGROUND
+   FINAL DASHBOARD SIDEBAR COLOUR OVERRIDE
+   Keep this as the LAST block in style.css
    ========================================================= */
 
-.dashboard-sidebar {
-  background: #f7f5f2;
-  border-right: 1px solid #e4e0da;
+/* Desktop / tablet */
+#travelDashboard .dashboard-sidebar {
+  background: #eef2f6 !important;
+  border-right: 1px solid #d7dde5 !important;
 }
 
 
-/* Keep navigation area clean and separated */
-
-.dashboard-nav {
-  padding-top: 8px;
-}
-
-
-/* Normal navigation buttons */
-
-.dashboard-nav-button {
-  background: transparent;
-  border: 1px solid transparent;
+/* Navigation buttons */
+#travelDashboard .dashboard-nav-button {
+  background: transparent !important;
 }
 
 
 /* Active navigation button */
-
-.dashboard-nav-button.active {
-  background: #fff0e7;
-  border-color: #f2c5ad;
-  color: #f4511e;
+#travelDashboard .dashboard-nav-button.active {
+  background: #fff0e6 !important;
+  color: #f4511e !important;
+  border: 1px solid #f2c2a8 !important;
 }
 
 
 /* Best time card */
-
-.best-time-card {
-  background: #fff7ed;
-  border: 1px solid #f4e3d2;
+#travelDashboard .best-time-card {
+  background: #fff7e8 !important;
 }
 
 
 /* =========================================================
-   PHONE / SMALL SCREEN
+   PHONE
    ========================================================= */
 
 @media (max-width: 950px) {
 
-  .dashboard-sidebar {
-    background: #f5f3ef;
-    border-right: 1px solid #dedad3;
+  #travelDashboard .dashboard-sidebar {
+    background: #e9eef4 !important;
   }
 
 }
-
