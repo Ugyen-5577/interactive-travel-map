@@ -1929,51 +1929,103 @@ function populateExperiencePlanExplore(properties) {
    EXPERIENCE / PLAN / EXPLORE
    ========================================================= */
 
-const dashboardTabs = {
-  experience: document.getElementById('dashboardExperience'),
-  plan: document.getElementById('dashboardPlan'),
-  explore: document.getElementById('dashboardExplore')
-};
+function showDashboardTab(tabName) {
 
-function showDashboardTab(tab) {
-  Object.values(dashboardTabs).forEach(section => {
-    if (section) {
-      section.classList.remove('active');
-    }
+  /* ==================== TAB SECTIONS ==================== */
+
+  const sections = {
+    experience: document.getElementById('dashboardExperience'),
+    plan: document.getElementById('dashboardPlan'),
+    explore: document.getElementById('dashboardExplore')
+  };
+
+
+  /* ==================== HIDE ALL SECTIONS ==================== */
+
+  Object.values(sections).forEach(section => {
+
+    if (!section) return;
+
+    section.classList.remove('active');
+    section.style.display = 'none';
+
   });
 
-  if (dashboardTabs[tab]) {
-    dashboardTabs[tab].classList.add('active');
+
+  /* ==================== SHOW SELECTED SECTION ==================== */
+
+  const selectedSection = sections[tabName];
+
+  if (selectedSection) {
+
+    selectedSection.classList.add('active');
+    selectedSection.style.display = 'block';
+
   }
 
-  document.querySelectorAll('.dashboard-nav-button').forEach(button => {
-    button.classList.toggle(
-      'active',
-      button.dataset.dashboardTab === tab
-    );
-  });
+
+  /* ==================== UPDATE LEFT NAVIGATION ==================== */
+
+  document
+    .querySelectorAll('.dashboard-nav-button')
+    .forEach(button => {
+
+      const isActive =
+        button.dataset.dashboardTab === tabName;
+
+      button.classList.toggle(
+        'active',
+        isActive
+      );
+
+    });
+
+
+  /* ==================== RETURN CONTENT TO TOP ==================== */
 
   const dashboardMain =
     document.querySelector('.dashboard-main');
 
   if (dashboardMain) {
+
     dashboardMain.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
+
   }
+
 }
 
-document.querySelectorAll('.dashboard-nav-button').forEach(button => {
-  button.addEventListener('click', () => {
-    const tab =
-      button.dataset.dashboardTab;
 
-    if (!dashboardTabs[tab]) return;
+/* =========================================================
+   DASHBOARD NAVIGATION BUTTON CLICKS
+   ========================================================= */
 
-    showDashboardTab(tab);
+document
+  .querySelectorAll('.dashboard-nav-button')
+  .forEach(button => {
+
+    button.addEventListener('click', event => {
+
+      event.preventDefault();
+
+      const tabName =
+        button.dataset.dashboardTab;
+
+      if (
+        tabName !== 'experience' &&
+        tabName !== 'plan' &&
+        tabName !== 'explore'
+      ) {
+        return;
+      }
+
+      showDashboardTab(tabName);
+
+    });
+
   });
-});
 
 /* =========================================================
    ESCAPE KEY
