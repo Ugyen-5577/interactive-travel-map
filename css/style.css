@@ -3377,3 +3377,236 @@ button {
   }
 
 }
+
+/* =========================================================
+   RESPONSIVE DESKTOP / TABLET FIX
+   Keeps large desktop layout intact but prevents controls
+   from becoming cramped on narrower screens.
+   ========================================================= */
+
+
+/* =========================================================
+   LARGE / NORMAL DESKTOP
+   ========================================================= */
+
+@media (min-width: 1201px) {
+
+  #topUI {
+    left: 16px;
+    right: 70px;
+    gap: 10px;
+  }
+
+  .map-brand {
+    flex: 0 0 240px;
+  }
+
+  .search-wrap {
+    flex: 0 1 370px;
+    min-width: 220px;
+    max-width: 390px;
+  }
+
+  .category-bar {
+    flex: 1 1 auto;
+    min-width: 260px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL DESKTOP / TABLET LANDSCAPE
+   951px – 1200px
+   ========================================================= */
+
+@media (min-width: 951px) and (max-width: 1200px) {
+
+  /* ---------- TOP UI ---------- */
+
+  #topUI {
+    left: 12px;
+    right: 58px;
+    gap: 8px;
+  }
+
+
+  /* ---------- BRAND ---------- */
+
+  .map-brand {
+    flex: 0 0 62px;
+    width: 62px;
+    height: 58px;
+    padding: 6px;
+    justify-content: center;
+  }
+
+  .map-brand img {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+  }
+
+  .brand-text {
+    display: none;
+  }
+
+
+  /* ---------- SEARCH ---------- */
+
+  .search-wrap {
+    flex: 1 1 260px;
+    min-width: 180px;
+    max-width: 320px;
+    height: 58px;
+  }
+
+  .search-box {
+    height: 58px;
+  }
+
+
+  /* ---------- CATEGORY BAR ---------- */
+
+  .category-bar {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 58px;
+    overflow-x: auto;
+  }
+
+  .category-button {
+    height: 40px;
+    padding: 0 9px;
+    font-size: 10px;
+  }
+
+
+  /* ---------- MAP STYLE ---------- */
+
+  .map-style-switcher {
+    height: 58px;
+  }
+
+  .style-button {
+    height: 40px;
+    padding: 0 8px;
+    font-size: 10px;
+  }
+
+
+  /* ---------- LEFT MENU ---------- */
+
+  .main-menu {
+    top: 88px;
+    left: 12px;
+    width: 132px;
+  }
+
+  .menu-item {
+    min-height: 48px;
+    padding: 0 10px;
+  }
+
+  .menu-label {
+    font-size: 11px;
+  }
+
+
+  /* ---------- RECENT PLACES ---------- */
+
+  #recentPlaces {
+    left: 170px;
+    right: 90px;
+    bottom: 14px;
+  }
+
+  .recent-card {
+    flex: 0 0 145px;
+    height: 105px;
+  }
+
+
+  /* ---------- MAPLIBRE CONTROLS ---------- */
+
+  .maplibregl-ctrl-top-right {
+    top: 82px;
+    right: 6px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE / TABLET PORTRAIT
+   Existing mobile design starts below 950px.
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+  #map {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+  #topUI {
+    left: 8px !important;
+    right: 8px !important;
+    gap: 7px !important;
+
+    grid-template-columns:
+      48px
+      minmax(0, 1fr)
+      48px !important;
+  }
+
+
+  /* ---------- LOGO ---------- */
+
+  #topUI > .map-brand {
+    width: 48px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
+    height: 48px !important;
+  }
+
+  .map-brand img {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+
+  /* ---------- SEARCH ---------- */
+
+  .search-wrap,
+  .search-box {
+    height: 48px !important;
+  }
+
+  .search-box {
+    padding: 0 12px !important;
+  }
+
+  #placeSearch {
+    font-size: 14px !important;
+  }
+
+
+  /* ---------- HAMBURGER ---------- */
+
+  .mobile-menu-button {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+}
