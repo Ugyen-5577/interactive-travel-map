@@ -1712,7 +1712,12 @@ function getNestedValue(object, keys, fallback = '') {
   return fallback;
 }
 
+/* =========================================================
+   POPULATE EXPERIENCE / PLAN / EXPLORE
+   ========================================================= */
+
 function populateExperiencePlanExplore(properties) {
+
   if (!properties) return;
 
   const experience = properties.experience || {};
@@ -1722,7 +1727,10 @@ function populateExperiencePlanExplore(properties) {
   const photos = getMediaArray(properties, 'photos', 'photo');
   const videos = getMediaArray(properties, 'videos', 'video');
 
-  /* ==================== EXPERIENCE ==================== */
+
+  /* =======================================================
+     EXPERIENCE
+     ======================================================= */
 
   setText(
     'experienceSummary',
@@ -1765,130 +1773,169 @@ function populateExperiencePlanExplore(properties) {
     'Environmental observations will be added soon.'
   );
 
-  /* ==================== PLAN ==================== */
+
+  /* =======================================================
+     PLAN — BEST TIME
+     ======================================================= */
+
+  const bestSeason = plan.bestSeason || {};
 
   setText(
     'planBestTime',
-    getNestedValue(
-      plan,
-      ['bestTime', 'bestSeason'],
-      properties.bestTime || 'Check seasonal conditions before travelling.'
-    )
+    bestSeason.summary ||
+    plan.bestTime ||
+    properties.bestTime ||
+    'Check seasonal conditions before travelling.'
   );
+
+
+  /* =======================================================
+     PLAN — ACCESS
+     ======================================================= */
+
+  const access = plan.access || {};
 
   setText(
     'planAccess',
-    getNestedValue(
-      plan,
-      ['access', 'gettingThere'],
-      properties.gettingThere || 'Information not added yet.'
-    )
+    access.summary ||
+    plan.gettingThere ||
+    properties.gettingThere ||
+    'Information not added yet.'
   );
 
-  setText(
+
+  /* =======================================================
+     PLAN — FACILITIES
+     ======================================================= */
+
+  renderSimpleList(
     'planFacilities',
-    getNestedValue(
-      plan,
-      ['facilities'],
-      'Information not added yet.'
-    )
+    plan.facilities,
+    'Facilities information will be added soon.'
   );
 
-  setText(
+
+  /* =======================================================
+     PLAN — SAFETY
+     ======================================================= */
+
+  renderSimpleList(
     'planSafety',
-    getNestedValue(
-      plan,
-      ['safety'],
-      'Check current official advice before travelling.'
-    )
+    plan.safety,
+    'Check current official advice before travelling.'
   );
+
+
+  /* =======================================================
+     PLAN — MOBILE COVERAGE
+     ======================================================= */
 
   setText(
     'planMobile',
-    getNestedValue(
-      plan,
-      ['mobileCoverage', 'mobile'],
-      'Information not added yet.'
-    )
+    plan.mobileCoverage ||
+    'Information not added yet.'
   );
 
-  setText(
+
+  /* =======================================================
+     PLAN — WHAT TO PACK
+     ======================================================= */
+
+  renderSimpleList(
     'planPacking',
-    Array.isArray(plan.whatToPack)
-      ? plan.whatToPack.join(' • ')
-      : getNestedValue(
-          plan,
-          ['whatToPack', 'packing'],
-          'Information not added yet.'
-        )
+    plan.whatToPack,
+    'Packing information will be added soon.'
   );
+
+
+  /* =======================================================
+     PLAN — PERMITS / PARK PASS
+     ======================================================= */
 
   setText(
     'planPermits',
-    getNestedValue(
-      plan,
-      ['permits', 'passes'],
-      'Check whether passes or permits are required.'
-    )
+    plan.permits ||
+    'Check whether passes or permits are required.'
   );
+
+
+  /* =======================================================
+     PLAN — COST
+     ======================================================= */
 
   setText(
     'planCost',
-    getNestedValue(
-      plan,
-      ['cost'],
-      'Information not added yet.'
-    )
+    plan.cost ||
+    'Information not added yet.'
   );
 
-  /* ==================== LEGACY PLAN DATA ==================== */
+
+  /* =======================================================
+     PLAN — GETTING THERE
+     ======================================================= */
 
   setText(
     'infoGettingThere',
-    getNestedValue(
-      plan,
-      ['gettingThere', 'access'],
-      properties.gettingThere || 'Information not added yet.'
-    )
+    plan.gettingThere ||
+    access.summary ||
+    properties.gettingThere ||
+    'Information not added yet.'
   );
+
+
+  /* =======================================================
+     PLAN — STAYING NEARBY
+     ======================================================= */
 
   setText(
     'infoStayingNearby',
-    getNestedValue(
-      plan,
-      ['stayingNearby', 'accommodation'],
-      properties.stayingNearby || 'Information not added yet.'
-    )
+    plan.stayingNearby ||
+    properties.stayingNearby ||
+    'Information not added yet.'
   );
+
+
+  /* =======================================================
+     PLAN — PLANNING
+     ======================================================= */
 
   setText(
     'infoPlanVisit',
-    getNestedValue(
-      plan,
-      ['planVisit', 'planning'],
-      properties.planVisit || 'Information not added yet.'
-    )
+    plan.planVisit ||
+    properties.planVisit ||
+    'Information not added yet.'
   );
+
+
+  /* =======================================================
+     PLAN — CULTURAL RESPECT
+     ======================================================= */
 
   setText(
     'infoCulturalNote',
-    getNestedValue(
-      plan,
-      ['culturalNote', 'respect'],
-      properties.culturalNote || 'Information not added yet.'
-    )
+    plan.culturalConsiderations ||
+    plan.culturalNote ||
+    properties.culturalNote ||
+    'Information not added yet.'
   );
 
-  /* ==================== EXPLORE ==================== */
+
+  /* =======================================================
+     EXPLORE — NEARBY
+     ======================================================= */
 
   setText(
     'infoExploreNearby',
-    getNestedValue(
-      explore,
-      ['nearby', 'nearbyExperiences'],
-      properties.exploreNearby || 'Nearby experiences will be added soon.'
-    )
+    explore.nearby ||
+    explore.nearbyExperiences ||
+    properties.exploreNearby ||
+    'Nearby experiences will be added soon.'
   );
+
+
+  /* =======================================================
+     EXPLORE — CATEGORIES
+     ======================================================= */
 
   renderSimpleList(
     'exploreSimilar',
@@ -1921,8 +1968,8 @@ function populateExperiencePlanExplore(properties) {
     explore.culturalExperiences,
     'Culture and city experiences will be added soon.'
   );
-}
 
+}
 
 /* =========================================================
    DASHBOARD TABS
