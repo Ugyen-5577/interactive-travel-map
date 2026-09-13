@@ -182,62 +182,139 @@
 
     "plan": {
 
-      "distance": "",
-      "duration": "",
-      "difficulty": "",
-      "cost": "",
+  "distance": "Uluru is about 20 km by road from Yulara / Ayers Rock Resort.",
 
-      "access": {
-        "summary": "Most visitors fly into Ayers Rock Airport near Yulara or travel by road through Central Australia.",
-        "road": "",
-        "publicTransport": "",
-        "parking": ""
-      },
+  "duration": "Allow at least 2–3 days to explore Uluru, Kata Tjuta, walks, sunrise and sunset locations at a relaxed pace.",
 
-      "bestSeason": {
-        "summary": "April to October generally offers cooler and more comfortable conditions for walking and outdoor exploration.",
-        "months": []
-      },
+  "difficulty": "Most viewing areas and short walks are easy to moderate. The full Uluru Base Walk is longer and requires more time and preparation.",
 
-      "climate": {
-        "temperature": [],
-        "rainfall": []
-      },
+  "cost": "A Uluṟu-Kata Tjuṯa National Park pass is required. Adult 3-day pass: $38. Visitors under 18 enter free.",
 
-      "facilities": [],
 
-      "safety": [],
+  "access": {
 
-      "mobileCoverage": "",
+    "summary": "Most visitors stay at Yulara and travel into Uluṟu-Kata Tjuṯa National Park by car, tour vehicle or resort transport.",
 
-      "whatToPack": [],
+    "road": "Uluru is reached by sealed roads from Yulara. Self-drive is straightforward, but allow extra time for sunrise and sunset traffic and always check current road and park conditions.",
 
-      "permits": "",
+    "publicTransport": "There is no regular public transport network inside the national park. Resort transfers, organised tours and hire vehicles are commonly used.",
 
-      "culturalConsiderations": "Uluru and Kata Tjuṯa are culturally significant to the Aṉangu Traditional Owners. Respect signs, culturally sensitive areas and photography restrictions throughout the national park.",
+    "parking": "Designated parking areas are available at major locations including the Cultural Centre, Mala Walk, Kuniya Walk and official sunrise and sunset viewing areas."
 
-      "officialLinks": [
-        {
-          "name": "Parks Australia – Uluṟu-Kata Tjuṯa National Park",
-          "url": "https://parksaustralia.gov.au/uluru/"
-        },
-        {
-          "name": "Official Uluṟu-Kata Tjuṯa visitor information",
-          "url": "https://uluru.gov.au/"
-        },
-        {
-          "name": "Ayers Rock Resort",
-          "url": "https://www.ayersrockresort.com.au/"
-        },
-        {
-          "name": "Northern Territory – Uluru & Surrounds",
-          "url": "https://northernterritory.com/uluru-and-surrounds"
-        }
-      ],
+  },
 
-      "directionsUrl": ""
 
+  "bestSeason": {
+
+    "summary": "April to October generally provides cooler conditions for walking and outdoor exploration. Winter mornings and evenings can be cold, while summer temperatures can become extremely hot.",
+
+    "months": [
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October"
+    ]
+
+  },
+
+
+  "climate": {
+
+    "temperature": [],
+
+    "rainfall": []
+
+  },
+
+
+  "facilities": [
+    "Drinking water is available at selected walking areas and visitor facilities.",
+    "Toilets are available at several major visitor locations, but not at every walking track or lookout.",
+    "The Cultural Centre provides visitor information and cultural interpretation.",
+    "Some locations include picnic areas, shaded shelters and accessible viewing areas.",
+    "Emergency Call Devices are available at selected walking locations."
+  ],
+
+
+  "safety": [
+    "Carry plenty of drinking water, especially when walking.",
+    "Wear suitable walking shoes, sun protection and protective clothing.",
+    "Avoid strenuous walking during the hottest part of the day.",
+    "In hot weather, start longer walks early in the morning.",
+    "Some walking tracks may close when temperatures become dangerously high.",
+    "Check current park conditions, weather forecasts and track closures before setting out.",
+    "Stay on marked tracks and follow all park signs and ranger instructions."
+  ],
+
+
+  "mobileCoverage": "Mobile coverage can be limited or unavailable in parts of Uluṟu-Kata Tjuṯa National Park, particularly away from Yulara and major visitor areas. Do not rely entirely on your phone for navigation or emergency communication.",
+
+
+  "whatToPack": [
+    "Reusable water bottle",
+    "Comfortable walking shoes",
+    "Wide-brimmed hat",
+    "Sunscreen",
+    "Sunglasses",
+    "Lightweight sun-protective clothing",
+    "Warm layers for cool mornings and evenings",
+    "Small daypack",
+    "Camera or phone",
+    "Offline maps or downloaded visitor information"
+  ],
+
+
+  "permits": "A valid Uluṟu-Kata Tjuṯa National Park pass is required to enter the park. Additional permits may apply for some commercial photography, filming or specialised activities.",
+
+
+  "culturalConsiderations": "Uluṟu and Kata Tjuṯa are culturally significant to the Aṉangu Traditional Owners. Respect signs, culturally sensitive areas, photography restrictions and requests not to photograph certain sacred sites. Stay on designated tracks and follow cultural guidance throughout the park.",
+
+
+  "gettingThere": "Most visitors arrive through Ayers Rock Airport near Yulara or drive through Central Australia. Yulara is the main accommodation and service hub for visiting Uluṟu-Kata Tjuṯa National Park.",
+
+
+  "stayingNearby": "Most visitors stay at Yulara / Ayers Rock Resort, which provides accommodation, restaurants, shops, tours, vehicle hire and other visitor services close to the national park.",
+
+
+  "planVisit": "Allow enough time for sunrise or sunset viewing, the Cultural Centre and at least one walk. If you plan to complete the full Uluru Base Walk, start early and allow around 3.5 hours. Summer walking conditions can be extremely hot.",
+
+
+  "officialLinks": [
+
+    {
+      "name": "Parks Australia – Uluṟu-Kata Tjuṯa National Park",
+      "url": "https://parksaustralia.gov.au/uluru/"
     },
+
+    {
+      "name": "Official Uluṟu-Kata Tjuṯa visitor information",
+      "url": "https://uluru.gov.au/"
+    },
+
+    {
+      "name": "Buy a National Park Pass",
+      "url": "https://uluru.gov.au/plan/buy-your-pass/"
+    },
+
+    {
+      "name": "Ayers Rock Resort",
+      "url": "https://www.ayersrockresort.com.au/"
+    },
+
+    {
+      "name": "Northern Territory – Uluru & Surrounds",
+      "url": "https://northernterritory.com/uluru-and-surrounds"
+    }
+
+  ],
+
+
+  "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=Uluru-Kata+Tjuta+National+Park"
+
+},
 
     "explore": {
 
