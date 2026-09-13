@@ -1480,13 +1480,13 @@ if (linksList) {
 
 /* ==================== SHOW DASHBOARD ==================== */
 
-showDashboardTab('overview');
+populateExperiencePlanExplore(properties);
+showDashboardTab('experience');
 
 if (dashboard) dashboard.classList.add('active');
 if (backdrop) backdrop.classList.add('active');
 
 } // End openDashboard()
-
 
 
 
@@ -1667,24 +1667,279 @@ if (lightbox) {
 
 
 /* =========================================================
+   EXPERIENCE / PLAN / EXPLORE DATA
+   ========================================================= */
+
+function normaliseList(value) {
+  if (!value) return [];
+  if (Array.isArray(value)) return value.filter(Boolean);
+  return [value].filter(Boolean);
+}
+
+function renderSimpleList(id, value, emptyText = 'More information will be added soon.') {
+  const element = document.getElementById(id);
+  if (!element) return;
+
+  const items = normaliseList(value);
+
+  if (!items.length) {
+    element.innerHTML = `<p class="empty-feature-text">${emptyText}</p>`;
+    return;
+  }
+
+  element.innerHTML = `
+    <ul class="feature-list">
+      ${items.map(item => {
+        if (typeof item === 'string') return `<li>${item}</li>`;
+        return `<li>${item.name || item.title || ''}</li>`;
+      }).join('')}
+    </ul>
+  `;
+}
+
+function getNestedValue(object, keys, fallback = '') {
+  for (const key of keys) {
+    if (
+      object &&
+      object[key] !== undefined &&
+      object[key] !== null &&
+      object[key] !== ''
+    ) {
+      return object[key];
+    }
+  }
+
+  return fallback;
+}
+
+function populateExperiencePlanExplore(properties) {
+  if (!properties) return;
+
+  const experience = properties.experience || {};
+  const plan = properties.plan || {};
+  const explore = properties.explore || {};
+
+  const photos = getMediaArray(properties, 'photos', 'photo');
+  const videos = getMediaArray(properties, 'videos', 'video');
+
+  /* ==================== EXPERIENCE ==================== */
+
+  setText(
+    'experienceSummary',
+    experience.summary ||
+    properties.aboutPreview ||
+    `My experience at ${properties.name || 'this place'}.`
+  );
+
+  setText(
+    'experiencePhotoLabel',
+    `${photos.length} ${photos.length === 1 ? 'photo' : 'photos'}`
+  );
+
+  setText(
+    'experienceVideoLabel',
+    `${videos.length} ${videos.length === 1 ? 'video' : 'videos'}`
+  );
+
+  renderSimpleList(
+    'experienceSurprised',
+    experience.surprisedMe,
+    'Personal observations will be added soon.'
+  );
+
+  renderSimpleList(
+    'experienceLearned',
+    experience.whatILearned,
+    'What I learned will be added soon.'
+  );
+
+  renderSimpleList(
+    'experienceDifferent',
+    experience.whatIdDoDifferently,
+    'Notes will be added after reviewing the trip.'
+  );
+
+  renderSimpleList(
+    'experienceEnvironment',
+    experience.environmentalObservations || experience.observations,
+    'Environmental observations will be added soon.'
+  );
+
+  /* ==================== PLAN ==================== */
+
+  setText(
+    'planBestTime',
+    getNestedValue(
+      plan,
+      ['bestTime', 'bestSeason'],
+      properties.bestTime || 'Check seasonal conditions before travelling.'
+    )
+  );
+
+  setText(
+    'planAccess',
+    getNestedValue(
+      plan,
+      ['access', 'gettingThere'],
+      properties.gettingThere || 'Information not added yet.'
+    )
+  );
+
+  setText(
+    'planFacilities',
+    getNestedValue(
+      plan,
+      ['facilities'],
+      'Information not added yet.'
+    )
+  );
+
+  setText(
+    'planSafety',
+    getNestedValue(
+      plan,
+      ['safety'],
+      'Check current official advice before travelling.'
+    )
+  );
+
+  setText(
+    'planMobile',
+    getNestedValue(
+      plan,
+      ['mobileCoverage', 'mobile'],
+      'Information not added yet.'
+    )
+  );
+
+  setText(
+    'planPacking',
+    Array.isArray(plan.whatToPack)
+      ? plan.whatToPack.join(' • ')
+      : getNestedValue(
+          plan,
+          ['whatToPack', 'packing'],
+          'Information not added yet.'
+        )
+  );
+
+  setText(
+    'planPermits',
+    getNestedValue(
+      plan,
+      ['permits', 'passes'],
+      'Check whether passes or permits are required.'
+    )
+  );
+
+  setText(
+    'planCost',
+    getNestedValue(
+      plan,
+      ['cost'],
+      'Information not added yet.'
+    )
+  );
+
+  /* ==================== LEGACY PLAN DATA ==================== */
+
+  setText(
+    'infoGettingThere',
+    getNestedValue(
+      plan,
+      ['gettingThere', 'access'],
+      properties.gettingThere || 'Information not added yet.'
+    )
+  );
+
+  setText(
+    'infoStayingNearby',
+    getNestedValue(
+      plan,
+      ['stayingNearby', 'accommodation'],
+      properties.stayingNearby || 'Information not added yet.'
+    )
+  );
+
+  setText(
+    'infoPlanVisit',
+    getNestedValue(
+      plan,
+      ['planVisit', 'planning'],
+      properties.planVisit || 'Information not added yet.'
+    )
+  );
+
+  setText(
+    'infoCulturalNote',
+    getNestedValue(
+      plan,
+      ['culturalNote', 'respect'],
+      properties.culturalNote || 'Information not added yet.'
+    )
+  );
+
+  /* ==================== EXPLORE ==================== */
+
+  setText(
+    'infoExploreNearby',
+    getNestedValue(
+      explore,
+      ['nearby', 'nearbyExperiences'],
+      properties.exploreNearby || 'Nearby experiences will be added soon.'
+    )
+  );
+
+  renderSimpleList(
+    'exploreSimilar',
+    explore.similar || explore.similarExperiences,
+    'Similar experiences will be added soon.'
+  );
+
+  renderSimpleList(
+    'exploreWalks',
+    explore.walks,
+    'Walks will be added soon.'
+  );
+
+  renderSimpleList(
+    'exploreRoadTrips',
+    explore.roadTrips,
+    'Road trips will be added soon.'
+  );
+
+  renderSimpleList(
+    'exploreNature',
+    explore.nature,
+    'Nature experiences will be added soon.'
+  );
+
+  renderSimpleList(
+    'exploreCulture',
+    explore.culture ||
+    explore.cities ||
+    explore.culturalExperiences,
+    'Culture and city experiences will be added soon.'
+  );
+}
+
+
+/* =========================================================
    DASHBOARD TABS
+   EXPERIENCE / PLAN / EXPLORE
    ========================================================= */
 
 const dashboardTabs = {
-  overview: document.getElementById('dashboardOverview'),
-  gallery: document.getElementById('dashboardGallery'),
-  videos: document.getElementById('dashboardVideos'),
-  info: document.getElementById('dashboardInfo'),
-  links: document.getElementById('dashboardLinks')
+  experience: document.getElementById('dashboardExperience'),
+  plan: document.getElementById('dashboardPlan'),
+  explore: document.getElementById('dashboardExplore')
 };
 
-
 function showDashboardTab(tab) {
-
   Object.values(dashboardTabs).forEach(section => {
-
-    if (section) section.classList.remove('active');
-
+    if (section) {
+      section.classList.remove('active');
+    }
   });
 
   if (dashboardTabs[tab]) {
@@ -1692,40 +1947,33 @@ function showDashboardTab(tab) {
   }
 
   document.querySelectorAll('.dashboard-nav-button').forEach(button => {
-
     button.classList.toggle(
       'active',
       button.dataset.dashboardTab === tab
     );
-
   });
 
-  const dashboardMain = document.querySelector('.dashboard-main');
+  const dashboardMain =
+    document.querySelector('.dashboard-main');
 
   if (dashboardMain) {
-
     dashboardMain.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
-
   }
-
 }
 
-
 document.querySelectorAll('.dashboard-nav-button').forEach(button => {
-
   button.addEventListener('click', () => {
+    const tab =
+      button.dataset.dashboardTab;
 
-    showDashboardTab(
-      button.dataset.dashboardTab
-    );
+    if (!dashboardTabs[tab]) return;
 
+    showDashboardTab(tab);
   });
-
 });
-
 
 /* =========================================================
    ESCAPE KEY
