@@ -222,12 +222,10 @@
 
 
   "climate": {
-
-    "temperature": [],
-
-    "rainfall": []
-
-  },
+  "summary": "Uluṟu has a semi-arid climate with large differences between daytime and overnight temperatures. Summers can be extremely hot, while winter days are generally mild but nights can become very cold. Rainfall is relatively low and highly variable, although summer storms can occasionally bring heavy rain. May to September generally provides the most comfortable temperatures for walking and outdoor activities.",
+  "sourceName": "Bureau of Meteorology – Yulara climate statistics",
+  "sourceUrl": "https://www.bom.gov.au/climate/averages/tables/cw_015635.shtml"
+},
 
 
   "facilities": [
