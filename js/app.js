@@ -1788,6 +1788,31 @@ function populateExperiencePlanExplore(properties) {
     'Check seasonal conditions before travelling.'
   );
 
+   /* =======================================================
+     PLAN — CLIMATE
+     ======================================================= */
+     
+const climate = plan.climate || {};
+
+setText(
+  'planClimate',
+  climate.summary ||
+  'Climate information will be added soon.'
+);
+
+const climateLink = document.getElementById('planClimateLink');
+
+if (climateLink) {
+  if (climate.sourceUrl) {
+    climateLink.href = climate.sourceUrl;
+    climateLink.textContent =
+      climate.sourceName || 'View detailed climate statistics →';
+    climateLink.style.display = 'inline-block';
+  } else {
+    climateLink.style.display = 'none';
+  }
+};
+
 
   /* =======================================================
      PLAN — ACCESS
