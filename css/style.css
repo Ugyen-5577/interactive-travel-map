@@ -3980,3 +3980,159 @@ button {
   font-size: 16px !important;
   font-weight: 600 !important;
 }
+
+/* =========================================================
+   WHEREWEBEEN — CLEAN LIGHT BLUE COLOUR SYSTEM
+   ========================================================= */
+
+/* Main dashboard */
+#travelDashboard {
+  background: #ffffff !important;
+}
+
+/* ---------------------------------------------------------
+   LEFT SIDEBAR
+   --------------------------------------------------------- */
+
+#travelDashboard .dashboard-sidebar {
+  background: #f8fafd !important;
+  border-right: 1px solid #d9e0ea !important;
+}
+
+/* Navigation buttons */
+#travelDashboard .dashboard-nav-button {
+  background: transparent !important;
+  color: #3c4043 !important;
+  border: 1px solid transparent !important;
+  border-radius: 10px !important;
+}
+
+/* Hover */
+#travelDashboard .dashboard-nav-button:hover {
+  background: #eef3fb !important;
+}
+
+/* Selected: Experience / Plan / Explore */
+#travelDashboard .dashboard-nav-button.active {
+  background: #e8f0fe !important;
+  color: #0b57d0 !important;
+  border-color: transparent !important;
+}
+
+/* ---------------------------------------------------------
+   MAIN DASHBOARD CONTENT
+   --------------------------------------------------------- */
+
+#travelDashboard .dashboard-main {
+  background: #ffffff !important;
+}
+
+/* ---------------------------------------------------------
+   PLAN CARDS
+   --------------------------------------------------------- */
+
+#travelDashboard .plan-card {
+  background: #e8f0fe !important;
+  border: 1px solid transparent !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+  padding: 20px !important;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#travelDashboard .plan-card:hover {
+  background: #dce7fa !important;
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 4px 12px rgba(60, 64, 67, 0.08) !important;
+}
+
+/* Card headings */
+#travelDashboard .plan-card h3 {
+  color: #1f1f1f !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+/* Card body */
+#travelDashboard .plan-card p,
+#travelDashboard .plan-card li {
+  color: #3c4043 !important;
+}
+
+/* Links */
+#travelDashboard .plan-card a {
+  color: #0b57d0 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+#travelDashboard .plan-card a:hover {
+  text-decoration: underline !important;
+}
+
+/* ---------------------------------------------------------
+   EXPLORE CARDS
+   --------------------------------------------------------- */
+
+#travelDashboard .explore-card {
+  background: #e8f0fe !important;
+  border: 1px solid transparent !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+}
+
+#travelDashboard .explore-card:hover {
+  background: #dce7fa !important;
+}
+
+/* ---------------------------------------------------------
+   EXPERIENCE CARDS
+   --------------------------------------------------------- */
+
+#travelDashboard .insight-card {
+  background: #f8fafd !important;
+  border: 1px solid #d9e0ea !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+}
+
+/* ---------------------------------------------------------
+   BEST TIME SIDEBAR CARD
+   --------------------------------------------------------- */
+
+#travelDashboard .best-time-card {
+  background: #e8f0fe !important;
+  border: 1px solid transparent !important;
+  color: #1f1f1f !important;
+}
+
+/* ---------------------------------------------------------
+   SECTION TEXT
+   --------------------------------------------------------- */
+
+#travelDashboard .section-kicker {
+  color: #5f6368 !important;
+}
+
+#travelDashboard .section-intro h2 {
+  color: #1f1f1f !important;
+}
+
+#travelDashboard .section-summary {
+  color: #5f6368 !important;
+}
+
+/* ---------------------------------------------------------
+   REMOVE PLAN + EXPLORE EMOJIS
+   --------------------------------------------------------- */
+
+#travelDashboard .plan-icon,
+#travelDashboard .explore-icon {
+  display: none !important;
+}
