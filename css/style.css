@@ -534,7 +534,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .section-summary { max-width: 760px; margin: 0; color: var(--wwb-text-2); font-size: 14px; line-height: 1.6; }
 
 /* EXPERIENCE / PLAN / EXPLORE SIDEBAR */
-#travelDashboard .dashboard-sidebar { background: background: #eef3fb; border-color: #d9e0ea; }
+#travelDashboard .dashboard-sidebar { background: background: #778899; border-color: #d9e0ea; }
 #travelDashboard .dashboard-nav { gap: 6px; }
 #travelDashboard .dashboard-nav-button { gap: 10px; background: transparent; color: var(--wwb-text); font-size: 16px; font-weight: 600; }
 #travelDashboard .dashboard-nav-button:hover { background: var(--wwb-card-soft); }
