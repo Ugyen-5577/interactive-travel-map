@@ -3936,3 +3936,47 @@ button {
 #travelDashboard .plan-card a:hover {
   text-decoration: underline;
 }
+
+/* =========================================================
+   DASHBOARD NAVIGATION — LARGER TEXT
+   ========================================================= */
+
+#travelDashboard .dashboard-nav-button {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  padding-left: 16px !important;
+}
+
+#travelDashboard .dashboard-nav-label {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+}
+
+/* Keep navigation icons hidden */
+
+#travelDashboard .dashboard-nav-icon {
+  display: none !important;
+}
+/* =========================================================
+   MAIN LEFT NAVIGATION — LARGER TEXT
+   ========================================================= */
+
+.main-menu button,
+.main-menu a,
+.main-menu .menu-item,
+.main-menu .menu-label {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+/* =========================================================
+   TOP CATEGORY NAVIGATION — LARGER TEXT
+   ========================================================= */
+
+.category-button {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
