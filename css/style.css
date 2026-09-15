@@ -4561,3 +4561,32 @@ select {
   font-size: 16px !important;
   font-weight: 600 !important;
 }
+
+/* =========================================================
+   EXPERIENCE — SUMMARY TILES
+   Visited / Category / Photos / Videos
+   ========================================================= */
+
+#travelDashboard .quick-card,
+#travelDashboard .quick-stat,
+#travelDashboard .quick-item,
+#travelDashboard .quick-grid > div {
+  background: #e8f0fe !important;
+  border: 1px solid transparent !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#travelDashboard .quick-card:hover,
+#travelDashboard .quick-stat:hover,
+#travelDashboard .quick-item:hover,
+#travelDashboard .quick-grid > div:hover {
+  background: #dce7fa !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(60, 64, 67, 0.08) !important;
+}
