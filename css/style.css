@@ -4136,3 +4136,317 @@ button {
 #travelDashboard .explore-icon {
   display: none !important;
 }
+/* =========================================================
+   WHEREWEBEEN — GLOBAL COLOUR THEME
+   Clean light-blue / white interface
+   ========================================================= */
+
+:root {
+  --wwb-white: #ffffff;
+  --wwb-background: #f8fafd;
+  --wwb-surface: #ffffff;
+
+  --wwb-blue-soft: #e8f0fe;
+  --wwb-blue-hover: #dce7fa;
+  --wwb-blue-light: #f1f5fd;
+  --wwb-blue: #0b57d0;
+
+  --wwb-text: #1f1f1f;
+  --wwb-text-secondary: #5f6368;
+
+  --wwb-border: #d9e0ea;
+  --wwb-border-light: #e8eaed;
+
+  --wwb-shadow: rgba(60, 64, 67, 0.10);
+}
+
+
+/* =========================================================
+   GENERAL UI
+   ========================================================= */
+
+body {
+  color: var(--wwb-text);
+}
+
+button,
+input,
+select {
+  color: var(--wwb-text);
+}
+
+
+/* =========================================================
+   TOP HEADER / CONTROLS
+   ========================================================= */
+
+#topUI > *,
+.brand-card,
+.search-container,
+.category-container,
+.map-style-control {
+  background: var(--wwb-surface) !important;
+  border-color: var(--wwb-border) !important;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-container input,
+#searchInput {
+  background: var(--wwb-surface) !important;
+  color: var(--wwb-text) !important;
+}
+
+.search-container input::placeholder,
+#searchInput::placeholder {
+  color: var(--wwb-text-secondary) !important;
+}
+
+
+/* =========================================================
+   CATEGORY BUTTONS
+   All / Nature / Cities / Culture / Walks
+   ========================================================= */
+
+.category-button {
+  background: transparent !important;
+  color: var(--wwb-text) !important;
+}
+
+.category-button:hover {
+  background: var(--wwb-blue-light) !important;
+}
+
+.category-button.active {
+  background: var(--wwb-blue) !important;
+  color: var(--wwb-white) !important;
+}
+
+
+/* =========================================================
+   MAIN LEFT MENU
+   Explore / Trips / Wishlist / Timeline etc.
+   ========================================================= */
+
+.main-menu {
+  background: var(--wwb-background) !important;
+  border-color: var(--wwb-border) !important;
+}
+
+.main-menu button,
+.main-menu a,
+.main-menu .menu-item {
+  color: var(--wwb-text) !important;
+  background: transparent !important;
+}
+
+.main-menu button:hover,
+.main-menu a:hover,
+.main-menu .menu-item:hover {
+  background: var(--wwb-blue-light) !important;
+}
+
+.main-menu button.active,
+.main-menu a.active,
+.main-menu .menu-item.active {
+  background: var(--wwb-blue-soft) !important;
+  color: var(--wwb-blue) !important;
+}
+
+
+/* =========================================================
+   GENERAL PANELS
+   About / Disclaimer / Settings / etc.
+   ========================================================= */
+
+.info-panel,
+.menu-panel,
+.side-panel,
+.control-panel {
+  background: var(--wwb-surface) !important;
+  border-color: var(--wwb-border) !important;
+  color: var(--wwb-text) !important;
+}
+
+
+/* =========================================================
+   PLACE DASHBOARD
+   ========================================================= */
+
+#travelDashboard {
+  background: var(--wwb-surface) !important;
+  color: var(--wwb-text) !important;
+}
+
+#travelDashboard .dashboard-main {
+  background: var(--wwb-surface) !important;
+}
+
+
+/* =========================================================
+   EXPERIENCE / PLAN / EXPLORE SIDEBAR
+   ========================================================= */
+
+#travelDashboard .dashboard-sidebar {
+  background: var(--wwb-background) !important;
+  border-color: var(--wwb-border) !important;
+}
+
+#travelDashboard .dashboard-nav-button {
+  background: transparent !important;
+  color: var(--wwb-text) !important;
+  border-color: transparent !important;
+}
+
+#travelDashboard .dashboard-nav-button:hover {
+  background: var(--wwb-blue-light) !important;
+}
+
+#travelDashboard .dashboard-nav-button.active {
+  background: var(--wwb-blue-soft) !important;
+  color: var(--wwb-blue) !important;
+  border-color: transparent !important;
+}
+
+
+/* =========================================================
+   PLAN CARDS
+   ========================================================= */
+
+#travelDashboard .plan-card {
+  background: var(--wwb-blue-soft) !important;
+  border: 1px solid transparent !important;
+  color: var(--wwb-text) !important;
+  box-shadow: none !important;
+}
+
+#travelDashboard .plan-card:hover {
+  background: var(--wwb-blue-hover) !important;
+  box-shadow: 0 5px 15px var(--wwb-shadow) !important;
+}
+
+#travelDashboard .plan-card h3 {
+  color: var(--wwb-text) !important;
+}
+
+#travelDashboard .plan-card p,
+#travelDashboard .plan-card li {
+  color: var(--wwb-text-secondary) !important;
+}
+
+
+/* =========================================================
+   EXPLORE CARDS
+   ========================================================= */
+
+#travelDashboard .explore-card {
+  background: var(--wwb-blue-soft) !important;
+  border: 1px solid transparent !important;
+  color: var(--wwb-text) !important;
+  box-shadow: none !important;
+}
+
+#travelDashboard .explore-card:hover {
+  background: var(--wwb-blue-hover) !important;
+}
+
+
+/* =========================================================
+   EXPERIENCE CARDS
+   ========================================================= */
+
+#travelDashboard .insight-card {
+  background: var(--wwb-blue-soft) !important;
+  border: 1px solid transparent !important;
+  color: var(--wwb-text) !important;
+  box-shadow: none !important;
+}
+
+#travelDashboard .insight-card:hover {
+  background: var(--wwb-blue-hover) !important;
+}
+
+
+/* =========================================================
+   OTHER DASHBOARD SECTIONS
+   ========================================================= */
+
+#travelDashboard .dashboard-section,
+#travelDashboard .about-block {
+  color: var(--wwb-text) !important;
+}
+
+
+/* =========================================================
+   BEST TIME CARD
+   ========================================================= */
+
+#travelDashboard .best-time-card {
+  background: var(--wwb-blue-soft) !important;
+  border: 1px solid transparent !important;
+  color: var(--wwb-text) !important;
+}
+
+
+/* =========================================================
+   HEADINGS + SECONDARY TEXT
+   ========================================================= */
+
+#travelDashboard h1,
+#travelDashboard h2,
+#travelDashboard h3 {
+  color: var(--wwb-text) !important;
+}
+
+#travelDashboard .section-summary,
+#travelDashboard .section-kicker {
+  color: var(--wwb-text-secondary) !important;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+#travelDashboard a {
+  color: var(--wwb-blue) !important;
+}
+
+#travelDashboard a:hover {
+  color: #0842a0 !important;
+}
+
+
+/* =========================================================
+   MOBILE PANELS
+   ========================================================= */
+
+.mobile-control-panel,
+.mobile-menu,
+.mobile-panel {
+  background: var(--wwb-background) !important;
+  color: var(--wwb-text) !important;
+}
+
+.mobile-panel-link,
+.mobile-control-button {
+  color: var(--wwb-text) !important;
+}
+
+.mobile-panel-link:hover,
+.mobile-control-button:hover {
+  background: var(--wwb-blue-light) !important;
+}
+
+
+/* =========================================================
+   REMOVE PLAN + EXPLORE EMOJIS
+   ========================================================= */
+
+#travelDashboard .plan-icon,
+#travelDashboard .explore-icon {
+  display: none !important;
+}
