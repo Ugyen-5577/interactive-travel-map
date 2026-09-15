@@ -3888,3 +3888,50 @@ button {
 #travelDashboard .plan-icon {
   display: none !important;
 }
+
+/* =========================================================
+   PLAN CARDS — MODERN TILE DESIGN
+   ========================================================= */
+
+#travelDashboard .plan-card {
+  background: #f8fafc !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 14px !important;
+  padding: 20px !important;
+  box-shadow: none !important;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#travelDashboard .plan-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.07) !important;
+}
+
+#travelDashboard .plan-card h3 {
+  margin-top: 0 !important;
+  margin-bottom: 9px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #172033 !important;
+}
+
+#travelDashboard .plan-card p {
+  color: #526070 !important;
+  line-height: 1.6 !important;
+}
+
+#travelDashboard .plan-card a {
+  display: inline-block;
+  margin-top: 8px;
+  color: #c4512d !important;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#travelDashboard .plan-card a:hover {
+  text-decoration: underline;
+}
