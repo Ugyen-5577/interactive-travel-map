@@ -4629,3 +4629,27 @@ select {
   }
 
 }
+
+/* =========================================================
+   EXPERIENCE — VISITED / CATEGORY / PHOTOS / VIDEOS
+   ========================================================= */
+
+#travelDashboard .quick-card,
+#travelDashboard .quick-stat,
+#travelDashboard .quick-item,
+#travelDashboard .quick-grid > div {
+  background: #f1f5fd !important;
+  border: 1px solid #d9e0ea !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+
+/* Hover */
+
+#travelDashboard .quick-card:hover,
+#travelDashboard .quick-stat:hover,
+#travelDashboard .quick-item:hover,
+#travelDashboard .quick-grid > div:hover {
+  background: #e8f0fe !important;
+  border-color: #c7d4e8 !important;
+}
