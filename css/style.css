@@ -3882,10 +3882,11 @@ button {
 }
 
 /* =========================================================
-   PLAN CARDS — REMOVE EMOJI ICONS
+   PLAN + EXPLORE CARDS — REMOVE EMOJI ICONS
    ========================================================= */
 
-#travelDashboard .plan-icon {
+#travelDashboard .plan-icon,
+#travelDashboard .explore-icon {
   display: none !important;
 }
 
@@ -3894,7 +3895,7 @@ button {
    ========================================================= */
 
 #travelDashboard .plan-card {
-  background: #C0C0C0 !important;
+  background: #F0F8FF !important;
   border: 1px solid #e5e7eb !important;
   border-radius: 14px !important;
   padding: 20px !important;
