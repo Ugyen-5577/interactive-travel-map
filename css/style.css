@@ -4497,7 +4497,7 @@ select {
 .map-style-control button,
 .map-style-button,
 .basemap-button {
-  font-size: 13px !important;
+  font-size: 15px !important;
   font-weight: 600 !important;
 }
 
