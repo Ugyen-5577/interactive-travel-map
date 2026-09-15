@@ -4590,3 +4590,42 @@ select {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(60, 64, 67, 0.08) !important;
 }
+
+/* =========================================================
+   MOBILE DASHBOARD NAVIGATION
+   Centre Experience / Plan / Explore
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+  #travelDashboard .dashboard-nav {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    width: 100% !important;
+    gap: 6px !important;
+  }
+
+  #travelDashboard .dashboard-nav-button {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 12px 4px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    text-align: center !important;
+  }
+
+  #travelDashboard .dashboard-nav-label {
+    width: 100% !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+}
