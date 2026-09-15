@@ -3851,3 +3851,32 @@ button {
   }
 
 }
+
+/* =========================================================
+   DASHBOARD NAVIGATION — CLEAN MODERN STYLE
+   ========================================================= */
+
+#travelDashboard .dashboard-nav-button {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+}
+
+#travelDashboard .dashboard-nav-label {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* Remove navigation icons */
+
+#travelDashboard .dashboard-nav-icon {
+  display: none !important;
+}
+
+/* Give text more room after removing icons */
+
+#travelDashboard .dashboard-nav-button {
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  padding-left: 16px !important;
+}
