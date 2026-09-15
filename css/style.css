@@ -3880,3 +3880,11 @@ button {
   gap: 0 !important;
   padding-left: 16px !important;
 }
+
+/* =========================================================
+   PLAN CARDS — REMOVE EMOJI ICONS
+   ========================================================= */
+
+#travelDashboard .plan-icon {
+  display: none !important;
+}
