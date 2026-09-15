@@ -3969,7 +3969,7 @@ button {
 .main-menu a,
 .main-menu .menu-item,
 .main-menu .menu-label {
-  font-size: 14px !important;
+  font-size: 16px !important;
   font-weight: 600 !important;
 }
 /* =========================================================
@@ -3977,6 +3977,6 @@ button {
    ========================================================= */
 
 .category-button {
-  font-size: 14px !important;
+  font-size: 16px !important;
   font-weight: 600 !important;
 }
