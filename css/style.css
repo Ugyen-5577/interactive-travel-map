@@ -4450,3 +4450,114 @@ select {
 #travelDashboard .explore-icon {
   display: none !important;
 }
+
+/* =========================================================
+   WHEREWEBEEN — LARGER TOP UI + DESTINATION TEXT
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   BRAND
+   --------------------------------------------------------- */
+
+/* WhereWeBeen */
+.brand-name,
+.brand-title {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+}
+
+/* Places • Stories • Experiences */
+.brand-tagline,
+.brand-subtitle {
+  font-size: 10px !important;
+  line-height: 1.3 !important;
+}
+
+
+/* ---------------------------------------------------------
+   SEARCH
+   --------------------------------------------------------- */
+
+#searchInput,
+.search-container input {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+#searchInput::placeholder,
+.search-container input::placeholder {
+  font-size: 14px !important;
+}
+
+
+/* ---------------------------------------------------------
+   MAP / SATELLITE / TERRAIN
+   --------------------------------------------------------- */
+
+.map-style-control button,
+.map-style-button,
+.basemap-button {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+
+/* ---------------------------------------------------------
+   TOP CATEGORIES
+   All / Nature / Cities / Culture / Walks
+   --------------------------------------------------------- */
+
+.category-button {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+
+/* ---------------------------------------------------------
+   RECENT DESTINATION CARDS
+   Sydney / Uluru / Canberra
+   --------------------------------------------------------- */
+
+.recent-place-card h3,
+.recent-place-name,
+.place-card-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+}
+
+/* City / Nature & Culture etc. */
+
+.recent-place-card p,
+.recent-place-category,
+.place-card-subtitle {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+}
+
+
+/* ---------------------------------------------------------
+   MAIN LEFT MENU
+   Explore / Trips / Wishlist etc.
+   --------------------------------------------------------- */
+
+.main-menu button,
+.main-menu a,
+.main-menu .menu-item,
+.main-menu .menu-label {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+
+/* ---------------------------------------------------------
+   PLACE DASHBOARD NAVIGATION
+   Experience / Plan / Explore
+   --------------------------------------------------------- */
+
+#travelDashboard .dashboard-nav-button,
+#travelDashboard .dashboard-nav-label {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
