@@ -607,6 +607,18 @@
             <span class="dashboard-nav-label">Explore</span>
           </button>
 
+
+          <!-- ==================== FASCINATING FACTS ==================== -->
+
+          <button
+            class="dashboard-nav-button"
+            data-dashboard-tab="facts"
+            type="button"
+          >
+            <span class="dashboard-nav-icon">💡</span>
+            <span class="dashboard-nav-label">Fascinating facts</span>
+          </button>
+
         </div>
 
 
@@ -1422,6 +1434,66 @@
   </section>
   <!-- =====================================================
        END EXPLORE
+       ===================================================== -->
+
+
+  <!-- =====================================================
+       FASCINATING FACTS
+       Facts are populated from properties.facts in places.geojson.
+       ===================================================== -->
+
+  <section
+    id="dashboardFacts"
+    class="dashboard-tab-content"
+  >
+
+    <div class="section-intro">
+
+      <span class="section-kicker">
+        FASCINATING FACTS
+      </span>
+
+      <h2 id="factsHeading">
+        Fascinating facts
+      </h2>
+
+      <p class="section-summary">
+        Discover interesting facts about this place, with reference links where available.
+      </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         FASCINATING FACTS — GEOJSON CARDS
+         app.js will create the individual cards inside this grid.
+         ===================================================== -->
+
+    <div
+      id="factsGrid"
+      class="facts-grid"
+    ></div>
+
+
+    <!-- =====================================================
+         FASCINATING FACTS — EMPTY STATE
+         Shown by app.js when a place has no facts.
+         ===================================================== -->
+
+    <div
+      id="factsEmpty"
+      class="facts-empty"
+      style="display: none;"
+    >
+      <p>
+        Fascinating facts for this place will be added soon.
+      </p>
+    </div>
+
+
+  </section>
+  <!-- =====================================================
+       END FASCINATING FACTS
        ===================================================== -->
 
 
