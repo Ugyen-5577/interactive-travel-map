@@ -2214,100 +2214,122 @@ if (climateLink) {
   );
 
 
-  /* =======================================================
-     EXPLORE — CATEGORIES
-     ======================================================= */
+/* =======================================================
+   EXPLORE — CATEGORIES
+   ======================================================= */
 
-   const events = explore.events || {};
-   const eventsElement = document.getElementById('exploreEvents');
+/* ==================== EVENTS ==================== */
+// Events can contain a summary and an external source link.
 
-   if (eventsElement) {
-     if (events.summary) {
-       eventsElement.innerHTML = `
-         <p>${events.summary}</p>
-         ${events.sourceUrl ? `
-           <a href="${events.sourceUrl}" target="_blank" rel="noopener noreferrer" class="explore-source-link">
-             ${events.sourceName || 'View current events'} →
-           </a>
-         ` : ''}
-       `;
-     } else {
-       eventsElement.innerHTML = `
-         <p class="empty-feature-text">Events will be added soon.</p>
-       `;
-     }
-   }
-       // ==================== EXPLORE: WALKS ====================
-      // Walks are structured objects containing route details and optional animation.
-      
-      const walksElement = document.getElementById('exploreWalks');
-      const walks = Array.isArray(explore.walks) ? explore.walks : [];
-      
-      if (walksElement) {
-        if (walks.length) {
-          walksElement.innerHTML = walks.map(walk => `
-            <div class="explore-walk-item">
-              <h4>${walk.name || 'Walk'}</h4>
-      
-              ${walk.distance || walk.duration || walk.difficulty ? `
-                <div class="explore-walk-meta">
-                  ${walk.distance ? `<span>${walk.distance}</span>` : ''}
-                  ${walk.duration ? `<span>${walk.duration}</span>` : ''}
-                  ${walk.difficulty ? `<span>${walk.difficulty}</span>` : ''}
-                </div>
-              ` : ''}
-      
-              ${walk.description ? `
-                <p>${walk.description}</p>
-              ` : ''}
-      
-              ${walk.animated ? `
-                <button
-                  type="button"
-                  class="explore-walk-button"
-                  data-walk-id="${walk.id || ''}">
-                  ${walk.buttonText || 'View animated walk'} →
-                </button>
-              ` : ''}
-            </div>
-          `).join('');
-      
-          walksElement.querySelectorAll('.explore-walk-button').forEach(button => {
-            button.addEventListener('click', () => {
-              const walkId = button.dataset.walkId;
-      
-              if (walkId === 'uluru-base-walk') {
-                startUluruWalk();
-              }
-            });
-          });
-      
-        } else {
-          walksElement.innerHTML = `
-            <p class="empty-feature-text">Walks will be added soon.</p>
-          `;
+const events = explore.events || {};
+const eventsElement = document.getElementById('exploreEvents');
+
+if (eventsElement) {
+  if (events.summary) {
+    eventsElement.innerHTML = `
+      <p>${events.summary}</p>
+
+      ${events.sourceUrl ? `
+        <a href="${events.sourceUrl}" target="_blank" rel="noopener noreferrer" class="explore-source-link">
+          ${events.sourceName || 'View current events'} →
+        </a>
+      ` : ''}
+    `;
+  } else {
+    eventsElement.innerHTML = `
+      <p class="empty-feature-text">Events will be added soon.</p>
+    `;
+  }
+}
+
+
+/* ==================== WALKS ==================== */
+// Walks contain information plus an optional map animation.
+
+const walksElement = document.getElementById('exploreWalks');
+const walks = Array.isArray(explore.walks) ? explore.walks : [];
+
+if (walksElement) {
+  if (walks.length) {
+    walksElement.innerHTML = walks.map(walk => `
+      <div class="explore-walk-item">
+
+        <h4>${walk.name || 'Walk'}</h4>
+
+        ${walk.distance || walk.duration || walk.difficulty ? `
+          <div class="explore-walk-meta">
+            ${walk.distance ? `<span>${walk.distance}</span>` : ''}
+            ${walk.duration ? `<span>${walk.duration}</span>` : ''}
+            ${walk.difficulty ? `<span>${walk.difficulty}</span>` : ''}
+          </div>
+        ` : ''}
+
+        ${walk.description ? `
+          <p>${walk.description}</p>
+        ` : ''}
+
+        ${walk.animated ? `
+          <button
+            type="button"
+            class="explore-walk-button"
+            data-walk-id="${walk.id || ''}">
+            ${walk.buttonText || 'View animated walk'} →
+          </button>
+        ` : ''}
+
+      </div>
+    `).join('');
+
+    // Connect each animated walk button to its map animation.
+    walksElement.querySelectorAll('.explore-walk-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const walkId = button.dataset.walkId;
+
+        if (walkId === 'uluru-base-walk') {
+          if (typeof startUluruWalk === 'function') {
+            startUluruWalk();
+          } else {
+            console.error('startUluruWalk() was not found.');
+          }
         }
-      }
+      });
+    });
 
-  renderSimpleList(
-    'exploreRoadTrips',
-    explore.roadTrips,
-    'Road trips will be added soon.'
-  );
+  } else {
+    walksElement.innerHTML = `
+      <p class="empty-feature-text">Walks will be added soon.</p>
+    `;
+  }
+}
 
-  renderSimpleList(
-    'exploreNature',
-    explore.nature,
-    'Nature experiences will be added soon.'
-  );
 
-  renderSimpleList(
-    'exploreCulture',
-    explore.culture ||
-    explore.cities ||
-    explore.culturalExperiences,
-    'Culture and city experiences will be added soon.'
-  );
+/* ==================== ROAD TRIPS ==================== */
+
+renderSimpleList(
+  'exploreRoadTrips',
+  explore.roadTrips,
+  'Road trips will be added soon.'
+);
+
+
+/* ==================== NATURE ==================== */
+
+renderSimpleList(
+  'exploreNature',
+  explore.nature,
+  'Nature experiences will be added soon.'
+);
+
+
+/* ==================== CULTURE & CITIES ==================== */
+
+renderSimpleList(
+  'exploreCulture',
+  explore.culture ||
+  explore.cities ||
+  explore.culturalExperiences,
+  'Culture and city experiences will be added soon.'
+);
 
 }
 
