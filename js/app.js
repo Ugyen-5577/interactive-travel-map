@@ -1404,12 +1404,14 @@ const links = currentPlace?.properties?.links || [];
       });
 
       image.addEventListener('click', () => {
-        openLightbox(photo, properties.name);
+        const photoIndex = photos.indexOf(photo);
+
+        openLightboxGallery(
+          photos,
+          photoIndex,
+          properties.name
+        );
       });
-
-      photoGallery.appendChild(image);
-
-    });
 
   }
 
@@ -1602,27 +1604,112 @@ if (readMoreButton) {
 
 
 /* =========================================================
-   PHOTO LIGHTBOX
+   PHOTO LIGHTBOX GALLERY
+   Previous / Next + Keyboard + Mobile Swipe
    ========================================================= */
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightboxImage');
 const closeLightboxButton = document.getElementById('closeLightbox');
 
+let lightboxPhotos = [];
+let lightboxCurrentIndex = 0;
+let lightboxPlaceName = 'Travel photo';
 
-function openLightbox(photo, name = 'Travel photo') {
+let lightboxTouchStartX = 0;
+let lightboxTouchEndX = 0;
+
+
+/* =========================================================
+   OPEN GALLERY
+   ========================================================= */
+
+function openLightboxGallery(
+  photos,
+  startIndex = 0,
+  placeName = 'Travel photo'
+) {
 
   if (!lightbox || !lightboxImage) return;
 
-  lightboxImage.src = photo;
-  lightboxImage.alt = name;
+  lightboxPhotos = photos;
+  lightboxCurrentIndex = startIndex;
+  lightboxPlaceName = placeName;
+
+  updateLightboxImage();
 
   lightbox.classList.add('active');
-
   document.body.classList.add('lightbox-open');
 
 }
 
+
+/* =========================================================
+   UPDATE CURRENT PHOTO
+   ========================================================= */
+
+function updateLightboxImage() {
+
+  if (!lightboxImage || !lightboxPhotos.length) return;
+
+  const photo =
+    lightboxPhotos[lightboxCurrentIndex];
+
+  lightboxImage.src = photo;
+
+  lightboxImage.alt =
+    `${lightboxPlaceName} photo ${lightboxCurrentIndex + 1}`;
+
+  const counter =
+    document.getElementById('lightboxCounter');
+
+  if (counter) {
+
+    counter.textContent =
+      `${lightboxCurrentIndex + 1} / ${lightboxPhotos.length}`;
+
+  }
+
+}
+
+
+/* =========================================================
+   NEXT PHOTO
+   ========================================================= */
+
+function showNextLightboxPhoto() {
+
+  if (!lightboxPhotos.length) return;
+
+  lightboxCurrentIndex =
+    (lightboxCurrentIndex + 1) %
+    lightboxPhotos.length;
+
+  updateLightboxImage();
+
+}
+
+
+/* =========================================================
+   PREVIOUS PHOTO
+   ========================================================= */
+
+function showPreviousLightboxPhoto() {
+
+  if (!lightboxPhotos.length) return;
+
+  lightboxCurrentIndex =
+    (lightboxCurrentIndex - 1 + lightboxPhotos.length) %
+    lightboxPhotos.length;
+
+  updateLightboxImage();
+
+}
+
+
+/* =========================================================
+   CLOSE LIGHTBOX
+   ========================================================= */
 
 function closeLightbox() {
 
@@ -1634,38 +1721,203 @@ function closeLightbox() {
 
   setTimeout(() => {
 
-    if (lightboxImage) lightboxImage.src = '';
+    if (lightboxImage) {
+      lightboxImage.src = '';
+    }
+
+    lightboxPhotos = [];
+    lightboxCurrentIndex = 0;
 
   }, 200);
 
 }
 
 
-if (closeLightboxButton) {
+/* =========================================================
+   PREVIOUS / NEXT BUTTONS
+   ========================================================= */
 
-  closeLightboxButton.addEventListener('click', event => {
+const lightboxPreviousButton =
+  document.getElementById('lightboxPrevious');
 
-    event.stopPropagation();
+const lightboxNextButton =
+  document.getElementById('lightboxNext');
 
-    closeLightbox();
 
-  });
+if (lightboxPreviousButton) {
+
+  lightboxPreviousButton.addEventListener(
+    'click',
+    event => {
+
+      event.stopPropagation();
+
+      showPreviousLightboxPhoto();
+
+    }
+  );
 
 }
 
+
+if (lightboxNextButton) {
+
+  lightboxNextButton.addEventListener(
+    'click',
+    event => {
+
+      event.stopPropagation();
+
+      showNextLightboxPhoto();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+if (closeLightboxButton) {
+
+  closeLightboxButton.addEventListener(
+    'click',
+    event => {
+
+      event.stopPropagation();
+
+      closeLightbox();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CLICK BACKGROUND TO CLOSE
+   ========================================================= */
 
 if (lightbox) {
 
-  lightbox.addEventListener('click', event => {
+  lightbox.addEventListener(
+    'click',
+    event => {
 
-    if (event.target === lightbox) {
-      closeLightbox();
+      if (event.target === lightbox) {
+
+        closeLightbox();
+
+      }
+
     }
-
-  });
+  );
 
 }
 
+
+/* =========================================================
+   KEYBOARD NAVIGATION
+   ========================================================= */
+
+document.addEventListener(
+  'keydown',
+  event => {
+
+    if (
+      !lightbox ||
+      !lightbox.classList.contains('active')
+    ) {
+      return;
+    }
+
+
+    /* RIGHT ARROW */
+
+    if (event.key === 'ArrowRight') {
+
+      event.preventDefault();
+
+      showNextLightboxPhoto();
+
+    }
+
+
+    /* LEFT ARROW */
+
+    if (event.key === 'ArrowLeft') {
+
+      event.preventDefault();
+
+      showPreviousLightboxPhoto();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   MOBILE SWIPE
+   ========================================================= */
+
+if (lightbox) {
+
+  lightbox.addEventListener(
+    'touchstart',
+    event => {
+
+      lightboxTouchStartX =
+        event.changedTouches[0].screenX;
+
+    },
+    { passive: true }
+  );
+
+
+  lightbox.addEventListener(
+    'touchend',
+    event => {
+
+      lightboxTouchEndX =
+        event.changedTouches[0].screenX;
+
+      const swipeDistance =
+        lightboxTouchEndX -
+        lightboxTouchStartX;
+
+
+      /* Ignore very small finger movements */
+
+      if (Math.abs(swipeDistance) < 50) {
+        return;
+      }
+
+
+      /* Swipe left = next photo */
+
+      if (swipeDistance < 0) {
+
+        showNextLightboxPhoto();
+
+      }
+
+
+      /* Swipe right = previous photo */
+
+      if (swipeDistance > 0) {
+
+        showPreviousLightboxPhoto();
+
+      }
+
+    },
+    { passive: true }
+  );
+
+}
 
 /* =========================================================
    EXPERIENCE / PLAN / EXPLORE DATA
