@@ -504,7 +504,7 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 
 /* =========================================================
-   35. WHEREWEBEEN — EXPERIENCE / PLAN / EXPLORE
+   35. WHEREWEBEEN — EXPERIENCE / PLAN / EXPLORE / FASCINATING FACTS
    Single consolidated block.
    ========================================================= */
 :root {
@@ -533,8 +533,8 @@ button { -webkit-tap-highlight-color: transparent; }
 .section-intro h2 { margin: 0 0 8px; color: var(--wwb-text); font-size: 25px; line-height: 1.2; }
 .section-summary { max-width: 760px; margin: 0; color: var(--wwb-text-2); font-size: 14px; line-height: 1.6; }
 
-/* EXPERIENCE / PLAN / EXPLORE SIDEBAR */
-#travelDashboard .dashboard-sidebar { background: background: #778899; border-color: #d9e0ea; }
+/* EXPERIENCE / PLAN / EXPLORE / FASCINATING FACTS SIDEBAR */
+#travelDashboard .dashboard-sidebar { background: #778899; border-color: #d9e0ea; }
 #travelDashboard .dashboard-nav { gap: 6px; }
 #travelDashboard .dashboard-nav-button { gap: 10px; background: transparent; color: var(--wwb-text); font-size: 16px; font-weight: 600; }
 #travelDashboard .dashboard-nav-button:hover { background: var(--wwb-card-soft); }
@@ -572,6 +572,115 @@ button { -webkit-tap-highlight-color: transparent; }
 .section-heading-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .section-count-label { flex: 0 0 auto; color: #80868b; font-size: 12px; font-weight: 700; }
 .explore-map-note { color: var(--wwb-text-2); font-size: 14px; line-height: 1.6; }
+
+/* =========================================================
+   FASCINATING FACTS
+   GeoJSON-driven cards created by app.js
+   ========================================================= */
+
+#dashboardFacts { min-width: 0; }
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 22px 0 28px;
+}
+
+.fact-card {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 18px;
+  border: 1px solid var(--wwb-border);
+  border-radius: 15px;
+  background: var(--wwb-card-soft);
+  box-shadow: none;
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.fact-card:hover {
+  background: var(--wwb-card);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--wwb-shadow);
+}
+
+.fact-number {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--wwb-blue);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.fact-content {
+  min-width: 0;
+}
+
+.fact-title {
+  margin: 0 0 7px;
+  color: var(--wwb-text);
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.fact-text {
+  margin: 0;
+  color: var(--wwb-text-2);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.fact-source {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  margin-top: 12px;
+  padding: 7px 10px;
+  border: 1px solid var(--wwb-border);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--wwb-blue) !important;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.fact-source:hover {
+  background: #f5f8ff;
+  border-color: #b9c9e8;
+  color: #0842a0 !important;
+  transform: translateY(-1px);
+}
+
+.facts-empty {
+  margin: 22px 0 28px;
+  padding: 22px;
+  border: 1px dashed var(--wwb-border);
+  border-radius: 15px;
+  background: var(--wwb-card-soft);
+  text-align: center;
+}
+
+.facts-empty p {
+  margin: 0;
+  color: var(--wwb-text-2);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 
 /* =========================================================
    DESKTOP TYPOGRAPHY
@@ -637,7 +746,7 @@ button { -webkit-tap-highlight-color: transparent; }
 
 
 /* =========================================================
-   MOBILE EXPERIENCE / PLAN / EXPLORE
+   MOBILE EXPERIENCE / PLAN / EXPLORE / FASCINATING FACTS
    ========================================================= */
 @media (max-width: 950px) {
 
@@ -663,12 +772,12 @@ button { -webkit-tap-highlight-color: transparent; }
     background: var(--wwb-bg);
   }
 
-  /* Exactly three equal columns */
+  /* Four equal columns: Experience / Plan / Explore / Fascinating facts */
   #travelDashboard .dashboard-nav {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     width: 100%;
-    gap: 6px;
+    gap: 4px;
   }
 
   /* Experience / Plan / Explore buttons */
@@ -704,7 +813,57 @@ button { -webkit-tap-highlight-color: transparent; }
 
     text-align: center;
 
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .fact-card {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .fact-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  .fact-title {
+    font-size: 14px;
+  }
+
+  .fact-text {
+    font-size: 13px;
+  }
+
+  .fact-source {
+    font-size: 10px;
+  }
+}
+
+
+/* =========================================================
+   FASCINATING FACTS — SMALL PHONE NAVIGATION
+   ========================================================= */
+@media (max-width: 520px) {
+  #travelDashboard .dashboard-nav {
+    gap: 2px;
+  }
+
+  #travelDashboard .dashboard-nav-button {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  #travelDashboard .dashboard-nav-label {
+    font-size: 10px;
+    letter-spacing: -0.02em;
   }
 }
