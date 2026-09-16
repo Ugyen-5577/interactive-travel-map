@@ -255,7 +255,19 @@
             "sourceUrl": "https://www.discovercentralaustralia.com/events/calendar"
           },
         
-          "walks": [],
+          "walks": [
+          {
+            "id": "uluru-base-walk",
+            "name": "Uluru Base Walk",
+            "description": "A walk around the base of Uluru, passing significant landscapes, rock formations and culturally important areas.",
+            "distance": "About 10.6 km",
+            "duration": "3–4 hours",
+            "difficulty": "Moderate",
+            "routeFile": "data/routes/uluru-base-walk.geojson",
+            "animated": true,
+            "buttonText": "View animated walk"
+          }
+        ],
         
           "roadTrips": [],
         
