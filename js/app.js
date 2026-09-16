@@ -1481,6 +1481,7 @@ if (linksList) {
 /* ==================== SHOW DASHBOARD ==================== */
 
 populateExperiencePlanExplore(properties);
+populateFascinatingFacts(properties);
 showDashboardTab('experience');
 
 if (dashboard) dashboard.classList.add('active');
@@ -1997,8 +1998,171 @@ if (climateLink) {
 }
 
 /* =========================================================
+   FASCINATING FACTS
+   Populated from properties.facts in places.geojson.
+   Each fact may contain:
+   title, text, sourceName and sourceUrl.
+   ========================================================= */
+
+function getFactsArray(properties) {
+
+  if (!properties) return [];
+
+  if (Array.isArray(properties.facts)) {
+    return properties.facts.filter(Boolean);
+  }
+
+  /* Support facts that may arrive as a JSON string. */
+  if (typeof properties.facts === 'string' && properties.facts.trim()) {
+
+    try {
+
+      const parsed = JSON.parse(properties.facts);
+
+      if (Array.isArray(parsed)) {
+        return parsed.filter(Boolean);
+      }
+
+    } catch (error) {
+
+      console.error(
+        `Could not parse fascinating facts for ${properties.name || 'destination'}:`,
+        error
+      );
+
+    }
+
+  }
+
+  return [];
+
+}
+
+
+function isSafeExternalUrl(value) {
+
+  if (!value || typeof value !== 'string') return false;
+
+  try {
+
+    const url = new URL(value, window.location.href);
+
+    return url.protocol === 'http:' || url.protocol === 'https:';
+
+  } catch {
+
+    return false;
+
+  }
+
+}
+
+
+function populateFascinatingFacts(properties) {
+
+  const factsHeading = document.getElementById('factsHeading');
+  const factsGrid = document.getElementById('factsGrid');
+  const factsEmpty = document.getElementById('factsEmpty');
+
+  if (!factsGrid) return;
+
+  const facts = getFactsArray(properties);
+
+  /* Destination-specific heading. */
+  if (factsHeading) {
+
+    factsHeading.textContent = properties?.name
+      ? `Fascinating facts about ${properties.name}`
+      : 'Fascinating facts';
+
+  }
+
+  /* Clear cards from the previously opened destination. */
+  factsGrid.innerHTML = '';
+
+  if (!facts.length) {
+
+    factsGrid.style.display = 'none';
+
+    if (factsEmpty) {
+      factsEmpty.style.display = 'block';
+    }
+
+    return;
+
+  }
+
+  factsGrid.style.display = '';
+
+  if (factsEmpty) {
+    factsEmpty.style.display = 'none';
+  }
+
+
+  facts.forEach((fact, index) => {
+
+    if (!fact) return;
+
+    const card = document.createElement('article');
+    card.className = 'fact-card';
+
+    const number = document.createElement('div');
+    number.className = 'fact-number';
+    number.textContent = String(index + 1).padStart(2, '0');
+
+    const content = document.createElement('div');
+    content.className = 'fact-content';
+
+    const title = document.createElement('h3');
+    title.className = 'fact-title';
+    title.textContent =
+      fact.title ||
+      `Fact ${index + 1}`;
+
+    const text = document.createElement('p');
+    text.className = 'fact-text';
+    text.textContent =
+      fact.text ||
+      '';
+
+    content.appendChild(title);
+    content.appendChild(text);
+
+
+    /* Add a clickable reference only when a valid web URL exists. */
+    if (isSafeExternalUrl(fact.sourceUrl)) {
+
+      const source = document.createElement('a');
+
+      source.className = 'fact-source';
+      source.href = fact.sourceUrl;
+      source.target = '_blank';
+      source.rel = 'noopener noreferrer';
+
+      const sourceLabel =
+        fact.sourceName ||
+        'View source';
+
+      source.textContent = `${sourceLabel} ↗`;
+
+      content.appendChild(source);
+
+    }
+
+
+    card.appendChild(number);
+    card.appendChild(content);
+
+    factsGrid.appendChild(card);
+
+  });
+
+}
+
+
+/* =========================================================
    DASHBOARD TABS
-   EXPERIENCE / PLAN / EXPLORE
+   EXPERIENCE / PLAN / EXPLORE / FASCINATING FACTS
    ========================================================= */
 
 function showDashboardTab(tabName) {
@@ -2008,7 +2172,8 @@ function showDashboardTab(tabName) {
   const sections = {
     experience: document.getElementById('dashboardExperience'),
     plan: document.getElementById('dashboardPlan'),
-    explore: document.getElementById('dashboardExplore')
+    explore: document.getElementById('dashboardExplore'),
+    facts: document.getElementById('dashboardFacts')
   };
 
 
@@ -2088,7 +2253,8 @@ document
       if (
         tabName !== 'experience' &&
         tabName !== 'plan' &&
-        tabName !== 'explore'
+        tabName !== 'explore' &&
+        tabName !== 'facts'
       ) {
         return;
       }
