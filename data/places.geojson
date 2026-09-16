@@ -255,8 +255,8 @@
           {
             "title": "Like an iceberg",
             "text": "Only part of Uluru is visible above the surrounding landscape. Much of the rock structure continues below ground.",
-            "sourceName": "",
-            "sourceUrl": ""
+            "sourceName": "Ayers Rock - Uluru",
+            "sourceUrl": "https://uluru-australia.com/about-uluru/uluru-facts/"
           },
           {
             "title": "Long walking track",
@@ -266,9 +266,9 @@
           },
           {
             "title": "Rust creates the red glow",
-            "text": "Uluru's distinctive red appearance is associated with the oxidation of iron-bearing minerals in the sandstone.",
-            "sourceName": "",
-            "sourceUrl": ""
+            "text": "Uluru's distinctive rusty-red surface is caused by the oxidation of iron in the arkose — essentially, the rock is rusting.",
+            "sourceName": "Parks Australia",
+            "sourceUrl": "https://api.parksaustralia.gov.au/sites/default/files/2023-09/uktnp-a4factsheet-geology_23-sept.pdf"
           },
           {
             "title": "Colour-changing views",
@@ -301,11 +301,11 @@
             "sourceUrl": "https://whc.unesco.org/en/list/447"
           },
           {
-            "title": "Not simply Australia's biggest rock",
-            "text": "Uluru is often described as a monolith, but comparisons claiming a single 'largest monolith' in Australia depend on how geological formations are defined and measured.",
-            "sourceName": "",
-            "sourceUrl": ""
-          }
+            "title": "Uluru isn't Australia's biggest rock",
+            "text": "Mount Augustus in Western Australia is about twice the size of Uluru, although the two formations are geologically very different.",
+            "sourceName": "Geoscience Australia",
+            "sourceUrl": "https://www.ga.gov.au/scientific-topics/national-location-information/landforms/significant-rock-features"
+          },
         ]
       },
       "geometry": {
