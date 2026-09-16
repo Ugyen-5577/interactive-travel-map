@@ -238,20 +238,37 @@
           ],
           "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=Uluru-Kata+Tjuta+National+Park"
         },
+
         "explore": {
           "nearbyPlaces": [
             {
               "name": "Kata Tjuṯa",
               "placeId": "",
-              "distance": "Approximately 50 km by road"
+              "distance": "Approximately 50 km by road",
+              "description": "Visit nearby Kata Tjuṯa, approximately 50 km away by road. Longer Central Australian journeys may also include Kings Canyon and other experiences around Yulara."
             }
           ],
-          "similarExperiences": [],
+        
+          "events": {
+            "summary": "Events and festivals are held throughout Central Australia throughout the year. Check the current events calendar when planning your visit.",
+            "sourceName": "Red Centre Events Calendar",
+            "sourceUrl": "https://www.discovercentralaustralia.com/events/calendar"
+          },
+        
+          "walks": [],
+        
+          "roadTrips": [],
+        
+          "nature": [],
+        
+          "culture": [],
+        
           "experienceTypes": [
             "Walks",
             "Nature",
             "Cultural experiences"
           ],
+        
           "tags": [
             "walking",
             "nature",
