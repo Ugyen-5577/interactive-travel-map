@@ -2237,11 +2237,57 @@ if (climateLink) {
        `;
      }
    }
-  renderSimpleList(
-    'exploreWalks',
-    explore.walks,
-    'Walks will be added soon.'
-  );
+       // ==================== EXPLORE: WALKS ====================
+      // Walks are structured objects containing route details and optional animation.
+      
+      const walksElement = document.getElementById('exploreWalks');
+      const walks = Array.isArray(explore.walks) ? explore.walks : [];
+      
+      if (walksElement) {
+        if (walks.length) {
+          walksElement.innerHTML = walks.map(walk => `
+            <div class="explore-walk-item">
+              <h4>${walk.name || 'Walk'}</h4>
+      
+              ${walk.distance || walk.duration || walk.difficulty ? `
+                <div class="explore-walk-meta">
+                  ${walk.distance ? `<span>${walk.distance}</span>` : ''}
+                  ${walk.duration ? `<span>${walk.duration}</span>` : ''}
+                  ${walk.difficulty ? `<span>${walk.difficulty}</span>` : ''}
+                </div>
+              ` : ''}
+      
+              ${walk.description ? `
+                <p>${walk.description}</p>
+              ` : ''}
+      
+              ${walk.animated ? `
+                <button
+                  type="button"
+                  class="explore-walk-button"
+                  data-walk-id="${walk.id || ''}">
+                  ${walk.buttonText || 'View animated walk'} →
+                </button>
+              ` : ''}
+            </div>
+          `).join('');
+      
+          walksElement.querySelectorAll('.explore-walk-button').forEach(button => {
+            button.addEventListener('click', () => {
+              const walkId = button.dataset.walkId;
+      
+              if (walkId === 'uluru-base-walk') {
+                startUluruWalk();
+              }
+            });
+          });
+      
+        } else {
+          walksElement.innerHTML = `
+            <p class="empty-feature-text">Walks will be added soon.</p>
+          `;
+        }
+      }
 
   renderSimpleList(
     'exploreRoadTrips',
