@@ -1385,50 +1385,39 @@ const links = currentPlace?.properties?.links || [];
 
   /* ==================== PHOTO GALLERY ==================== */
 
- /* ==================== PHOTO GALLERY ==================== */
-
-if (photoGallery) {
-
-  photoGallery.innerHTML = '';
-
-  photos.forEach((photo, photoIndex) => {
-
-    const image = document.createElement('img');
-
-    image.src = photo;
-    image.alt = `${properties.name || 'Travel'} photo ${photoIndex + 1}`;
-    image.className = 'gallery-photo';
-    image.draggable = false;
-    image.loading = 'lazy';
-
-
-    /* Prevent right-click download menu */
-
-    image.addEventListener('contextmenu', event => {
-      event.preventDefault();
-    });
-
-
-    /* Open full gallery at the selected photo */
-
-    image.addEventListener('click', () => {
-
-      openLightboxGallery(
-        photos,
-        photoIndex,
-        properties.name
-      );
-
-    });
-
-
-    /* Add thumbnail to photo gallery */
-
-    photoGallery.appendChild(image);
-
-  });
-
-}
+   if (photoGallery) {
+   
+     photoGallery.innerHTML = '';
+   
+     photos.forEach((photo, photoIndex) => {
+   
+       const image = document.createElement('img');
+   
+       image.src = photo;
+       image.alt = properties.name || 'Travel photo';
+       image.className = 'gallery-photo';
+       image.draggable = false;
+       image.loading = 'lazy';
+   
+       image.addEventListener('contextmenu', event => {
+         event.preventDefault();
+       });
+   
+       image.addEventListener('click', () => {
+   
+         openLightboxGallery(
+           photos,
+           photoIndex,
+           properties.name
+         );
+   
+       });
+   
+       photoGallery.appendChild(image);
+   
+     });
+   
+   }
 
   /* ==================== VIDEO GALLERY ==================== */
 
