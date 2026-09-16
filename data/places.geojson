@@ -124,10 +124,26 @@
             }
           ],
           "observations": [],
-          "surprisedMe": [],
-          "whatILearned": [],
-          "whatIdDoDifferently": [],
-          "environmentalObservations": [],
+          "surprisedMe": [
+              "The scale of Uluru was much greater than I expected when seeing it in person.",
+              "The appearance of the rock changed noticeably as the light changed throughout the day.",
+              "Walking around Uluru takes longer than you might expect."
+          ],
+          "whatILearned": [
+              "Visiting Uluru helped me better understand its cultural significance to the Aṉangu Traditional Owners.",
+              "I learned that there is much more to experience around Uluru than simply viewing the rock.",
+              "Accommodation and transport should be booked well in advance rather than left until the last minute."
+          ],
+          "whatIdDoDifferently": [
+              "I would allow more time to explore the walking tracks and spend longer at the Cultural Centre.",
+              "I would start some activities earlier in the morning.",
+              "Visit the site early in the morning, then relax and enjoy some time at the pub at the Outback Lodge."
+          ],
+          "environmentalObservations": [
+              "The landscape around Uluru was much more vegetated than I had imagined.",
+              "The vegetation, soil and rock formations created a distinctive desert landscape.",
+              "Small rock pebbles and gravel scattered across the landscape resemble iron granules."
+          ],
           "visitConditions": {
             "date": "August 2026",
             "weather": "",
