@@ -2218,12 +2218,25 @@ if (climateLink) {
      EXPLORE — CATEGORIES
      ======================================================= */
 
- renderSimpleList(
-  'exploreEvents',
-  explore.events,
-  'Events will be added soon.'
-);
+   const events = explore.events || {};
+   const eventsElement = document.getElementById('exploreEvents');
 
+   if (eventsElement) {
+     if (events.summary) {
+       eventsElement.innerHTML = `
+         <p>${events.summary}</p>
+         ${events.sourceUrl ? `
+           <a href="${events.sourceUrl}" target="_blank" rel="noopener noreferrer" class="explore-source-link">
+             ${events.sourceName || 'View current events'} →
+           </a>
+         ` : ''}
+       `;
+     } else {
+       eventsElement.innerHTML = `
+         <p class="empty-feature-text">Events will be added soon.</p>
+       `;
+     }
+   }
   renderSimpleList(
     'exploreWalks',
     explore.walks,
