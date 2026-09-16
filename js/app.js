@@ -1998,7 +1998,7 @@ if (climateLink) {
 }
 
 /* =========================================================
-   FASCINATING FACTS
+   10 FACTS
    Populated from properties.facts in places.geojson.
    Each fact may contain:
    title, text, sourceName and sourceUrl.
@@ -2058,6 +2058,51 @@ function isSafeExternalUrl(value) {
 }
 
 
+function getShortFactSourceName(sourceName, sourceUrl) {
+
+  const name = (sourceName || '').trim().toLowerCase();
+
+  if (name.includes('parks australia')) return 'Parks Australia';
+  if (name.includes('unesco')) return 'UNESCO';
+  if (name.includes('australian government')) return 'Australian Government';
+  if (name.includes('wikipedia')) return 'Wikipedia';
+
+  if (sourceName && sourceName.trim()) {
+    return sourceName
+      .replace(/\s*[–—-]\s*Uluṟu-Kata Tjuṯa.*$/i, '')
+      .replace(/\s*[–—-]\s*Uluru-Kata Tjuta.*$/i, '')
+      .trim();
+  }
+
+  if (sourceUrl) {
+    try {
+      return new URL(sourceUrl).hostname.replace(/^www\./, '');
+    } catch {}
+  }
+
+  return 'Learn more';
+}
+
+
+function getFactIcon(index) {
+
+  const icons = [
+    '▲',  // height
+    '◆',  // below-ground formation
+    '●',  // walk
+    '✦',  // red colour / geology
+    '☀',  // changing light
+    '◉',  // culture / history
+    '◆',  // names
+    '⊘',  // climb closed
+    '●',  // ancient origins
+    '▲'   // scale / rock
+  ];
+
+  return icons[index] || '✦';
+}
+
+
 function populateFascinatingFacts(properties) {
 
   const factsHeading = document.getElementById('factsHeading');
@@ -2068,13 +2113,30 @@ function populateFascinatingFacts(properties) {
 
   const facts = getFactsArray(properties);
 
-  /* Destination-specific heading. */
+  /* Keep the section heading short and destination-specific. */
   if (factsHeading) {
-
     factsHeading.textContent = properties?.name
-      ? `Fascinating facts about ${properties.name}`
-      : 'Fascinating facts';
+      ? `10 facts about ${properties.name}`
+      : '10 facts';
+  }
 
+  /* Change the small kicker in the Facts section to 10 FACTS. */
+  const factsSection = document.getElementById('dashboardFacts');
+  const factsKicker = factsSection?.querySelector('.section-kicker');
+
+  if (factsKicker) {
+    factsKicker.textContent = '10 FACTS';
+  }
+
+  /* Keep the left navigation label compact. */
+  const factsNavButton =
+    document.querySelector('.dashboard-nav-button[data-dashboard-tab="facts"]');
+
+  const factsNavLabel =
+    factsNavButton?.querySelector('.dashboard-nav-label');
+
+  if (factsNavLabel) {
+    factsNavLabel.textContent = '10 Facts';
   }
 
   /* Clear cards from the previously opened destination. */
@@ -2089,7 +2151,6 @@ function populateFascinatingFacts(properties) {
     }
 
     return;
-
   }
 
   factsGrid.style.display = '';
@@ -2098,38 +2159,37 @@ function populateFascinatingFacts(properties) {
     factsEmpty.style.display = 'none';
   }
 
-
-  facts.forEach((fact, index) => {
+  facts.slice(0, 10).forEach((fact, index) => {
 
     if (!fact) return;
 
     const card = document.createElement('article');
-    card.className = 'fact-card';
+    card.className = `fact-card fact-card-${(index % 5) + 1}`;
 
-    const number = document.createElement('div');
-    number.className = 'fact-number';
-    number.textContent = String(index + 1).padStart(2, '0');
+    const iconWrap = document.createElement('div');
+    iconWrap.className = 'fact-icon';
+
+    const icon = document.createElement('span');
+    icon.className = 'fact-icon-symbol';
+    icon.textContent = getFactIcon(index);
+
+    iconWrap.appendChild(icon);
 
     const content = document.createElement('div');
     content.className = 'fact-content';
 
     const title = document.createElement('h3');
     title.className = 'fact-title';
-    title.textContent =
-      fact.title ||
-      `Fact ${index + 1}`;
+    title.textContent = fact.title || `Fact ${index + 1}`;
 
     const text = document.createElement('p');
     text.className = 'fact-text';
-    text.textContent =
-      fact.text ||
-      '';
+    text.textContent = fact.text || '';
 
     content.appendChild(title);
     content.appendChild(text);
 
-
-    /* Add a clickable reference only when a valid web URL exists. */
+    /* Short clickable source label. */
     if (isSafeExternalUrl(fact.sourceUrl)) {
 
       const source = document.createElement('a');
@@ -2138,31 +2198,23 @@ function populateFascinatingFacts(properties) {
       source.href = fact.sourceUrl;
       source.target = '_blank';
       source.rel = 'noopener noreferrer';
-
-      const sourceLabel =
-        fact.sourceName ||
-        'View source';
-
-      source.textContent = `${sourceLabel} ↗`;
+      source.textContent =
+        `${getShortFactSourceName(fact.sourceName, fact.sourceUrl)} ↗`;
 
       content.appendChild(source);
-
     }
 
-
-    card.appendChild(number);
+    card.appendChild(iconWrap);
     card.appendChild(content);
 
     factsGrid.appendChild(card);
-
   });
-
 }
 
 
 /* =========================================================
    DASHBOARD TABS
-   EXPERIENCE / PLAN / EXPLORE / FASCINATING FACTS
+   EXPERIENCE / PLAN / EXPLORE / 10 FACTS
    ========================================================= */
 
 function showDashboardTab(tabName) {
