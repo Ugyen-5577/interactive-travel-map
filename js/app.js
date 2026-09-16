@@ -2000,8 +2000,6 @@ if (climateLink) {
 /* =========================================================
    10 FACTS
    Populated from properties.facts in places.geojson.
-   Each fact may contain:
-   title, text, sourceName and sourceUrl.
    ========================================================= */
 
 function getFactsArray(properties) {
@@ -2012,7 +2010,6 @@ function getFactsArray(properties) {
     return properties.facts.filter(Boolean);
   }
 
-  /* Support facts that may arrive as a JSON string. */
   if (typeof properties.facts === 'string' && properties.facts.trim()) {
 
     try {
@@ -2026,7 +2023,7 @@ function getFactsArray(properties) {
     } catch (error) {
 
       console.error(
-        `Could not parse fascinating facts for ${properties.name || 'destination'}:`,
+        `Could not parse facts for ${properties.name || 'destination'}:`,
         error
       );
 
@@ -2038,6 +2035,10 @@ function getFactsArray(properties) {
 
 }
 
+
+/* =========================================================
+   CHECK SOURCE URL
+   ========================================================= */
 
 function isSafeExternalUrl(value) {
 
@@ -2058,79 +2059,108 @@ function isSafeExternalUrl(value) {
 }
 
 
+/* =========================================================
+   SHORT SOURCE NAME
+   ========================================================= */
+
 function getShortFactSourceName(sourceName, sourceUrl) {
 
-  const name = (sourceName || '').trim().toLowerCase();
+  const name = (sourceName || '').toLowerCase();
 
-  if (name.includes('parks australia')) return 'Parks Australia';
-  if (name.includes('unesco')) return 'UNESCO';
-  if (name.includes('australian government')) return 'Australian Government';
-  if (name.includes('wikipedia')) return 'Wikipedia';
+  if (name.includes('parks australia')) {
+    return 'Parks Australia';
+  }
+
+  if (name.includes('unesco')) {
+    return 'UNESCO';
+  }
+
+  if (name.includes('australian government')) {
+    return 'Australian Government';
+  }
+
+  if (name.includes('geoscience australia')) {
+    return 'Geoscience Australia';
+  }
+
+  if (name.includes('wikipedia')) {
+    return 'Wikipedia';
+  }
 
   if (sourceName && sourceName.trim()) {
-    return sourceName
-      .replace(/\s*[–—-]\s*Uluṟu-Kata Tjuṯa.*$/i, '')
-      .replace(/\s*[–—-]\s*Uluru-Kata Tjuta.*$/i, '')
-      .trim();
+    return sourceName.trim();
   }
 
   if (sourceUrl) {
+
     try {
-      return new URL(sourceUrl).hostname.replace(/^www\./, '');
+
+      return new URL(sourceUrl)
+        .hostname
+        .replace(/^www\./, '');
+
     } catch {}
+
   }
 
-  return 'Learn more';
+  return 'Source';
 }
 
 
-function getFactIcon(index) {
-
-  const icons = [
-    '▲',  // height
-    '◆',  // below-ground formation
-    '●',  // walk
-    '✦',  // red colour / geology
-    '☀',  // changing light
-    '◉',  // culture / history
-    '◆',  // names
-    '⊘',  // climb closed
-    '●',  // ancient origins
-    '▲'   // scale / rock
-  ];
-
-  return icons[index] || '✦';
-}
-
+/* =========================================================
+   POPULATE 10 FACTS
+   ========================================================= */
 
 function populateFascinatingFacts(properties) {
 
-  const factsHeading = document.getElementById('factsHeading');
-  const factsGrid = document.getElementById('factsGrid');
-  const factsEmpty = document.getElementById('factsEmpty');
+  const factsHeading =
+    document.getElementById('factsHeading');
+
+  const factsGrid =
+    document.getElementById('factsGrid');
+
+  const factsEmpty =
+    document.getElementById('factsEmpty');
+
+  const factsSection =
+    document.getElementById('dashboardFacts');
 
   if (!factsGrid) return;
 
+
+  /* ==================== GET FACTS ==================== */
+
   const facts = getFactsArray(properties);
 
-  /* Keep the section heading short and destination-specific. */
+
+  /* ==================== HEADING ==================== */
+
   if (factsHeading) {
-    factsHeading.textContent = properties?.name
-      ? `10 facts about ${properties.name}`
-      : '10 facts';
+
+    factsHeading.textContent =
+      properties?.name
+        ? `10 facts about ${properties.name}`
+        : '10 facts';
+
   }
 
-  /* Change the small kicker in the Facts section to 10 FACTS. */
-  const factsSection = document.getElementById('dashboardFacts');
-  const factsKicker = factsSection?.querySelector('.section-kicker');
+
+  /* ==================== SMALL KICKER ==================== */
+
+  const factsKicker =
+    factsSection?.querySelector('.section-kicker');
 
   if (factsKicker) {
     factsKicker.textContent = '10 FACTS';
   }
 
-  /* Keep the left navigation label compact. */
+
+  /* ==================== LEFT NAVIGATION ==================== */
+
   const factsNavButton =
-    document.querySelector('.dashboard-nav-button[data-dashboard-tab="facts"]');
+    document.querySelector(
+      '.dashboard-nav-button[data-dashboard-tab="facts"]'
+    );
 
   const factsNavLabel =
     factsNavButton?.querySelector('.dashboard-nav-label');
@@ -2139,8 +2169,13 @@ function populateFascinatingFacts(properties) {
     factsNavLabel.textContent = '10 Facts';
   }
 
-  /* Clear cards from the previously opened destination. */
+
+  /* ==================== CLEAR OLD CARDS ==================== */
+
   factsGrid.innerHTML = '';
+
+
+  /* ==================== NO FACTS ==================== */
 
   if (!facts.length) {
 
@@ -2153,62 +2188,108 @@ function populateFascinatingFacts(properties) {
     return;
   }
 
+
   factsGrid.style.display = '';
 
   if (factsEmpty) {
     factsEmpty.style.display = 'none';
   }
 
+
+  /* ==================== CREATE FACT CARDS ==================== */
+
   facts.slice(0, 10).forEach((fact, index) => {
 
     if (!fact) return;
 
-    const card = document.createElement('article');
-    card.className = `fact-card fact-card-${(index % 5) + 1}`;
 
-    const iconWrap = document.createElement('div');
-    iconWrap.className = 'fact-icon';
+    /* ---------- CARD ---------- */
 
-    const icon = document.createElement('span');
-    icon.className = 'fact-icon-symbol';
-    icon.textContent = getFactIcon(index);
+    const card =
+      document.createElement('article');
 
-    iconWrap.appendChild(icon);
+    card.className = 'fact-card';
 
-    const content = document.createElement('div');
+
+    /* ---------- NUMBER ---------- */
+
+    const number =
+      document.createElement('div');
+
+    number.className = 'fact-number';
+
+    number.textContent = index + 1;
+
+
+    /* ---------- CONTENT ---------- */
+
+    const content =
+      document.createElement('div');
+
     content.className = 'fact-content';
 
-    const title = document.createElement('h3');
-    title.className = 'fact-title';
-    title.textContent = fact.title || `Fact ${index + 1}`;
 
-    const text = document.createElement('p');
+    /* ---------- TITLE ---------- */
+
+    const title =
+      document.createElement('h3');
+
+    title.className = 'fact-title';
+
+    title.textContent =
+      fact.title || `Fact ${index + 1}`;
+
+
+    /* ---------- DESCRIPTION ---------- */
+
+    const text =
+      document.createElement('p');
+
     text.className = 'fact-text';
-    text.textContent = fact.text || '';
+
+    text.textContent =
+      fact.text || '';
+
 
     content.appendChild(title);
     content.appendChild(text);
 
-    /* Short clickable source label. */
+
+    /* ---------- SOURCE ---------- */
+
     if (isSafeExternalUrl(fact.sourceUrl)) {
 
-      const source = document.createElement('a');
+      const source =
+        document.createElement('a');
 
       source.className = 'fact-source';
+
       source.href = fact.sourceUrl;
+
       source.target = '_blank';
+
       source.rel = 'noopener noreferrer';
+
       source.textContent =
-        `${getShortFactSourceName(fact.sourceName, fact.sourceUrl)} ↗`;
+        `${getShortFactSourceName(
+          fact.sourceName,
+          fact.sourceUrl
+        )} ↗`;
 
       content.appendChild(source);
+
     }
 
-    card.appendChild(iconWrap);
+
+    /* ---------- BUILD CARD ---------- */
+
+    card.appendChild(number);
     card.appendChild(content);
 
     factsGrid.appendChild(card);
+
   });
+
 }
 
 
