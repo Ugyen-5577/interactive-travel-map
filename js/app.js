@@ -1385,36 +1385,50 @@ const links = currentPlace?.properties?.links || [];
 
   /* ==================== PHOTO GALLERY ==================== */
 
-  if (photoGallery) {
+ /* ==================== PHOTO GALLERY ==================== */
 
-    photoGallery.innerHTML = '';
+if (photoGallery) {
 
-    photos.forEach(photo => {
+  photoGallery.innerHTML = '';
 
-      const image = document.createElement('img');
+  photos.forEach((photo, photoIndex) => {
 
-      image.src = photo;
-      image.alt = properties.name || 'Travel photo';
-      image.className = 'gallery-photo';
-      image.draggable = false;
-      image.loading = 'lazy';
+    const image = document.createElement('img');
 
-      image.addEventListener('contextmenu', event => {
-        event.preventDefault();
-      });
+    image.src = photo;
+    image.alt = `${properties.name || 'Travel'} photo ${photoIndex + 1}`;
+    image.className = 'gallery-photo';
+    image.draggable = false;
+    image.loading = 'lazy';
 
-      image.addEventListener('click', () => {
-        const photoIndex = photos.indexOf(photo);
 
-        openLightboxGallery(
-          photos,
-          photoIndex,
-          properties.name
-        );
-      });
+    /* Prevent right-click download menu */
 
-  }
+    image.addEventListener('contextmenu', event => {
+      event.preventDefault();
+    });
 
+
+    /* Open full gallery at the selected photo */
+
+    image.addEventListener('click', () => {
+
+      openLightboxGallery(
+        photos,
+        photoIndex,
+        properties.name
+      );
+
+    });
+
+
+    /* Add thumbnail to photo gallery */
+
+    photoGallery.appendChild(image);
+
+  });
+
+}
 
   /* ==================== VIDEO GALLERY ==================== */
 
