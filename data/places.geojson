@@ -8,40 +8,27 @@
         "title": "Canberra - ACT - AUSTRALIA",
         "visited": "Home / Local",
         "category": "City",
-
         "heroDescription": "Australia's national capital, surrounded by nature reserves, lakes and national institutions.",
-
         "aboutPreview": "Canberra combines national institutions, planned urban landscapes and extensive natural areas.",
-
         "aboutFull": "<p>Canberra is Australia's national capital and is located within the Australian Capital Territory.</p><p>The city is known for Lake Burley Griffin, major national institutions, surrounding nature reserves and easy access to bushland.</p>",
-
         "gettingThere": "Canberra is accessible by road and air, with Canberra Airport located close to the city centre.",
-
         "stayingNearby": "Accommodation is available throughout central Canberra, Braddon, Kingston, Barton and surrounding suburbs.",
-
         "exploreNearby": "Explore Lake Burley Griffin, Mount Ainslie, the Australian National Botanic Gardens, Tidbinbilla and Namadgi National Park.",
-
         "planVisit": "Canberra has four distinct seasons. Spring and autumn are particularly comfortable for outdoor exploration.",
-
         "bestTime": "Spring and autumn generally provide comfortable temperatures for exploring the city and surrounding nature.",
-
         "culturalNote": "Respect local regulations and protected natural areas when visiting reserves and national parks.",
-
         "photos": [
           "images/canberra1.jpg"
         ],
-
         "videos": [],
-
         "links": [
-  {
-    "name": "Visit Canberra",
-    "url": "https://visitcanberra.com.au/",
-    "icon": "🌿"
-  }
-]
+          {
+            "name": "Visit Canberra",
+            "url": "https://visitcanberra.com.au/",
+            "icon": "🌿"
+          }
+        ]
       },
-
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -50,367 +37,316 @@
         ]
       }
     },
-
-
-    {
-  "type": "Feature",
-
-  "properties": {
-
-    "name": "Uluru",
-    "title": "Uluru - NT - AUSTRALIA",
-    "visited": "August 2026",
-    "category": "Nature & Culture",
-
-    "heroDescription": "Uluru is one of Australia's most recognisable natural landmarks and a place of deep cultural and spiritual significance.",
-
-    "aboutPreview": "Uluru is a massive sandstone formation in the Northern Territory, rising about 348 metres above the surrounding landscape. It holds deep cultural and spiritual significance for the Aṉangu Traditional Owners.",
-
-    "aboutFull": "<p>Uluru, also known as Ayers Rock, is one of Australia's most recognisable natural landmarks. Located in the Northern Territory, the massive sandstone formation rises about 348 metres above the surrounding landscape and is estimated to have formed hundreds of millions of years ago.</p><p>Its distinctive red appearance comes from the oxidation of iron-bearing minerals in the rock.</p><p>Uluru is especially significant to the <strong>Aṉangu Traditional Owners</strong>, for whom the landscape has deep cultural and spiritual importance. Visitors are asked to respect Aṉangu culture, including restrictions on photography at certain culturally sensitive locations. Climbing Uluru permanently closed in 2019.</p><p>Sunrise and sunset are especially popular because changing light can dramatically alter the appearance and colour of the rock. Visitors can also explore the base of Uluru on foot or bicycle, visit waterholes and join guided cultural experiences.</p>",
-
-    "gettingThere": "Most visitors fly into Ayers Rock Airport (AYQ) near Yulara or travel by road through Central Australia. Alice Springs is roughly 450 km away by road.",
-
-    "stayingNearby": "Accommodation is concentrated at Yulara, just outside the national park, with options ranging from camping and apartments to hotels and luxury accommodation.",
-
-    "exploreNearby": "Visit nearby Kata Tjuṯa, approximately 50 km away by road. Longer Central Australian journeys may also include Kings Canyon and other experiences around Yulara.",
-
-    "planVisit": "Summers can be extremely hot. Cooler months generally provide more comfortable conditions for walking and outdoor activities. Check current park conditions before travelling.",
-
-    "bestTime": "April to October generally offers cooler and more comfortable conditions for walking and outdoor exploration.",
-
-    "culturalNote": "Uluru and Kata Tjuṯa are culturally significant to the Aṉangu Traditional Owners. Respect signs, culturally sensitive areas and photography restrictions throughout the national park.",
-
-    "heroPhoto": "images/uluru/18.jpg",
-
-    "photos": [
-      "https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image01.webp",
-      "images/uluru/2.jpg",
-      "images/uluru/3.jpg",
-      "images/uluru/4.jpg",
-      "images/uluru/5.jpg",
-      "images/uluru/6.jpg",
-      "images/uluru/7.jpg",
-      "images/uluru/8.jpg",
-      "images/uluru/9.jpg",
-      "images/uluru/10.jpg",
-      "images/uluru/11.jpg",
-      "images/uluru/12.jpg",
-      "images/uluru/13.jpg",
-      "images/uluru/14.jpg",
-      "images/uluru/15.jpg",
-      "images/uluru/16.jpg",
-      "images/uluru/17.JPG",
-      "images/uluru/18.jpg",
-      "images/uluru/19.jpg",
-      "images/uluru/20.jpg",
-      "images/uluru/21.jpg",
-      "images/uluru/22.jpg",
-      "images/uluru/23.jpg",
-      "images/uluru/24.JPG",
-      "images/uluru/25.jpg"
-    ],
-
-    "videos": [
-      "videos/uluru1.mp4"
-    ],
-
-    "links": [
-      {
-        "name": "Parks Australia – Uluṟu-Kata Tjuṯa National Park",
-        "url": "https://parksaustralia.gov.au/uluru/",
-        "icon": "🌿"
-      },
-      {
-        "name": "Official Uluṟu-Kata Tjuṯa visitor information",
-        "url": "https://uluru.gov.au/",
-        "icon": "🏜"
-      },
-      {
-        "name": "Ayers Rock Resort – accommodation & experiences",
-        "url": "https://www.ayersrockresort.com.au/",
-        "icon": "🏨"
-      },
-      {
-        "name": "Northern Territory – Uluru & Surrounds",
-        "url": "https://northernterritory.com/uluru-and-surrounds",
-        "icon": "☀"
-      }
-    ],
-
-    "experience": {
-
-      "summary": "My visit to Uluru in August 2026.",
-
-      "photos": [],
-
-      "videos": [],
-
-      "moments": [],
-
-      "routes": [
-        {
-          "id": "uluru-base-walk",
-          "name": "Uluru Base Walk",
-          "type": "walk",
-          "distance": "",
-          "duration": "",
-          "difficulty": "",
-          "routeFile": "data/routes/uluru-base-walk.geojson",
-          "animated": false
-        }
-      ],
-
-      "observations": [],
-
-      "surprisedMe": [],
-
-      "whatILearned": [],
-
-      "whatIdDoDifferently": [],
-
-      "environmentalObservations": [],
-
-      "visitConditions": {
-        "date": "August 2026",
-        "weather": "",
-        "temperature": "",
-        "crowdLevel": "",
-        "trackCondition": ""
-      }
-
-    },
-
-    "plan": {
-
-  "distance": "Uluru is about 20 km by road from Yulara / Ayers Rock Resort.",
-
-  "duration": "Allow at least 2–3 days to explore Uluru, Kata Tjuta, walks, sunrise and sunset locations at a relaxed pace.",
-
-  "difficulty": "Most viewing areas and short walks are easy to moderate. The full Uluru Base Walk is longer and requires more time and preparation.",
-
-  "cost": "A Uluṟu-Kata Tjuṯa National Park pass is required. Adult 3-day pass: $38. Visitors under 18 enter free.",
-
-
-  "access": {
-
-    "summary": "Most visitors stay at Yulara and travel into Uluṟu-Kata Tjuṯa National Park by car, tour vehicle or resort transport.",
-
-    "road": "Uluru is reached by sealed roads from Yulara. Self-drive is straightforward, but allow extra time for sunrise and sunset traffic and always check current road and park conditions.",
-
-    "publicTransport": "There is no regular public transport network inside the national park. Resort transfers, organised tours and hire vehicles are commonly used.",
-
-    "parking": "Designated parking areas are available at major locations including the Cultural Centre, Mala Walk, Kuniya Walk and official sunrise and sunset viewing areas."
-
-  },
-
-
-  "bestSeason": {
-
-    "summary": "April to October generally provides cooler conditions for walking and outdoor exploration. Winter mornings and evenings can be cold, while summer temperatures can become extremely hot.",
-
-    "months": [
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October"
-    ]
-
-  },
-
-
-  "climate": {
-  "summary": "Uluṟu has a semi-arid climate with large differences between daytime and overnight temperatures. Summers can be extremely hot, while winter days are generally mild but nights can become very cold. Rainfall is relatively low and highly variable, although summer storms can occasionally bring heavy rain. May to September generally provides the most comfortable temperatures for walking and outdoor activities.",
-  "sourceName": "Bureau of Meteorology – Yulara climate statistics",
-  "sourceUrl": "https://www.bom.gov.au/climate/averages/tables/cw_015635.shtml"
-},
-
-
-  "facilities": [
-    "Drinking water is available at selected walking areas and visitor facilities.",
-    "Toilets are available at several major visitor locations, but not at every walking track or lookout.",
-    "The Cultural Centre provides visitor information and cultural interpretation.",
-    "Some locations include picnic areas, shaded shelters and accessible viewing areas.",
-    "Emergency Call Devices are available at selected walking locations."
-  ],
-
-
-  "safety": [
-    "Carry plenty of drinking water, especially when walking.",
-    "Wear suitable walking shoes, sun protection and protective clothing.",
-    "Avoid strenuous walking during the hottest part of the day.",
-    "In hot weather, start longer walks early in the morning.",
-    "Some walking tracks may close when temperatures become dangerously high.",
-    "Check current park conditions, weather forecasts and track closures before setting out.",
-    "Stay on marked tracks and follow all park signs and ranger instructions."
-  ],
-
-
-  "mobileCoverage": "Mobile coverage can be limited or unavailable in parts of Uluṟu-Kata Tjuṯa National Park, particularly away from Yulara and major visitor areas. Do not rely entirely on your phone for navigation or emergency communication.",
-
-
-  "whatToPack": [
-    "Reusable water bottle",
-    "Comfortable walking shoes",
-    "Wide-brimmed hat",
-    "Sunscreen",
-    "Sunglasses",
-    "Lightweight sun-protective clothing",
-    "Warm layers for cool mornings and evenings",
-    "Small daypack",
-    "Camera or phone",
-    "Offline maps or downloaded visitor information"
-  ],
-
-
-  "permits": "A valid Uluṟu-Kata Tjuṯa National Park pass is required to enter the park. Additional permits may apply for some commercial photography, filming or specialised activities.",
-
-
-  "culturalConsiderations": "Uluṟu and Kata Tjuṯa are culturally significant to the Aṉangu Traditional Owners. Respect signs, culturally sensitive areas, photography restrictions and requests not to photograph certain sacred sites. Stay on designated tracks and follow cultural guidance throughout the park.",
-
-
-  "gettingThere": "Most visitors arrive through Ayers Rock Airport near Yulara or drive through Central Australia. Yulara is the main accommodation and service hub for visiting Uluṟu-Kata Tjuṯa National Park.",
-
-
-  "stayingNearby": "Most visitors stay at Yulara / Ayers Rock Resort, which provides accommodation, restaurants, shops, tours, vehicle hire and other visitor services close to the national park.",
-
-
-  "planVisit": "Allow enough time for sunrise or sunset viewing, the Cultural Centre and at least one walk. If you plan to complete the full Uluru Base Walk, start early and allow around 3.5 hours. Summer walking conditions can be extremely hot.",
-
-
-  "officialLinks": [
-
-    {
-      "name": "Parks Australia – Uluṟu-Kata Tjuṯa National Park",
-      "url": "https://parksaustralia.gov.au/uluru/"
-    },
-
-    {
-      "name": "Official Uluṟu-Kata Tjuṯa visitor information",
-      "url": "https://uluru.gov.au/"
-    },
-
-    {
-      "name": "Buy a National Park Pass",
-      "url": "https://uluru.gov.au/plan/buy-your-pass/"
-    },
-
-    {
-      "name": "Ayers Rock Resort",
-      "url": "https://www.ayersrockresort.com.au/"
-    },
-
-    {
-      "name": "Northern Territory – Uluru & Surrounds",
-      "url": "https://northernterritory.com/uluru-and-surrounds"
-    }
-
-  ],
-
-
-  "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=Uluru-Kata+Tjuta+National+Park"
-
-},
-
-    "explore": {
-
-      "nearbyPlaces": [
-        {
-          "name": "Kata Tjuṯa",
-          "placeId": "",
-          "distance": "Approximately 50 km by road"
-        }
-      ],
-
-      "similarExperiences": [],
-
-      "experienceTypes": [
-        "Walks",
-        "Nature",
-        "Cultural experiences"
-      ],
-
-      "tags": [
-        "walking",
-        "nature",
-        "culture",
-        "landscape",
-        "sunrise",
-        "sunset"
-      ]
-
-    }
-
-  },
-
-  "geometry": {
-    "type": "Point",
-    "coordinates": [
-      131.0369,
-      -25.3444
-    ]
-  }
-
-},
-
     {
       "type": "Feature",
-
       "properties": {
-
+        "name": "Uluru",
+        "title": "Uluru - NT - AUSTRALIA",
+        "visited": "August 2026",
+        "category": "Nature & Culture",
+        "heroDescription": "Uluru is one of Australia's most recognisable natural landmarks and a place of deep cultural and spiritual significance.",
+        "aboutPreview": "Uluru is a massive sandstone formation in the Northern Territory, rising about 348 metres above the surrounding landscape. It holds deep cultural and spiritual significance for the Aṉangu Traditional Owners.",
+        "aboutFull": "<p>Uluru, also known as Ayers Rock, is one of Australia's most recognisable natural landmarks. Located in the Northern Territory, the massive sandstone formation rises about 348 metres above the surrounding landscape and is estimated to have formed hundreds of millions of years ago.</p><p>Its distinctive red appearance comes from the oxidation of iron-bearing minerals in the rock.</p><p>Uluru is especially significant to the <strong>Aṉangu Traditional Owners</strong>, for whom the landscape has deep cultural and spiritual importance. Visitors are asked to respect Aṉangu culture, including restrictions on photography at certain culturally sensitive locations. Climbing Uluru permanently closed in 2019.</p><p>Sunrise and sunset are especially popular because changing light can dramatically alter the appearance and colour of the rock. Visitors can also explore the base of Uluru on foot or bicycle, visit waterholes and join guided cultural experiences.</p>",
+        "gettingThere": "Most visitors fly into Ayers Rock Airport (AYQ) near Yulara or travel by road through Central Australia. Alice Springs is roughly 450 km away by road.",
+        "stayingNearby": "Accommodation is concentrated at Yulara, just outside the national park, with options ranging from camping and apartments to hotels and luxury accommodation.",
+        "exploreNearby": "Visit nearby Kata Tjuṯa, approximately 50 km away by road. Longer Central Australian journeys may also include Kings Canyon and other experiences around Yulara.",
+        "planVisit": "Summers can be extremely hot. Cooler months generally provide more comfortable conditions for walking and outdoor activities. Check current park conditions before travelling.",
+        "bestTime": "April to October generally offers cooler and more comfortable conditions for walking and outdoor exploration.",
+        "culturalNote": "Uluru and Kata Tjuṯa are culturally significant to the Aṉangu Traditional Owners. Respect signs, culturally sensitive areas and photography restrictions throughout the national park.",
+        "heroPhoto": "images/uluru/18.jpg",
+        "photos": [
+          "https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image01.webp",
+          "images/uluru/2.jpg",
+          "images/uluru/3.jpg",
+          "images/uluru/4.jpg",
+          "images/uluru/5.jpg",
+          "images/uluru/6.jpg",
+          "images/uluru/7.jpg",
+          "images/uluru/8.jpg",
+          "images/uluru/9.jpg",
+          "images/uluru/10.jpg",
+          "images/uluru/11.jpg",
+          "images/uluru/12.jpg",
+          "images/uluru/13.jpg",
+          "images/uluru/14.jpg",
+          "images/uluru/15.jpg",
+          "images/uluru/16.jpg",
+          "images/uluru/17.JPG",
+          "images/uluru/18.jpg",
+          "images/uluru/19.jpg",
+          "images/uluru/20.jpg",
+          "images/uluru/21.jpg",
+          "images/uluru/22.jpg",
+          "images/uluru/23.jpg",
+          "images/uluru/24.JPG",
+          "images/uluru/25.jpg"
+        ],
+        "videos": [
+          "videos/uluru1.mp4"
+        ],
+        "links": [
+          {
+            "name": "Parks Australia – Uluṟu-Kata Tjuṯa National Park",
+            "url": "https://parksaustralia.gov.au/uluru/",
+            "icon": "🌿"
+          },
+          {
+            "name": "Official Uluṟu-Kata Tjuṯa visitor information",
+            "url": "https://uluru.gov.au/",
+            "icon": "🏜"
+          },
+          {
+            "name": "Ayers Rock Resort – accommodation & experiences",
+            "url": "https://www.ayersrockresort.com.au/",
+            "icon": "🏨"
+          },
+          {
+            "name": "Northern Territory – Uluru & Surrounds",
+            "url": "https://northernterritory.com/uluru-and-surrounds",
+            "icon": "☀"
+          }
+        ],
+        "experience": {
+          "summary": "My visit to Uluru in August 2026.",
+          "photos": [],
+          "videos": [],
+          "moments": [],
+          "routes": [
+            {
+              "id": "uluru-base-walk",
+              "name": "Uluru Base Walk",
+              "type": "walk",
+              "distance": "",
+              "duration": "",
+              "difficulty": "",
+              "routeFile": "data/routes/uluru-base-walk.geojson",
+              "animated": false
+            }
+          ],
+          "observations": [],
+          "surprisedMe": [],
+          "whatILearned": [],
+          "whatIdDoDifferently": [],
+          "environmentalObservations": [],
+          "visitConditions": {
+            "date": "August 2026",
+            "weather": "",
+            "temperature": "",
+            "crowdLevel": "",
+            "trackCondition": ""
+          }
+        },
+        "plan": {
+          "distance": "Uluru is about 20 km by road from Yulara / Ayers Rock Resort.",
+          "duration": "Allow at least 2–3 days to explore Uluru, Kata Tjuta, walks, sunrise and sunset locations at a relaxed pace.",
+          "difficulty": "Most viewing areas and short walks are easy to moderate. The full Uluru Base Walk is longer and requires more time and preparation.",
+          "cost": "A Uluṟu-Kata Tjuṯa National Park pass is required. Adult 3-day pass: $38. Visitors under 18 enter free.",
+          "access": {
+            "summary": "Most visitors stay at Yulara and travel into Uluṟu-Kata Tjuṯa National Park by car, tour vehicle or resort transport.",
+            "road": "Uluru is reached by sealed roads from Yulara. Self-drive is straightforward, but allow extra time for sunrise and sunset traffic and always check current road and park conditions.",
+            "publicTransport": "There is no regular public transport network inside the national park. Resort transfers, organised tours and hire vehicles are commonly used.",
+            "parking": "Designated parking areas are available at major locations including the Cultural Centre, Mala Walk, Kuniya Walk and official sunrise and sunset viewing areas."
+          },
+          "bestSeason": {
+            "summary": "April to October generally provides cooler conditions for walking and outdoor exploration. Winter mornings and evenings can be cold, while summer temperatures can become extremely hot.",
+            "months": [
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October"
+            ]
+          },
+          "climate": {
+            "summary": "Uluṟu has a semi-arid climate with large differences between daytime and overnight temperatures. Summers can be extremely hot, while winter days are generally mild but nights can become very cold. Rainfall is relatively low and highly variable, although summer storms can occasionally bring heavy rain. May to September generally provides the most comfortable temperatures for walking and outdoor activities.",
+            "sourceName": "Bureau of Meteorology – Yulara climate statistics",
+            "sourceUrl": "https://www.bom.gov.au/climate/averages/tables/cw_015635.shtml"
+          },
+          "facilities": [
+            "Drinking water is available at selected walking areas and visitor facilities.",
+            "Toilets are available at several major visitor locations, but not at every walking track or lookout.",
+            "The Cultural Centre provides visitor information and cultural interpretation.",
+            "Some locations include picnic areas, shaded shelters and accessible viewing areas.",
+            "Emergency Call Devices are available at selected walking locations."
+          ],
+          "safety": [
+            "Carry plenty of drinking water, especially when walking.",
+            "Wear suitable walking shoes, sun protection and protective clothing.",
+            "Avoid strenuous walking during the hottest part of the day.",
+            "In hot weather, start longer walks early in the morning.",
+            "Some walking tracks may close when temperatures become dangerously high.",
+            "Check current park conditions, weather forecasts and track closures before setting out.",
+            "Stay on marked tracks and follow all park signs and ranger instructions."
+          ],
+          "mobileCoverage": "Mobile coverage can be limited or unavailable in parts of Uluṟu-Kata Tjuṯa National Park, particularly away from Yulara and major visitor areas. Do not rely entirely on your phone for navigation or emergency communication.",
+          "whatToPack": [
+            "Reusable water bottle",
+            "Comfortable walking shoes",
+            "Wide-brimmed hat",
+            "Sunscreen",
+            "Sunglasses",
+            "Lightweight sun-protective clothing",
+            "Warm layers for cool mornings and evenings",
+            "Small daypack",
+            "Camera or phone",
+            "Offline maps or downloaded visitor information"
+          ],
+          "permits": "A valid Uluṟu-Kata Tjuṯa National Park pass is required to enter the park. Additional permits may apply for some commercial photography, filming or specialised activities.",
+          "culturalConsiderations": "Uluṟu and Kata Tjuṯa are culturally significant to the Aṉangu Traditional Owners. Respect signs, culturally sensitive areas, photography restrictions and requests not to photograph certain sacred sites. Stay on designated tracks and follow cultural guidance throughout the park.",
+          "gettingThere": "Most visitors arrive through Ayers Rock Airport near Yulara or drive through Central Australia. Yulara is the main accommodation and service hub for visiting Uluṟu-Kata Tjuṯa National Park.",
+          "stayingNearby": "Most visitors stay at Yulara / Ayers Rock Resort, which provides accommodation, restaurants, shops, tours, vehicle hire and other visitor services close to the national park.",
+          "planVisit": "Allow enough time for sunrise or sunset viewing, the Cultural Centre and at least one walk. If you plan to complete the full Uluru Base Walk, start early and allow around 3.5 hours. Summer walking conditions can be extremely hot.",
+          "officialLinks": [
+            {
+              "name": "Parks Australia – Uluṟu-Kata Tjuṯa National Park",
+              "url": "https://parksaustralia.gov.au/uluru/"
+            },
+            {
+              "name": "Official Uluṟu-Kata Tjuṯa visitor information",
+              "url": "https://uluru.gov.au/"
+            },
+            {
+              "name": "Buy a National Park Pass",
+              "url": "https://uluru.gov.au/plan/buy-your-pass/"
+            },
+            {
+              "name": "Ayers Rock Resort",
+              "url": "https://www.ayersrockresort.com.au/"
+            },
+            {
+              "name": "Northern Territory – Uluru & Surrounds",
+              "url": "https://northernterritory.com/uluru-and-surrounds"
+            }
+          ],
+          "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=Uluru-Kata+Tjuta+National+Park"
+        },
+        "explore": {
+          "nearbyPlaces": [
+            {
+              "name": "Kata Tjuṯa",
+              "placeId": "",
+              "distance": "Approximately 50 km by road"
+            }
+          ],
+          "similarExperiences": [],
+          "experienceTypes": [
+            "Walks",
+            "Nature",
+            "Cultural experiences"
+          ],
+          "tags": [
+            "walking",
+            "nature",
+            "culture",
+            "landscape",
+            "sunrise",
+            "sunset"
+          ]
+        },
+        "facts": [
+          {
+            "title": "Taller than the Eiffel Tower",
+            "text": "Uluru rises about 348 metres above the surrounding plain, making it taller than the Eiffel Tower.",
+            "sourceName": "Parks Australia – Uluṟu-Kata Tjuṯa National Park",
+            "sourceUrl": "https://parksaustralia.gov.au/uluru/"
+          },
+          {
+            "title": "Like an iceberg",
+            "text": "Only part of Uluru is visible above the surrounding landscape. Much of the rock structure continues below ground.",
+            "sourceName": "",
+            "sourceUrl": ""
+          },
+          {
+            "title": "Long walking track",
+            "text": "The route around the base of Uluru is approximately 9.4 kilometres.",
+            "sourceName": "Australian Government – Uluṟu-Kata Tjuṯa World Heritage",
+            "sourceUrl": "https://www.dcceew.gov.au/parks-heritage/heritage/places/world/uluru"
+          },
+          {
+            "title": "Rust creates the red glow",
+            "text": "Uluru's distinctive red appearance is associated with the oxidation of iron-bearing minerals in the sandstone.",
+            "sourceName": "",
+            "sourceUrl": ""
+          },
+          {
+            "title": "Colour-changing views",
+            "text": "Changing sunlight, shade and rain can make Uluru appear in different tones of red, violet and orange, with particularly dramatic views around sunrise and sunset.",
+            "sourceName": "UNESCO World Heritage Centre – Uluṟu-Kata Tjuṯa National Park",
+            "sourceUrl": "https://whc.unesco.org/en/list/447"
+          },
+          {
+            "title": "Deep Indigenous history",
+            "text": "Uluṟu-Kata Tjuṯa National Park has been home to Aṉangu people for tens of thousands of years and is part of one of the world's oldest continuing living cultures.",
+            "sourceName": "UNESCO World Heritage Centre – Uluṟu-Kata Tjuṯa National Park",
+            "sourceUrl": "https://whc.unesco.org/en/list/447"
+          },
+          {
+            "title": "Two well-known names",
+            "text": "Uluru is its Aṉangu name. In 1873, explorer William Gosse named the landmark Ayers Rock, a name that remains widely recognised historically.",
+            "sourceName": "Australian Government – Uluṟu-Kata Tjuṯa World Heritage",
+            "sourceUrl": "https://www.dcceew.gov.au/parks-heritage/heritage/places/world/uluru"
+          },
+          {
+            "title": "Climbing is closed",
+            "text": "The Uluru climb permanently closed on 26 October 2019 following a decision by the park's Board of Management and in recognition of Aṉangu wishes and the site's cultural significance.",
+            "sourceName": "Parks Australia – Uluṟu-Kata Tjuṯa media handbook",
+            "sourceUrl": "https://parksaustralia.gov.au/uluru/pub/uluru-kata-tjuta-media-handbook.pdf"
+          },
+          {
+            "title": "Ancient origins",
+            "text": "Uluru is an ancient sandstone formation shaped by geological processes over hundreds of millions of years.",
+            "sourceName": "UNESCO World Heritage Centre – Uluṟu-Kata Tjuṯa National Park",
+            "sourceUrl": "https://whc.unesco.org/en/list/447"
+          },
+          {
+            "title": "Not simply Australia's biggest rock",
+            "text": "Uluru is often described as a monolith, but comparisons claiming a single 'largest monolith' in Australia depend on how geological formations are defined and measured.",
+            "sourceName": "",
+            "sourceUrl": ""
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          131.0369,
+          -25.3444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Sydney",
-
         "title": "Sydney - NSW - AUSTRALIA",
-
         "visited": "2026",
-
         "category": "City",
-
         "heroDescription": "Australia's largest city, combining harbour landscapes, beaches, urban attractions and coastal experiences.",
-
         "aboutPreview": "Sydney is one of Australia's best-known cities, centred around its harbour and coastline.",
-
         "aboutFull": "<p>Sydney is the capital of New South Wales and one of Australia's major international gateways.</p><p>The city combines harbour landscapes, beaches, coastal walks, national parks and major cultural attractions.</p>",
-
         "gettingThere": "Sydney is served by Sydney Airport and extensive road, rail and public transport networks.",
-
         "stayingNearby": "Accommodation is available throughout the CBD, Circular Quay, Darling Harbour, Bondi and surrounding suburbs.",
-
         "exploreNearby": "Explore Sydney Harbour, coastal walks, beaches, the Blue Mountains and national parks surrounding the metropolitan area.",
-
         "planVisit": "Conditions vary throughout the year. Check weather and transport information before planning outdoor activities.",
-
         "bestTime": "Spring and autumn often provide mild conditions for sightseeing and coastal exploration.",
-
         "culturalNote": "Respect protected environments, Aboriginal cultural places and local rules when visiting coastal and natural areas.",
-
         "photos": [
           "images/sydney1.jpg"
         ],
-
         "videos": [
           "videos/sydney1.mp4"
         ],
-
         "links": []
-
       },
-
       "geometry": {
-
         "type": "Point",
-
         "coordinates": [
           151.2093,
           -33.8688
         ]
-
       }
-
     }
-
   ]
-
 }
