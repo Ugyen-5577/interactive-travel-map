@@ -574,113 +574,226 @@ button { -webkit-tap-highlight-color: transparent; }
 .explore-map-note { color: var(--wwb-text-2); font-size: 14px; line-height: 1.6; }
 
 /* =========================================================
-   FASCINATING FACTS
-   GeoJSON-driven cards created by app.js
+   10 FACTS
    ========================================================= */
 
-#dashboardFacts { min-width: 0; }
+#dashboardFacts {
+  min-width: 0;
+}
+
+
+/* ==================== GRID ==================== */
 
 .facts-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
-  margin: 22px 0 28px;
+  margin: 24px 0 30px;
 }
+
+
+/* ==================== CARD ==================== */
 
 .fact-card {
   min-width: 0;
+
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 14px;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 16px;
+
   align-items: start;
-  padding: 18px;
-  border: 1px solid var(--wwb-border);
+
+  padding: 18px 20px;
+
+  border: 1px solid #d8e0ec;
   border-radius: 15px;
-  background: var(--wwb-card-soft);
-  box-shadow: none;
-  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+
+  background: #f4f7fc;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
+
 .fact-card:hover {
-  background: var(--wwb-card);
+  background: #ffffff;
+
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px var(--wwb-shadow);
+
+  box-shadow:
+    0 6px 18px rgba(15, 23, 42, 0.08);
 }
+
+
+/* ==================== NUMBER ==================== */
 
 .fact-number {
   width: 42px;
   height: 42px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  background: var(--wwb-blue);
-  color: #ffffff;
-  font-size: 13px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #dbe9ff;
+
+  color: #172033;
+
+  font-size: 16px;
   font-weight: 800;
-  letter-spacing: .04em;
 }
+
+
+/* ==================== CONTENT ==================== */
 
 .fact-content {
   min-width: 0;
 }
 
+
+/* ==================== TITLE ==================== */
+
 .fact-title {
-  margin: 0 0 7px;
-  color: var(--wwb-text);
+  margin: 1px 0 6px;
+
+  color: #111827;
+
   font-size: 15px;
   font-weight: 750;
   line-height: 1.35;
 }
 
+
+/* ==================== DESCRIPTION ==================== */
+
 .fact-text {
   margin: 0;
-  color: var(--wwb-text-2);
-  font-size: 13px;
-  line-height: 1.6;
-}
 
-.fact-source {
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
-  margin-top: 12px;
-  padding: 7px 10px;
-  border: 1px solid var(--wwb-border);
-  border-radius: 999px;
-  background: #ffffff;
-  color: var(--wwb-blue) !important;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1.25;
-  text-decoration: none;
-  overflow-wrap: anywhere;
-  transition: background .18s ease, border-color .18s ease, transform .18s ease;
-}
+  color: #536076;
 
-.fact-source:hover {
-  background: #f5f8ff;
-  border-color: #b9c9e8;
-  color: #0842a0 !important;
-  transform: translateY(-1px);
-}
-
-.facts-empty {
-  margin: 22px 0 28px;
-  padding: 22px;
-  border: 1px dashed var(--wwb-border);
-  border-radius: 15px;
-  background: var(--wwb-card-soft);
-  text-align: center;
-}
-
-.facts-empty p {
-  margin: 0;
-  color: var(--wwb-text-2);
   font-size: 13px;
   line-height: 1.55;
 }
 
+
+/* ==================== SOURCE LINK ==================== */
+
+.fact-source {
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  margin-top: 10px;
+  padding: 5px 10px;
+
+  border: 1px solid #d6dfec;
+  border-radius: 999px;
+
+  background: #ffffff;
+
+  color: #0b63d8 !important;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  text-decoration: none;
+
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+
+.fact-source:hover {
+  background: #f5f8ff;
+
+  border-color: #9dbce8;
+
+  transform: translateY(-1px);
+
+  text-decoration: none;
+}
+
+
+/* ==================== EMPTY STATE ==================== */
+
+.facts-empty {
+  margin: 22px 0 28px;
+
+  padding: 22px;
+
+  border: 1px dashed #d8e0ec;
+  border-radius: 15px;
+
+  background: #f7f9fc;
+
+  text-align: center;
+}
+
+
+.facts-empty p {
+  margin: 0;
+
+  color: #667085;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   10 FACTS — MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+
+  .fact-card {
+    grid-template-columns: 38px minmax(0, 1fr);
+
+    gap: 12px;
+
+    padding: 15px;
+  }
+
+
+  .fact-number {
+    width: 36px;
+    height: 36px;
+
+    font-size: 14px;
+  }
+
+
+  .fact-title {
+    font-size: 14px;
+  }
+
+
+  .fact-text {
+    font-size: 12px;
+  }
+
+
+  .fact-source {
+    font-size: 10px;
+  }
+
+}
 
 /* =========================================================
    DESKTOP TYPOGRAPHY
