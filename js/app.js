@@ -1372,11 +1372,18 @@ async function startUluruWalk() {
    GLOBAL WALK FUNCTIONS
    ========================================================= */
 
-window.startUluruWalk =
-  startUluruWalk;
+window.startUluruWalk = startUluruWalk;
+window.stopUluruWalk = stopUluruWalk;
 
-window.stopUluruWalk =
-  stopUluruWalk;
+
+/* =========================================================
+   ADD TRAVEL MAP LAYERS
+   ========================================================= */
+
+function addTravelLayers() {
+
+  if (!map || !currentFilteredData) return;
+
 
   /* ==================== GEOJSON SOURCE ==================== */
 
