@@ -3978,6 +3978,49 @@ document
 
   });
 
+   /* =========================================================
+   LOAD PLACES.GEOJSON
+   ========================================================= */
+
+try {
+
+  const response = await fetch('data/places.geojson', {
+    cache: 'no-store'
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Could not load places.geojson (${response.status})`
+    );
+  }
+
+  travelData = await response.json();
+
+  /* Keep original nested GeoJSON properties intact. */
+  currentFilteredData = travelData;
+
+  /* Build destination markers and clusters. */
+  addTravelLayers();
+
+  /* Activate marker / cluster interactions. */
+  bindTravelInteractions();
+
+  /* Build Recently Added / Top Places cards. */
+  buildRecentPlaces();
+
+  console.log(
+    `Travel data loaded: ${travelData.features?.length || 0} places`
+  );
+
+} catch (error) {
+
+  console.error(
+    'Could not load travel places:',
+    error
+  );
+
+}
+
 
 /* =========================================================
    END MAP LOAD
