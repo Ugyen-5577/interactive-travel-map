@@ -1182,3 +1182,258 @@ button { -webkit-tap-highlight-color: transparent; }
   }
 
 }
+
+/* =========================================================
+   ULURU BASE WALK — IMMERSIVE ANIMATION UI
+   ========================================================= */
+
+/* Main animation interface sits above the map. */
+#uluruWalkOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   WALK INFORMATION CARD
+   ========================================================= */
+
+.uluru-walk-info-card {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: min(520px, calc(100vw - 48px));
+  padding: 20px 22px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(12px);
+  pointer-events: auto;
+}
+
+.uluru-walk-info-title {
+  margin-bottom: 14px;
+  color: #1f1f1f;
+  font-size: 27px;
+  font-weight: 750;
+  line-height: 1.15;
+}
+
+.uluru-walk-info-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  padding-bottom: 16px;
+  color: #3c4043;
+  font-size: 15px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.uluru-walk-info-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 15px;
+}
+
+.uluru-walk-info-bottom strong {
+  color: #1f1f1f;
+  font-size: 15px;
+}
+
+.uluru-walk-info-bottom p {
+  margin: 3px 0 0;
+  color: #5f6368;
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   STOP / CLOSE BUTTON
+   ========================================================= */
+
+.uluru-walk-stop-button {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 9px 15px;
+  border: 1px solid #d93025;
+  border-radius: 10px;
+  background: #fff;
+  color: #d93025;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.uluru-walk-stop-button:hover {
+  background: #fce8e6;
+}
+
+
+/* =========================================================
+   WALKING PERSON
+   ========================================================= */
+
+.uluru-human-walker {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.uluru-human-walker-emoji {
+  display: block;
+  font-size: 38px;
+  line-height: 1;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.4));
+  animation: uluruWalkerStep 0.55s ease-in-out infinite alternate;
+}
+
+@keyframes uluruWalkerStep {
+
+  from {
+    transform: translateY(1px) rotate(-3deg);
+  }
+
+  to {
+    transform: translateY(-4px) rotate(3deg);
+  }
+
+}
+
+
+/* =========================================================
+   PROGRESS PANEL
+   ========================================================= */
+
+.uluru-walk-progress-panel {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  width: min(720px, calc(100vw - 48px));
+  padding: 14px 18px;
+  transform: translateX(-50%);
+  background: rgba(32, 33, 36, 0.92);
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(10px);
+  color: white;
+  pointer-events: auto;
+}
+
+.uluru-walk-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.uluru-walk-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.uluru-walk-progress-track {
+  height: 10px;
+  flex: 1;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+}
+
+.uluru-walk-progress-bar {
+  width: 0;
+  height: 100%;
+  background: #f4511e;
+  border-radius: inherit;
+  transition: width 0.18s linear;
+}
+
+#uluruWalkPercentage {
+  width: 42px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .uluru-walk-info-card {
+    top: 12px;
+    left: 12px;
+    width: calc(100vw - 24px);
+    padding: 15px 16px;
+    border-radius: 14px;
+  }
+
+  .uluru-walk-info-title {
+    margin-bottom: 10px;
+    font-size: 21px;
+  }
+
+  .uluru-walk-info-meta {
+    gap: 8px 16px;
+    font-size: 13px;
+  }
+
+  .uluru-walk-info-bottom {
+    align-items: flex-end;
+  }
+
+  .uluru-walk-info-bottom p {
+    display: none;
+  }
+
+  .uluru-walk-stop-button {
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .uluru-human-walker {
+    width: 42px;
+    height: 42px;
+  }
+
+  .uluru-human-walker-emoji {
+    font-size: 33px;
+  }
+
+  .uluru-walk-progress-panel {
+    bottom: 18px;
+    width: calc(100vw - 24px);
+    padding: 12px 14px;
+  }
+
+  .uluru-walk-progress-header {
+    gap: 10px;
+    font-size: 12px;
+  }
+
+}
+
+
+/* Respect reduced-motion preference. */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .uluru-human-walker-emoji {
+    animation: none;
+  }
+
+}
