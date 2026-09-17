@@ -3978,7 +3978,7 @@ document
 
   });
 
-   /* =========================================================
+  /* =========================================================
    LOAD PLACES.GEOJSON
    ========================================================= */
 
@@ -3994,23 +3994,31 @@ try {
     );
   }
 
+  /* ==================== STORE ORIGINAL DATA ==================== */
+
   travelData = await response.json();
 
-  /* Keep original nested GeoJSON properties intact. */
   currentFilteredData = travelData;
-
-  /* Build destination markers and clusters. */
-  addTravelLayers();
-
-  /* Activate marker / cluster interactions. */
-  bindTravelInteractions();
-
-  /* Build Recently Added / Top Places cards. */
-  buildRecentPlaces();
 
   console.log(
     `Travel data loaded: ${travelData.features?.length || 0} places`
   );
+
+
+  /* ==================== BUILD MAP PLACES ==================== */
+
+  addTravelLayers();
+
+
+  /* ==================== ACTIVATE MAP INTERACTIONS ==================== */
+
+  bindTravelInteractions();
+
+
+  /* ==================== BUILD RECENT PLACE CARDS ==================== */
+
+  buildRecentPlaces();
+
 
 } catch (error) {
 
@@ -4026,4 +4034,4 @@ try {
    END MAP LOAD
    ========================================================= */
 
-});
+}); // End map.on('load')
