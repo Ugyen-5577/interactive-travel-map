@@ -188,26 +188,273 @@ map.on('load', async () => {
 
 
 /* =========================================================
-   ULURU BASE WALK ANIMATION
+   ULURU BASE WALK — IMMERSIVE MAP ANIMATION
    Uses every coordinate from uluru-base-walk.geojson.
    ========================================================= */
 
 let uluruWalkAnimation = null;
 let uluruWalkerMarker = null;
+let uluruWalkStopped = false;
+
+
+/* =========================================================
+   DISTANCE BETWEEN TWO COORDINATES
+   Returns distance in kilometres.
+   ========================================================= */
+
+function calculateWalkDistance(coord1, coord2) {
+
+  const earthRadius = 6371;
+
+  const lat1 = coord1[1] * Math.PI / 180;
+  const lat2 = coord2[1] * Math.PI / 180;
+
+  const deltaLat = (coord2[1] - coord1[1]) * Math.PI / 180;
+  const deltaLng = (coord2[0] - coord1[0]) * Math.PI / 180;
+
+  const a =
+    Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+    Math.cos(lat1) *
+    Math.cos(lat2) *
+    Math.sin(deltaLng / 2) *
+    Math.sin(deltaLng / 2);
+
+  const c = 2 * Math.atan2(
+    Math.sqrt(a),
+    Math.sqrt(1 - a)
+  );
+
+  return earthRadius * c;
+}
+
+
+/* =========================================================
+   CREATE WALK ANIMATION UI
+   ========================================================= */
+
+function createUluruWalkUI() {
+
+  /* Remove an old animation interface first. */
+  document.getElementById('uluruWalkOverlay')?.remove();
+
+  const overlay = document.createElement('div');
+
+  overlay.id = 'uluruWalkOverlay';
+
+  overlay.innerHTML = `
+
+    <!-- WALK INFORMATION CARD -->
+
+    <div class="uluru-walk-info-card">
+
+      <div class="uluru-walk-info-title">
+        Uluru Base Walk
+      </div>
+
+      <div class="uluru-walk-info-meta">
+
+        <span>
+          <strong>10.6 km</strong>
+        </span>
+
+        <span>
+          <strong>3–4 hours</strong>
+        </span>
+
+        <span>
+          <strong>Moderate</strong>
+        </span>
+
+      </div>
+
+      <div class="uluru-walk-info-bottom">
+
+        <div>
+          <strong>Enjoy the journey!</strong>
+          <p>Following the Uluru Base Walk route.</p>
+        </div>
+
+        <button
+          type="button"
+          id="stopUluruWalkButton"
+          class="uluru-walk-stop-button">
+          Stop animation
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- WALK PROGRESS PANEL -->
+
+    <div class="uluru-walk-progress-panel">
+
+      <div class="uluru-walk-progress-header">
+
+        <span id="uluruWalkStatus">
+          Walking around Uluru...
+        </span>
+
+        <span id="uluruWalkDistance">
+          0.0 km / 10.6 km
+        </span>
+
+      </div>
+
+      <div class="uluru-walk-progress-row">
+
+        <div class="uluru-walk-progress-track">
+
+          <div
+            id="uluruWalkProgressBar"
+            class="uluru-walk-progress-bar">
+          </div>
+
+        </div>
+
+        <span id="uluruWalkPercentage">
+          0%
+        </span>
+
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  document
+    .getElementById('stopUluruWalkButton')
+    ?.addEventListener('click', stopUluruWalk);
+}
+
+
+/* =========================================================
+   UPDATE WALK PROGRESS UI
+   ========================================================= */
+
+function updateUluruWalkProgress(
+  percentage,
+  distanceTravelled,
+  displayTotalDistance
+) {
+
+  const progressBar =
+    document.getElementById('uluruWalkProgressBar');
+
+  const percentageElement =
+    document.getElementById('uluruWalkPercentage');
+
+  const distanceElement =
+    document.getElementById('uluruWalkDistance');
+
+  if (progressBar) {
+    progressBar.style.width = `${percentage}%`;
+  }
+
+  if (percentageElement) {
+    percentageElement.textContent =
+      `${Math.round(percentage)}%`;
+  }
+
+  if (distanceElement) {
+    distanceElement.textContent =
+      `${distanceTravelled.toFixed(1)} km / ${displayTotalDistance.toFixed(1)} km`;
+  }
+
+}
+
+
+/* =========================================================
+   STOP WALK
+   ========================================================= */
+
+function stopUluruWalk() {
+
+  uluruWalkStopped = true;
+
+  if (uluruWalkAnimation) {
+    cancelAnimationFrame(uluruWalkAnimation);
+    uluruWalkAnimation = null;
+  }
+
+  const status =
+    document.getElementById('uluruWalkStatus');
+
+  if (status) {
+    status.textContent = 'Walk paused';
+  }
+
+  const stopButton =
+    document.getElementById('stopUluruWalkButton');
+
+  if (stopButton) {
+    stopButton.textContent = 'Close';
+    stopButton.onclick = closeUluruWalkUI;
+  }
+
+}
+
+
+/* =========================================================
+   CLOSE WALK UI
+   ========================================================= */
+
+function closeUluruWalkUI() {
+
+  if (uluruWalkAnimation) {
+    cancelAnimationFrame(uluruWalkAnimation);
+    uluruWalkAnimation = null;
+  }
+
+  uluruWalkStopped = true;
+
+  if (uluruWalkerMarker) {
+    uluruWalkerMarker.remove();
+    uluruWalkerMarker = null;
+  }
+
+  document
+    .getElementById('uluruWalkOverlay')
+    ?.remove();
+
+}
+
+
+/* =========================================================
+   START ULURU BASE WALK
+   ========================================================= */
 
 async function startUluruWalk() {
 
   try {
 
-    /* Route layers are created only after the map has loaded. */
-    const routeSource = map.getSource('uluru-walk-route');
-    const progressSource = map.getSource('uluru-walk-progress');
+    /* -------------------------------------------------------
+       CLOSE EXPERIENCE / PLAN / EXPLORE DASHBOARD
+       ------------------------------------------------------- */
 
-    if (!routeSource || !progressSource) {
-      throw new Error('Uluru walk layers are not ready yet. Wait for the map to finish loading.');
+    const dashboard =
+      document.getElementById('travelDashboard');
+
+    const backdrop =
+      document.getElementById('dashboardBackdrop');
+
+    if (dashboard) {
+      dashboard.classList.remove('active');
     }
 
-    /* Stop a previous run before starting again. */
+    if (backdrop) {
+      backdrop.classList.remove('active');
+    }
+
+
+    /* -------------------------------------------------------
+       RESET PREVIOUS ANIMATION
+       ------------------------------------------------------- */
+
+    uluruWalkStopped = false;
+
     if (uluruWalkAnimation) {
       cancelAnimationFrame(uluruWalkAnimation);
       uluruWalkAnimation = null;
@@ -218,140 +465,373 @@ async function startUluruWalk() {
       uluruWalkerMarker = null;
     }
 
+    document
+      .getElementById('uluruWalkOverlay')
+      ?.remove();
+
+
+    /* -------------------------------------------------------
+       GET MAP SOURCES
+       ------------------------------------------------------- */
+
+    const routeSource =
+      map.getSource('uluru-walk-route');
+
+    const progressSource =
+      map.getSource('uluru-walk-progress');
+
+    if (!routeSource || !progressSource) {
+      throw new Error(
+        'Uluru walk layers are not ready yet. Wait for the map to finish loading.'
+      );
+    }
+
+
+    /* -------------------------------------------------------
+       LOAD ACTUAL ROUTE
+       ------------------------------------------------------- */
+
     const response = await fetch(
       'data/routes/uluru-base-walk.geojson',
-      { cache: 'no-store' }
+      {
+        cache: 'no-store'
+      }
     );
 
     if (!response.ok) {
-      throw new Error(`Could not load Uluru Base Walk route (${response.status})`);
+      throw new Error(
+        `Could not load Uluru Base Walk route (${response.status})`
+      );
     }
 
     const route = await response.json();
 
-    /* Support either a Feature or FeatureCollection. */
-    const feature = route.type === 'FeatureCollection'
-      ? route.features?.[0]
-      : route;
+    const feature =
+      route.type === 'FeatureCollection'
+        ? route.features?.[0]
+        : route;
 
-    if (!feature || feature.geometry?.type !== 'LineString') {
-      throw new Error('Uluru Base Walk GeoJSON must contain a LineString feature.');
+    if (
+      !feature ||
+      feature.geometry?.type !== 'LineString'
+    ) {
+      throw new Error(
+        'Uluru Base Walk GeoJSON must contain a LineString feature.'
+      );
     }
 
-    const coordinates = feature.geometry.coordinates;
+    const coordinates =
+      feature.geometry.coordinates;
 
-    if (!Array.isArray(coordinates) || coordinates.length < 2) {
-      throw new Error('Uluru Base Walk route has fewer than two coordinates.');
+    if (
+      !Array.isArray(coordinates) ||
+      coordinates.length < 2
+    ) {
+      throw new Error(
+        'Uluru Base Walk route has fewer than two coordinates.'
+      );
     }
 
-    console.log(`Uluru Base Walk loaded: ${coordinates.length} points`);
+    console.log(
+      `Uluru Base Walk loaded: ${coordinates.length} points`
+    );
 
-    /* Show complete route faintly. */
+
+    /* -------------------------------------------------------
+       CALCULATE ACTUAL ROUTE DISTANCES
+       ------------------------------------------------------- */
+
+    const cumulativeDistances = [0];
+
+    let calculatedRouteDistance = 0;
+
+    for (let i = 1; i < coordinates.length; i++) {
+
+      calculatedRouteDistance +=
+        calculateWalkDistance(
+          coordinates[i - 1],
+          coordinates[i]
+        );
+
+      cumulativeDistances.push(
+        calculatedRouteDistance
+      );
+
+    }
+
+    /*
+      10.6 km is the public Base Walk distance displayed
+      to the visitor. Animation progress is calculated
+      from the geometry itself.
+    */
+
+    const displayTotalDistance = 10.6;
+
+
+    /* -------------------------------------------------------
+       DISPLAY COMPLETE ROUTE
+       ------------------------------------------------------- */
+
     routeSource.setData({
       type: 'Feature',
+
       properties: {
-        name: feature.properties?.name || 'Uluru Base Walk'
+        name:
+          feature.properties?.name ||
+          'Uluru Base Walk'
       },
+
       geometry: {
         type: 'LineString',
         coordinates: coordinates
       }
     });
 
-    /* Clear the previous progress line. */
+
+    /* -------------------------------------------------------
+       CLEAR OLD PROGRESS ROUTE
+       ------------------------------------------------------- */
+
     progressSource.setData({
       type: 'FeatureCollection',
       features: []
     });
 
-    /* Create walker marker. */
-    const walker = document.createElement('div');
-    walker.innerHTML = '🥾';
-    walker.style.fontSize = '28px';
-    walker.style.width = '34px';
-    walker.style.height = '34px';
-    walker.style.display = 'flex';
-    walker.style.alignItems = 'center';
-    walker.style.justifyContent = 'center';
-    walker.style.background = 'white';
-    walker.style.borderRadius = '50%';
-    walker.style.boxShadow = '0 2px 8px rgba(0,0,0,0.35)';
 
-    uluruWalkerMarker = new maplibregl.Marker({
-      element: walker,
-      anchor: 'center'
-    })
-      .setLngLat(coordinates[0])
-      .addTo(map);
+    /* -------------------------------------------------------
+       CREATE WALKING PERSON MARKER
+       ------------------------------------------------------- */
 
-    /* Zoom to the full route. */
-    const bounds = coordinates.reduce(
-      (routeBounds, coordinate) => routeBounds.extend(coordinate),
-      new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
-    );
+    const walker =
+      document.createElement('div');
+
+    walker.className =
+      'uluru-human-walker';
+
+    walker.innerHTML = `
+      <span class="uluru-human-walker-emoji">
+        🚶
+      </span>
+    `;
+
+    uluruWalkerMarker =
+      new maplibregl.Marker({
+        element: walker,
+        anchor: 'center'
+      })
+        .setLngLat(coordinates[0])
+        .addTo(map);
+
+
+    /* -------------------------------------------------------
+       CREATE FLOATING WALK INTERFACE
+       ------------------------------------------------------- */
+
+    createUluruWalkUI();
+
+
+    /* -------------------------------------------------------
+       FIT MAP TO COMPLETE ROUTE
+       ------------------------------------------------------- */
+
+    const bounds =
+      coordinates.reduce(
+
+        (routeBounds, coordinate) =>
+          routeBounds.extend(coordinate),
+
+        new maplibregl.LngLatBounds(
+          coordinates[0],
+          coordinates[0]
+        )
+
+      );
 
     map.fitBounds(bounds, {
-      padding: 80,
+      padding: {
+        top: 150,
+        bottom: 130,
+        left: 80,
+        right: 80
+      },
+
       duration: 1800
     });
 
-    await new Promise(resolve => setTimeout(resolve, 1900));
 
-    /* Animate every original route point in order. */
-    const progressCoordinates = [coordinates[0]];
-    const totalDuration = 35000; // About 35 seconds.
-    const interval = totalDuration / (coordinates.length - 1);
+    /* Wait for camera movement before walking starts. */
+
+    await new Promise(
+      resolve =>
+        setTimeout(resolve, 1900)
+    );
+
+
+    /* -------------------------------------------------------
+       ANIMATE ROUTE
+       ------------------------------------------------------- */
+
+    const progressCoordinates = [
+      coordinates[0]
+    ];
+
+    const totalDuration = 35000;
+
+    const interval =
+      totalDuration /
+      (coordinates.length - 1);
 
     let index = 1;
     let previousTime = 0;
 
+
     function animate(timestamp) {
 
-      if (!previousTime) previousTime = timestamp;
+      if (uluruWalkStopped) {
+        return;
+      }
 
-      if (timestamp - previousTime >= interval) {
+      if (!previousTime) {
+        previousTime = timestamp;
+      }
+
+      if (
+        timestamp - previousTime >= interval
+      ) {
 
         previousTime = timestamp;
 
         if (index >= coordinates.length) {
+
           uluruWalkAnimation = null;
+
+          updateUluruWalkProgress(
+            100,
+            displayTotalDistance,
+            displayTotalDistance
+          );
+
+          const status =
+            document.getElementById(
+              'uluruWalkStatus'
+            );
+
+          if (status) {
+            status.textContent =
+              'Uluru Base Walk completed';
+          }
+
+          const stopButton =
+            document.getElementById(
+              'stopUluruWalkButton'
+            );
+
+          if (stopButton) {
+            stopButton.textContent =
+              'Close';
+
+            stopButton.onclick =
+              closeUluruWalkUI;
+          }
+
           return;
         }
 
-        const coordinate = coordinates[index];
-        progressCoordinates.push(coordinate);
 
-        /* A valid LineString starts once two route points exist. */
+        /* Current route coordinate. */
+
+        const coordinate =
+          coordinates[index];
+
+        progressCoordinates.push(
+          coordinate
+        );
+
+
+        /* Draw completed portion. */
+
         progressSource.setData({
           type: 'Feature',
+
           properties: {},
+
           geometry: {
             type: 'LineString',
-            coordinates: progressCoordinates
+            coordinates:
+              progressCoordinates
           }
         });
 
-        uluruWalkerMarker.setLngLat(coordinate);
+
+        /* Move walking person. */
+
+        if (uluruWalkerMarker) {
+          uluruWalkerMarker
+            .setLngLat(coordinate);
+        }
+
+
+        /* Calculate progress. */
+
+        const geometryPercentage =
+          cumulativeDistances[index] /
+          calculatedRouteDistance;
+
+        const percentage =
+          Math.min(
+            geometryPercentage * 100,
+            100
+          );
+
+        const displayedDistance =
+          geometryPercentage *
+          displayTotalDistance;
+
+
+        updateUluruWalkProgress(
+          percentage,
+          displayedDistance,
+          displayTotalDistance
+        );
+
         index++;
+
       }
 
-      uluruWalkAnimation = requestAnimationFrame(animate);
+
+      uluruWalkAnimation =
+        requestAnimationFrame(
+          animate
+        );
+
     }
 
-    uluruWalkAnimation = requestAnimationFrame(animate);
+
+    uluruWalkAnimation =
+      requestAnimationFrame(
+        animate
+      );
+
 
   } catch (error) {
 
-    console.error('Uluru walk animation error:', error);
+    console.error(
+      'Uluru walk animation error:',
+      error
+    );
 
   }
 
 }
 
-/* Make testing from the browser Console reliable. */
-window.startUluruWalk = startUluruWalk;
 
+/* Make testing from browser Console reliable. */
 
+window.startUluruWalk =
+  startUluruWalk;
+
+window.stopUluruWalk =
+  stopUluruWalk;
 /* =========================================================
    ADD PERMANENT TRAVEL SOURCE + LAYERS
    ========================================================= */
