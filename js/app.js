@@ -336,37 +336,249 @@ let uluruWalkPhotoMarkers = [];
 
 /* =========================================================
    CREATE ULURU WALK PHOTO MARKERS
-   Uses the actual GPS coordinate stored with each photo.
+   Each photo keeps its real GPS coordinate, but the visible
+   camera marker is snapped to the nearest point on the
+   actual Uluru Base Walk route.
    ========================================================= */
 
-function createUluruWalkPhotoMarkers() {
+function createUluruWalkPhotoMarkers(routeCoordinates) {
 
-  /* Remove any markers left from a previous walk. */
+  /* Remove markers from a previous walk. */
   removeUluruWalkPhotoMarkers();
+
+
+  /* Make sure the walking route is available. */
+  if (
+    !Array.isArray(routeCoordinates) ||
+    routeCoordinates.length < 2
+  ) {
+    console.warn(
+      'Uluru photo markers could not be created: route coordinates unavailable.'
+    );
+
+    return;
+  }
+
+
+  /* ---------------------------------------------------------
+     FIND NEAREST POINT ON ROUTE
+     --------------------------------------------------------- */
+
+  function findNearestRoutePoint(photoCoordinate) {
+
+    const photoLng =
+      Number(photoCoordinate[0]);
+
+    const photoLat =
+      Number(photoCoordinate[1]);
+
+    let nearestCoordinate = null;
+
+    let nearestDistanceSquared =
+      Infinity;
+
+
+    /*
+      Examine every segment of the actual walking LineString.
+    */
+
+    for (
+      let i = 0;
+      i < routeCoordinates.length - 1;
+      i++
+    ) {
+
+      const start =
+        routeCoordinates[i];
+
+      const end =
+        routeCoordinates[i + 1];
+
+
+      const startLng =
+        Number(start[0]);
+
+      const startLat =
+        Number(start[1]);
+
+      const endLng =
+        Number(end[0]);
+
+      const endLat =
+        Number(end[1]);
+
+
+      if (
+        !Number.isFinite(startLng) ||
+        !Number.isFinite(startLat) ||
+        !Number.isFinite(endLng) ||
+        !Number.isFinite(endLat)
+      ) {
+        continue;
+      }
+
+
+      /*
+        Project the photo coordinate onto this
+        individual walking-route segment.
+      */
+
+      const segmentLng =
+        endLng - startLng;
+
+      const segmentLat =
+        endLat - startLat;
+
+      const segmentLengthSquared =
+        segmentLng * segmentLng +
+        segmentLat * segmentLat;
+
+
+      let position = 0;
+
+
+      if (segmentLengthSquared > 0) {
+
+        position =
+          (
+            (photoLng - startLng) *
+            segmentLng +
+            (photoLat - startLat) *
+            segmentLat
+          ) /
+          segmentLengthSquared;
+
+      }
+
+
+      /*
+        Keep the projected point inside the
+        current route segment.
+      */
+
+      position =
+        Math.max(
+          0,
+          Math.min(
+            1,
+            position
+          )
+        );
+
+
+      const snappedLng =
+        startLng +
+        position *
+        segmentLng;
+
+      const snappedLat =
+        startLat +
+        position *
+        segmentLat;
+
+
+      /*
+        Compare this projected position with
+        the original GPS coordinate.
+      */
+
+      const lngDifference =
+        photoLng - snappedLng;
+
+      const latDifference =
+        photoLat - snappedLat;
+
+      const distanceSquared =
+        lngDifference * lngDifference +
+        latDifference * latDifference;
+
+
+      if (
+        distanceSquared <
+        nearestDistanceSquared
+      ) {
+
+        nearestDistanceSquared =
+          distanceSquared;
+
+        nearestCoordinate = [
+          snappedLng,
+          snappedLat
+        ];
+
+      }
+
+    }
+
+
+    return nearestCoordinate;
+
+  }
+
+
+  /* ---------------------------------------------------------
+     CREATE CAMERA MARKERS
+     --------------------------------------------------------- */
 
   uluruWalkPhotoPoints.forEach(photo => {
 
-    /* Read longitude and latitude directly from photo data. */
-    const longitude = Number(photo.coordinates?.[0]);
-    const latitude = Number(photo.coordinates?.[1]);
+    const longitude =
+      Number(
+        photo.coordinates?.[0]
+      );
 
-    /* Skip the photo if its coordinate is invalid. */
+    const latitude =
+      Number(
+        photo.coordinates?.[1]
+      );
+
+
+    /* Validate original GPS coordinate. */
+
     if (
       !Number.isFinite(longitude) ||
       !Number.isFinite(latitude)
     ) {
+
       console.warn(
-        `Skipping ${photo.id}: invalid photo coordinates`,
+        `Skipping ${photo.id}: invalid GPS coordinates`,
         photo.coordinates
       );
+
       return;
+
+    }
+
+
+    /*
+      Find the closest position on the actual
+      walking route.
+    */
+
+    const snappedCoordinate =
+      findNearestRoutePoint([
+        longitude,
+        latitude
+      ]);
+
+
+    if (!snappedCoordinate) {
+
+      console.warn(
+        `Skipping ${photo.id}: could not find nearest route position.`
+      );
+
+      return;
+
     }
 
 
     /* ==================== CAMERA BUTTON ==================== */
 
     const markerElement =
-      document.createElement('button');
+      document.createElement(
+        'button'
+      );
 
     markerElement.className =
       'uluru-photo-marker';
@@ -380,7 +592,9 @@ function createUluruWalkPhotoMarkers() {
     );
 
     markerElement.innerHTML = `
-      <span class="uluru-photo-marker-icon">📷</span>
+      <span class="uluru-photo-marker-icon">
+        📷
+      </span>
     `;
 
 
@@ -393,7 +607,9 @@ function createUluruWalkPhotoMarkers() {
         event.preventDefault();
         event.stopPropagation();
 
-        openUluruWalkPhoto(photo);
+        openUluruWalkPhoto(
+          photo
+        );
 
       }
     );
@@ -406,29 +622,28 @@ function createUluruWalkPhotoMarkers() {
         element: markerElement,
         anchor: 'center'
       })
-        .setLngLat([
-          longitude,
-          latitude
-        ])
+        .setLngLat(
+          snappedCoordinate
+        )
         .addTo(map);
 
 
-    uluruWalkPhotoMarkers.push(marker);
+    uluruWalkPhotoMarkers.push(
+      marker
+    );
+
+
+    /* Useful for checking the result in Console. */
+
+    console.log(
+      `${photo.id}:`,
+      'GPS =',
+      photo.coordinates,
+      'Snapped =',
+      snappedCoordinate
+    );
 
   });
-
-}
-/* =========================================================
-   REMOVE ULURU WALK PHOTO MARKERS
-   ========================================================= */
-
-function removeUluruWalkPhotoMarkers() {
-
-  uluruWalkPhotoMarkers.forEach(
-    marker => marker.remove()
-  );
-
-  uluruWalkPhotoMarkers = [];
 
 }
 
@@ -1068,11 +1283,13 @@ createUluruWalkUI();
 
 /* ==================== PHOTO POINTS ==================== */
 /*
-   Each camera uses the actual GPS coordinate
-   stored in uluruWalkPhotoPoints.
+   Pass the actual Base Walk LineString coordinates.
+   Each GPS photo is snapped to its nearest route position.
 */
 
-createUluruWalkPhotoMarkers();
+createUluruWalkPhotoMarkers(
+  coordinates
+);
 
 
 /* ==================== FIT ULURU ==================== */
