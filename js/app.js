@@ -648,11 +648,21 @@ function closeUluruWalkUI() {
 
   }
 
-  document
-    .getElementById('uluruWalkOverlay')
-    ?.remove();
+  /* Remove the floating walk interface. */
 
-  exitUluruWalkMode();
+document
+  .getElementById('uluruWalkOverlay')
+  ?.remove();
+
+
+/* Remove Uluru and landmark labels. */
+
+removeUluruWalkLocationLabels();
+
+
+/* Return to the normal WhereWeBeen map. */
+
+exitUluruWalkMode();
 
 }
 
