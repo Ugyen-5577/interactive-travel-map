@@ -1139,9 +1139,9 @@ createUluruWalkUI();
 /* ==================== PHOTO POINTS ==================== */
 
 createUluruWalkPhotoMarkers(
-  coordinates,
+   coordinates,
   cumulativeDistances,
-  calculatedRouteDistance
+  geometryDistance
 );
 
 
