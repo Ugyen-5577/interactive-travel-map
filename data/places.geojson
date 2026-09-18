@@ -264,6 +264,7 @@
             "duration": "3–4 hours",
             "difficulty": "Moderate",
             "routeFile": "data/routes/uluru-base-walk.geojson",
+            "photoFile": "data/routes/uluru/uluru-base-walk-photos.json",
             "animated": true,
             "buttonText": "View animated walk"
           }
