@@ -516,10 +516,15 @@ function removeUluruWalkPhotoMarkers() {
 
 function openUluruWalkPhoto(photo) {
 
+  console.log(
+    'ULURU PHOTO CLICKED:',
+    photo.id,
+    photo.image
+  );
+
   document
     .getElementById('uluruWalkPhotoViewer')
     ?.remove();
-
 
   const viewer =
     document.createElement('div');
