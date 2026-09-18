@@ -1137,9 +1137,13 @@ createUluruWalkUI();
 
 
 /* ==================== PHOTO POINTS ==================== */
+/*
+   Attach photo markers directly to positions along
+   the same Uluru Base Walk geometry used by the walker.
+*/
 
 createUluruWalkPhotoMarkers(
-   coordinates,
+  coordinates,
   cumulativeDistances,
   geometryDistance
 );
