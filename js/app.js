@@ -222,111 +222,15 @@ let uluruWalkAnimation = null;
 let uluruWalkerMarker = null;
 let uluruWalkStopped = false;
 
-   /* =========================================================
-   ULURU WALK — LOCATION LABELS
-   Labels shown only during the cinematic Base Walk.
-   Coordinates can be refined independently from the route.
-   ========================================================= */
-
-const uluruWalkLocations = [
-  {
-    id: 'uluru',
-    name: 'ULURU',
-    subtitle: 'Aṉangu cultural landscape',
-    coordinates: [131.0369, -25.3444],
-    type: 'major'
-  },
-  {
-    id: 'mala-walk',
-    name: 'Mala Walk',
-    subtitle: '',
-    coordinates: [130.9857, -25.3455],
-    type: 'place'
-  },
-  {
-    id: 'kantju-gorge',
-    name: 'Kantju Gorge',
-    subtitle: '',
-    coordinates: [130.9859, -25.3365],
-    type: 'place'
-  },
-  {
-    id: 'mutitjulu-waterhole',
-    name: 'Mutitjulu Waterhole',
-    subtitle: '',
-    coordinates: [131.0805, -25.3520],
-    type: 'place'
-  },
-  {
-    id: 'kuniya-walk',
-    name: 'Kuniya Walk',
-    subtitle: '',
-    coordinates: [131.0781, -25.3514],
-    type: 'place'
-  }
-];
-
-let uluruWalkLocationMarkers = [];
-
-
 /* =========================================================
-   CREATE ULURU WALK LOCATION LABELS
+   ULURU WALK — LOCATION LABELS
+   Landmark labels removed.
    ========================================================= */
 
-function createUluruWalkLocationLabels() {
-
-  removeUluruWalkLocationLabels();
-
-  uluruWalkLocations.forEach(location => {
-
-    const markerElement = document.createElement('div');
-
-    markerElement.className =
-      `uluru-walk-location-label ${location.type === 'major' ? 'uluru-major-label' : ''}`;
-
-    if (location.type === 'major') {
-
-      markerElement.innerHTML = `
-        <div class="uluru-location-major-name">
-          ${location.name}
-        </div>
-
-        ${
-          location.subtitle
-            ? `
-              <div class="uluru-location-subtitle">
-                ${location.subtitle}
-              </div>
-            `
-            : ''
-        }
-      `;
-
-    } else {
-
-      markerElement.innerHTML = `
-        <div class="uluru-location-dot"></div>
-
-        <div class="uluru-location-name">
-          ${location.name}
-        </div>
-      `;
-
-    }
-
-    const marker = new maplibregl.Marker({
-      element: markerElement,
-      anchor: 'center'
-    })
-      .setLngLat(location.coordinates)
-      .addTo(map);
-
-    uluruWalkLocationMarkers.push(marker);
-
-  });
-
-}
-
+/*
+  No custom landmark labels are used.
+  The walk displays the route, walker and photo points only.
+*/
 
 /* =========================================================
    REMOVE ULURU WALK LOCATION LABELS
@@ -923,11 +827,6 @@ document
   ?.remove();
 
 
-/* Remove Uluru and landmark labels. */
-
-removeUluruWalkLocationLabels();
-
-
 /* Remove Uluru photo markers. */
 
 removeUluruWalkPhotoMarkers();
@@ -1146,11 +1045,6 @@ async function startUluruWalk() {
 /* ==================== WALK UI ==================== */
 
 createUluruWalkUI();
-
-
-/* ==================== LOCATION LABELS ==================== */
-
-createUluruWalkLocationLabels();
 
 
 /* ==================== PHOTO POINTS ==================== */
