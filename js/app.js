@@ -1190,153 +1190,31 @@ async function startUluruWalk() {
     }
 
 
-    /* ==================== LOAD REAL ROUTE ==================== */
-
-    const response =
-      await fetch(
-        'data/routes/uluru-base-walk.geojson',
-        {
-          cache: 'no-store'
-        }
-      );
-
-    if (!response.ok) {
-
-      throw new Error(
-        `Could not load Uluru Base Walk route (${response.status})`
-      );
-
-    }
-
-    const route =
-      await response.json();
-
-    const feature =
-      route.type === 'FeatureCollection'
-        ? route.features?.[0]
-        : route;
-
-    if (
-      !feature ||
-      feature.geometry?.type !== 'LineString'
-    ) {
-
-      throw new Error(
-        'Uluru Base Walk must contain a LineString.'
-      );
-
-    }
-
-    const coordinates =
-      feature.geometry.coordinates;
-
-    if (
-      !Array.isArray(coordinates) ||
-      coordinates.length < 2
-    ) {
-
-      throw new Error(
-        'Uluru Base Walk has insufficient coordinates.'
-      );
-
-    }
-
-
-    /* ==================== CALCULATE DISTANCES ==================== */
-
-    const cumulativeDistances = [0];
-
-    let geometryDistance = 0;
-
-    for (
-      let i = 1;
-      i < coordinates.length;
-      i++
-    ) {
-
-      geometryDistance +=
-        calculateWalkDistance(
-          coordinates[i - 1],
-          coordinates[i]
-        );
-
-      cumulativeDistances.push(
-        geometryDistance
-      );
-
-    }
-
-    const displayDistance = 10.6;
-
-
-    /* ==================== SHOW COMPLETE ROUTE ==================== */
-
-    routeSource.setData({
-
-      type: 'Feature',
-
-      properties: {
-        name:
-          feature.properties?.name ||
-          'Uluru Base Walk'
-      },
-
-      geometry: {
-        type: 'LineString',
-        coordinates
-      }
-
-    });
-
-
-    /* ==================== CLEAR PROGRESS ==================== */
-
-    progressSource.setData({
-
-      type: 'FeatureCollection',
-
-      features: []
-
-    });
-
-
-    /* ==================== WALKER ==================== */
-
-    const walker =
-      document.createElement('div');
-
-    walker.className =
-      'uluru-walker-marker';
-
-    walker.innerHTML = `
-      <div class="uluru-walker-halo">
-        <span>🚶</span>
-      </div>
-    `;
-
-    uluruWalkerMarker =
-      new maplibregl.Marker({
-
-        element: walker,
-
-        anchor: 'center'
-
-      })
-        .setLngLat(
-          coordinates[0]
-        )
-        .addTo(map);
-
-
 /* ==================== WALK UI ==================== */
 
 createUluruWalkUI();
 
 
-/* ==================== PHOTO POINTS ==================== */
+/* ==================== LOAD PHOTO DATA ==================== */
+
 /*
-   Pass the actual Base Walk LineString coordinates.
-   Each GPS photo is snapped to its nearest route position.
+   Load the photo information from the external JSON file.
+   This keeps photo data out of app.js.
+*/
+
+await loadUluruWalkPhotoData(
+  'data/routes/uluru/uluru-base-walk-photos.json'
+);
+
+
+/* ==================== PHOTO POINTS ==================== */
+
+/*
+   Create the camera markers after the photo data has loaded.
+
+   The actual Base Walk LineString coordinates are passed
+   into the marker function so each photo can be snapped
+   to its nearest position on the walking track.
 */
 
 createUluruWalkPhotoMarkers(
