@@ -555,11 +555,18 @@ function createUluruWalkPhotoMarkers(routeCoordinates) {
     */
 
     const snappedCoordinate =
-      findNearestRoutePoint([
-        longitude,
-        latitude
-      ]);
-
+     findNearestRoutePoint([
+       longitude,
+       latitude
+     ]);
+   
+   console.log(
+     `PHOTO SNAP ${photo.id}`,
+     {
+       original: photo.coordinates,
+       snapped: snappedCoordinate
+     }
+   );
 
     if (!snappedCoordinate) {
 
@@ -648,17 +655,54 @@ function createUluruWalkPhotoMarkers(routeCoordinates) {
 
  /* =========================================================
    REMOVE ULURU WALK PHOTO MARKERS
-   Removes all camera markers when the walk is restarted
-   or closed.
+   Completely removes every Uluru camera marker.
    ========================================================= */
 
 function removeUluruWalkPhotoMarkers() {
 
+  /* Remove markers stored by JavaScript. */
+
   uluruWalkPhotoMarkers.forEach(marker => {
-    marker.remove();
+
+    try {
+      marker.remove();
+    } catch (error) {
+      console.warn(
+        'Could not remove stored Uluru photo marker:',
+        error
+      );
+    }
+
   });
 
+
+  /* Clear marker storage. */
+
   uluruWalkPhotoMarkers = [];
+
+
+  /*
+    Safety cleanup:
+    remove any old camera elements that may have been
+    created by an earlier version of the photo system.
+  */
+
+  document
+    .querySelectorAll('.uluru-photo-marker')
+    .forEach(markerElement => {
+
+      const mapLibreMarker =
+        markerElement.closest(
+          '.maplibregl-marker'
+        );
+
+      if (mapLibreMarker) {
+        mapLibreMarker.remove();
+      } else {
+        markerElement.remove();
+      }
+
+    });
 
 }
 
