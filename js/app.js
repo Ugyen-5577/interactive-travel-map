@@ -311,6 +311,10 @@ const uluruWalkPhotoPoints = [
 
 ];
 
+/* Store the active Uluru photo markers. */
+
+let uluruWalkPhotoMarkers = [];
+
 /* =========================================================
    CREATE ULURU WALK PHOTO MARKERS
    ========================================================= */
