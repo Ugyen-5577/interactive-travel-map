@@ -359,6 +359,22 @@ function createUluruWalkPhotoMarkers(routeCoordinates) {
     return;
   }
 
+   /* =========================================================
+   REMOVE ULURU WALK PHOTO MARKERS
+   Removes all camera markers when the walk is restarted
+   or closed.
+   ========================================================= */
+
+function removeUluruWalkPhotoMarkers() {
+
+  uluruWalkPhotoMarkers.forEach(marker => {
+    marker.remove();
+  });
+
+  uluruWalkPhotoMarkers = [];
+
+}
+
 
   /* ---------------------------------------------------------
      FIND NEAREST POINT ON ROUTE
