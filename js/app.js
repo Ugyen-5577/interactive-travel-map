@@ -247,92 +247,85 @@ function removeUluruWalkLocationLabels() {
 }
 
 /* =========================================================
-   ULURU WALK — PHOTO POINTS
-
-   Photos are attached to positions along the actual
-   Uluru Base Walk route when the animation starts.
+   ULURU WALK — PHOTO DATA
+   Photo information is loaded from an external JSON file
+   instead of being stored directly inside app.js.
    ========================================================= */
 
-const uluruWalkPhotoPoints = [
+let uluruWalkPhotoPoints = [];
+let uluruWalkPhotoMarkers = [];
 
-  {
-    id: 'uluru-photo-01',
-    title: 'Uluru Base Walk',
-    caption: 'A moment from the northern side of the walk.',
-    image:
-      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image03.webp',
-    coordinates: [
-      131.0299987476537,
-      -25.3350200525214
-    ]
-  },
 
-  {
-    id: 'uluru-photo-02',
-    title: 'Around Uluru',
-    caption: 'Following the walking track around the rock.',
-    image:
-      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image06.webp',
-    coordinates: [
-      131.0438318123332,
-      -25.33575584584111
-    ]
-  },
+/* =========================================================
+   LOAD ULURU WALK PHOTO DATA
+   ========================================================= */
 
-  {
-    id: 'uluru-photo-03',
-    title: 'Uluru Landscape',
-    caption: 'A view from the eastern section of the Base Walk.',
-    image:
-      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image10.webp',
-    coordinates: [
-      131.0539691878397,
-      -25.34147744055506
-    ]
-  },
+async function loadUluruWalkPhotoData(photoFile) {
 
-  {
-    id: 'uluru-photo-04',
-    title: 'Walking Country',
-    caption: 'A moment along the southern section of the circuit.',
-    image:
-      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image14.webp',
-    coordinates: [
-      131.0482590538396,
-      -25.35030216683478
-    ]
-  },
+  /* Clear data from any previous walk. */
+  uluruWalkPhotoPoints = [];
 
-  {
-    id: 'uluru-photo-05',
-    title: 'Uluru Base',
-    caption: 'Looking across the landscape while continuing around Uluru.',
-    image:
-      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image19.webp',
-    coordinates: [
-      131.0363067849428,
-      -25.35221663800647
-    ]
-  },
 
-  {
-    id: 'uluru-photo-06',
-    title: 'Completing the Circuit',
-    caption: 'A final moment from the western side of the Base Walk.',
-    image:
-      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image23.webp',
-    coordinates: [
-      131.0242751503351,
-      -25.35039449452704
-    ]
+  /* A walk can work without photo data. */
+  if (!photoFile) {
+    console.warn(
+      'No photo file has been configured for this walk.'
+    );
+
+    return;
   }
 
 
-];
+  try {
 
-/* Store the active Uluru photo markers. */
+    const response = await fetch(
+      photoFile,
+      {
+        cache: 'no-store'
+      }
+    );
 
-let uluruWalkPhotoMarkers = [];
+
+    if (!response.ok) {
+      throw new Error(
+        `Could not load walk photo data (${response.status})`
+      );
+    }
+
+
+    const photoData =
+      await response.json();
+
+
+    if (!Array.isArray(photoData.photos)) {
+      throw new Error(
+        'Walk photo JSON must contain a photos array.'
+      );
+    }
+
+
+    uluruWalkPhotoPoints =
+      photoData.photos;
+
+
+    console.log(
+      `Uluru walk photos loaded: ${uluruWalkPhotoPoints.length}`
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      'Could not load Uluru walk photo data:',
+      error
+    );
+
+    uluruWalkPhotoPoints = [];
+
+  }
+
+}
+   
 
 /* =========================================================
    CREATE ULURU WALK PHOTO MARKERS
