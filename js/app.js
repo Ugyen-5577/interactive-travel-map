@@ -317,63 +317,124 @@ let uluruWalkPhotoMarkers = [];
 
 /* =========================================================
    CREATE ULURU WALK PHOTO MARKERS
-
-   Each photo is positioned directly on the actual loaded
-   Base Walk route using its routePosition value.
+   Places each camera directly on the actual walking route
+   using distance along the LineString.
    ========================================================= */
 
-function createUluruWalkPhotoMarkers(routeCoordinates) {
-
-  /* Remove any markers left from a previous walk. */
+function createUluruWalkPhotoMarkers(
+  routeCoordinates,
+  cumulativeDistances,
+  totalRouteDistance
+) {
 
   removeUluruWalkPhotoMarkers();
 
-
-  /* Make sure the route is available. */
-
   if (
     !Array.isArray(routeCoordinates) ||
-    routeCoordinates.length < 2
+    routeCoordinates.length < 2 ||
+    !Array.isArray(cumulativeDistances) ||
+    cumulativeDistances.length !== routeCoordinates.length ||
+    !Number.isFinite(totalRouteDistance) ||
+    totalRouteDistance <= 0
   ) {
-
     console.warn(
-      'Uluru photo markers could not be created because route coordinates are unavailable.'
+      'Uluru photo markers could not be created because route-distance data is unavailable.'
     );
 
     return;
   }
 
 
-  /* Create each camera marker. */
-
   uluruWalkPhotoPoints.forEach(photo => {
 
-    /*
-      Convert routePosition (0–1) into an index
-      in the actual route coordinate array.
+    /* Target distance along the real route. */
 
-      Example:
-      0.10 = approximately 10% around the route
-      0.50 = approximately halfway around
-      0.85 = approximately 85% around
+    const targetDistance =
+      totalRouteDistance *
+      photo.routePosition;
+
+
+    /*
+      Find the route segment containing that distance.
     */
 
-    const routeIndex = Math.min(
-      Math.round(
-        photo.routePosition *
-        (routeCoordinates.length - 1)
-      ),
+    let segmentIndex = 1;
+
+    while (
+      segmentIndex < cumulativeDistances.length &&
+      cumulativeDistances[segmentIndex] < targetDistance
+    ) {
+      segmentIndex++;
+    }
+
+
+    segmentIndex = Math.min(
+      segmentIndex,
       routeCoordinates.length - 1
     );
 
 
-    /* This coordinate comes directly from the route. */
-
-    const photoCoordinate =
-      routeCoordinates[routeIndex];
+    const previousIndex =
+      Math.max(0, segmentIndex - 1);
 
 
-    /* Create camera button. */
+    const segmentStartDistance =
+      cumulativeDistances[previousIndex];
+
+    const segmentEndDistance =
+      cumulativeDistances[segmentIndex];
+
+    const segmentDistance =
+      segmentEndDistance -
+      segmentStartDistance;
+
+
+    /*
+      Determine how far through this individual
+      route segment the photo belongs.
+    */
+
+    const segmentProgress =
+      segmentDistance > 0
+        ? (
+            targetDistance -
+            segmentStartDistance
+          ) / segmentDistance
+        : 0;
+
+
+    const startCoordinate =
+      routeCoordinates[previousIndex];
+
+    const endCoordinate =
+      routeCoordinates[segmentIndex];
+
+
+    /*
+      Interpolate between the two actual route coordinates.
+
+      This guarantees that the camera sits directly
+      on the same LineString segment as the walking route.
+    */
+
+    const photoCoordinate = [
+
+      startCoordinate[0] +
+      (
+        endCoordinate[0] -
+        startCoordinate[0]
+      ) * segmentProgress,
+
+      startCoordinate[1] +
+      (
+        endCoordinate[1] -
+        startCoordinate[1]
+      ) * segmentProgress
+
+    ];
+
+
+    /* ==================== CAMERA BUTTON ==================== */
 
     const markerElement =
       document.createElement('button');
@@ -396,8 +457,6 @@ function createUluruWalkPhotoMarkers(routeCoordinates) {
     `;
 
 
-    /* Open corresponding photo. */
-
     markerElement.addEventListener(
       'click',
       event => {
@@ -411,7 +470,7 @@ function createUluruWalkPhotoMarkers(routeCoordinates) {
     );
 
 
-    /* Add camera directly onto route coordinate. */
+    /* ==================== ADD TO MAP ==================== */
 
     const marker =
       new maplibregl.Marker({
@@ -429,7 +488,6 @@ function createUluruWalkPhotoMarkers(routeCoordinates) {
   });
 
 }
-
 /* =========================================================
    REMOVE ULURU WALK PHOTO MARKERS
    ========================================================= */
