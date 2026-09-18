@@ -249,11 +249,8 @@ function removeUluruWalkLocationLabels() {
 /* =========================================================
    ULURU WALK — PHOTO POINTS
 
-   These are illustrative photo stops positioned directly
-   on coordinates from the actual Uluru Base Walk route.
-
-   The coordinate does NOT represent the exact location
-   where the photograph was originally taken.
+   Photos are attached to positions along the actual
+   Uluru Base Walk route when the animation starts.
    ========================================================= */
 
 const uluruWalkPhotoPoints = [
@@ -261,80 +258,58 @@ const uluruWalkPhotoPoints = [
   {
     id: 'uluru-photo-01',
     title: 'Uluru Base Walk',
-    caption: 'A moment from the northern side of the walk.',
+    caption: 'A moment from the Uluru Base Walk.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image03.webp',
-    coordinates: [
-      131.0299987476537,
-      -25.3350200525214
-    ]
+    routePosition: 0.10
   },
 
   {
     id: 'uluru-photo-02',
     title: 'Around Uluru',
-    caption: 'Following the walking track around the rock.',
+    caption: 'Following the walking track around Uluru.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image06.webp',
-    coordinates: [
-      131.0438318123332,
-      -25.33575584584111
-    ]
+    routePosition: 0.25
   },
 
   {
     id: 'uluru-photo-03',
     title: 'Uluru Landscape',
-    caption: 'A view from the eastern section of the Base Walk.',
+    caption: 'A moment along the Base Walk.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image10.webp',
-    coordinates: [
-      131.0539691878397,
-      -25.34147744055506
-    ]
+    routePosition: 0.40
   },
 
   {
     id: 'uluru-photo-04',
     title: 'Walking Country',
-    caption: 'A moment along the southern section of the circuit.',
+    caption: 'Walking through the landscape around Uluru.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image14.webp',
-    coordinates: [
-      131.0482590538396,
-      -25.35030216683478
-    ]
+    routePosition: 0.55
   },
 
   {
     id: 'uluru-photo-05',
     title: 'Uluru Base',
-    caption: 'Looking across the landscape while continuing around Uluru.',
+    caption: 'A moment from the Base Walk.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image19.webp',
-    coordinates: [
-      131.0363067849428,
-      -25.35221663800647
-    ]
+    routePosition: 0.70
   },
 
   {
     id: 'uluru-photo-06',
     title: 'Completing the Circuit',
-    caption: 'A final moment from the western side of the Base Walk.',
+    caption: 'Continuing around the Uluru Base Walk.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image23.webp',
-    coordinates: [
-      131.0242751503351,
-      -25.35039449452704
-    ]
+    routePosition: 0.85
   }
 
 ];
-
-
-let uluruWalkPhotoMarkers = [];
-
 
 /* =========================================================
    CREATE ULURU WALK PHOTO MARKERS
