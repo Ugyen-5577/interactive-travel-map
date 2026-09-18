@@ -342,6 +342,269 @@ function removeUluruWalkLocationLabels() {
 
 }
 
+/* =========================================================
+   ULURU WALK — PHOTO POINTS
+
+   These are illustrative photo stops positioned directly
+   on coordinates from the actual Uluru Base Walk route.
+
+   The coordinate does NOT represent the exact location
+   where the photograph was originally taken.
+   ========================================================= */
+
+const uluruWalkPhotoPoints = [
+
+  {
+    id: 'uluru-photo-01',
+    title: 'Uluru Base Walk',
+    caption: 'A moment from the northern side of the walk.',
+    image:
+      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image03.webp',
+    coordinates: [
+      131.0299987476537,
+      -25.3350200525214
+    ]
+  },
+
+  {
+    id: 'uluru-photo-02',
+    title: 'Around Uluru',
+    caption: 'Following the walking track around the rock.',
+    image:
+      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image06.webp',
+    coordinates: [
+      131.0438318123332,
+      -25.33575584584111
+    ]
+  },
+
+  {
+    id: 'uluru-photo-03',
+    title: 'Uluru Landscape',
+    caption: 'A view from the eastern section of the Base Walk.',
+    image:
+      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image10.webp',
+    coordinates: [
+      131.0539691878397,
+      -25.34147744055506
+    ]
+  },
+
+  {
+    id: 'uluru-photo-04',
+    title: 'Walking Country',
+    caption: 'A moment along the southern section of the circuit.',
+    image:
+      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image14.webp',
+    coordinates: [
+      131.0482590538396,
+      -25.35030216683478
+    ]
+  },
+
+  {
+    id: 'uluru-photo-05',
+    title: 'Uluru Base',
+    caption: 'Looking across the landscape while continuing around Uluru.',
+    image:
+      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image19.webp',
+    coordinates: [
+      131.0363067849428,
+      -25.35221663800647
+    ]
+  },
+
+  {
+    id: 'uluru-photo-06',
+    title: 'Completing the Circuit',
+    caption: 'A final moment from the western side of the Base Walk.',
+    image:
+      'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image23.webp',
+    coordinates: [
+      131.0242751503351,
+      -25.35039449452704
+    ]
+  }
+
+];
+
+
+let uluruWalkPhotoMarkers = [];
+
+
+/* =========================================================
+   CREATE ULURU WALK PHOTO MARKERS
+   ========================================================= */
+
+function createUluruWalkPhotoMarkers() {
+
+  removeUluruWalkPhotoMarkers();
+
+  uluruWalkPhotoPoints.forEach(photo => {
+
+    const markerElement =
+      document.createElement('button');
+
+    markerElement.className =
+      'uluru-photo-marker';
+
+    markerElement.type = 'button';
+
+    markerElement.setAttribute(
+      'aria-label',
+      `View photo: ${photo.title}`
+    );
+
+    markerElement.innerHTML = `
+      <span class="uluru-photo-marker-icon">
+        📷
+      </span>
+    `;
+
+
+    /* Open the photo when camera is clicked. */
+
+    markerElement.addEventListener(
+      'click',
+      event => {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        openUluruWalkPhoto(photo);
+
+      }
+    );
+
+
+    const marker =
+      new maplibregl.Marker({
+        element: markerElement,
+        anchor: 'center'
+      })
+        .setLngLat(photo.coordinates)
+        .addTo(map);
+
+
+    uluruWalkPhotoMarkers.push(
+      marker
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   REMOVE ULURU WALK PHOTO MARKERS
+   ========================================================= */
+
+function removeUluruWalkPhotoMarkers() {
+
+  uluruWalkPhotoMarkers.forEach(
+    marker => marker.remove()
+  );
+
+  uluruWalkPhotoMarkers = [];
+
+}
+
+
+/* =========================================================
+   OPEN ULURU WALK PHOTO
+   ========================================================= */
+
+function openUluruWalkPhoto(photo) {
+
+  document
+    .getElementById('uluruWalkPhotoViewer')
+    ?.remove();
+
+
+  const viewer =
+    document.createElement('div');
+
+  viewer.id =
+    'uluruWalkPhotoViewer';
+
+  viewer.className =
+    'uluru-walk-photo-viewer';
+
+
+  viewer.innerHTML = `
+
+    <div class="uluru-photo-card">
+
+      <button
+        type="button"
+        class="uluru-photo-close"
+        aria-label="Close photo"
+      >
+        ×
+      </button>
+
+      <img
+        class="uluru-photo-image"
+        src="${photo.image}"
+        alt="${photo.title}"
+      >
+
+      <div class="uluru-photo-content">
+
+        <div class="uluru-photo-title">
+          ${photo.title}
+        </div>
+
+        <div class="uluru-photo-caption">
+          ${photo.caption}
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document.body.appendChild(
+    viewer
+  );
+
+
+  viewer
+    .querySelector('.uluru-photo-close')
+    ?.addEventListener(
+      'click',
+      closeUluruWalkPhoto
+    );
+
+
+  viewer.addEventListener(
+    'click',
+    event => {
+
+      if (event.target === viewer) {
+        closeUluruWalkPhoto();
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE ULURU WALK PHOTO
+   ========================================================= */
+
+function closeUluruWalkPhoto() {
+
+  document
+    .getElementById('uluruWalkPhotoViewer')
+    ?.remove();
+
+}
+
 
 /* =========================================================
    DISTANCE CALCULATION
@@ -660,10 +923,19 @@ document
 removeUluruWalkLocationLabels();
 
 
+/* Remove Uluru photo markers. */
+
+removeUluruWalkPhotoMarkers();
+
+
+/* Close an open photo viewer. */
+
+closeUluruWalkPhoto();
+
+
 /* Return to the normal WhereWeBeen map. */
 
 exitUluruWalkMode();
-
 }
 
 
@@ -874,6 +1146,11 @@ createUluruWalkUI();
 /* ==================== LOCATION LABELS ==================== */
 
 createUluruWalkLocationLabels();
+
+
+/* ==================== PHOTO POINTS ==================== */
+
+createUluruWalkPhotoMarkers();
 
 
 /* ==================== FIT ULURU ==================== */
