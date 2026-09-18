@@ -336,35 +336,29 @@ let uluruWalkPhotoMarkers = [];
 
 /* =========================================================
    CREATE ULURU WALK PHOTO MARKERS
-   Each camera uses the actual coordinate assigned
-   to that photograph.
+   Uses the actual GPS coordinate stored with each photo.
    ========================================================= */
 
 function createUluruWalkPhotoMarkers() {
 
-  /* Remove markers from any previous walk. */
-
+  /* Remove any markers left from a previous walk. */
   removeUluruWalkPhotoMarkers();
-
-
-  /* Create each photo marker. */
 
   uluruWalkPhotoPoints.forEach(photo => {
 
-    /* Validate photo coordinates. */
+    /* Read longitude and latitude directly from photo data. */
+    const longitude = Number(photo.coordinates?.[0]);
+    const latitude = Number(photo.coordinates?.[1]);
 
+    /* Skip the photo if its coordinate is invalid. */
     if (
-      !Array.isArray(photo.coordinates) ||
-      photo.coordinates.length !== 2 ||
-      !Number.isFinite(photo.coordinates[0]) ||
-      !Number.isFinite(photo.coordinates[1])
+      !Number.isFinite(longitude) ||
+      !Number.isFinite(latitude)
     ) {
-
       console.warn(
-        `Invalid coordinates for ${photo.id}:`,
+        `Skipping ${photo.id}: invalid photo coordinates`,
         photo.coordinates
       );
-
       return;
     }
 
@@ -386,13 +380,11 @@ function createUluruWalkPhotoMarkers() {
     );
 
     markerElement.innerHTML = `
-      <span class="uluru-photo-marker-icon">
-        📷
-      </span>
+      <span class="uluru-photo-marker-icon">📷</span>
     `;
 
 
-    /* ==================== OPEN PHOTO ==================== */
+    /* ==================== PHOTO CLICK ==================== */
 
     markerElement.addEventListener(
       'click',
@@ -407,18 +399,19 @@ function createUluruWalkPhotoMarkers() {
     );
 
 
-    /* ==================== ADD CAMERA TO MAP ==================== */
+    /* ==================== MAP MARKER ==================== */
 
     const marker =
       new maplibregl.Marker({
         element: markerElement,
         anchor: 'center'
       })
-        .setLngLat(photo.coordinates)
+        .setLngLat([
+          longitude,
+          latitude
+        ])
         .addTo(map);
 
-
-    /* Store marker so it can be removed later. */
 
     uluruWalkPhotoMarkers.push(marker);
 
@@ -1075,8 +1068,8 @@ createUluruWalkUI();
 
 /* ==================== PHOTO POINTS ==================== */
 /*
-   Attach photo markers directly to positions along
-   the same Uluru Base Walk geometry used by the walker.
+   Each camera uses the actual GPS coordinate
+   stored in uluruWalkPhotoPoints.
 */
 
 createUluruWalkPhotoMarkers();
