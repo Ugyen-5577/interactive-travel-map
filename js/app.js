@@ -612,14 +612,6 @@ async function startUluruWalk() {
 
 }
 
-
-/* Make testing from browser Console reliable. */
-
-window.startUluruWalk =
-  startUluruWalk;
-
-window.stopUluruWalk =
-  stopUluruWalk;
 /* =========================================================
    ULURU BASE WALK — CINEMATIC WALK MODE
    ========================================================= */
