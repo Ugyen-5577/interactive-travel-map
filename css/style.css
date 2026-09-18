@@ -1947,64 +1947,106 @@ body.uluru-walk-mode .uluru-progress-panel {
 
 
 /* =========================================================
-   LOCATION LABELS
-   IMPORTANT: keep marker container compact.
+   ULURU WALK — LOCATION LABELS
+   Prevent MapLibre marker containers from stretching.
    ========================================================= */
 
-body.uluru-walk-mode .uluru-walk-location-label {
-  position: relative;
-  display: inline-flex;
-  width: auto !important;
-  max-width: max-content;
-  min-width: 0;
+/* Outer MapLibre marker element */
+
+body.uluru-walk-mode .maplibregl-marker.uluru-walk-location-label {
+  width: fit-content !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+
+  display: inline-flex !important;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+  box-shadow: none !important;
+
   white-space: nowrap;
+
+  overflow: visible !important;
+
   pointer-events: none;
-  user-select: none;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 
-/* ==================== NORMAL LOCATION DOT ==================== */
+/* ==================== LANDMARK DOT ==================== */
 
 body.uluru-walk-mode .uluru-location-dot {
-  width: 8px;
-  height: 8px;
+  width: 8px !important;
+  height: 8px !important;
+
+  min-width: 8px;
   flex: 0 0 8px;
+
+  padding: 0 !important;
+
   border: 2px solid #ffffff;
+
   border-radius: 50%;
+
   background: #ff453a;
+
   box-shadow:
     0 0 0 2px rgba(0, 0, 0, 0.28),
     0 2px 5px rgba(0, 0, 0, 0.35);
 }
 
 
-/* ==================== NORMAL LOCATION NAME ==================== */
+/* ==================== LANDMARK NAME ==================== */
 
 body.uluru-walk-mode .uluru-location-name {
-  display: inline-block;
-  width: auto !important;
-  max-width: 180px;
-  padding: 5px 8px;
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  width: fit-content !important;
+  min-width: 0 !important;
+  max-width: 180px !important;
+
+  display: inline-block !important;
+
+  padding: 5px 8px !important;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.55);
+
   border-radius: 7px;
-  background: rgba(25, 25, 25, 0.78);
+
+  background:
+    rgba(25, 25, 25, 0.82);
+
   color: #ffffff;
+
   font-size: 11px;
   font-weight: 700;
   line-height: 1.2;
+
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.25);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+
+  box-shadow:
+    0 2px 7px
+    rgba(0, 0, 0, 0.28);
+
+  text-shadow:
+    0 1px 2px
+    rgba(0, 0, 0, 0.55);
 }
 
 
@@ -2012,42 +2054,137 @@ body.uluru-walk-mode .uluru-location-name {
    MAIN ULURU LABEL
    ========================================================= */
 
-body.uluru-walk-mode .uluru-major-label {
-  display: inline-block;
-  width: auto !important;
-  max-width: max-content;
-  padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.50);
-  border-radius: 9px;
-  background: rgba(20, 20, 20, 0.76);
+body.uluru-walk-mode
+.maplibregl-marker.uluru-walk-location-label.uluru-major-label {
+
+  width: fit-content !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  display: block !important;
+
+  padding: 8px 12px !important;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.55) !important;
+
+  border-radius: 9px !important;
+
+  background:
+    rgba(20, 20, 20, 0.78) !important;
+
   text-align: center;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.30);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+
+  box-shadow:
+    0 3px 10px
+    rgba(0, 0, 0, 0.30) !important;
+
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
 }
 
 
-body.uluru-walk-mode .uluru-location-major-name {
+body.uluru-walk-mode
+.uluru-location-major-name {
+
+  width: auto !important;
+
   color: #ffffff;
+
   font-size: 17px;
   font-weight: 800;
   line-height: 1;
+
   letter-spacing: 2px;
+
   white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+
+  text-shadow:
+    0 1px 3px
+    rgba(0, 0, 0, 0.85);
 }
 
 
-body.uluru-walk-mode .uluru-location-subtitle {
+body.uluru-walk-mode
+.uluru-location-subtitle {
+
+  width: auto !important;
+
   margin-top: 4px;
-  color: rgba(255, 255, 255, 0.88);
+
+  color:
+    rgba(255, 255, 255, 0.88);
+
   font-size: 9px;
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: 0.2px;
+
   white-space: nowrap;
 }
 
+
+/* =========================================================
+   LOCATION LABELS — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  body.uluru-walk-mode
+  .maplibregl-marker.uluru-walk-location-label {
+    gap: 4px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-location-dot {
+
+    width: 6px !important;
+    height: 6px !important;
+
+    min-width: 6px;
+
+    flex-basis: 6px;
+
+    border-width: 1px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-location-name {
+
+    max-width: 115px !important;
+
+    padding:
+      4px 6px !important;
+
+    font-size: 9px;
+  }
+
+
+  body.uluru-walk-mode
+  .maplibregl-marker.uluru-walk-location-label.uluru-major-label {
+
+    padding:
+      6px 8px !important;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-location-major-name {
+
+    font-size: 13px;
+
+    letter-spacing: 1.5px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-location-subtitle {
+    font-size: 8px;
+  }
+
+}
 
 /* =========================================================
    PHOTO MARKERS
