@@ -336,116 +336,37 @@ let uluruWalkPhotoMarkers = [];
 
 /* =========================================================
    CREATE ULURU WALK PHOTO MARKERS
-   Camera coordinates are generated directly from the
-   loaded Uluru Base Walk GeoJSON route.
+   Each camera uses the actual coordinate assigned
+   to that photograph.
    ========================================================= */
 
-function createUluruWalkPhotoMarkers(
-  routeCoordinates,
-  cumulativeDistances,
-  geometryDistance
-) {
+function createUluruWalkPhotoMarkers() {
 
-  /* Remove markers from an earlier animation. */
+  /* Remove markers from any previous walk. */
+
   removeUluruWalkPhotoMarkers();
 
-  /* Validate route data. */
-  if (
-    !Array.isArray(routeCoordinates) ||
-    routeCoordinates.length < 2 ||
-    !Array.isArray(cumulativeDistances) ||
-    cumulativeDistances.length !== routeCoordinates.length ||
-    !Number.isFinite(geometryDistance) ||
-    geometryDistance <= 0
-  ) {
-    console.warn(
-      'Uluru photo markers could not be created because the route data is invalid.'
-    );
-    return;
-  }
 
+  /* Create each photo marker. */
 
-  /* Create one camera for each photo. */
   uluruWalkPhotoPoints.forEach(photo => {
 
-    /* Convert routePosition into actual distance along route. */
-    const targetDistance =
-      geometryDistance * photo.routePosition;
+    /* Validate photo coordinates. */
 
-
-    /* Find the route segment containing that distance. */
-    let segmentIndex = 1;
-
-    while (
-      segmentIndex < cumulativeDistances.length &&
-      cumulativeDistances[segmentIndex] < targetDistance
+    if (
+      !Array.isArray(photo.coordinates) ||
+      photo.coordinates.length !== 2 ||
+      !Number.isFinite(photo.coordinates[0]) ||
+      !Number.isFinite(photo.coordinates[1])
     ) {
-      segmentIndex++;
+
+      console.warn(
+        `Invalid coordinates for ${photo.id}:`,
+        photo.coordinates
+      );
+
+      return;
     }
-
-    segmentIndex = Math.min(
-      segmentIndex,
-      routeCoordinates.length - 1
-    );
-
-    const previousIndex =
-      Math.max(0, segmentIndex - 1);
-
-
-    /* Distances at beginning and end of this segment. */
-    const startDistance =
-      cumulativeDistances[previousIndex];
-
-    const endDistance =
-      cumulativeDistances[segmentIndex];
-
-    const segmentDistance =
-      endDistance - startDistance;
-
-
-    /* Position within this individual route segment. */
-    let segmentProgress = 0;
-
-    if (segmentDistance > 0) {
-      segmentProgress =
-        (targetDistance - startDistance) /
-        segmentDistance;
-    }
-
-    segmentProgress = Math.max(
-      0,
-      Math.min(1, segmentProgress)
-    );
-
-
-    /* Get the two actual GeoJSON coordinates. */
-    const startCoordinate =
-      routeCoordinates[previousIndex];
-
-    const endCoordinate =
-      routeCoordinates[segmentIndex];
-
-
-    /*
-      Generate the camera coordinate between those two
-      actual route coordinates.
-
-      Therefore the camera lies directly on the same
-      LineString used to draw the Base Walk.
-    */
-    const generatedCoordinate = [
-      startCoordinate[0] +
-        (
-          endCoordinate[0] -
-          startCoordinate[0]
-        ) * segmentProgress,
-
-      startCoordinate[1] +
-        (
-          endCoordinate[1] -
-          startCoordinate[1]
-        ) * segmentProgress
-    ];
 
 
     /* ==================== CAMERA BUTTON ==================== */
@@ -465,7 +386,9 @@ function createUluruWalkPhotoMarkers(
     );
 
     markerElement.innerHTML = `
-      <span class="uluru-photo-marker-icon">📷</span>
+      <span class="uluru-photo-marker-icon">
+        📷
+      </span>
     `;
 
 
@@ -484,16 +407,18 @@ function createUluruWalkPhotoMarkers(
     );
 
 
-    /* ==================== ADD CAMERA TO ROUTE ==================== */
+    /* ==================== ADD CAMERA TO MAP ==================== */
 
     const marker =
       new maplibregl.Marker({
         element: markerElement,
         anchor: 'center'
       })
-        .setLngLat(generatedCoordinate)
+        .setLngLat(photo.coordinates)
         .addTo(map);
 
+
+    /* Store marker so it can be removed later. */
 
     uluruWalkPhotoMarkers.push(marker);
 
@@ -1154,11 +1079,7 @@ createUluruWalkUI();
    the same Uluru Base Walk geometry used by the walker.
 */
 
-createUluruWalkPhotoMarkers(
-  coordinates,
-  cumulativeDistances,
-  geometryDistance
-);
+createUluruWalkPhotoMarkers();
 
 
 /* ==================== FIT ULURU ==================== */
