@@ -1886,3 +1886,375 @@ body.uluru-walk-mode
   }
 
 }
+/* =========================================================
+   ULURU CINEMATIC WALK — FINAL UI CLEANUP
+   Keep this block at the END of the stylesheet.
+   ========================================================= */
+
+
+/* ==================== HIDE NORMAL WHEREWEBEEN UI ==================== */
+
+body.uluru-walk-mode #topUI,
+body.uluru-walk-mode .main-menu,
+body.uluru-walk-mode #menuPanel,
+body.uluru-walk-mode #recentPlaces,
+body.uluru-walk-mode #travelSummary,
+body.uluru-walk-mode #travelDashboard,
+body.uluru-walk-mode #overlayBackdrop,
+body.uluru-walk-mode .mobile-menu-button,
+body.uluru-walk-mode .mobile-control-panel,
+body.uluru-walk-mode .mobile-control-backdrop {
+  display: none !important;
+}
+
+
+/* ==================== KEEP WALK UI ABOVE MAP ==================== */
+
+body.uluru-walk-mode #uluruWalkOverlay {
+  z-index: 1500;
+}
+
+
+/* ==================== DESKTOP WALK CARD ==================== */
+
+body.uluru-walk-mode .uluru-walk-card {
+  top: 20px;
+  left: 20px;
+
+  width: min(535px, calc(100vw - 40px));
+
+  padding: 20px 22px 17px;
+
+  border-radius: 18px;
+}
+
+
+/* ==================== DESKTOP PROGRESS PANEL ==================== */
+
+body.uluru-walk-mode .uluru-progress-panel {
+  left: 50%;
+  bottom: 24px;
+
+  width: min(760px, calc(100vw - 40px));
+
+  transform: translateX(-50%);
+}
+
+
+/* ==================== WALK LOCATION LABELS ==================== */
+
+body.uluru-walk-mode .uluru-walk-location-label {
+  position: relative;
+
+  padding: 6px 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 8px;
+
+  background: rgba(20, 20, 20, 0.78);
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  white-space: nowrap;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.30);
+
+  pointer-events: none;
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+
+/* Main Uluru label can be slightly stronger. */
+
+body.uluru-walk-mode
+.uluru-walk-location-label.uluru-main-label {
+  padding: 7px 12px;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  background: rgba(20, 20, 20, 0.86);
+}
+
+
+/* ==================== PHOTO MARKERS ==================== */
+
+body.uluru-walk-mode .uluru-photo-marker {
+  position: relative;
+
+  z-index: 10;
+
+  pointer-events: auto;
+
+  touch-action: manipulation;
+}
+
+
+/* ==================== PHOTO VIEWER ==================== */
+
+body.uluru-walk-mode .uluru-walk-photo-viewer {
+  z-index: 6000;
+}
+
+
+/* =========================================================
+   TABLET / MOBILE WALK MODE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  /* ---------- WALK CARD ---------- */
+
+  body.uluru-walk-mode .uluru-walk-card {
+    top:
+      max(
+        10px,
+        env(safe-area-inset-top)
+      );
+
+    left: 10px;
+
+    width:
+      calc(100vw - 20px);
+
+    padding:
+      13px 14px;
+
+    border-radius: 15px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-walk-card h2 {
+    margin-bottom: 10px;
+
+    font-size: 21px;
+
+    line-height: 1.1;
+  }
+
+
+  /* ---------- WALK STATS ---------- */
+
+  body.uluru-walk-mode
+  .uluru-walk-stats {
+    gap: 7px 14px;
+
+    padding-bottom: 10px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-walk-stat {
+    gap: 5px;
+
+    font-size: 12px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-stat-icon {
+    min-width: 17px;
+
+    font-size: 16px;
+  }
+
+
+  /* ---------- CARD FOOTER ---------- */
+
+  body.uluru-walk-mode
+  .uluru-walk-card-footer {
+    gap: 10px;
+
+    padding-top: 10px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-walk-message strong {
+    font-size: 12px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-walk-message span {
+    display: none;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-stop-button {
+    min-height: 38px;
+
+    padding: 7px 10px;
+
+    font-size: 11px;
+  }
+
+
+  /* ---------- WALKER ---------- */
+
+  body.uluru-walk-mode
+  .uluru-walker-marker {
+    width: 46px;
+    height: 46px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-walker-halo {
+    width: 44px;
+    height: 44px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-walker-halo span {
+    font-size: 31px;
+  }
+
+
+  /* ---------- LOCATION LABELS ---------- */
+
+  body.uluru-walk-mode
+  .uluru-walk-location-label {
+    padding: 4px 7px;
+
+    border-radius: 6px;
+
+    font-size: 9px;
+
+    max-width: 130px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-walk-location-label.uluru-main-label {
+    padding: 5px 8px;
+
+    font-size: 11px;
+  }
+
+
+  /* ---------- CAMERA MARKERS ---------- */
+
+  body.uluru-walk-mode
+  .uluru-photo-marker {
+    width: 30px;
+
+    height: 30px;
+
+    border-width: 2px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-photo-marker-icon {
+    font-size: 14px;
+  }
+
+
+  /* ---------- PROGRESS PANEL ---------- */
+
+  body.uluru-walk-mode
+  .uluru-progress-panel {
+    left: 10px;
+
+    bottom:
+      max(
+        10px,
+        env(safe-area-inset-bottom)
+      );
+
+    width:
+      calc(100vw - 20px);
+
+    padding:
+      11px 12px;
+
+    transform: none;
+
+    border-radius: 12px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-progress-top {
+    gap: 8px;
+
+    margin-bottom: 8px;
+
+    font-size: 11px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-progress-track {
+    height: 9px;
+  }
+
+
+  body.uluru-walk-mode
+  #uluruWalkPercentage {
+    width: 35px;
+
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+  body.uluru-walk-mode
+  .uluru-walk-card {
+    padding: 12px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-walk-card h2 {
+    font-size: 19px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-walk-stats {
+    gap: 6px 11px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-walk-stat {
+    font-size: 11px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-stop-button {
+    padding: 6px 9px;
+
+    font-size: 10px;
+  }
+
+
+  body.uluru-walk-mode
+  .uluru-progress-top {
+    font-size: 10px;
+  }
+
+}
