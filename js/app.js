@@ -258,56 +258,75 @@ const uluruWalkPhotoPoints = [
   {
     id: 'uluru-photo-01',
     title: 'Uluru Base Walk',
-    caption: 'A moment from the Uluru Base Walk.',
+    caption: 'A moment from the northern side of the walk.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image03.webp',
-    routePosition: 0.10
+    coordinates: [
+      131.0299987476537,
+      -25.3350200525214
+    ]
   },
 
   {
     id: 'uluru-photo-02',
     title: 'Around Uluru',
-    caption: 'Following the walking track around Uluru.',
+    caption: 'Following the walking track around the rock.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image06.webp',
-    routePosition: 0.25
+    coordinates: [
+      131.0438318123332,
+      -25.33575584584111
+    ]
   },
 
   {
     id: 'uluru-photo-03',
     title: 'Uluru Landscape',
-    caption: 'A moment along the Base Walk.',
+    caption: 'A view from the eastern section of the Base Walk.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image10.webp',
-    routePosition: 0.40
+    coordinates: [
+      131.0539691878397,
+      -25.34147744055506
+    ]
   },
 
   {
     id: 'uluru-photo-04',
     title: 'Walking Country',
-    caption: 'Walking through the landscape around Uluru.',
+    caption: 'A moment along the southern section of the circuit.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image14.webp',
-    routePosition: 0.55
+    coordinates: [
+      131.0482590538396,
+      -25.35030216683478
+    ]
   },
 
   {
     id: 'uluru-photo-05',
     title: 'Uluru Base',
-    caption: 'A moment from the Base Walk.',
+    caption: 'Looking across the landscape while continuing around Uluru.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image19.webp',
-    routePosition: 0.70
+    coordinates: [
+      131.0363067849428,
+      -25.35221663800647
+    ]
   },
 
   {
     id: 'uluru-photo-06',
     title: 'Completing the Circuit',
-    caption: 'Continuing around the Uluru Base Walk.',
+    caption: 'A final moment from the western side of the Base Walk.',
     image:
       'https://pub-5b0739bcf4824a9281200bc31e19b443.r2.dev/uluru/photos/Image23.webp',
-    routePosition: 0.85
+    coordinates: [
+      131.0242751503351,
+      -25.35039449452704
+    ]
   }
+
 
 ];
 
