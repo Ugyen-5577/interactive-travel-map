@@ -2168,6 +2168,73 @@ function addTravelLayers() {
 
 }
 
+/* =========================================================
+   NORMALISE FEATURE PROPERTIES
+   ========================================================= */
+
+function normaliseFeatureProperties(properties = {}) {
+
+  const normalised = {
+    ...properties
+  };
+
+  const fieldsToParse = [
+    'photos',
+    'videos',
+    'links',
+    'facts',
+    'experience',
+    'plan',
+    'explore'
+  ];
+
+  fieldsToParse.forEach(field => {
+
+    const value = normalised[field];
+
+    if (
+      typeof value !== 'string' ||
+      !value.trim()
+    ) {
+      return;
+    }
+
+    try {
+
+      const parsed = JSON.parse(value);
+
+      if (
+        Array.isArray(parsed) ||
+        (
+          parsed !== null &&
+          typeof parsed === 'object'
+        )
+      ) {
+        normalised[field] = parsed;
+      }
+
+    } catch (error) {
+
+      console.warn(
+        `Could not parse ${field} for ${normalised.name || 'destination'}:`,
+        error
+      );
+
+    }
+
+  });
+
+  return normalised;
+
+}
+
+
+/* =========================================================
+   MAP INTERACTIONS
+   ========================================================= */
+
+function bindTravelInteractions() {
+
 
 /* =========================================================
    MAP INTERACTIONS
