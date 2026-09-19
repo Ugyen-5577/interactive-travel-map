@@ -2235,13 +2235,6 @@ function normaliseFeatureProperties(properties = {}) {
 
 function bindTravelInteractions() {
 
-
-/* =========================================================
-   MAP INTERACTIONS
-   ========================================================= */
-
-function bindTravelInteractions() {
-
   /* ==================== CLUSTER CLICK ==================== */
 
   map.on(
