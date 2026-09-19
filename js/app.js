@@ -322,110 +322,6 @@ map.addLayer({
 
 
 /* =========================================================
-   ULURU BASE WALK — CINEMATIC WALK MODE
-   ========================================================= */
-
-let uluruWalkAnimation = null;
-let uluruWalkerMarker = null;
-let uluruWalkStopped = false;
-
-
-/* =========================================================
-   ULURU WALK — LOCATION LABELS
-   No custom landmark labels are currently used.
-   ========================================================= */
-
-
-/* =========================================================
-   ULURU WALK — PHOTO DATA
-   Photo information is loaded from an external JSON file
-   instead of being stored directly inside app.js.
-   ========================================================= */
-
-let uluruWalkPhotoPoints = [];
-let uluruWalkPhotoMarkers = [];
-
-
-/* =========================================================
-   LOAD ULURU WALK PHOTO DATA
-   ========================================================= */
-
-async function loadUluruWalkPhotoData(photoFile) {
-
-  /* Clear data from any previous walk. */
-
-  uluruWalkPhotoPoints = [];
-
-
-  /* A walk can work without photo data. */
-
-  if (!photoFile) {
-
-    console.warn(
-      'No photo file has been configured for this walk.'
-    );
-
-    return;
-
-  }
-
-
-  try {
-
-    const response = await fetch(
-      photoFile,
-      {
-        cache: 'no-store'
-      }
-    );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        `Could not load walk photo data (${response.status})`
-      );
-
-    }
-
-
-    const photoData =
-      await response.json();
-
-
-    if (!Array.isArray(photoData.photos)) {
-
-      throw new Error(
-        'Walk photo JSON must contain a photos array.'
-      );
-
-    }
-
-
-    uluruWalkPhotoPoints =
-      photoData.photos;
-
-
-    console.log(
-      `Uluru walk photos loaded: ${uluruWalkPhotoPoints.length}`
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      'Could not load Uluru walk photo data:',
-      error
-    );
-
-    uluruWalkPhotoPoints = [];
-
-  }
-
-}
-
-
-/* =========================================================
    CREATE ULURU WALK PHOTO POINTS
    Photo coordinates are rendered directly by MapLibre.
    No HTML markers and no route snapping.
@@ -440,15 +336,17 @@ function createUluruWalkPhotoMarkers() {
     return;
   }
 
-  if (!Array.isArray(uluruWalkPhotoData) || !uluruWalkPhotoData.length) {
+  if (!Array.isArray(uluruWalkPhotoPoints) || !uluruWalkPhotoPoints.length) {
     photoSource.setData({
       type: 'FeatureCollection',
       features: []
     });
+
+    console.warn('No Uluru walk photo points are available.');
     return;
   }
 
-  const features = uluruWalkPhotoData
+  const features = uluruWalkPhotoPoints
     .filter(photo => {
       return (
         Array.isArray(photo.coordinates) &&
@@ -460,6 +358,7 @@ function createUluruWalkPhotoMarkers() {
     .map(photo => {
       return {
         type: 'Feature',
+
         geometry: {
           type: 'Point',
           coordinates: [
@@ -467,6 +366,7 @@ function createUluruWalkPhotoMarkers() {
             Number(photo.coordinates[1])
           ]
         },
+
         properties: {
           photoId: photo.id || '',
           title: photo.title || '',
@@ -478,546 +378,45 @@ function createUluruWalkPhotoMarkers() {
 
   photoSource.setData({
     type: 'FeatureCollection',
-    features
+    features: features
   });
 
   console.log(`Uluru walk photo points displayed: ${features.length}`);
 }
 
-  /* =======================================================
-     FIND NEAREST POSITION ON THE ROUTE
-     ======================================================= */
-
-  function findNearestRoutePoint(photoCoordinate) {
-
-    const photoLng =
-      Number(photoCoordinate[0]);
-
-    const photoLat =
-      Number(photoCoordinate[1]);
-
-
-    if (
-      !Number.isFinite(photoLng) ||
-      !Number.isFinite(photoLat)
-    ) {
-
-      return null;
-
-    }
-
-
-    let nearestCoordinate = null;
-
-    let nearestDistanceSquared =
-      Infinity;
-
-
-    /*
-      Check every individual segment of the Base Walk.
-    */
-
-    for (
-      let i = 0;
-      i < routeCoordinates.length - 1;
-      i++
-    ) {
-
-      const start =
-        routeCoordinates[i];
-
-      const end =
-        routeCoordinates[i + 1];
-
-
-      const startLng =
-        Number(start[0]);
-
-      const startLat =
-        Number(start[1]);
-
-      const endLng =
-        Number(end[0]);
-
-      const endLat =
-        Number(end[1]);
-
-
-      if (
-        !Number.isFinite(startLng) ||
-        !Number.isFinite(startLat) ||
-        !Number.isFinite(endLng) ||
-        !Number.isFinite(endLat)
-      ) {
-
-        continue;
-
-      }
-
-
-      /*
-        Vector representing this route segment.
-      */
-
-      const segmentLng =
-        endLng - startLng;
-
-      const segmentLat =
-        endLat - startLat;
-
-
-      const segmentLengthSquared =
-        segmentLng * segmentLng +
-        segmentLat * segmentLat;
-
-
-      let position = 0;
-
-
-      /*
-        Project the photo coordinate onto the route segment.
-      */
-
-      if (segmentLengthSquared > 0) {
-
-        position =
-          (
-            (photoLng - startLng) *
-            segmentLng +
-
-            (photoLat - startLat) *
-            segmentLat
-          ) /
-          segmentLengthSquared;
-
-      }
-
-
-      /*
-        Keep the projected point inside the current segment.
-      */
-
-      position =
-        Math.max(
-          0,
-          Math.min(
-            1,
-            position
-          )
-        );
-
-
-      const snappedLng =
-        startLng +
-        position *
-        segmentLng;
-
-
-      const snappedLat =
-        startLat +
-        position *
-        segmentLat;
-
-
-      /*
-        Determine how far the projected position is from
-        the original photo GPS coordinate.
-      */
-
-      const lngDifference =
-        photoLng -
-        snappedLng;
-
-
-      const latDifference =
-        photoLat -
-        snappedLat;
-
-
-      const distanceSquared =
-        lngDifference *
-        lngDifference +
-
-        latDifference *
-        latDifference;
-
-
-      /*
-        Keep the closest route position found so far.
-      */
-
-      if (
-        distanceSquared <
-        nearestDistanceSquared
-      ) {
-
-        nearestDistanceSquared =
-          distanceSquared;
-
-
-        nearestCoordinate = [
-          snappedLng,
-          snappedLat
-        ];
-
-      }
-
-    }
-
-
-    return nearestCoordinate;
-
-  }
-
-
-  /* =======================================================
-     CREATE CAMERA MARKERS
-     ======================================================= */
-
-  uluruWalkPhotoPoints.forEach(photo => {
-
-    const longitude =
-      Number(
-        photo.coordinates?.[0]
-      );
-
-
-    const latitude =
-      Number(
-        photo.coordinates?.[1]
-      );
-
-
-    /* Validate original GPS coordinates. */
-
-    if (
-      !Number.isFinite(longitude) ||
-      !Number.isFinite(latitude)
-    ) {
-
-      console.warn(
-        `Skipping ${photo.id}: invalid GPS coordinates`,
-        photo.coordinates
-      );
-
-      return;
-
-    }
-
-
-    /*
-      Find the closest position on the actual walking route.
-    */
-
-    const snappedCoordinate =
-      findNearestRoutePoint([
-        longitude,
-        latitude
-      ]);
-
-
-    if (!snappedCoordinate) {
-
-      console.warn(
-        `Skipping ${photo.id}: could not find nearest route position.`
-      );
-
-      return;
-
-    }
-
-
-    console.log(
-      `PHOTO SNAP ${photo.id}`,
-      {
-        original: photo.coordinates,
-        snapped: snappedCoordinate
-      }
-    );
-
-
-    /* ==================== CAMERA BUTTON ==================== */
-
-    const markerElement =
-      document.createElement(
-        'button'
-      );
-
-
-    markerElement.className =
-      'uluru-photo-marker';
-
-
-    markerElement.type =
-      'button';
-
-
-    markerElement.setAttribute(
-      'aria-label',
-      `View photo: ${photo.title || 'Uluru walk photo'}`
-    );
-
-
-    markerElement.innerHTML = `
-      <span class="uluru-photo-marker-icon">
-        📷
-      </span>
-    `;
-
-
-    /* ==================== PHOTO CLICK ==================== */
-
-    markerElement.addEventListener(
-      'click',
-      event => {
-
-        event.preventDefault();
-
-        event.stopPropagation();
-
-
-        openUluruWalkPhoto(
-          photo
-        );
-
-      }
-    );
-
-
-    /* ==================== MAP MARKER ==================== */
-
-    const marker =
-      new maplibregl.Marker({
-        element: markerElement,
-        anchor: 'center'
-      })
-        .setLngLat(
-          snappedCoordinate
-        )
-        .addTo(map);
-
-
-    uluruWalkPhotoMarkers.push(
-      marker
-    );
-
-  });
-
-}
-
 
 /* =========================================================
    REMOVE ULURU WALK PHOTO MARKERS
+   Clears the MapLibre GeoJSON photo source.
    ========================================================= */
 
 function removeUluruWalkPhotoMarkers() {
 
-  uluruWalkPhotoMarkers.forEach(marker => {
+  const photoSource = map.getSource('uluru-walk-photos');
 
-    try {
-
-      marker.remove();
-
-    } catch (error) {
-
-      console.warn(
-        'Could not remove stored Uluru photo marker:',
-        error
-      );
-
-    }
-
-  });
-
+  if (photoSource) {
+    photoSource.setData({
+      type: 'FeatureCollection',
+      features: []
+    });
+  }
 
   uluruWalkPhotoMarkers = [];
-
-
-  /*
-    Safety cleanup for camera elements that may have been
-    created by an earlier version of the application.
-  */
 
   document
     .querySelectorAll('.uluru-photo-marker')
     .forEach(markerElement => {
-
-      const mapLibreMarker =
-        markerElement.closest(
-          '.maplibregl-marker'
-        );
-
+      const mapLibreMarker = markerElement.closest('.maplibregl-marker');
 
       if (mapLibreMarker) {
-
         mapLibreMarker.remove();
-
       } else {
-
         markerElement.remove();
-
       }
-
     });
-
 }
-
-
-/* =========================================================
-   OPEN ULURU WALK PHOTO
-   ========================================================= */
-
-function openUluruWalkPhoto(photo) {
-
-  document
-    .getElementById('uluruWalkPhotoViewer')
-    ?.remove();
-
-
-  const viewer =
-    document.createElement('div');
-
-
-  viewer.id =
-    'uluruWalkPhotoViewer';
-
-
-  viewer.className =
-    'uluru-walk-photo-viewer';
-
-
-  viewer.innerHTML = `
-
-    <div class="uluru-photo-card">
-
-      <button
-        type="button"
-        class="uluru-photo-close"
-        aria-label="Close photo">
-        ×
-      </button>
-
-      <img
-        class="uluru-photo-image"
-        src="${photo.image || ''}"
-        alt="${photo.title || 'Uluru walk photo'}">
-
-      <div class="uluru-photo-content">
-
-        <div class="uluru-photo-title">
-          ${photo.title || 'Uluru Base Walk'}
-        </div>
-
-        <div class="uluru-photo-caption">
-          ${photo.caption || ''}
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-
-  document.body.appendChild(
-    viewer
-  );
-
-
-  viewer
-    .querySelector('.uluru-photo-close')
-    ?.addEventListener(
-      'click',
-      closeUluruWalkPhoto
-    );
-
-
-  viewer.addEventListener(
-    'click',
-    event => {
-
-      if (event.target === viewer) {
-
-        closeUluruWalkPhoto();
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   CLOSE ULURU WALK PHOTO
-   ========================================================= */
-
-function closeUluruWalkPhoto() {
-
-  document
-    .getElementById('uluruWalkPhotoViewer')
-    ?.remove();
-
-}
-
-
-/* =========================================================
-   DISTANCE CALCULATION
-   Returns distance between two [longitude, latitude]
-   coordinates in kilometres.
-   ========================================================= */
-
-function calculateWalkDistance(coord1, coord2) {
-
-  const earthRadius = 6371;
-
-
-  const lat1 =
-    coord1[1] *
-    Math.PI / 180;
-
-
-  const lat2 =
-    coord2[1] *
-    Math.PI / 180;
-
-
-  const deltaLat =
-    (coord2[1] - coord1[1]) *
-    Math.PI / 180;
-
-
-  const deltaLng =
-    (coord2[0] - coord1[0]) *
-    Math.PI / 180;
-
-
-  const a =
-    Math.sin(deltaLat / 2) *
-    Math.sin(deltaLat / 2) +
-
-    Math.cos(lat1) *
-    Math.cos(lat2) *
-
-    Math.sin(deltaLng / 2) *
-    Math.sin(deltaLng / 2);
-
-
-  const c =
-    2 *
-    Math.atan2(
-      Math.sqrt(a),
-      Math.sqrt(1 - a)
-    );
-
-
-  return earthRadius * c;
-
-}
-
-
-/* =========================================================
-   ENTER CINEMATIC WALK MODE
+   /* ======================================================
+   ATIC WALK MODE
    Hide the normal WhereWeBeen interface.
    ========================================================= */
 
