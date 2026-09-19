@@ -2228,6 +2228,33 @@ function normaliseFeatureProperties(properties = {}) {
 
 }
 
+/* =========================================================
+   OPEN PLACE FROM MAP
+   ========================================================= */
+
+function openPlace(properties, coordinates) {
+
+  if (!properties) return;
+
+  /* Move the map toward the selected destination. */
+  if (
+    Array.isArray(coordinates) &&
+    coordinates.length >= 2
+  ) {
+
+    map.flyTo({
+      center: coordinates,
+      zoom: Math.max(map.getZoom(), 8),
+      duration: 900
+    });
+
+  }
+
+  /* Open the destination dashboard. */
+  openDashboard(properties);
+
+}
+
 
 /* =========================================================
    MAP INTERACTIONS
