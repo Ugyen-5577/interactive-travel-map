@@ -1104,7 +1104,6 @@ async function startUluruWalk() {
     */
 
       createUluruWalkPhotoMarkers();
-    );
 
 
     /* ==================== FIT MAP TO ROUTE ==================== */
