@@ -427,91 +427,62 @@ async function loadUluruWalkPhotoData(photoFile) {
 
 /* =========================================================
    CREATE ULURU WALK PHOTO POINTS
-   Convert photo JSON coordinates into MapLibre GeoJSON.
-   These points use the same geographic projection as the
-   walking route and therefore remain aligned at every zoom.
+   Photo coordinates are rendered directly by MapLibre.
+   No HTML markers and no route snapping.
    ========================================================= */
 
 function createUluruWalkPhotoMarkers() {
 
-  const photoSource =
-    map.getSource('uluru-walk-photos');
+  const photoSource = map.getSource('uluru-walk-photos');
 
   if (!photoSource) {
-
-    console.error(
-      'Uluru walk photo source was not found.'
-    );
-
+    console.error('Uluru walk photo source was not found.');
     return;
-
   }
 
-
-  if (
-    !Array.isArray(uluruWalkPhotoData) ||
-    !uluruWalkPhotoData.length
-  ) {
-
+  if (!Array.isArray(uluruWalkPhotoData) || !uluruWalkPhotoData.length) {
     photoSource.setData({
       type: 'FeatureCollection',
       features: []
     });
-
     return;
-
   }
 
-
-  const features =
-    uluruWalkPhotoData
-      .filter(photo => {
-
-        return (
-          Array.isArray(photo.coordinates) &&
-          photo.coordinates.length >= 2 &&
-          Number.isFinite(Number(photo.coordinates[0])) &&
-          Number.isFinite(Number(photo.coordinates[1]))
-        );
-
-      })
-      .map(photo => {
-
-        return {
-          type: 'Feature',
-
-          geometry: {
-            type: 'Point',
-
-            coordinates: [
-              Number(photo.coordinates[0]),
-              Number(photo.coordinates[1])
-            ]
-          },
-
-          properties: {
-            photoId: photo.id || '',
-            title: photo.title || '',
-            caption: photo.caption || '',
-            image: photo.image || ''
-          }
-        };
-
-      });
-
+  const features = uluruWalkPhotoData
+    .filter(photo => {
+      return (
+        Array.isArray(photo.coordinates) &&
+        photo.coordinates.length >= 2 &&
+        Number.isFinite(Number(photo.coordinates[0])) &&
+        Number.isFinite(Number(photo.coordinates[1]))
+      );
+    })
+    .map(photo => {
+      return {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [
+            Number(photo.coordinates[0]),
+            Number(photo.coordinates[1])
+          ]
+        },
+        properties: {
+          photoId: photo.id || '',
+          title: photo.title || '',
+          caption: photo.caption || '',
+          image: photo.image || ''
+        }
+      };
+    });
 
   photoSource.setData({
     type: 'FeatureCollection',
     features
   });
 
-
-  console.log(
-    `Uluru walk photo points displayed: ${features.length}`
-  );
-
+  console.log(`Uluru walk photo points displayed: ${features.length}`);
 }
-
 
   /* =======================================================
      FIND NEAREST POSITION ON THE ROUTE
