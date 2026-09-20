@@ -131,12 +131,28 @@ map.addSource('uluru-walk-progress', {
 });
 
 /* =========================================================
-   ULURU WALK — CAMERA PHOTO POINTS
-   Geographic photo markers with camera symbols.
+   ULURU WALK — PHOTO SOURCE + CAMERA LAYERS
+
+   Source must exist before either layer is created.
+   Both layers use the same geographic photo coordinates.
    ========================================================= */
 
-if (!map.getLayer('uluru-walk-photo-points')) {
+/* ==================== PHOTO GEOJSON SOURCE ==================== */
 
+if (!map.getSource('uluru-walk-photos')) {
+  map.addSource('uluru-walk-photos', {
+    type: 'geojson',
+    data: {
+      type: 'FeatureCollection',
+      features: []
+    }
+  });
+}
+
+
+/* ==================== BLUE CAMERA CIRCLES ==================== */
+
+if (!map.getLayer('uluru-walk-photo-points')) {
   map.addLayer({
     id: 'uluru-walk-photo-points',
     type: 'circle',
@@ -149,14 +165,12 @@ if (!map.getLayer('uluru-walk-photo-points')) {
       'circle-stroke-width': 3
     }
   });
-
 }
 
 
-/* ==================== CAMERA SYMBOL ==================== */
+/* ==================== CAMERA SYMBOLS ==================== */
 
 if (!map.getLayer('uluru-walk-photo-icons')) {
-
   map.addLayer({
     id: 'uluru-walk-photo-icons',
     type: 'symbol',
@@ -174,28 +188,7 @@ if (!map.getLayer('uluru-walk-photo-icons')) {
       'text-opacity': 1
     }
   });
-
 }
-
-/* ==================== ULURU WALK PHOTO POINTS ==================== */
-
-if (!map.getLayer('uluru-walk-photo-points')) {
-
-  map.addLayer({
-    id: 'uluru-walk-photo-points',
-    type: 'circle',
-    source: 'uluru-walk-photos',
-
-    paint: {
-      'circle-radius': 11,
-      'circle-color': '#2563eb',
-      'circle-stroke-color': '#ffffff',
-      'circle-stroke-width': 3
-    }
-  });
-
-}
-
 
 /* =========================================================
    ULURU WALK — PHOTO CLICK + CURSOR
