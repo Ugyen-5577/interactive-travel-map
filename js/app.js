@@ -2110,57 +2110,64 @@ map.on('click', 'clusters', async event => {
   );
 
 
-  /* ==================== POINTER CURSOR ==================== */
+ /* =========================================================
+   POINTER CURSOR + DESTINATION NAME TOOLTIP
+   Shows the place name when hovering over an individual marker.
+   ========================================================= */
 
-  map.on(
-    'mouseenter',
-    'clusters',
-    () => {
-
-      map.getCanvas().style.cursor =
-        'pointer';
-
-    }
-  );
-
-
-  map.on(
-    'mouseleave',
-    'clusters',
-    () => {
-
-      map.getCanvas().style.cursor =
-        '';
-
-    }
-  );
+// Create one reusable tooltip.
+const placeHoverPopup = new maplibregl.Popup({
+  closeButton: false,
+  closeOnClick: false,
+  offset: 18,
+  className: 'place-hover-popup'
+});
 
 
-  map.on(
-    'mouseenter',
-    'unclustered-point',
-    () => {
+/* ==================== CLUSTER CURSOR ==================== */
 
-      map.getCanvas().style.cursor =
-        'pointer';
+map.on('mouseenter', 'clusters', () => {
+  map.getCanvas().style.cursor = 'pointer';
+});
 
-    }
-  );
+map.on('mouseleave', 'clusters', () => {
+  map.getCanvas().style.cursor = '';
+});
 
 
-  map.on(
-    'mouseleave',
-    'unclustered-point',
-    () => {
+/* ==================== PLACE NAME ON HOVER ==================== */
 
-      map.getCanvas().style.cursor =
-        '';
+map.on('mouseenter', 'unclustered-point', event => {
 
-    }
-  );
+  map.getCanvas().style.cursor = 'pointer';
 
-}
+  const feature = event.features?.[0];
+  if (!feature) return;
 
+  // Read the destination name from the GeoJSON properties.
+  const placeName =
+    feature.properties?.name ||
+    feature.properties?.title ||
+    'Destination';
+
+  // Display the name at the marker's geographic position.
+  placeHoverPopup
+    .setLngLat(feature.geometry.coordinates)
+    .setText(placeName)
+    .addTo(map);
+
+});
+
+
+/* ==================== REMOVE NAME ON MOUSE LEAVE ==================== */
+
+map.on('mouseleave', 'unclustered-point', () => {
+
+  map.getCanvas().style.cursor = '';
+
+  placeHoverPopup.remove();
+
+});
 /* =========================================================
    BASEMAP SWITCHING
    ========================================================= */
