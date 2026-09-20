@@ -824,8 +824,15 @@ function closeUluruWalkUI() {
 
 
 /* =========================================================
-   START ULURU BASE WALK
+   ULURU WALK — ANIMATION STATE
+   Shared by startUluruWalk(), closeUluruWalkUI(),
+   and the walk animation controls.
    ========================================================= */
+
+let uluruWalkAnimation = null;
+let uluruWalkerMarker = null;
+let uluruWalkStopped = false;
+
 
 async function startUluruWalk() {
 
