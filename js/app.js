@@ -2015,90 +2015,39 @@ function openPlace(properties, coordinates) {
 
 function bindTravelInteractions() {
 
-  /* ==================== CLUSTER CLICK ==================== */
+ /* ==================== CLUSTER CLICK ==================== */
+/* Single click immediately expands a cluster. */
 
-  map.on(
-    'click',
-    'clusters',
-    async event => {
+map.on('click', 'clusters', async event => {
 
-      const features =
-        map.queryRenderedFeatures(
-          event.point,
-          {
-            layers: [
-              'clusters'
-            ]
-          }
-        );
+  const clusterFeature = event.features?.[0];
+  if (!clusterFeature) return;
 
+  const clusterId = clusterFeature.properties.cluster_id;
+  const source = map.getSource('travel-places');
+  if (!source) return;
 
-      const clusterFeature =
-        features?.[0];
+  // Prevent the same click from opening a place underneath the cluster.
+  event.originalEvent.stopPropagation();
 
+  try {
 
-      if (!clusterFeature) {
+    // Get the zoom level needed to expand this cluster.
+    const zoom = await source.getClusterExpansionZoom(clusterId);
 
-        return;
+    // Immediately zoom to the cluster without waiting for an animation.
+    map.jumpTo({
+      center: clusterFeature.geometry.coordinates,
+      zoom: zoom
+    });
 
-      }
+  } catch (error) {
 
+    console.error('Could not expand cluster:', error);
 
-      const clusterId =
-        clusterFeature
-          .properties
-          .cluster_id;
+  }
 
-
-      const source =
-        map.getSource(
-          'travel-places'
-        );
-
-
-      if (!source) {
-
-        return;
-
-      }
-
-
-      source.getClusterExpansionZoom(
-        clusterId,
-        (
-          error,
-          zoom
-        ) => {
-
-          if (error) {
-
-            console.error(
-              'Could not expand cluster:',
-              error
-            );
-
-            return;
-
-          }
-
-
-          map.easeTo({
-
-            center:
-              clusterFeature
-                .geometry
-                .coordinates,
-
-            zoom
-
-          });
-
-        }
-      );
-
-    }
-  );
-
+});
 
   /* ==================== PLACE CLICK ==================== */
 
@@ -2543,10 +2492,23 @@ mainMenuItems.forEach(item => {
         break;
 
 
-      case 'settings':
-        showSettingsPanel();
+      /* ==================== RESET MAP ==================== */
+
+      case 'reset-map':
+
+        closeMenuPanel(); // Close any open information panel.
+        resetMap();       // Return to the original Australia view.
+
         break;
 
+
+      /* ==================== SETTINGS ==================== */
+
+      case 'settings':
+
+        showSettingsPanel();
+
+        break;
     }
 
   });
@@ -2748,7 +2710,23 @@ function showStatisticsPanel() {
 
 
 /* =========================================================
+   RESET MAP
+   Returns the map to the original Australia view.
+   ========================================================= */
+
+function resetMap() {
+
+  map.flyTo({
+    center: [134.5, -27.5],
+    zoom: 3.5
+  });
+
+}
+
+
+/* =========================================================
    SETTINGS
+   Reset Map has been moved to the main menu.
    ========================================================= */
 
 function showSettingsPanel() {
@@ -2756,26 +2734,11 @@ function showSettingsPanel() {
   showMenuPanel(
     'Settings',
     `
-      <button id="resetMapButton" class="timeline-year">Reset map</button>
       <button id="clearFiltersButton" class="timeline-year">Clear filters</button>
     `
   );
 
-  const resetMapButton = document.getElementById('resetMapButton');
   const clearFiltersButton = document.getElementById('clearFiltersButton');
-
-  if (resetMapButton) {
-
-    resetMapButton.addEventListener('click', () => {
-
-      map.flyTo({
-        center: [134.5, -27.5],
-        zoom: 3.5
-      });
-
-    });
-
-  }
 
   if (clearFiltersButton) {
 
@@ -2800,7 +2763,6 @@ function showSettingsPanel() {
   }
 
 }
-
 
 /* =========================================================
    MEDIA ARRAY HELPER
