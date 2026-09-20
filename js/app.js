@@ -162,7 +162,7 @@ if (!map.getLayer('uluru-walk-photo-points')) {
       'circle-radius': 14,
       'circle-color': '#2563eb',
       'circle-stroke-color': '#ffffff',
-      'circle-stroke-width': 3
+      'circle-stroke-width': 2
     }
   });
 }
