@@ -130,21 +130,10 @@ map.addSource('uluru-walk-progress', {
   data: emptyGeoJSON
 });
 
-/* ==================== ULURU WALK PHOTO SOURCE ==================== */
-
-if (!map.getSource('uluru-walk-photos')) {
-
-  map.addSource('uluru-walk-photos', {
-    type: 'geojson',
-    data: {
-      type: 'FeatureCollection',
-      features: []
-    }
-  });
-
-}
-
-/* ==================== ULURU WALK PHOTO POINTS ==================== */
+/* =========================================================
+   ULURU WALK — CAMERA PHOTO POINTS
+   Geographic photo markers with camera symbols.
+   ========================================================= */
 
 if (!map.getLayer('uluru-walk-photo-points')) {
 
@@ -154,10 +143,35 @@ if (!map.getLayer('uluru-walk-photo-points')) {
     source: 'uluru-walk-photos',
 
     paint: {
-      'circle-radius': 11,
+      'circle-radius': 14,
       'circle-color': '#2563eb',
       'circle-stroke-color': '#ffffff',
       'circle-stroke-width': 3
+    }
+  });
+
+}
+
+
+/* ==================== CAMERA SYMBOL ==================== */
+
+if (!map.getLayer('uluru-walk-photo-icons')) {
+
+  map.addLayer({
+    id: 'uluru-walk-photo-icons',
+    type: 'symbol',
+    source: 'uluru-walk-photos',
+
+    layout: {
+      'text-field': '📷',
+      'text-size': 17,
+      'text-anchor': 'center',
+      'text-allow-overlap': true,
+      'text-ignore-placement': true
+    },
+
+    paint: {
+      'text-opacity': 1
     }
   });
 
