@@ -2168,6 +2168,8 @@ map.on('mouseleave', 'unclustered-point', () => {
   placeHoverPopup.remove();
 
 });
+
+} // End bindTravelInteractions()
 /* =========================================================
    BASEMAP SWITCHING
    ========================================================= */
