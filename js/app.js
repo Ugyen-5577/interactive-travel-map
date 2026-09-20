@@ -822,6 +822,15 @@ function closeUluruWalkUI() {
 
 }
 
+   /* =========================================================
+   CLOSE ULURU WALK PHOTO
+   Closes the photo viewer without stopping the walk.
+   ========================================================= */
+
+function closeUluruWalkPhoto() {
+  document.getElementById('uluruWalkPhotoViewer')?.remove();
+}
+
 
 /* =========================================================
    ULURU WALK — ANIMATION STATE
