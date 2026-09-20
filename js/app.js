@@ -183,32 +183,43 @@ if (!map.getLayer('uluru-walk-photo-points')) {
 }
 
 
-/* ==================== ULURU PHOTO CLICK ==================== */
+/* =========================================================
+   ULURU WALK — PHOTO CLICK + CURSOR
+   Uses the photo data loaded from the external JSON file.
+   ========================================================= */
 
-map.on(
-  'click',
-  'uluru-walk-photo-points',
-  event => {
+/* ==================== PHOTO CLICK ==================== */
 
-    const feature =
-      event.features?.[0];
+map.on('click', 'uluru-walk-photo-points', event => {
 
-    if (!feature) return;
+  const feature = event.features?.[0];
+  if (!feature) return;
 
-    const photoId =
-      feature.properties?.photoId;
+  const photoId = feature.properties?.photoId;
 
-    const photo =
-      uluruWalkPhotoData.find(
-        item => item.id === photoId
-      );
+  const photo = uluruWalkPhotoPoints.find(
+    item => item.id === photoId
+  );
 
-    if (!photo) return;
-
-    openUluruWalkPhoto(photo);
-
+  if (!photo) {
+    console.warn('Uluru walk photo not found:', photoId);
+    return;
   }
-);
+
+  openUluruWalkPhoto(photo);
+
+});
+
+
+/* ==================== PHOTO CURSOR ==================== */
+
+map.on('mouseenter', 'uluru-walk-photo-points', () => {
+  map.getCanvas().style.cursor = 'pointer';
+});
+
+map.on('mouseleave', 'uluru-walk-photo-points', () => {
+  map.getCanvas().style.cursor = '';
+});
 
 
 /* ==================== PHOTO CURSOR ==================== */
