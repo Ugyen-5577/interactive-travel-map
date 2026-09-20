@@ -833,6 +833,75 @@ function closeUluruWalkUI() {
 
 }
 
+/* =========================================================
+   OPEN ULURU WALK PHOTO
+   Displays the selected photo without stopping the walk.
+   ========================================================= */
+
+function openUluruWalkPhoto(photo) {
+
+  if (!photo) return;
+
+  // Close any photo viewer already open.
+  closeUluruWalkPhoto();
+
+  /* ==================== CREATE VIEWER ==================== */
+
+  const viewer = document.createElement('div');
+
+  viewer.id = 'uluruWalkPhotoViewer';
+  viewer.className = 'uluru-walk-photo-viewer';
+
+  viewer.innerHTML = `
+    <div class="uluru-photo-card">
+
+      <button
+        type="button"
+        class="uluru-photo-close"
+        aria-label="Close photo">
+        ×
+      </button>
+
+      <img
+        class="uluru-photo-image"
+        src="${photo.image || ''}"
+        alt="${photo.title || 'Uluru walk photo'}">
+
+      <div class="uluru-photo-content">
+
+        <div class="uluru-photo-title">
+          ${photo.title || 'Uluru Base Walk'}
+        </div>
+
+        <div class="uluru-photo-caption">
+          ${photo.caption || ''}
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(viewer);
+
+  /* ==================== CLOSE BUTTON ==================== */
+
+  viewer
+    .querySelector('.uluru-photo-close')
+    ?.addEventListener('click', closeUluruWalkPhoto);
+
+  /* ==================== CLICK OUTSIDE PHOTO ==================== */
+
+  viewer.addEventListener('click', event => {
+
+    if (event.target === viewer) {
+      closeUluruWalkPhoto();
+    }
+
+  });
+
+}
+
    /* =========================================================
    CLOSE ULURU WALK PHOTO
    Closes the photo viewer without stopping the walk.
