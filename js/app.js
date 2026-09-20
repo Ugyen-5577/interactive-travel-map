@@ -865,6 +865,66 @@ function calculateWalkDistance(coord1, coord2) {
 
 }
 
+/* =========================================================
+   ULURU WALK — PHOTO DATA
+   ========================================================= */
+
+let uluruWalkPhotoPoints = [];
+
+
+/* =========================================================
+   LOAD ULURU WALK PHOTO DATA
+   ========================================================= */
+
+async function loadUluruWalkPhotoData(photoFile) {
+
+  // Clear photo data from the previous walk.
+  uluruWalkPhotoPoints = [];
+
+  if (!photoFile) {
+    console.warn('No photo file configured for this walk.');
+    return;
+  }
+
+  try {
+
+    const response = await fetch(photoFile, {
+      cache: 'no-store'
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Could not load walk photo data (${response.status})`
+      );
+    }
+
+    const photoData = await response.json();
+
+    if (!Array.isArray(photoData.photos)) {
+      throw new Error(
+        'Walk photo JSON must contain a photos array.'
+      );
+    }
+
+    uluruWalkPhotoPoints = photoData.photos;
+
+    console.log(
+      `Uluru walk photos loaded: ${uluruWalkPhotoPoints.length}`
+    );
+
+  } catch (error) {
+
+    console.error(
+      'Could not load Uluru walk photo data:',
+      error
+    );
+
+    uluruWalkPhotoPoints = [];
+
+  }
+
+}
+
 
 /* =========================================================
    ULURU WALK — ANIMATION STATE
