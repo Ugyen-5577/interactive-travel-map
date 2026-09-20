@@ -168,27 +168,54 @@ if (!map.getLayer('uluru-walk-photo-points')) {
 }
 
 
-/* ==================== CAMERA SYMBOLS ==================== */
+/* =========================================================
+   ULURU WALK — CAMERA ICON
+   Draws a camera icon directly into an SVG image.
+   No emoji or external image file required.
+   ========================================================= */
 
-if (!map.getLayer('uluru-walk-photo-icons')) {
-  map.addLayer({
-    id: 'uluru-walk-photo-icons',
-    type: 'symbol',
-    source: 'uluru-walk-photos',
+const uluruCameraSvg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <path d="M12 21 H21 L26 15 H39 L44 21 H52 Q56 21 56 25 V47 Q56 51 52 51 H12 Q8 51 8 47 V25 Q8 21 12 21 Z"
+        fill="none" stroke="white" stroke-width="4"
+        stroke-linejoin="round"/>
+  <circle cx="32" cy="36" r="10"
+          fill="none" stroke="white" stroke-width="4"/>
+  <circle cx="48" cy="28" r="2" fill="white"/>
+</svg>
+`;
 
-    layout: {
-      'text-field': '📷',
-      'text-size': 17,
-      'text-anchor': 'center',
-      'text-allow-overlap': true,
-      'text-ignore-placement': true
-    },
+const uluruCameraImage = new Image(64, 64);
 
-    paint: {
-      'text-opacity': 1
-    }
-  });
-}
+uluruCameraImage.onload = () => {
+
+  if (!map.hasImage('uluru-camera-icon')) {
+    map.addImage('uluru-camera-icon', uluruCameraImage);
+  }
+
+  if (!map.getLayer('uluru-walk-photo-icons')) {
+
+    map.addLayer({
+      id: 'uluru-walk-photo-icons',
+      type: 'symbol',
+      source: 'uluru-walk-photos',
+
+      layout: {
+        'icon-image': 'uluru-camera-icon',
+        'icon-size': 0.28,
+        'icon-anchor': 'center',
+        'icon-allow-overlap': true,
+        'icon-ignore-placement': true
+      }
+    });
+
+  }
+
+};
+
+uluruCameraImage.src =
+  'data:image/svg+xml;charset=utf-8,' +
+  encodeURIComponent(uluruCameraSvg);
 
 /* =========================================================
    ULURU WALK — PHOTO CLICK + CURSOR
