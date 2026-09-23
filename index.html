@@ -145,57 +145,52 @@
 
 
     <!-- ===================================================
-         DESKTOP CATEGORY FILTERS
+     DESKTOP CATEGORY FILTERS
 
-         data-category must match places.geojson.
+     data-category must match places.geojson.
+     Keep the existing category-bar and category-button
+     classes so the current JavaScript continues working.
+     =================================================== -->
 
-         Example:
-         "category": "City"
-         =================================================== -->
+<div class="category-bar">
 
-    <div class="category-bar">
+  <button class="category-button active" data-category="All" type="button">
+    All
+  </button>
 
-      <button
-        class="category-button active"
-        data-category="All"
-        type="button"
-      >
-        All
-      </button>
+  <button class="category-button" data-category="Nature" type="button">
+    🌿 Nature
+  </button>
 
-      <button
-        class="category-button"
-        data-category="Nature"
-        type="button"
-      >
-        Nature
-      </button>
+  <button class="category-button" data-category="City" type="button">
+    🏙️ Cities
+  </button>
 
-      <button
-        class="category-button"
-        data-category="City"
-        type="button"
-      >
-        Cities
-      </button>
+  <button class="category-button" data-category="Culture" type="button">
+    🏛️ Culture
+  </button>
 
-      <button
-        class="category-button"
-        data-category="Culture"
-        type="button"
-      >
-        Culture
-      </button>
+  <button class="category-button" data-category="Food" type="button">
+    🍴 Food
+  </button>
 
-      <button
-        class="category-button"
-        data-category="Walk"
-        type="button"
-      >
-        Walks
-      </button>
+  <button class="category-button" data-category="Beach" type="button">
+    🌴 Beaches
+  </button>
 
-    </div>
+  <button class="category-button" data-category="Walk" type="button">
+    🚶 Walks
+  </button>
+
+  <button class="category-button" data-category="Road Trip" type="button">
+    🚙 Road Trips
+  </button>
+
+  <button class="category-button" data-category="Wildlife" type="button">
+    🐾 Wildlife
+  </button>
+
+</div>
 
 
     <!-- ===================================================
