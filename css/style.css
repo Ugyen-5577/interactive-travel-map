@@ -2578,3 +2578,30 @@ body.uluru-walk-mode .uluru-walk-photo-viewer {
 }
 
 }
+
+/* =========================================================
+   FEATURED DESTINATIONS HEADING
+   ========================================================= */
+
+.featured-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.featured-heading .recent-heading {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+}
+
+.featured-subheading {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
