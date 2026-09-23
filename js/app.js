@@ -2237,7 +2237,7 @@ document.querySelectorAll('.category-button').forEach(button => {
 });
 
 /* =========================================================
-   CATEGORY BAR — SCROLL TO MORE CATEGORIES
+   CATEGORY BAR — MORE / BACK NAVIGATION
    ========================================================= */
 
 const categoryScroll = document.getElementById('categoryScroll');
@@ -2245,14 +2245,56 @@ const categoryMore = document.getElementById('categoryMore');
 
 if (categoryScroll && categoryMore) {
 
+  let categoryScrollDirection = 1; // 1 = right, -1 = left.
+
+  /* ==================== UPDATE BUTTON LABEL ==================== */
+
+  function updateCategoryMoreButton() {
+
+    const atEnd =
+      categoryScroll.scrollLeft + categoryScroll.clientWidth >=
+      categoryScroll.scrollWidth - 5;
+
+    const atStart = categoryScroll.scrollLeft <= 5;
+
+    if (atEnd) {
+      categoryScrollDirection = -1;
+    } else if (atStart) {
+      categoryScrollDirection = 1;
+    }
+
+    categoryMore.textContent =
+      categoryScrollDirection === 1 ? 'More →' : '← Back';
+
+    categoryMore.setAttribute(
+      'aria-label',
+      categoryScrollDirection === 1
+        ? 'Scroll to more categories'
+        : 'Scroll back to previous categories'
+    );
+
+  }
+
+  /* ==================== MORE / BACK BUTTON ==================== */
+
   categoryMore.addEventListener('click', () => {
 
     categoryScroll.scrollBy({
-      left: 220,
+      left: 220 * categoryScrollDirection,
       behavior: 'smooth'
     });
 
   });
+
+  /* ==================== DETECT SCROLL POSITION ==================== */
+
+  categoryScroll.addEventListener(
+    'scroll',
+    updateCategoryMoreButton,
+    { passive: true }
+  );
+
+  updateCategoryMoreButton();
 
 }
 
