@@ -2236,6 +2236,26 @@ document.querySelectorAll('.category-button').forEach(button => {
 
 });
 
+/* =========================================================
+   CATEGORY BAR — SCROLL TO MORE CATEGORIES
+   ========================================================= */
+
+const categoryScroll = document.getElementById('categoryScroll');
+const categoryMore = document.getElementById('categoryMore');
+
+if (categoryScroll && categoryMore) {
+
+  categoryMore.addEventListener('click', () => {
+
+    categoryScroll.scrollBy({
+      left: 220,
+      behavior: 'smooth'
+    });
+
+  });
+
+}
+
 
 /* =========================================================
    FILTER ENGINE
