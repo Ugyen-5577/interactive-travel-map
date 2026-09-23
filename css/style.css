@@ -53,14 +53,97 @@ button { -webkit-tap-highlight-color: transparent; }
 .search-result-category { color: #7b8494; font-size: 15px; }
 
 /* =========================================================
-   7. DESKTOP CATEGORY BAR
+   7. RESPONSIVE CATEGORY BAR
+   All stays visible; remaining categories scroll.
    ========================================================= */
-.category-bar { flex: 1 1 auto; min-width: 260px; height: 62px; display: flex; align-items: center; gap: 3px; padding: 6px; overflow-x: auto; overflow-y: hidden; border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); scrollbar-width: none; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-.category-bar::-webkit-scrollbar { display: none; }
-.category-button { flex: 0 0 auto; height: 42px; display: flex; align-items: center; justify-content: center; padding: 0 11px; border: none; border-radius: 11px; background: transparent; color: #26344d; font-size: 15px; font-weight: 700; white-space: nowrap; cursor: pointer; }
-.category-button:hover { background: #f1f4f8; }
-.category-button.active { background: var(--blue); color: white; }
 
+.category-bar {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ==================== CATEGORY BUTTONS ==================== */
+
+.category-button {
+  flex: 0 0 auto;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 11px;
+  border: none;
+  border-radius: 11px;
+  background: transparent;
+  color: #26344d;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.category-button:hover {
+  background: #f1f4f8;
+}
+
+.category-button.active {
+  background: var(--blue);
+  color: white;
+}
+
+/* ==================== ALWAYS VISIBLE ALL ==================== */
+
+.category-all {
+  flex: 0 0 auto;
+}
+
+/* ==================== SCROLLABLE CATEGORIES ==================== */
+
+.category-scroll {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==================== MORE BUTTON ==================== */
+
+.category-more {
+  flex: 0 0 auto;
+  height: 42px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 11px;
+  background: #eef4ff;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.category-more:hover {
+  background: #dbeafe;
+}
 /* =========================================================
    8. DESKTOP MAP STYLE SWITCHER
    ========================================================= */
