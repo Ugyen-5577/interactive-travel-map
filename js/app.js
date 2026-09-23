@@ -2251,11 +2251,18 @@ function applyFilters() {
     features: travelData.features.filter(feature => {
 
       const properties = feature.properties;
-      const category = (properties.category || '').toLowerCase();
 
-      const categoryOK =
-        activeCategory === 'All' ||
-        category.includes(activeCategory.toLowerCase());
+         // Support both the original category and additional categories.
+         const categories = [
+           properties.category || '',
+           ...(Array.isArray(properties.categories) ? properties.categories : [])
+         ].map(category => category.toLowerCase());
+         
+         const categoryOK =
+           activeCategory === 'All' ||
+           categories.some(category =>
+             category.includes(activeCategory.toLowerCase())
+           );
 
       const yearOK =
         activeYear === 'All' ||
