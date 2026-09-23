@@ -84,28 +84,28 @@ map.on('load', async () => {
   });
 
 
-  /* ==================== BASEMAP LAYERS ==================== */
+ /* ==================== BASEMAP LAYERS ==================== */
 
-  map.addLayer({
-    id: 'basemap-map-layer',
-    type: 'raster',
-    source: 'basemap-map',
-    layout: { visibility: 'none' }
-  });
-
-  map.addLayer({
-    id: 'basemap-satellite-layer',
-    type: 'raster',
-    source: 'basemap-satellite',
-    layout: { visibility: 'visible' }
-  });
-
-  map.addLayer({
-    id: 'basemap-terrain-layer',
-    type: 'raster',
-    source: 'basemap-terrain',
-    layout: { visibility: 'none' }
-  });
+   map.addLayer({
+     id: 'basemap-map-layer',
+     type: 'raster',
+     source: 'basemap-map',
+     layout: { visibility: 'visible' } // Default basemap.
+   });
+   
+   map.addLayer({
+     id: 'basemap-satellite-layer',
+     type: 'raster',
+     source: 'basemap-satellite',
+     layout: { visibility: 'none' }
+   });
+   
+   map.addLayer({
+     id: 'basemap-terrain-layer',
+     type: 'raster',
+     source: 'basemap-terrain',
+     layout: { visibility: 'none' }
+   });
 
 
 /* =========================================================
