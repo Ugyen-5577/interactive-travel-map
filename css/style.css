@@ -2600,7 +2600,7 @@ body.uluru-walk-mode .uluru-walk-photo-viewer {
 
 .featured-subheading {
   margin: 0;
-  color: rgba(255, 255, 255, 0.85);
+  color: #000000; /* Black subtitle text. */
   font-size: 12px;
   font-weight: 500;
   line-height: 1.4;
