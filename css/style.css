@@ -639,6 +639,55 @@ button { -webkit-tap-highlight-color: transparent; }
 #travelDashboard .dashboard-nav-label { font-size: inherit; font-weight: inherit; }
 #travelDashboard .dashboard-nav-icon { width: 28px; min-width: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 18px; }
 #travelDashboard .best-time-card { background: var(--wwb-card-soft); border: 1px solid var(--wwb-border); color: var(--wwb-text); }
+/* ==================== RESPONSIVE DASHBOARD NAVIGATION ==================== */
+
+#travelDashboard .dashboard-nav-button {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 11px 10px;
+}
+
+#travelDashboard .dashboard-nav-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Tablet / narrower dashboard */
+@media (max-width: 900px) {
+  #travelDashboard .dashboard-nav-button {
+    gap: 6px;
+    padding: 10px 7px;
+    font-size: 14px;
+  }
+
+  #travelDashboard .dashboard-nav-icon {
+    width: 22px;
+    min-width: 22px;
+    font-size: 16px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  #travelDashboard .dashboard-nav {
+    width: 100%;
+  }
+
+  #travelDashboard .dashboard-nav-button {
+    width: 100%;
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  #travelDashboard .dashboard-nav-label {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: nowrap;
+  }
+}
 
 /* EXPERIENCE SUMMARY TILES */
 #travelDashboard .quick-card { background: var(--wwb-card-soft); border: 1px solid var(--wwb-border); border-radius: 12px; box-shadow: none; transition: background .2s ease, transform .2s ease, box-shadow .2s ease; }
