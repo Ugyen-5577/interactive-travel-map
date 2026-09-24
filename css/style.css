@@ -125,24 +125,38 @@ button { -webkit-tap-highlight-color: transparent; }
   display: none;
 }
 
-/* ==================== MORE BUTTON ==================== */
+/* ==================== MORE / BACK BUTTON ==================== */
 
 .category-more {
   flex: 0 0 auto;
   height: 42px;
-  padding: 0 10px;
-  border: none;
+  padding: 0 12px;
+  border: 2px solid #2563eb;
   border-radius: 11px;
-  background: #eef4ff;
+  background: #ffffff;
   color: #2563eb;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
   white-space: nowrap;
   cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .category-more:hover {
-  background: #dbeafe;
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+
+.category-more:active {
+  transform: scale(0.94);
+  box-shadow: none;
+}
+
+.category-more:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.3);
+  outline-offset: 2px;
 }
 /* =========================================================
    8. DESKTOP MAP STYLE SWITCHER
